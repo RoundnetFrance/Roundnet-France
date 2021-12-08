@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import menuElements from './menu-elements';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
 // MATERIAL COMPONENTS
-import { 
-  Link as MUILink, AppBar, Box, Toolbar, Typography, Button, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem 
+import {
+  Link as MUILink, AppBar, Box, Toolbar, Typography, Button, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem
 } from '@mui/material';
 
 // OUTER COMPONENTS
@@ -33,43 +33,66 @@ HideOnScroll.propTypes = {
 function Header(props) {
 
   // State for the different menu items
-  // const menuInitialState = {};
-  // menuElements.forEach(element => {
-  //   menuInitialState[element.slug] = false;
-  // });
-  // const [menuOpen, setMenuOpen] = useState(menuInitialState);
+  const menuInitialState = {};
+  menuElements.forEach(element => {
+    menuInitialState[element.slug] = false;
+  });
+  const [menuOpen, setMenuOpen] = useState(menuInitialState);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  // const handleMenuHover = (slug) => {
-  //   console.log(menuOpen);
-  //   const newMenuOpen = menuOpen;
-  //   newMenuOpen[slug] = !menuOpen[slug];
-  //   setMenuOpen(newMenuOpen);
-  // };
-
-  // const handleMenuClose = (event) => {
-  //   setMenuOpen(menuInitialState);
-  // };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleMenuHover = (event, slug) => {
+    console.log('plop');
+    const newMenuOpen = menuOpen;
+    newMenuOpen[slug] = !menuOpen[slug];
+    setMenuOpen(newMenuOpen);
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
+
+  const handleMenuClose = (event) => {
+    setMenuOpen(menuInitialState);
   };
+
+  // const handleMenuHover = (event) => {
+  //   console.log('plop');
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   // Display 1st level navigation items
   const navItems = menuElements.map((item) => (
-    <Link key={item.name} href={item.url} passHref>
-      <Button
-        color="inherit"
-        onMouseOver={() => { handleMenuHover(item.slug) }}
-        onMouseLeave={handleMenuClose}
-      >
-        {item.name}
-      </Button>
-    </Link>
+    <Fragment key={item.name}>
+      <Link href={item.url} passHref>
+        <Button
+          color="inherit"
+          onMouseOver={(event) => {handleMenuHover(event, item.slug)}}
+          onClick={(event) => {handleMenuHover(event, item.slug)}}
+        >
+          {item.name}
+        </Button>
+      </Link>
+      {
+        item.subElements && (
+          <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={menuOpen[item.slug]}
+          onClose={handleMenuClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+            onMouseLeave: handleMenuClose,
+          }}
+        >
+          {item.subElements.map((subItem) => (
+            <MenuItem key={subItem.name} onClick={handleMenuClose}>
+              <Link href={subItem.url}>{subItem.name}</Link>
+              </MenuItem>
+          ))}
+        </Menu>
+        )
+      }
+    </Fragment>
   ));
 
   return (
