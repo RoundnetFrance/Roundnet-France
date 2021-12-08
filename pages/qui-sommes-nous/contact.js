@@ -1,9 +1,14 @@
-import React from 'react'
+import ContactForm from '../../components/contact/contact-form'
+import Hero from '../../components/ui/hero'
 
 function ContactPage() {
   return (
     <div>
-      <h1>Contact</h1>
+      <Hero 
+        title="Contact"
+        mini
+      />
+      <ContactForm />
     </div>
   )
 }

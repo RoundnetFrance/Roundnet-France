@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
-function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, altButtonText, altButtonLink }) {
+function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, altButtonText, altButtonLink, mini }) {
   const styles = {
     container: {
       backgroundImage: `url(${image})`,
@@ -24,7 +24,7 @@ function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, alt
       style={styles.container}
       sx={{
         bgcolor: 'primary.dark',
-        height: '70vh',
+        height: mini ? '20vh' : '70vh',
         width: '100%',
       }}
     >
@@ -51,14 +51,16 @@ function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, alt
             direction={{ xs: 'column', sm: 'row' }}
             spacing={2}
           >
+            {mainButtonText && mainButtonLink && (
+              <Button sx={{ justifyContent: 'flex-start' }} href={mainButtonLink} size="large" variant="contained">
+                <QueryStatsIcon sx={{ mr: 2 }} />
+                {mainButtonText}
+              </Button>
+            )}
 
-            <Button sx={{ justifyContent: 'flex-start' }} href={mainButtonLink} size="large" variant="contained">
-              <QueryStatsIcon sx={{ mr: 2 }} />
-              {mainButtonText}
-            </Button>
 
             {altButtonText && altButtonLink && (
-              <Button sx={{ justifyContent: 'flex-start' }} href={altButtonText} color="secondary" size="large" variant="contained">
+              <Button sx={{ justifyContent: 'flex-start' }} href={altButtonLink} color="secondary" size="large" variant="contained">
                 <EqualizerIcon sx={{ mr: 2 }} />
                 {altButtonText}
               </Button>

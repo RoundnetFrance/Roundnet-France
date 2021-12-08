@@ -51,17 +51,19 @@ function Header(props) {
         <AppBar>
           <Toolbar>
             <MenuDrawer />
-            <Link href="http://localhost:3000" passHref>
-              <Image
-                src="/images/logos/roundnet-france-tp-blanc.png"
-                alt="Roundnet France"
-                width="50px"
-                height="50px"
-              />
+            <Link href="http://localhost:3000/" passHref>
+              <a>
+                <Image
+                  src="/images/logos/roundnet-france-tp-blanc.png"
+                  alt="Roundnet France"
+                  width="50px"
+                  height="50px"
+                />
+              </a>
             </Link>
 
             <Typography ml={2} variant="h6" component="h1" sx={{ flexGrow: 1 }}>
-              <Link href="http://localhost:3000" passHref>
+              <Link href="http://localhost:3000/" passHref>
                 <MUILink color="inherit" underline="none">Roundnet France</MUILink>
               </Link>
             </Typography>
