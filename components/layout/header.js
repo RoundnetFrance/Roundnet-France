@@ -2,17 +2,12 @@ import PropTypes from 'prop-types';
 import menuElements from './menu-elements';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 // MATERIAL COMPONENTS
-import MUILink from '@mui/material/Link';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Slide from '@mui/material/Slide';
+import { 
+  Link as MUILink, AppBar, Box, Toolbar, Typography, Button, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem 
+} from '@mui/material';
 
 // OUTER COMPONENTS
 import MenuDrawer from './menu-drawer';
@@ -36,9 +31,42 @@ HideOnScroll.propTypes = {
 };
 
 function Header(props) {
-  const menuItems = menuElements.map((item) => (
+
+  // State for the different menu items
+  // const menuInitialState = {};
+  // menuElements.forEach(element => {
+  //   menuInitialState[element.slug] = false;
+  // });
+  // const [menuOpen, setMenuOpen] = useState(menuInitialState);
+
+  // const handleMenuHover = (slug) => {
+  //   console.log(menuOpen);
+  //   const newMenuOpen = menuOpen;
+  //   newMenuOpen[slug] = !menuOpen[slug];
+  //   setMenuOpen(newMenuOpen);
+  // };
+
+  // const handleMenuClose = (event) => {
+  //   setMenuOpen(menuInitialState);
+  // };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // Display 1st level navigation items
+  const navItems = menuElements.map((item) => (
     <Link key={item.name} href={item.url} passHref>
-      <Button color="inherit">
+      <Button
+        color="inherit"
+        onMouseOver={() => { handleMenuHover(item.slug) }}
+        onMouseLeave={handleMenuClose}
+      >
         {item.name}
       </Button>
     </Link>
@@ -69,7 +97,7 @@ function Header(props) {
             </Typography>
 
             <ButtonGroup variant="text" sx={{ display: { xs: 'none', md: 'block' } }}>
-              {menuItems}
+              {navItems}
             </ButtonGroup>
           </Toolbar>
         </AppBar>

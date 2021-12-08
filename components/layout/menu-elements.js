@@ -2,6 +2,7 @@ const menuElements = [
   {
     name: 'Compétition',
     url: '/competition',
+    slug: 'competition',
     subElements: [
       {
         name: 'Règles',
@@ -32,6 +33,7 @@ const menuElements = [
   {
     name: 'Clubs & communautés',
     url: '/clubs-et-communautes',
+    slug: 'communities',
     subElements: [
       {
         name: 'Communautés',
@@ -50,10 +52,12 @@ const menuElements = [
   {
     name: 'Boutique',
     url: '/boutique',
+    slug: 'shop',
   },
   {
     name: 'Qui sommes-nous ?',
     url: '/qui-sommes-nous',
+    slug: 'about',
     subElements: [
       {
         name: 'Contact',
