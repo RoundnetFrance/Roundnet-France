@@ -40,34 +40,30 @@ function Header(props) {
   const [menuOpen, setMenuOpen] = useState(menuInitialState);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  // Handle the menu appearing : first reinitialize the state, then open the menu and set the anchor
   const handleMenuHover = (event, slug) => {
-    console.log('plop');
+    handleMenuClose();
     const newMenuOpen = menuOpen;
     newMenuOpen[slug] = !menuOpen[slug];
     setMenuOpen(newMenuOpen);
-    setAnchorEl(event.currentTarget);
+    if (anchorEl !== event.currentTarget) {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
-  const handleMenuClose = (event) => {
+  const handleMenuClose = () => {
     setMenuOpen(menuInitialState);
+    setAnchorEl(null);
   };
 
-  // const handleMenuHover = (event) => {
-  //   console.log('plop');
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleMenuClose = () => {
-  //   setAnchorEl(null);
-  // };
-
-  // Display 1st level navigation items
+  // Display 1st and 2nd level navigation items
   const navItems = menuElements.map((item) => (
     <Fragment key={item.name}>
-      <Link href={item.url} passHref>
+      <Link href={item.url} id={item.slug} passHref>
         <Button
           color="inherit"
           onMouseOver={(event) => {handleMenuHover(event, item.slug)}}
-          onClick={(event) => {handleMenuHover(event, item.slug)}}
+          // onClick={(event) => {handleMenuHover(event, item.slug)}}
         >
           {item.name}
         </Button>
@@ -86,7 +82,9 @@ function Header(props) {
         >
           {item.subElements.map((subItem) => (
             <MenuItem key={subItem.name} onClick={handleMenuClose}>
-              <Link href={subItem.url}>{subItem.name}</Link>
+              <Link href={subItem.url} passHref>
+                <MUILink underline="none">{subItem.name}</MUILink>
+                </Link>
               </MenuItem>
           ))}
         </Menu>

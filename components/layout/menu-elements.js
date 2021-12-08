@@ -60,9 +60,13 @@ const menuElements = [
     slug: 'about',
     subElements: [
       {
+        name: 'La fédération',
+        url: '/qui-sommes-nous/la-federation',
+      },
+      {
         name: 'Contact',
         url: '/qui-sommes-nous/contact',
-      },
+      },      
     ],
   },
 ];
