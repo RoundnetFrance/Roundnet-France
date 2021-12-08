@@ -5,7 +5,6 @@ import HomeInfoBlock from '../components/home/home-info-block';
 import LogoCarousel from '../components/home/logo-carousel';
 import FourSquareInfo from '../components/home/four-square-info';
 
-
 export default function Home() {
   return (
     <Fragment>
@@ -21,6 +20,7 @@ export default function Home() {
       <HomeInfoBlock />
       <LogoCarousel />
       <FourSquareInfo />
+      {/* Classement ? */}
     </Fragment>
   )
 }

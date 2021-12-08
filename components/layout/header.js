@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // MATERIAL COMPONENTS
+import MUILink from '@mui/material/Link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -46,14 +47,25 @@ function Header(props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <HideOnScroll {...props}>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, paddingBottom: "60px" }}>
         <AppBar>
           <Toolbar>
             <MenuDrawer />
-            <span>Logo</span>
+            <Link href="http://localhost:3000" passHref>
+              <Image
+                src="/images/logos/roundnet-france-tp-blanc.png"
+                alt="Roundnet France"
+                width="50px"
+                height="50px"
+              />
+            </Link>
+
             <Typography ml={2} variant="h6" component="h1" sx={{ flexGrow: 1 }}>
-              Roundnet France
+              <Link href="http://localhost:3000" passHref>
+                <MUILink color="inherit" underline="none">Roundnet France</MUILink>
+              </Link>
             </Typography>
+
             <ButtonGroup variant="text" sx={{ display: { xs: 'none', md: 'block' } }}>
               {menuItems}
             </ButtonGroup>
