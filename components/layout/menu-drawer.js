@@ -1,15 +1,7 @@
 import { useState } from 'react';
 
-import IconButton from '@mui/material/IconButton';
-import Drawer from '@mui/material/Drawer';
-import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+// MUI IMPORTS
+import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link, Box } from '@mui/material';
 
 // MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,9 +10,29 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import { Typography } from '@mui/material';
 
+// MENU DATA
+import menuElements from './menu-elements';
+
 function MenuDrawer() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+
+  const listItems = menuElements.map((element) => {
+    return (
+      <ListItem key={element.name}>
+          <ListItemButton disableGutters onClick={toggleDrawer}>
+            <ListItemIcon>
+              {/* !!! CHANGE TO DYNAMIC  ICON*/}
+              {/* <SupervisedUserCircleRoundedIcon color="primary" fontSize="medium" /> */}
+            </ListItemIcon>
+            <ListItemText>
+              <Link href={element.url}>{element.name}</Link>
+            </ListItemText>
+            {/* !!! ADD SUBELEMENTS */}
+          </ListItemButton>
+        </ListItem>
+    );
+  });
 
   const list = () => (
     <Box>
@@ -39,38 +51,11 @@ function MenuDrawer() {
         Ranking
       </Typography>
       <Divider />
+
       <List sx={{ p: 2, width: { xs: '75vw', sm: '50vw' } }}>
-        <ListItem>
-          <ListItemButton disableGutters onClick={toggleDrawer}>
-            <ListItemIcon>
-              <SupervisedUserCircleRoundedIcon color="primary" fontSize="medium" />
-            </ListItemIcon>
-            <ListItemText>
-              <Link href="#who-are-we">Qui sommes-nous</Link>
-            </ListItemText>
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton disableGutters onClick={toggleDrawer}>
-            <ListItemIcon>
-              <HelpRoundedIcon color="primary" fontSize="medium" />
-            </ListItemIcon>
-            <ListItemText>
-              <Link href="#methods">Méthodologie</Link>
-            </ListItemText>
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton disableGutters onClick={toggleDrawer}>
-            <ListItemIcon>
-              <StarRoundedIcon color="primary" fontSize="medium" />
-            </ListItemIcon>
-            <ListItemText>
-              <Link href="#ranking">Classement</Link>
-            </ListItemText>
-          </ListItemButton>
-        </ListItem>
+        {listItems}
       </List>
+
       <Box
         sx={{
           position: 'absolute',
