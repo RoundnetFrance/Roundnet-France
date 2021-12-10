@@ -13,8 +13,10 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { Typography } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-// MENU DATA & 
+
+// MENU DATA & HELPERS
 import menuElements from './menu-elements';
 import menuState from '../../helpers/menu-state';
 
@@ -22,6 +24,7 @@ function MenuDrawer() {
   // Preparing states
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+  const keepDrawerOpen = () => setIsDrawerOpen(true);
 
   // State for the different menu items
   const menuInitialState = menuState();
@@ -42,18 +45,18 @@ function MenuDrawer() {
     console.log(menuOpen);
   };
 
+  //! TO TRANSFORM INTO A COMPONENT
   const listItems = menuElements.map((element) => {
     // JSX for menu subElements (if any)
     let subCollapse;
-
     if (element.subElements) {
       subCollapse = element.subElements.map((subElement) => {
         return (
           <Collapse key={subElement.name} in={menuOpen[element.slug]} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton sx={{ pl: 4 }} onClick={toggleDrawer}>
                 <ListItemIcon>
-                  <StarBorder />
+                  <ArrowForwardIcon />
                 </ListItemIcon>
                 <ListItemText>
                   <Link href={subElement.url} passHref>
@@ -67,21 +70,28 @@ function MenuDrawer() {
       });
     }
 
-    // JSX for elements
+    // Display arrow of expansion if subElement is chosen
+    const expandIcon = menuOpen[element.slug] ? <ExpandLess /> : <ExpandMore />;
+
+    // General return of JSX (elements + subElements)
     return (
       <Box key={element.name}>
-        <ListItem onClick={() => { handleMenuClick(element.slug) }}>
+        <ListItem onClick={() => { handleMenuClick(element.slug), keepDrawerOpen() }}>
           <ListItemButton disableGutters onClick={toggleDrawer}>
             <ListItemIcon>
               {/* !!! CHANGE TO DYNAMIC  ICON*/}
               <SupervisedUserCircleRoundedIcon color="primary" fontSize="medium" />
             </ListItemIcon>
             <ListItemText>
-              {/* <Link href={element.url}> */}
-              {element.name}
-              {/* </Link> */}
-              {element.subElements && <ExpandMore />}
+              {element.subElements ? (
+                element.name
+              ) : (
+                  <Link href={element.url} passHref>
+                    <MUILink underline="none">{element.name}</MUILink>
+                  </Link>
+              )}             
             </ListItemText>
+            {element.subElements && expandIcon}
           </ListItemButton>
         </ListItem>
         {subCollapse}
@@ -89,6 +99,7 @@ function MenuDrawer() {
     );
   });
 
+  //! TO TRANSFORM INTO A COMPONENT
   const list = () => (
     <Box>
       <Typography
@@ -124,7 +135,7 @@ function MenuDrawer() {
       </IconButton>
       <Drawer
         anchor="left"
-        variant={areMenusOpen ? 'permanent' : 'temporary'}
+        variant="temporary"
         open={isDrawerOpen}
         onClose={toggleDrawer}
       >
