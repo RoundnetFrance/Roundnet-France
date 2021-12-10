@@ -1,36 +1,91 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
+import Link from 'next/link';
 
 // MUI IMPORTS
-import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link, Box } from '@mui/material';
+import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse, ListItemSecondaryAction } from '@mui/material';
 
 // MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
 import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
 import { Typography } from '@mui/material';
 
-// MENU DATA
+// MENU DATA & 
 import menuElements from './menu-elements';
+import menuState from '../../helpers/menu-state';
 
 function MenuDrawer() {
+  // Preparing states
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
 
+  // State for the different menu items
+  const menuInitialState = menuState();
+  const [menuOpen, setMenuOpen] = useState(menuInitialState);
+  const [areMenusOpen, setAreMenusOpen] = useState(false);
+
+  // Function to toggle the menu items
+  const handleMenuClick = (slug) => {
+
+    const newMenuOpen = menuOpen;
+    newMenuOpen[slug] = !menuOpen[slug];
+    setMenuOpen(newMenuOpen);
+
+    // Check if newMenuOpen has any true values
+    const newMenuOpenHasTrue = Object.values(newMenuOpen).some(value => value === true);
+    setAreMenusOpen(newMenuOpenHasTrue);
+
+    console.log(menuOpen);
+  };
+
   const listItems = menuElements.map((element) => {
+    // JSX for menu subElements (if any)
+    let subCollapse;
+
+    if (element.subElements) {
+      subCollapse = element.subElements.map((subElement) => {
+        return (
+          <Collapse key={subElement.name} in={menuOpen[element.slug]} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText>
+                  <Link href={subElement.url} passHref>
+                    <MUILink underline="none">{subElement.name}</MUILink>
+                  </Link>
+                </ListItemText>
+              </ListItemButton>
+            </List>
+          </Collapse>
+        )
+      });
+    }
+
+    // JSX for elements
     return (
-      <ListItem key={element.name}>
+      <Box key={element.name}>
+        <ListItem onClick={() => { handleMenuClick(element.slug) }}>
           <ListItemButton disableGutters onClick={toggleDrawer}>
             <ListItemIcon>
               {/* !!! CHANGE TO DYNAMIC  ICON*/}
-              {/* <SupervisedUserCircleRoundedIcon color="primary" fontSize="medium" /> */}
+              <SupervisedUserCircleRoundedIcon color="primary" fontSize="medium" />
             </ListItemIcon>
             <ListItemText>
-              <Link href={element.url}>{element.name}</Link>
+              {/* <Link href={element.url}> */}
+              {element.name}
+              {/* </Link> */}
+              {element.subElements && <ExpandMore />}
             </ListItemText>
-            {/* !!! ADD SUBELEMENTS */}
           </ListItemButton>
         </ListItem>
+        {subCollapse}
+      </Box>
     );
   });
 
@@ -45,31 +100,16 @@ function MenuDrawer() {
         }}
       >
         Roundnet France
-        {' '}
-        <br />
-        {' '}
-        Ranking
       </Typography>
       <Divider />
 
       <List sx={{ p: 2, width: { xs: '75vw', sm: '50vw' } }}>
         {listItems}
       </List>
-
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: 0,
-          left: '4rem',
-          opacity: 1,
-        }}
-      >
-        <span>Logo</span>
-
-      </Box>
     </Box>
   );
 
+  // Actual JSX return
   return (
     <>
       <IconButton
@@ -84,7 +124,7 @@ function MenuDrawer() {
       </IconButton>
       <Drawer
         anchor="left"
-        variant="temporary"
+        variant={areMenusOpen ? 'permanent' : 'temporary'}
         open={isDrawerOpen}
         onClose={toggleDrawer}
       >

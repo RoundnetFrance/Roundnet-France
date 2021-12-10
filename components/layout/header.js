@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import menuElements from './menu-elements';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, Fragment } from 'react';
@@ -10,7 +9,9 @@ import {
 } from '@mui/material';
 
 // OUTER COMPONENTS
+import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
+import menuState from '../../helpers/menu-state';
 
 function HideOnScroll(props) {
   const { children } = props;
@@ -33,10 +34,7 @@ HideOnScroll.propTypes = {
 function Header(props) {
 
   // State for the different menu items
-  const menuInitialState = {};
-  menuElements.forEach(element => {
-    menuInitialState[element.slug] = false;
-  });
+  const menuInitialState = menuState();
   const [menuOpen, setMenuOpen] = useState(menuInitialState);
   const [anchorEl, setAnchorEl] = useState(null);
 
