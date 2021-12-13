@@ -20,7 +20,13 @@ import HalfImage from '../../components/ui/half-image';
 function RulesPage() {
   return (
     <Fragment>
-      <Hero title="Règles" mini />
+
+      <Hero 
+      title="Règles" 
+      image="/images/hero/regles.jpg"
+      imagePosition='center 80%'
+      mini />
+
       <Container maxWidth="md" sx={{ py: 4 }}>
 
         <Box sx={{ pb: 4 }}>

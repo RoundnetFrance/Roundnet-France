@@ -5,42 +5,48 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 
 function HalfImage() {
   // Render a box with half a background image, and half a text
   return (
     <Stack
-      direction={{xs: 'column', sm: 'row'}}
+      direction={{xs: 'column', md: 'row'}}
       justifyContent="center"
       alignItems="center"
       spacing={0}
       backgroundColor="secondary.main"
+      minHeight="300px"
+      maxHeight={{lg: "700px"}}
     >
 
       <Box
-        width={{xs: '100%', sm: '50%'}}
+        width={{xs: '100%', md: '50%'}}
       >
         <Image
           src="/images/home-slide.jpg"
           alt="Placeholder"
-          width="100%"
-          height="100%"
+          width="1000"
+          height="700"
           layout="responsive"
           objectFit="cover"
         />
       </Box>
 
       <Box
-        width={{xs: '100%', sm: '50%'}}
+        width={{xs: 'inherit', md: '50%'}}
         sx={{
-          p: 4,
+          p: {
+            xs: 4,
+            lg: 6,
+          },
         }}
       >
         <Typography
           variant="h5"
           color="white"
         >
-          Welcome to the home page!
+          Règles officielles 2021 de Roundnet
         </Typography>
         <Divider 
         color="white" 
@@ -61,9 +67,12 @@ function HalfImage() {
           variant="body1"
           sx={{
             color: "white",
+            mb: 4,
           }}>
           Les nouvelles règles ajoutées en 2021 (consecutive blocks, 7 feet serve...) sont surlignées en jaune dans le document.
         </Typography>
+
+        <Button variant="contained" href="/docs/regles-2021.pdf">Télécharger les règles 2021</Button>
       </Box>
 
     </Stack>
