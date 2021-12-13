@@ -9,8 +9,10 @@ import Typography from '@mui/material/Typography';
 // COMPONENTS IMPORTS
 import Hero from '../../components/ui/hero';
 import Criteria from '../../components/competition/tournaments/criteria';
+import PlanningTable from '../../components/ui/planning-table';
+import PageTitle from '../../components/ui/page-title';
 
-function Tournaments() {
+function TournamentsPage() {
   return (
     <Fragment>
       <Hero
@@ -22,10 +24,7 @@ function Tournaments() {
 
       <Container maxWidth="md" sx={{ my: 4 }}>
 
-        <Box sx={{ pb: 4 }}>
-          <Typography variant="h4">Le planning de tous les tournois officiels français</Typography>
-          <Divider sx={{ pb: 2 }} />
-        </Box>
+        <PageTitle title="Roundnet France accompagne les tournois français" />
 
         <Box sx={{ pb: 4 }}>
           <Typography variant="h5">Les avantages</Typography>
@@ -43,19 +42,24 @@ function Tournaments() {
 
       </Container >
 
-      <Container maxWidth="lg" sx={{ mb: 4, pb: 4 }}>
+      <Container maxWidth="lg" sx={{ mb: 4 }}>
         <Criteria />
+        <Divider variant="middle" sx={{ mt: 6 }} />
       </Container>
 
-      <Container maxWidth="md" sx={{ my: 4 }}>
-      <Typography variant="h5">Calendrier des tournois à venir</Typography>
+      <Container maxWidth="lg" sx={{ mb: 4 }}>
+        <Box mb={4}>
+          <Typography variant="h5">Calendrier des tournois à venir</Typography>
           <Typography variant="body1">
-            Les tournois indépendants peuvent compter pour le classement national s&apos;ils respectent les critères suivants.
+            Le planning des tournois officiels de roundnet pour la saison 2021-2022.
           </Typography>
+        </Box>
+
+        <PlanningTable />
       </Container>
 
     </Fragment>
   )
 }
 
-export default Tournaments
+export default TournamentsPage

@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Hero from '../../components/ui/hero';
 import HalfImage from '../../components/ui/half-image';
 import Timeliner from '../../components/ui/timeliner';
+import PageTitle from '../../components/ui/page-title';
 
 // Rules
 const rulesItems = [
@@ -50,10 +51,7 @@ function RulesPage() {
 
       <Container maxWidth="md" sx={{ py: 4 }}>
 
-        <Box sx={{ pb: 4 }}>
-          <Typography variant="h4">Comment jouer au roundnet ?</Typography>
-          <Divider />
-        </Box>
+        <PageTitle title="Comment jouer au roundnet ?" />
 
         <Box sx={{ pb: 4 }}>
           <Typography variant="h6" align="center">

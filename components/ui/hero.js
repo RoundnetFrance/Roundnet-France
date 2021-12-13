@@ -24,17 +24,19 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
       zIndex: 1,
     },
   };
+
   return (
 
     <Box
       style={styles.container}
       sx={{
-        bgcolor: 'primary.dark',
+        bgcolor: 'primary.main',
         height: mini ? '20vh' : '70vh',
         width: '100%',
         position: 'relative',
       }}
     >
+
         <Image
           src={image}
           alt={title}
