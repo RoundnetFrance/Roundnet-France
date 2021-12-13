@@ -91,7 +91,7 @@ function RulesPage() {
           <Typography align="center" variant="h6">Si tout cela n&apos;est pas clair, la vidéo ci-dessous devrait faire l&apos;affaire.</Typography>
         </Box>
 
-        <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 600, 900], height: 600 }} />
+          <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600] }} />
 
       </Container>
       <HalfImage />

@@ -23,10 +23,6 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
       textShadow: 'black 3px 2px 3px',
       zIndex: 1,
     },
-    bg: {
-      overflow: 'hidden',
-      zIndex: -1,
-    },
   };
   return (
 
@@ -39,16 +35,14 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
         position: 'relative',
       }}
     >
-      <Box style={styles.bg}>
         <Image
           src={image}
           alt={title}
           layout="fill"
           objectFit="cover"
           objectPosition={imagePosition}
-          style={styles.image}
+          priority={true}
         />
-      </Box>
 
       <Container sx={{ height: '100%' }}>
         <Stack justifyContent="center" minHeight="100%" spacing={1}>
