@@ -2,7 +2,7 @@ import { useState, Fragment } from 'react';
 import Link from 'next/link';
 
 // MUI IMPORTS
-import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse } from '@mui/material';
+import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse, Typography } from '@mui/material';
 
 // MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,7 +11,6 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 

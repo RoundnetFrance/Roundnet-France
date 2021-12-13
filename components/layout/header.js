@@ -8,6 +8,10 @@ import {
   Link as MUILink, AppBar, Box, Toolbar, Typography, Button, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem
 } from '@mui/material';
 
+// MUI ICONS
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+
 // OUTER COMPONENTS
 import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
@@ -55,41 +59,43 @@ function Header(props) {
   };
 
   // Display 1st and 2nd level navigation items
-  const navItems = menuElements.map((item) => (
-    <Fragment key={item.name}>
-      <Link href={item.url} id={item.slug} passHref>
+  const navItems = menuElements.map((item) => {
+    // Display arrow of expansion if subElement is chosen
+    const expandIcon = menuOpen[item.slug] ? <ExpandLess /> : <ExpandMore />;
+
+    return (
+      <Fragment key={item.name}>
+        {/* <Link href={item.url} id={item.slug} passHref> */}
         <Button
           color="inherit"
-          onMouseOver={(event) => {handleMenuHover(event, item.slug)}}
-          // onClick={(event) => {handleMenuHover(event, item.slug)}}
+          onClick={(event) => { handleMenuHover(event, item.slug) }}
         >
           {item.name}
+          {item.subElements && expandIcon}
         </Button>
-      </Link>
-      {
-        item.subElements && (
-          <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={menuOpen[item.slug]}
-          onClose={handleMenuClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-            onMouseLeave: handleMenuClose,
-          }}
-        >
-          {item.subElements.map((subItem) => (
-            <MenuItem key={subItem.name} onClick={handleMenuClose}>
-              <Link href={subItem.url} passHref>
-                <MUILink underline="none">{subItem.name}</MUILink>
-                </Link>
-              </MenuItem>
-          ))}
-        </Menu>
-        )
-      }
-    </Fragment>
-  ));
+        {/* </Link> */}
+        {
+          item.subElements && (
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={menuOpen[item.slug]}
+              onClose={handleMenuClose}
+            >
+              {item.subElements.map((subItem) => (
+                <MenuItem key={subItem.name} onClick={handleMenuClose}>
+                  <Link href={subItem.url} passHref>
+                    <MUILink underline="none">{subItem.name}</MUILink>
+                  </Link>
+                </MenuItem>
+              ))}
+            </Menu>
+          )
+        }
+      </Fragment>
+    )
+  }
+  );
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
