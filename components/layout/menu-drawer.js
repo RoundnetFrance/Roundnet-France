@@ -2,7 +2,7 @@ import { useState, Fragment } from 'react';
 import Link from 'next/link';
 
 // MUI IMPORTS
-import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse, ListItemSecondaryAction } from '@mui/material';
+import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse } from '@mui/material';
 
 // MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,14 +11,13 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
 import { Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 // MENU DATA & HELPERS
 import menuElements from './menu-elements';
-import menuState from '../../helpers/menu-state';
+import menuState from '../../helpers/menu-state'; 
 
 function MenuDrawer() {
   // Preparing states
@@ -42,7 +41,7 @@ function MenuDrawer() {
     const newMenuOpenHasTrue = Object.values(newMenuOpen).some(value => value === true);
     setAreMenusOpen(newMenuOpenHasTrue);
 
-    console.log(menuOpen);
+    // console.log(menuOpen);
   };
 
   //! TO TRANSFORM INTO A COMPONENT
@@ -75,7 +74,7 @@ function MenuDrawer() {
 
     // General return of JSX (elements + subElements)
     return (
-      <Box key={element.name}>
+      <Fragment key={element.name}>
         <ListItem onClick={() => { handleMenuClick(element.slug), keepDrawerOpen() }}>
           <ListItemButton disableGutters onClick={toggleDrawer}>
             <ListItemIcon>
@@ -95,7 +94,7 @@ function MenuDrawer() {
           </ListItemButton>
         </ListItem>
         {subCollapse}
-      </Box>
+      </Fragment>
     );
   });
 
