@@ -44,6 +44,7 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
           objectFit="cover"
           objectPosition={imagePosition}
           priority={true}
+          placeholder="shimmer"
         />
 
       <Container sx={{ height: '100%' }}>

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import propTypes from 'prop-types';
 
 // MUI IMPORTS
 import Table from '@mui/material/Table';
@@ -10,8 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-// MUI ICONS
-import LinkIcon from '@mui/icons-material/Link';
+// COMPONENTS IMPORTS
+import PlanningRow from './planning-row';
 
 function createData(organization, place, date, players, price, url) {
   return { organization, place, date, players, price, url };
@@ -26,50 +26,40 @@ const rows = [
 ];
 
 
-function PlanningTable() {
+function PlanningTable({ resultsTable }) {
   return (
     <TableContainer variant="outlined" component={Paper}>
       <Table size="medium" aria-label="simple table">
-        <TableHead>
+        <TableHead sx={{ backgroundColor: "primary.lighter" }}>
           <TableRow>
+            {resultsTable && <TableCell />}
             <TableCell>Organisateur</TableCell>
             <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Lieu</TableCell>
             <TableCell align="right">Date</TableCell>
             <TableCell align="right" sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Nombre de joueurs</TableCell>
-            <TableCell align="right">Prix</TableCell>
-            <TableCell align="right">Inscription</TableCell>
+            {resultsTable || <TableCell align="right">Prix</TableCell>}
+            <TableCell align="right">{resultsTable ? 'Résultats' : 'Inscription'}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => {
-            const humanReadableDate = new Date(row.date).toLocaleDateString('fr-FR', { year: "numeric", month: "short", day: "2-digit" });
-            return (
-              <TableRow
-                key={row.place}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.organization}
-                </TableCell>
-                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{row.place}</TableCell>
-                <TableCell align="right">{humanReadableDate}</TableCell>
-                <TableCell align="right" sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{row.players}</TableCell>
-                <TableCell align="right">{row.price}€</TableCell>
-                <TableCell align="right">
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                    endIcon={<LinkIcon sx={{ display: { xs: 'none', sm: 'table-cell' } }} />}> S&apos;inscrire </Button>
-                </TableCell>
-              </TableRow>
-            )
-          }
+          {rows.map((row) => <PlanningRow
+            key={row.date}
+            row={row}
+            resultsTable={resultsTable}
+          />
           )}
         </TableBody>
       </Table>
     </TableContainer>
   )
+}
+
+PlanningTable.propTypes = {
+  resultsTable: propTypes.bool,
+}
+
+PlanningTable.defaultProps = {
+  resultsTable: false,
 }
 
 export default PlanningTable
