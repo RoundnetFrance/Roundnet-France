@@ -3,6 +3,7 @@ const menuElements = [
     name: 'Compétition',
     url: '/competition',
     slug: 'competition',
+    icon: 'emoji_events',
     subElements: [
       {
         name: 'Règles Officielles',
@@ -34,6 +35,7 @@ const menuElements = [
     name: 'Clubs & communautés',
     url: '/clubs-et-communautes',
     slug: 'communities',
+    icon: 'supervised_user_circle',
     subElements: [
       {
         name: 'Communautés',
@@ -53,11 +55,13 @@ const menuElements = [
     name: 'Boutique',
     url: '/boutique',
     slug: 'shop',
+    icon: 'shopping_cart',
   },
   {
     name: 'Qui sommes-nous ?',
     url: '/qui-sommes-nous',
     slug: 'about',
+    icon: 'info',
     subElements: [
       {
         name: 'La fédération',

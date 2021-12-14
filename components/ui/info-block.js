@@ -7,9 +7,11 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 
-function InfoBlock({ title, items, image, description, imageToLeft }) {
+function InfoBlock({ title, items, image, description, imageToLeft, height }) {
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
+  // Getting the height of the image
+  const heightPx = `${height}px`;
 
   return (
     <Stack
@@ -30,11 +32,11 @@ function InfoBlock({ title, items, image, description, imageToLeft }) {
             <Stack
               direction="row"
               justifyContent="space-between"
-              spacing={2}
+              spacing={{ xs: 1, md: 2 }}
             >
               {
-                items.map((item, index) => (
-                  <Box width="50%" key={index}>
+                items.map((item) => (
+                  <Box width="50%" key={item.id}>
                     <Typography variant="h6" color="secondary.main"> {item.title} </Typography>
                     <Typography variant="body2">
                       {item.text}
@@ -43,18 +45,6 @@ function InfoBlock({ title, items, image, description, imageToLeft }) {
                 ))
 
               }
-              {/* <Box width="50%">
-                <Typography variant="h6" color="secondary.main"> 24+ </Typography>
-                <Typography variant="body2">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, voluptate. Numquam, tempora?
-                </Typography>
-              </Box>
-              <Box width="50%">
-                <Typography variant="h6" color="secondary.main"> 6+ </Typography>
-                <Typography variant="body2">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, voluptate. Numquam, tempora?
-                </Typography>
-              </Box> */}
 
             </Stack>
           )
@@ -63,7 +53,7 @@ function InfoBlock({ title, items, image, description, imageToLeft }) {
 
       </Stack>
 
-      <Paper elevation={3} sx={{ width: { xs: '100%', md: '50%' }, height: '400px', position: 'relative', overflow: 'hidden', borderRadius: 2 }}>
+      <Paper elevation={3} sx={{ width: { xs: '100%', md: '50%' }, height: {xs: height/2, md: height }, position: 'relative', overflow: 'hidden', borderRadius: 2 }}>
         <Image
           src={image}
           layout='fill'
@@ -82,11 +72,13 @@ InfoBlock.propTypes = {
   image: propTypes.string.isRequired,
   description: propTypes.string.isRequired,
   imageToLeft: propTypes.bool,
+  height: propTypes.number,
 }
 
 InfoBlock.defaultProps = {
   items: null,
   imageToLeft: false,
+  height: 400,
 }
 
 export default InfoBlock

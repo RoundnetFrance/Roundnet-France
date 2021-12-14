@@ -304,7 +304,7 @@ function TeamRanking() {
     <Container maxWidth="lg" sx={{ position: 'relative', mb: 4 }}>
 
       <HeaderWithIcon
-        icon={<EqualizerIcon color="primary" sx={{ fontSize: 80 }} />}
+        icon="equalizer"
         title="Classement des équipes">
         Dernière mise à jour :
         {' '}

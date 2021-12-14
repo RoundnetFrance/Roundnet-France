@@ -2,7 +2,7 @@ import { useState, Fragment } from 'react';
 import Link from 'next/link';
 
 // MUI IMPORTS
-import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse, Typography } from '@mui/material';
+import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Box, Collapse, Typography, Icon } from '@mui/material';
 
 // MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
@@ -54,7 +54,7 @@ function MenuDrawer() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={toggleDrawer}>
                 <ListItemIcon>
-                  <ArrowForwardIcon />
+                  <Icon>arrow_forward</Icon>
                 </ListItemIcon>
                 <ListItemText>
                   <Link href={subElement.url} passHref>
@@ -78,7 +78,7 @@ function MenuDrawer() {
           <ListItemButton disableGutters onClick={toggleDrawer}>
             <ListItemIcon>
               {/* !!! CHANGE TO DYNAMIC  ICON*/}
-              <SupervisedUserCircleRoundedIcon color="primary" fontSize="medium" />
+              <Icon color="primary" fontSize="medium">{element.icon}</Icon>
             </ListItemIcon>
             <ListItemText>
               {element.subElements ? (

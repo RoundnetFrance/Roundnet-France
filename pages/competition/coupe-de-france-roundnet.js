@@ -4,16 +4,12 @@ import { Fragment } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-// MUI ICONS
-import EventIcon from '@mui/icons-material/Event';
-
 // COMPONENTS IMPORTS
 import Hero from '../../components/ui/hero';
 import PageTitle from '../../components/ui/page-title';
 import TeamRanking from '../../components/competition/national-ranking/team-ranking';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PlanningTable from '../../components/ui/planning-table';
-
 
 function NationalRankingPage() {
   return (
@@ -39,7 +35,7 @@ function NationalRankingPage() {
       <Container maxWidth="md" sx={{ mt: 8 }}>
         <HeaderWithIcon
           title="Résultat des précédents tournois"
-          icon={<EventIcon color="primary" sx={{ fontSize: 80 }} />}
+          icon="event"
         >
           Les tournois de la Coupe de France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram.
         </HeaderWithIcon>
