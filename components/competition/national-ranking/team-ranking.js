@@ -28,6 +28,9 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 
+// COMPONENT IMPORTS
+import HeaderWithIcon from '../../ui/header-with-icon';
+
 
 function TablePaginationActions(props) {
   const {
@@ -91,7 +94,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function PlayerRanking() {
+function TeamRanking() {
 
   // Fake Data
   const rankingList = [
@@ -158,6 +161,7 @@ function PlayerRanking() {
     {
       playerId: 115,
       rank: 10,
+      points: 160,
       team: 'Equipe 10',
     },
     // {
@@ -251,7 +255,7 @@ function PlayerRanking() {
     //   }
     // },
   ];
-  
+
 
   // Pagination
   const [page, setPage] = useState(0);
@@ -299,22 +303,13 @@ function PlayerRanking() {
   return (
     <Container maxWidth="lg" sx={{ position: 'relative', mb: 4 }}>
 
-      <Typography
-        variant="h4"
-        align="center"
-        color="primary"
-        mt={4}
-      >
-        <Box textAlign="center">
-          <EqualizerIcon color="primary" sx={{ fontSize: 80 }} />
-        </Box>
-        Le classement des équipes
-      </Typography>
-      <Typography variant="subtitle1" align="center" color="secondary" mb={4}>
+      <HeaderWithIcon
+        icon={<EqualizerIcon color="primary" sx={{ fontSize: 80 }} />}
+        title="Classement des équipes">
         Dernière mise à jour :
         {' '}
         {new Date().toLocaleDateString()}
-      </Typography>
+      </HeaderWithIcon>
 
       {/* TABLE */}
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems="center">
@@ -376,18 +371,18 @@ function PlayerRanking() {
         </TableContainer>
 
         <Box sx={{ width: { xs: '100%', md: '50%' } }}>
-        <Masonry columns={2} spacing={1}>
-        {itemData.map((item) => (
-          <Stack key={item.title}>
-            <Image
-              src={`${item.img}?w=162&auto=format`}
-              alt={item.title}
-              width={item.width}
-              height={item.height}
-            />
-          </Stack>
-        ))}
-      </Masonry>
+          <Masonry columns={2} spacing={1}>
+            {itemData.map((item) => (
+              <Stack key={item.title}>
+                <Image
+                  src={`${item.img}?w=162&auto=format`}
+                  alt={item.title}
+                  width={item.width}
+                  height={item.height}
+                />
+              </Stack>
+            ))}
+          </Masonry>
         </Box>
       </Stack>
 
@@ -395,4 +390,4 @@ function PlayerRanking() {
   );
 }
 
-export default PlayerRanking;
+export default TeamRanking;
