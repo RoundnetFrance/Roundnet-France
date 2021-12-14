@@ -8,7 +8,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 
-function Timeliner({ position, items }) {
+function Timeliner({ position, items, color }) {
   const timelineItems = items.map((item, index) => {
     return (
       <TimelineItem key={item.key}>
@@ -16,7 +16,7 @@ function Timeliner({ position, items }) {
           <TimelineDot />
           {index === items.length - 1 ? null : <TimelineConnector />}
         </TimelineSeparator>
-        <TimelineContent>{item.text}</TimelineContent>
+        <TimelineContent color={color}>{item.text}</TimelineContent>
       </TimelineItem>
     )
   })
@@ -30,10 +30,13 @@ function Timeliner({ position, items }) {
 
 Timeliner.propTypes = {
   position: propTypes.string,
+  items: propTypes.array.isRequired,
+  color: propTypes.string,
 }
 
 Timeliner.defaultProps = {
   position: 'alternate',
+  color: 'initial',
 }
 
 export default Timeliner

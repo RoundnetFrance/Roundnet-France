@@ -20,6 +20,7 @@ const muiTheme = createTheme(
         light: '#778edc',
         main: '#315bcd',
         dark: '#1e48b6',
+        darker: '#0f245b',
         analogous: '#31a9cd',
       },
       secondary: {

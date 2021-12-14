@@ -14,6 +14,7 @@ import Hero from '../../components/ui/hero';
 import HalfImage from '../../components/ui/half-image';
 import Timeliner from '../../components/ui/timeliner';
 import PageTitle from '../../components/ui/page-title';
+import ColoredBackground from '../../components/ui/colored-background';
 
 // Rules
 const rulesItems = [
@@ -50,35 +51,42 @@ function RulesPage() {
         mini />
 
       <Container maxWidth="md" sx={{ py: 4 }}>
-
         <PageTitle title="Comment jouer au roundnet ?" />
+        <Typography variant="body1" sx={{ pb: 4 }}>
+          Réputé pour sa facilité de prise en main, le roundnet est un sport populaire qui emprunte au meilleur des mondes de nombreux sports pour le plaisir de tous les joueurs. Pratiquable autant en loisir qu&apos;à haut niveau, il ne possède en son coeur qu&apos;une poignée de règles très simples.
+        </Typography>
+      </Container>
 
+      <ColoredBackground>
         <Box sx={{ pb: 4 }}>
-          <Typography variant="h6" align="center">
+          <Typography variant="h6" align="center" color="white">
             Première chose à savoir : vous pouvez jouer sur n&apos;importe quel terrain. Indoor, gazon, synthétique, terre battue,  neige, boue, béton... Soyez créatifs.
           </Typography>
         </Box>
 
-        <Box sx={{ pb: 4 }}>
-          <Timeliner items={rulesItems} />
-        </Box>
+        <Container maxWidth="sm" sx={{ mb: 4 }}>
+          <Timeliner items={rulesItems} color='white' />
+        </Container>
 
-        <Box sx={{ pb: 4 }}>
-          <Typography align="center" variant="h6">
-            Si tout cela n&apos;est pas clair, la vidéo ci-dessous devrait faire l&apos;affaire.
-          </Typography>
-        </Box>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={0}
-        >
-          <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600] }} />
+        <Typography align="center" variant="h6" color="white">
+          Si tout cela n&apos;est pas clair, la vidéo ci-dessous devrait faire l&apos;affaire.
+        </Typography>
 
-        </Stack>
+      </ColoredBackground>
 
-      </Container>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={0}
+        sx={{
+          my: 4,
+        }}
+      >
+        <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600] }} />
+
+      </Stack>
+
       <HalfImage
         image='/images/pages/competition/regles/regles-pdf.jpg'>
 
@@ -88,7 +96,7 @@ function RulesPage() {
         >
           Règles officielles 2021 de Roundnet
         </Typography>
-      
+
         <Divider
           color="white"
           sx={{

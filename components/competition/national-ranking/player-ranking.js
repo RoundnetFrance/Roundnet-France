@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+import Image from 'next/image'
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -30,7 +30,6 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 
 
 function TablePaginationActions(props) {
-  const theme = useTheme();
   const {
     count, page, rowsPerPage, onPageChange,
   } = props;
@@ -100,182 +99,157 @@ function PlayerRanking() {
       playerId: 121,
       rank: 1,
       points: 500,
-      player: {
-        name: "Thomas",
-        surname: "Jouve"
-      }
+      team: 'Les Jouve',
     },
     {
       playerId: 122,
       rank: 2,
       points: 500,
-      player: {
-        name: "Louis",
-        surname: "Jouve"
-      }
+      team: 'M&N',
+
     },
     {
       playerId: 120,
       rank: 3,
       points: 400,
-      player: {
-        name: "Charles",
-        surname: "Mordacq"
-      }
+      team: 'Pour Combien ?',
+
     },
     {
       playerId: 119,
       rank: 4,
       points: 400,
-      player: {
-        name: "Benoit",
-        surname: "Nguyen"
-      }
+      team: 'Mango Curry',
+
     },
     {
       playerId: 107,
       rank: 5,
       points: 232,
-      player: {
-        name: "Benoît",
-        surname: "Durand"
-      }
+      team: 'Equinox',
+
     },
     {
       playerId: 118,
       rank: 6,
       points: 210,
-      player: {
-        name: "Dorian",
-        surname: "Améziane"
-      }
+      team: 'Equipe 6',
+
     },
     {
       playerId: 117,
       rank: 7,
       points: 210,
-      player: {
-        name: "Cebastien",
-        surname: "Page"
-      }
+      team: 'Equipe 7',
     },
     {
       playerId: 106,
       rank: 8,
       points: 195,
-      player: {
-        name: "Erwan",
-        surname: "Chapelière"
-      }
+      team: 'Equipe 8',
+
     },
     {
       playerId: 116,
       rank: 9,
       points: 165,
-      player: {
-        name: "Robin",
-        surname: "Souriau"
-      }
+      team: 'Equipe 9',
     },
     {
       playerId: 115,
       rank: 10,
-      points: 165,
-      player: {
-        name: "Alexandre",
-        surname: "Marti"
-      }
+      team: 'Equipe 10',
     },
-    {
-      playerId: 113,
-      rank: 11,
-      points: 110,
-      player: {
-        name: "Tristan",
-        surname: "Olin"
-      }
-    },
-    {
-      playerId: 114,
-      rank: 12,
-      points: 110,
-      player: {
-        name: "Nicolas",
-        surname: "Brun"
-      }
-    },
-    {
-      playerId: 111,
-      rank: 13,
-      points: 109,
-      player: {
-        name: "Timothée",
-        surname: "Dunglas"
-      }
-    },
-    {
-      playerId: 112,
-      rank: 14,
-      points: 109,
-      player: {
-        name: "Jean",
-        surname: "Delloye"
-      }
-    },
-    {
-      playerId: 109,
-      rank: 15,
-      points: 108,
-      player: {
-        name: "Lancelot",
-        surname: "Touzé"
-      }
-    },
-    {
-      playerId: 110,
-      rank: 16,
-      points: 108,
-      player: {
-        name: "Jan-Peter",
-        surname: "Geringer"
-      }
-    },
-    {
-      playerId: 108,
-      rank: 17,
-      points: 107,
-      player: {
-        name: "Axel",
-        surname: "Degiorgis"
-      }
-    },
-    {
-      playerId: 105,
-      rank: 18,
-      points: 70,
-      player: {
-        name: "Valentin",
-        surname: "Perraud"
-      }
-    },
-    {
-      playerId: 103,
-      rank: 19,
-      points: 69,
-      player: {
-        name: "Gabriel",
-        surname: "Rodriguez"
-      }
-    },
-    {
-      playerId: 104,
-      rank: 20,
-      points: 69,
-      player: {
-        name: "Ryan",
-        surname: "Danekas"
-      }
-    },
+    // {
+    //   playerId: 113,
+    //   rank: 11,
+    //   points: 110,
+    //   player: {
+    //     name: "Tristan",
+    //     surname: "Olin"
+    //   }
+    // },
+    // {
+    //   playerId: 114,
+    //   rank: 12,
+    //   points: 110,
+    //   player: {
+    //     name: "Nicolas",
+    //     surname: "Brun"
+    //   }
+    // },
+    // {
+    //   playerId: 111,
+    //   rank: 13,
+    //   points: 109,
+    //   player: {
+    //     name: "Timothée",
+    //     surname: "Dunglas"
+    //   }
+    // },
+    // {
+    //   playerId: 112,
+    //   rank: 14,
+    //   points: 109,
+    //   player: {
+    //     name: "Jean",
+    //     surname: "Delloye"
+    //   }
+    // },
+    // {
+    //   playerId: 109,
+    //   rank: 15,
+    //   points: 108,
+    //   player: {
+    //     name: "Lancelot",
+    //     surname: "Touzé"
+    //   }
+    // },
+    // {
+    //   playerId: 110,
+    //   rank: 16,
+    //   points: 108,
+    //   player: {
+    //     name: "Jan-Peter",
+    //     surname: "Geringer"
+    //   }
+    // },
+    // {
+    //   playerId: 108,
+    //   rank: 17,
+    //   points: 107,
+    //   player: {
+    //     name: "Axel",
+    //     surname: "Degiorgis"
+    //   }
+    // },
+    // {
+    //   playerId: 105,
+    //   rank: 18,
+    //   points: 70,
+    //   player: {
+    //     name: "Valentin",
+    //     surname: "Perraud"
+    //   }
+    // },
+    // {
+    //   playerId: 103,
+    //   rank: 19,
+    //   points: 69,
+    //   player: {
+    //     name: "Gabriel",
+    //     surname: "Rodriguez"
+    //   }
+    // },
+    // {
+    //   playerId: 104,
+    //   rank: 20,
+    //   points: 69,
+    //   player: {
+    //     name: "Ryan",
+    //     surname: "Danekas"
+    //   }
+    // },
   ];
   
 
@@ -299,18 +273,26 @@ function PlayerRanking() {
     {
       img: '/images/ranking-masonry/roundnet-france-ranking1.jpg',
       title: 'Fern',
+      width: 170,
+      height: 400,
     },
     {
       img: '/images/ranking-masonry/roundnet-france-ranking3.jpg',
       title: 'Mushrooms',
+      width: 170,
+      height: 400,
     },
     {
       img: '/images/ranking-masonry/roundnet-france-ranking4.jpg',
       title: 'Tower',
+      width: 250,
+      height: 200,
     },
     {
       img: '/images/ranking-masonry/roundnet-france-ranking6.jpg',
       title: 'Honey',
+      width: 250,
+      height: 200,
     },
   ];
 
@@ -326,7 +308,7 @@ function PlayerRanking() {
         <Box textAlign="center">
           <EqualizerIcon color="primary" sx={{ fontSize: 80 }} />
         </Box>
-        Le classement
+        Le classement des équipes
       </Typography>
       <Typography variant="subtitle1" align="center" color="secondary" mb={4}>
         Dernière mise à jour :
@@ -342,7 +324,7 @@ function PlayerRanking() {
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Rang</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Joueur.se</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>Equipe</TableCell>
                 <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem' }} align="right">Points</TableCell>
               </TableRow>
             </TableHead>
@@ -359,9 +341,7 @@ function PlayerRanking() {
                     {row.rank}
                   </TableCell>
                   <TableCell>
-                    {row.player.name}
-                    {' '}
-                    {row.player.surname}
+                    {row.team}
                   </TableCell>
                   <TableCell sx={{ fontWeight: 'bold' }} align="right">{row.points}</TableCell>
                 </TableRow>
@@ -399,12 +379,11 @@ function PlayerRanking() {
         <Masonry columns={2} spacing={1}>
         {itemData.map((item) => (
           <Stack key={item.title}>
-            <img
+            <Image
               src={`${item.img}?w=162&auto=format`}
-              srcSet={`${item.img}?w=162&auto=format&dpr=2 2x`}
               alt={item.title}
-              loading="lazy"
-              style={{ borderBottomLeftRadius: 4, borderBottomRightRadius: 4 }}
+              width={item.width}
+              height={item.height}
             />
           </Stack>
         ))}

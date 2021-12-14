@@ -13,18 +13,18 @@ function NationalRankingPage() {
   return (
     <Fragment>
       <Hero
-        title="Classement National"
+        title="Coupe de France"
         image="/images/hero/classement-national.jpg"
         mini
       />
       <Container maxWidth="md" sx={{ mt: 4 }}>
-        <PageTitle title="Le classement officiel des joueurs français" />
+        <PageTitle title="Le classement officiel des équipes françaises" />
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
           Le classement national est basé sur des tournois indépendants répondants aux critères de la fédération décrits ci-dessous.
 
           Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram.
 
-          Dans le tableau ci-dessous, vous pouvez voir le classement national à jour, ainsi que la liste des prochains tournois.
+          Dans le tableau ci-dessous, vous pouvez voir le classement national à jour.
         </Typography>
       </Container>
 
