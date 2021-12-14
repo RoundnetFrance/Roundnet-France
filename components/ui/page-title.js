@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 function PageTitle({ title }) {
   return (
-    <Box sx={{ pb: 4 }}>
+    <Box sx={{ mb: 2 }}>
       <Typography variant="h4">
         {title}
       </Typography>
