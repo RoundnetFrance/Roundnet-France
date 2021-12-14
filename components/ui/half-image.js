@@ -4,9 +4,6 @@ import propTypes from 'prop-types';
 // MUI IMPORTS
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
 
 function HalfImage({ image, children }) {
   // Render a box with half a background image, and half a text

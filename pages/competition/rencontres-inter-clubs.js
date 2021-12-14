@@ -7,40 +7,36 @@ import Typography from '@mui/material/Typography';
 // COMPONENTS IMPORTS
 import Hero from '../../components/ui/hero';
 import PageTitle from '../../components/ui/page-title';
-import PlanningTable from '../../components/ui/planning-table';
+import InfoBlock from '../../components/ui/info-block';
 
 function TournamentsResultsPage() {
   return (
     <Fragment>
       <Hero
-        title="Résultats"
+        title="Rencontres inter-clubs"
         image="/images/hero/results.jpg"
         imagePosition='center 80%'
         mini
       />
 
-      <Container maxWidth="md" sx={{ my: 4}}>
-        <PageTitle title="Tous les résultats des tournois de roundnet français" />
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <PageTitle title="Le rendez-vous compétitif des clubs français" />
         <Typography variant="body1">
-          Consultez les résultats de tous les tournois officiel de roundnet français, classés par saison.
+          Les rencontres inter-clubs représentent l&apos;initiative de Roundnet France de se faire rencontrer les différents viviers de joueurs nationaux.
         </Typography>
+
+        <InfoBlock
+          imageToLeft
+          title="Comment se déroulent les rencontres inter-clubs ?"
+          image="/images/home-slide.jpg"
+          description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore eveniet possimus quidem, voluptas blanditiis rem beatae hic asperiores inventore nobis quos adipisci laboriosam earum in necessitatibus, accusantium itaque voluptatem aliquid error odio a autem officia eum maxime. Doloribus ducimus, debitis modi libero nesciunt similique excepturi laborum temporibus cumque esse deserunt labore aspernatur expedita consectetur, odit hic quos exercitationem quaerat dolore. Expedita modi neque quam."
+        >
+
+        </InfoBlock>
+
       </Container>
 
-      <Container maxWidth="lg" sx={{ my: 4}}>
-      <Typography variant="h6">
-          Saison 2022/
-        </Typography>
-        <Typography variant="body1">
-          Pas encore de résultats enregistrés.
-        </Typography>
-      </Container>
 
-      <Container maxWidth="lg" sx={{ my: 4}}>
-      <Typography variant="h6">
-          Saison 2021/
-        </Typography>
-        <PlanningTable resultsTable />
-      </Container>
 
 
 
