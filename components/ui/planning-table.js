@@ -14,7 +14,28 @@ import Button from '@mui/material/Button';
 import PlanningRow from './planning-row';
 
 function createData(organization, place, date, players, price, url) {
-  return { organization, place, date, players, price, url };
+  return {
+    organization, place, date, players, price, url, results: [
+      {
+        position: 1,
+        teamName: 'Les Jouve',
+        players: 'Louis Jouve & Thomas Jouve',
+        points: 120,
+      },
+      {
+        position: 2,
+        teamName: 'Pour Combien ?',
+        players: 'Robin Florinda & Dorian Améziane',
+        points: 80,
+      },
+      {
+        position: 3,
+        teamName: 'M&N',
+        players: 'Charles Mordacq & Benoit Nguyen',
+        points: 45,
+      },
+    ],
+  };
 }
 
 const rows = [
@@ -32,7 +53,7 @@ function PlanningTable({ resultsTable }) {
       <Table size="medium" aria-label="simple table">
         <TableHead sx={{ backgroundColor: "primary.lighter" }}>
           <TableRow>
-            {resultsTable && <TableCell />}
+            {resultsTable && <TableCell padding="checkbox" />}
             <TableCell>Organisateur</TableCell>
             <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Lieu</TableCell>
             <TableCell align="right">Date</TableCell>

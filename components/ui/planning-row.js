@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
 // MUI IMPORTS
+import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
+import Collapse from '@mui/material/Collapse';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Stack';
 
 // MUI ICONS
 import LinkIcon from '@mui/icons-material/Link';
@@ -22,43 +30,85 @@ function PlanningRow({ row, resultsTable }) {
 
 
   return (
-    <TableRow
-      sx={{ 
-        '&:last-child td, &:last-child th': { border: 0 },
-        '& > *': { borderBottom: 'unset' },
-      }}
-    >
-      {resultsTable && (
-        <IconButton
-          aria-label="expand row"
-          size="small"
-          onClick={() => setExpanded(!expanded)}
-        >
-          {expanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </IconButton>
-      )}
-      <TableCell component="th" scope="row">
-        {row.organization}
-      </TableCell>
-      <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{row.place}</TableCell>
-      <TableCell align="right">{humanReadableDate}</TableCell>
-      <TableCell align="right" sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{row.players}</TableCell>
-      {resultsTable || (
-        <TableCell align="right">{row.price}€</TableCell>
-      )}
-      <TableCell align="right">
-        <Button
-          variant={resultsTable ? 'contained' : 'outlined'}
-          color="primary"
-          size="small"
-          endIcon={resultsTable ?
-            <EmojiEventsIcon sx={{ display: { xs: 'none', sm: 'table-cell' } }} />
-            :
-            <LinkIcon sx={{ display: { xs: 'none', sm: 'table-cell' } }} />}>
-          {resultsTable ? 'Consulter' : 'S\'inscrire'}
-        </Button>
-      </TableCell>
-    </TableRow>
+    <Fragment>
+
+      {/* MAIN TABLE */}
+      <TableRow
+        sx={{
+          '&:last-child td, &:last-child th': { border: 0 },
+          // '& > *': { borderBottom: 'unset' },
+        }}
+      >
+        {resultsTable && (
+          <TableCell padding="checkbox">
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        )}
+        <TableCell component="th" scope="row">
+          {row.organization}
+        </TableCell>
+        <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{row.place}</TableCell>
+        <TableCell align="right">{humanReadableDate}</TableCell>
+        <TableCell align="right" sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{row.players}</TableCell>
+        {resultsTable || (
+          <TableCell align="right">{row.price}€</TableCell>
+        )}
+        <TableCell align="right">
+          <Button
+            variant={resultsTable ? 'contained' : 'outlined'}
+            color="primary"
+            size="small"
+            endIcon={resultsTable ?
+              <EmojiEventsIcon sx={{ display: { xs: 'none', sm: 'table-cell' } }} />
+              :
+              <LinkIcon sx={{ display: { xs: 'none', sm: 'table-cell' } }} />}>
+            {resultsTable ? 'Consulter' : 'S\'inscrire'}
+          </Button>
+        </TableCell>
+      </TableRow>
+
+      {/* COLLAPSABLE SUBTABLE */}
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: {xs: 1, sm: 2} }}>
+              <Typography variant="h6" gutterBottom component="div">
+                Podium
+              </Typography>
+                <Table size="small" sx={{ maxWidth: '600px'}} aria-label="tournament podium">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Pos.</TableCell>
+                      <TableCell>Equipe</TableCell>
+                      <TableCell>Joueurs</TableCell>
+                      <TableCell align="right">Points</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {row.results.map((result) => (
+                      <TableRow key={result.teamName}>
+                        <TableCell component="th" scope="row">
+                          {result.position}
+                        </TableCell>
+                        <TableCell>{result.teamName}</TableCell>
+                        <TableCell>{result.players}</TableCell>
+                        <TableCell align="right">{result.points}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                <Divider />
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </Fragment>
   )
 }
 
