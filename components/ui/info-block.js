@@ -12,8 +12,6 @@ import Chip from '@mui/material/Chip'
 function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage }) {
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
-  // Getting the height of the image
-  const heightPx = `${height}px`;
 
   return (
     <Stack
@@ -83,7 +81,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
         <Image
           src={image}
           layout='fill'
-          alt="home-slide"
+          alt={title}
           objectFit="cover"
         />
       </Paper>

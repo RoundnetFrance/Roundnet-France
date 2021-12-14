@@ -52,7 +52,7 @@ function HallOfFamePage() {
       </Container>
 
       <Container maxWidth="sm" sx={{ my: 8 }}>
-        <CrossingItems items={crossingItems} />
+        <CrossingItems items={crossingItems} roundedItems />
       </Container>
       
     </Fragment>

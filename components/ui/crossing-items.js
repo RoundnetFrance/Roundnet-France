@@ -6,8 +6,7 @@ import Stack from '@mui/material/Stack';
 // COMPONENTS IMPORTS
 import InfoBlock from './info-block';
 
-function CrossingItems({ items }) {
-
+function CrossingItems({ items, roundedItems, height }) {
   return (
     <Stack
       direction="column"
@@ -23,9 +22,9 @@ function CrossingItems({ items }) {
             chip={item.chip}
             image={item.image}
             description={item.description}
-            height={260}
-            imageToLeft={index % 2}
-            roundedImage
+            height={roundedItems ? 260 : height}
+            imageToLeft={index % 2 === 0}
+            roundedImage={roundedItems}
           />
         ))
       }
@@ -42,6 +41,13 @@ CrossingItems.propTypes = {
     image: propTypes.string.isRequired,
     description: propTypes.string.isRequired,
   })).isRequired,
+  roundedItems: propTypes.bool,
+  height: propTypes.number,
+}
+
+CrossingItems.defaultProps = {
+  roundedItems: false,
+  height: 400,
 }
 
 export default CrossingItems
