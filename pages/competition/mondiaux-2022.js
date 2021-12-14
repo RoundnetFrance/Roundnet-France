@@ -10,6 +10,7 @@ import PageTitle from '../../components/ui/page-title';
 import FeaturedItems from '../../components/ui/featured-items';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import CrossingItems from '../../components/ui/crossing-items';
+import CTAFooter from '../../components/ui/cta-footer';
 
 function WorldChampionshipPage() {
 
@@ -76,6 +77,22 @@ function WorldChampionshipPage() {
         />
         <CrossingItems items={items} height={300} />
         </Container>
+
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <CTAFooter
+          title="Alors, on s'inscrit ?"
+          subtitle="Participez avec nous à un événément unique !"
+          mainLink={{
+            url: '/inscription',
+            text: 'S\'inscrire'
+          }}
+          altLink={{
+            url: '/competition',
+            text: 'Rejoindre un club'
+          }}
+          />
+      </Container>
+
 
     </Fragment>
   )
