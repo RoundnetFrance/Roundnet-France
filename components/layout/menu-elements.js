@@ -5,20 +5,20 @@ const menuElements = [
     slug: 'competition',
     subElements: [
       {
-        name: 'Règles',
+        name: 'Règles Officielles',
         url: '/competition/regles',
       },
       {
-        name: 'Compétitions et tournois',
-        url: '/competition/competitions-et-tournois',
+        name: 'Calendrier',
+        url: '/competition/calendrier',
       },
       {
-        name: 'Liste des résultats',
-        url: '/competition/liste-des-resultats',
+        name: 'Coupe de France',
+        url: '/competition/coupe-de-france-roundnet',
       },
       {
-        name: 'Classement national',
-        url: '/competition/classement-national',
+        name: 'Rencontres inter-clubs',
+        url: '/competition/rencontres-inter-clubs',
       },
       {
         name: 'Hall Of Fame',

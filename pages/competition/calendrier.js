@@ -16,7 +16,7 @@ function TournamentsPage() {
   return (
     <Fragment>
       <Hero
-        title="Compétitions et tournois"
+        title="Calendrier"
         image="/images/hero/competitions-tournois.jpg"
         imagePosition='center center'
         mini
