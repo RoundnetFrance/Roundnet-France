@@ -2,22 +2,24 @@ const menuElements = [
   {
     name: 'Compétition',
     url: '/competition',
+    slug: 'competition',
+    icon: 'emoji_events',
     subElements: [
       {
-        name: 'Règles',
+        name: 'Règles Officielles',
         url: '/competition/regles',
       },
       {
-        name: 'Compétitions et tournois',
-        url: '/competition/competitions-et-tournois',
+        name: 'Calendrier',
+        url: '/competition/calendrier',
       },
       {
-        name: 'Liste des résultats',
-        url: '/competition/liste-des-resultats',
+        name: 'Coupe de France',
+        url: '/competition/coupe-de-france-roundnet',
       },
       {
-        name: 'Classement national',
-        url: '/competition/classement-national',
+        name: 'Rencontres inter-clubs',
+        url: '/competition/rencontres-inter-clubs',
       },
       {
         name: 'Hall Of Fame',
@@ -32,6 +34,8 @@ const menuElements = [
   {
     name: 'Clubs & communautés',
     url: '/clubs-et-communautes',
+    slug: 'communities',
+    icon: 'supervised_user_circle',
     subElements: [
       {
         name: 'Communautés',
@@ -50,15 +54,23 @@ const menuElements = [
   {
     name: 'Boutique',
     url: '/boutique',
+    slug: 'shop',
+    icon: 'shopping_cart',
   },
   {
     name: 'Qui sommes-nous ?',
     url: '/qui-sommes-nous',
+    slug: 'about',
+    icon: 'info',
     subElements: [
+      {
+        name: 'La fédération',
+        url: '/qui-sommes-nous/la-federation',
+      },
       {
         name: 'Contact',
         url: '/qui-sommes-nous/contact',
-      },
+      },      
     ],
   },
 ];

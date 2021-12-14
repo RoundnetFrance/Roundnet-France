@@ -31,7 +31,7 @@ function Footer() {
   ];
 
   return (
-    <Box bgcolor="primary.dark" py={4}>
+    <Box bgcolor="primary.darker" py={4}>
       <Container maxWidth="lg">
         <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between">
           <Box>
