@@ -6,6 +6,8 @@ function ContactPage() {
     <div>
       <Hero 
         title="Contact"
+        image="/images/hero/contact.jpg"
+        imagePosition="center top"
         mini
       />
       <ContactForm />

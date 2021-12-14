@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
-import menuElements from './menu-elements';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, Fragment } from 'react';
 
 // MATERIAL COMPONENTS
-import MUILink from '@mui/material/Link';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Slide from '@mui/material/Slide';
+import {
+  Link as MUILink, AppBar, Box, Toolbar, Typography, Button, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem
+} from '@mui/material';
+
+// MUI ICONS
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 // OUTER COMPONENTS
+import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
+import menuState from '../../helpers/menu-state';
 
 function HideOnScroll(props) {
   const { children } = props;
@@ -36,13 +36,66 @@ HideOnScroll.propTypes = {
 };
 
 function Header(props) {
-  const menuItems = menuElements.map((item) => (
-    <Link key={item.name} href={item.url} passHref>
-      <Button color="inherit">
-        {item.name}
-      </Button>
-    </Link>
-  ));
+
+  // State for the different menu items
+  const menuInitialState = menuState();
+  const [menuOpen, setMenuOpen] = useState(menuInitialState);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // Handle the menu appearing : first reinitialize the state, then open the menu and set the anchor
+  const handleMenuHover = (event, slug) => {
+    handleMenuClose();
+    const newMenuOpen = menuOpen;
+    newMenuOpen[slug] = !menuOpen[slug];
+    setMenuOpen(newMenuOpen);
+    if (anchorEl !== event.currentTarget) {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(menuInitialState);
+    setAnchorEl(null);
+  };
+
+  // Display 1st and 2nd level navigation items
+  const navItems = menuElements.map((item) => {
+    // Display arrow of expansion if subElement is chosen
+    const expandIcon = menuOpen[item.slug] ? <ExpandLess /> : <ExpandMore />;
+
+    return (
+      <Fragment key={item.name}>
+        {/* <Link href={item.url} id={item.slug} passHref> */}
+        <Button
+          color="inherit"
+          onClick={(event) => { handleMenuHover(event, item.slug) }}
+        >
+          {item.name}
+          {item.subElements && expandIcon}
+        </Button>
+        {/* </Link> */}
+        {
+          item.subElements && (
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={menuOpen[item.slug]}
+              onClose={handleMenuClose}
+            >
+              {item.subElements.map((subItem) => (
+                <MenuItem key={subItem.name} onClick={handleMenuClose}>
+                  <Link href={subItem.url} passHref>
+                    <MUILink underline="none">{subItem.name}</MUILink>
+                  </Link>
+                </MenuItem>
+              ))}
+            </Menu>
+          )
+        }
+      </Fragment>
+    )
+  }
+  );
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
@@ -69,7 +122,7 @@ function Header(props) {
             </Typography>
 
             <ButtonGroup variant="text" sx={{ display: { xs: 'none', md: 'block' } }}>
-              {menuItems}
+              {navItems}
             </ButtonGroup>
           </Toolbar>
         </AppBar>

@@ -1,3 +1,8 @@
+import Image from 'next/image';
+import { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
+// MUI IMPORTS
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -8,26 +13,40 @@ import Typography from '@mui/material/Typography';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
-function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, altButtonText, altButtonLink, mini }) {
+function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, mainButtonLink, altButtonText, altButtonLink, mini }) {
   const styles = {
     container: {
-      backgroundImage: `url(${image})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     },
     title: {
       textShadow: 'black 3px 2px 3px',
+      zIndex: 1,
     },
   };
+
   return (
+
     <Box
       style={styles.container}
       sx={{
-        bgcolor: 'primary.dark',
+        bgcolor: 'primary.main',
         height: mini ? '20vh' : '70vh',
         width: '100%',
+        position: 'relative',
       }}
     >
+
+        <Image
+          src={image}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          objectPosition={imagePosition}
+          priority={true}
+          placeholder="shimmer"
+        />
+
       <Container sx={{ height: '100%' }}>
         <Stack justifyContent="center" minHeight="100%" spacing={1}>
           <Typography
@@ -70,6 +89,29 @@ function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, alt
       </Container>
     </Box>
   );
-}
+};
+
+HomeIntro.propTypes = {
+  image: PropTypes.string,
+  imagePosition: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  mainButtonText: PropTypes.string,
+  mainButtonLink: PropTypes.string,
+  altButtonText: PropTypes.string,
+  altButtonLink: PropTypes.string,
+  mini: PropTypes.bool,
+};
+
+HomeIntro.defaultProps = {
+  image: '/images/home-slide.jpg',
+  imagePosition: 'center',
+  subtitle: null,
+  mainButtonText: null,
+  mainButtonLink: null,
+  altButtonText: null,
+  altButtonLink: null,
+  mini: false,
+};
 
 export default HomeIntro;

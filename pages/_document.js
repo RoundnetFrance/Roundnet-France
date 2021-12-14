@@ -13,6 +13,11 @@ export default function Document() {
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
         {/* Favicon */}
         <link rel="icon" type="image/png" sizes="224x224" href="/images/logos/roundnet-france-tp.png" />
+        {/* Material icons */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
       </Head>
       <body>
         <Main />
