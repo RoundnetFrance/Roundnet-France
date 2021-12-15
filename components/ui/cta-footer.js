@@ -35,13 +35,13 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
           mt: 8,
         }}
       >
-        <Button variant="contained" color="primary" >
+        <Button variant="contained" color="primary" size="large">
           <Link href={mainLink.url} passHref>
             <MUILink color="#fff" underline='none'>{mainLink.text}</MUILink>
           </Link>
         </Button>
         {altLink && (
-          <Button variant="contained" color="secondary" >
+          <Button variant="contained" color="secondary" size="large" >
             <Link href={altLink.url} passHref>
               <MUILink color="#fff" underline='none'>{altLink.text}</MUILink>
             </Link>

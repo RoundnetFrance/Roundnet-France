@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 function FeaturedItems({ items, color }) {
   return (
     <Stack
-      direction={{ xs: 'column', md: 'row' }}
+      direction={{ xs: 'column', sm: 'row' }}
       justifyContent="space-between"
       alignItems="center"
       spacing={{ xs: 2, md: 4 }}
@@ -23,11 +23,11 @@ function FeaturedItems({ items, color }) {
           key={item.id}
         >
           <Box 
-          p={3}
+          p={4}
           sx={{
             background: `url(/images/misc/blob-lighter-${color}.svg) no-repeat center center`,
           }}>
-            <Icon style={{ fontSize: 50 }} color={color}>{item.icon}</Icon>
+            <Icon style={{ fontSize: 40 }} color={color}>{item.icon}</Icon>
           </Box>
           <Typography variant="h6" my={2} color={color}>{item.title}</Typography>
           <Typography variant="body1" align="center">{item.description}</Typography>

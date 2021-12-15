@@ -42,8 +42,8 @@ const menuElements = [
         url: '/clubs-et-communautes/liste-des-clubs',
       },
       {
-        name: 'Adhérer à la fédération / Créer votre club',
-        url: '/clubs-et-communautes/adherer-a-la-federation',
+        name: 'Adhérer à la fédération',
+        url: '/clubs-et-communautes/adherer-a-roundnet-france',
       },
     ]
   },
