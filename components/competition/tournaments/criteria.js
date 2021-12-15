@@ -16,6 +16,9 @@ function Criteria() {
           justifyContent="space-evenly"
           alignItems="flex-start"
           spacing={2}
+          sx={{
+            background: `url(/images/misc/blob-lighter-secondary.svg) no-repeat center center`,
+          }}
         >
           <Card raised sx={{width: {xs: '100%', md:'30%'}}}>
             <CardMedia>

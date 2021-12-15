@@ -18,6 +18,7 @@ function HomeInfoBlock() {
             position: 'relative',
             top: '-4rem',
             padding: '2rem',
+            borderRadius: 2,
           }}
         >
           <Box textAlign="center">

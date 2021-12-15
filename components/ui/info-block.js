@@ -8,12 +8,14 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import Chip from '@mui/material/Chip'
+import Button from '@mui/material/Button';
 
-function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage }) {
+// MUI ICONS
+import InsertLinkIcon from '@mui/icons-material/InsertLink';
+
+function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, link }) {
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
-  // Getting the height of the image
-  const heightPx = `${height}px`;
 
   return (
     <Stack
@@ -22,8 +24,13 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
       alignItems="center"
       spacing={{ xs: 2, md: 4 }}
       my={4}
+      sx={{
+        background: 'url(/images/misc/blob-teams.svg) no-repeat center center',
+      }}
     >
-      <Stack width={{ xs: '100%', md: '50%' }}>
+      <Stack
+        alignItems={{ xs: 'center', md: imageToLeft ? 'flex-start' : 'flex-end' }}
+        width={{ xs: '100%', md: '50%' }}>
         <Typography
           variant="h6"
           mb={2}
@@ -48,11 +55,13 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
           {description}
         </Typography>
 
+        {/* ITEMS DISPLAY, IF ANY */}
         {
           items && (
             <Stack
               direction="row"
               justifyContent="space-between"
+              alignItems="center"
               spacing={{ xs: 1, md: 2 }}
             >
               {
@@ -62,7 +71,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
                       variant="h6"
                       color="secondary.main"
                     >
-                      {item.title}
+                      <strong>{item.title}</strong>
                     </Typography>
                     <Typography variant="body2">
                       {item.text}
@@ -76,6 +85,25 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
           )
         }
 
+        {/* LINK DISPLAY, IF ANY */}
+        {
+          link && (
+            <Button
+              sx={{
+                width: 'fit-content',
+              }}
+              variant="contained"
+              color="secondary"
+              href={link.url}
+              target={link.outLink ? '_blank' : '_self'}
+              rel={link.outLink ? 'noopener noreferrer' : ''}
+              startIcon={link.outLink ? <InsertLinkIcon /> : null}
+            >
+              {link.text ? link.text : 'Site'}
+            </Button>
+          )
+        }
+
 
       </Stack>
 
@@ -83,7 +111,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
         <Image
           src={image}
           layout='fill'
-          alt="home-slide"
+          alt={title}
           objectFit="cover"
         />
       </Paper>
@@ -94,13 +122,22 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
 
 InfoBlock.propTypes = {
   title: propTypes.string.isRequired,
-  items: propTypes.array,
+  items: propTypes.arrayOf({
+    id: propTypes.string.isRequired,
+    title: propTypes.string.isRequired,
+    text: propTypes.string.isRequired,
+  }),
   image: propTypes.string.isRequired,
   description: propTypes.string.isRequired,
   imageToLeft: propTypes.bool,
   height: propTypes.number,
   roundedImage: propTypes.bool,
   chip: propTypes.string,
+  link: propTypes.shape({
+    url: propTypes.string.isRequired,
+    text: propTypes.string,
+    outLink: propTypes.bool,
+  }),
 }
 
 InfoBlock.defaultProps = {
@@ -109,6 +146,7 @@ InfoBlock.defaultProps = {
   height: 400,
   roundedImage: false,
   chip: null,
+  link: null,
 }
 
 export default InfoBlock

@@ -16,6 +16,9 @@ import Timeliner from '../../components/ui/timeliner';
 import PageTitle from '../../components/ui/page-title';
 import ColoredBackground from '../../components/ui/colored-background';
 
+// MUI ICONS
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+
 // Rules
 const rulesItems = [
   {
@@ -58,34 +61,57 @@ function RulesPage() {
       </Container>
 
       <ColoredBackground>
-        <Box sx={{ pb: 4 }}>
-          <Typography variant="h6" align="center" color="white">
-            Première chose à savoir : vous pouvez jouer sur n&apos;importe quel terrain. Indoor, gazon, synthétique, terre battue,  neige, boue, béton... Soyez créatifs.
-          </Typography>
+        <Box sx={{
+          pb: 4,
+        }}>
+          <Container maxWidth="sm">
+            <Stack
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              spacing={4}
+            >
+              <Typography variant="h4" align="center" color="white">
+                <strong>Première chose à savoir : vous pouvez jouer sur n&apos;importe quel terrain. Indoor, gazon, synthétique, terre battue,  neige, boue, béton... Soyez créatifs.</strong>
+              </Typography>
+              <ArrowCircleDownIcon sx={{ fontSize: 80, color: 'secondary.lightest', mb: 4 }} />
+            </Stack>
+          </Container>
         </Box>
 
-        <Container maxWidth="sm" sx={{ mb: 4 }}>
-          <Timeliner items={rulesItems} color='white' />
+        <Container maxWidth="md" sx={{
+          mb: 4,
+          p: 20,
+          background: `url(/images/misc/blob-lighter-neutral.svg) no-repeat center center`,
+          backgroundSize: 'cover',
+        }}>
+          <Container maxWidth="sm">
+            <Timeliner items={rulesItems} color='black' />
+          </Container>
         </Container>
 
-        <Typography align="center" variant="h6" color="white">
-          Si tout cela n&apos;est pas clair, la vidéo ci-dessous devrait faire l&apos;affaire.
+        <Typography align="center" variant="h4" color="white">
+          <strong>Si tout cela n&apos;est pas clair, <br />la vidéo ci-dessous devrait faire l&apos;affaire.</strong>
         </Typography>
+
+
+        <Stack
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={0}
+          sx={{
+            my: 4,
+          }}
+        >
+          <ArrowCircleDownIcon align="center" sx={{ fontSize: 80, color: 'secondary.lightest', mb: 4 }} />
+          <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600], border: 'none', boxShadow: 8 }} />
+
+        </Stack>
 
       </ColoredBackground>
 
-      <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={0}
-        sx={{
-          my: 4,
-        }}
-      >
-        <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600] }} />
 
-      </Stack>
 
       <HalfImage
         image='/images/pages/competition/regles/regles-pdf.jpg'>
@@ -94,7 +120,7 @@ function RulesPage() {
           variant="h5"
           color="white"
         >
-          Règles officielles 2021 de Roundnet
+          <strong>Règles officielles 2021 de Roundnet</strong>
         </Typography>
 
         <Divider
@@ -121,11 +147,11 @@ function RulesPage() {
           Les nouvelles règles ajoutées en 2021 (consecutive blocks, 7 feet serve...) sont surlignées en jaune dans le document.
         </Typography>
 
-        <Button variant="contained" href="/docs/regles-2021.pdf">
+        <Button color="secondary" size="large" variant="contained" href="/docs/regles-2021.pdf">
           Télécharger les règles 2021
         </Button>
       </HalfImage>
-    </Fragment>
+    </Fragment >
   )
 }
 

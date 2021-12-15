@@ -2,31 +2,39 @@ import propTypes from 'prop-types'
 
 // MUI IMPORTS
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 // COMPONENTS IMPORTS
 import InfoBlock from './info-block';
 
-function CrossingItems({ items }) {
-
+function CrossingItems({ items, roundedItems, height }) {
   return (
     <Stack
       direction="column"
       alignItems="center"
-      spacing={4}
+      spacing={{ xs: 2, md: 4 }}
     >
 
       {
         items.map((item, index) => (
-          <InfoBlock
+          <Box
             key={item.id}
-            title={item.title}
-            chip={item.chip}
-            image={item.image}
-            description={item.description}
-            height={260}
-            imageToLeft={index % 2}
-            roundedImage
-          />
+            sx={{
+              position: 'relative',
+              left: { xs: 0, md: index % 2 === 0 ? '2.5rem' : '-2.5rem' },
+            }}
+          >
+            <InfoBlock
+              title={item.title}
+              chip={item.chip}
+              image={item.image}
+              description={item.description}
+              link={item.link}
+              height={roundedItems ? 260 : height}
+              imageToLeft={index % 2 === 0}
+              roundedImage={roundedItems}
+            />
+          </Box>
         ))
       }
 
@@ -41,7 +49,19 @@ CrossingItems.propTypes = {
     chip: propTypes.string,
     image: propTypes.string.isRequired,
     description: propTypes.string.isRequired,
+    link: propTypes.shape({
+      url: propTypes.string.isRequired,
+      text: propTypes.string,
+      outLink: propTypes.bool,
+    }),
   })).isRequired,
+  roundedItems: propTypes.bool,
+  height: propTypes.number,
+}
+
+CrossingItems.defaultProps = {
+  roundedItems: false,
+  height: 400,
 }
 
 export default CrossingItems
