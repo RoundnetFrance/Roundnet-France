@@ -65,15 +65,28 @@ function Header(props) {
 
     return (
       <Fragment key={item.name}>
-        {/* <Link href={item.url} id={item.slug} passHref> */}
-        <Button
-          color="inherit"
-          onClick={(event) => { handleMenuHover(event, item.slug) }}
-        >
-          {item.name}
-          {item.subElements && expandIcon}
-        </Button>
-        {/* </Link> */}
+        {
+          !item.subElements ? (
+            <Link href={item.url} id={item.slug} passHref>
+              <Button
+                color="inherit"
+                onClick={(event) => { handleMenuHover(event, item.slug) }}
+              >
+                {item.name}
+                {item.subElements && expandIcon}
+              </Button>
+            </Link>
+          ) : (
+            <Button
+                color="inherit"
+                onClick={(event) => { handleMenuHover(event, item.slug) }}
+              >
+                {item.name}
+                {item.subElements && expandIcon}
+              </Button>
+          )
+        }
+
         {
           item.subElements && (
             <Menu
@@ -98,13 +111,12 @@ function Header(props) {
   );
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <HideOnScroll {...props}>
-      <Box sx={{ flexGrow: 1, paddingBottom: "60px" }}>
+      <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
         <AppBar>
           <Toolbar>
             <MenuDrawer />
-            <Link href="http://localhost:3000/" passHref>
+            <Link href="/" passHref>
               <a>
                 <Image
                   src="/images/logos/roundnet-france-tp-blanc.png"
@@ -116,8 +128,8 @@ function Header(props) {
             </Link>
 
             <Typography ml={2} variant="h6" component="h1" sx={{ flexGrow: 1 }}>
-              <Link href="http://localhost:3000/" passHref>
-                <MUILink color="inherit" underline="none">Roundnet France</MUILink>
+              <Link href="/" passHref>
+                <MUILink color="inherit" underline="none"><strong>Roundnet France</strong></MUILink>
               </Link>
             </Typography>
 

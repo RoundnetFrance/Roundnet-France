@@ -53,7 +53,7 @@ function LogoCarousel() {
       }}
     >
       <Box mb={2}>
-        <Typography align="center" variant="h5" component="h2"> Application officielle du roundnet français </Typography>
+        <Typography align="center" variant="h5" component="h2"> Ils adhèrent à Roundnet France </Typography>
       </Box>
       <Slider
         dots
@@ -66,7 +66,7 @@ function LogoCarousel() {
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 3,
+              slidesToShow: 4,
             },
           },
           {

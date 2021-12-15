@@ -38,16 +38,12 @@ const menuElements = [
     icon: 'supervised_user_circle',
     subElements: [
       {
-        name: 'Communautés',
-        url: '/clubs-et-communautes/communautes',
+        name: 'Liste des clubs',
+        url: '/clubs-et-communautes/liste-des-clubs',
       },
       {
         name: 'Adhérer à la fédération',
-        url: '/clubs-et-communautes/adherer-a-la-federation',
-      },
-      {
-        name: 'Créer votre club',
-        url: '/clubs-et-communautes/creer-votre-club',
+        url: '/clubs-et-communautes/adherer-a-roundnet-france',
       },
     ]
   },
@@ -64,8 +60,12 @@ const menuElements = [
     icon: 'info',
     subElements: [
       {
-        name: 'La fédération',
-        url: '/qui-sommes-nous/la-federation',
+        name: 'L\'équipe Roundnet France',
+        url: '/qui-sommes-nous/equipe-roundnet-france',
+      },
+      {
+        name: 'Le projet associatif',
+        url: '/qui-sommes-nous/projet-associatif',
       },
       {
         name: 'Contact',
