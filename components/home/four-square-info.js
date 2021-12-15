@@ -24,7 +24,7 @@ function FourSquareInfo() {
           <Box textAlign="center">
             <QueryStatsIcon color="disabled" sx={{ fontSize: 80 }} />
           </Box>
-          <Typography mb={8} align="center" color="white" variant="h4" component="h2">Méthodologie &amp; Critères</Typography>
+          <Typography mb={8} align="center" color="white" variant="h4" component="h2"><strong>Méthodologie &amp; Critères</strong></Typography>
           <Grid
             container
             item
@@ -33,7 +33,7 @@ function FourSquareInfo() {
 
             {/* PAPER 1 */}
             <Grid item xs={12} sm={6}>
-              <Paper sx={{ p: 2 }}>
+              <Paper sx={{ p: 2, borderRadius: 4 }}>
                 <Stack mb={2} direction="row" alignItems="center">
                   <AutoAwesomeIcon color="secondary" />
                   <Typography ml={2} variant="h5" component="h3" color="secondary.main" fontWeight="bold">Inspiré de l&apos;EURA</Typography>
@@ -58,7 +58,7 @@ function FourSquareInfo() {
 
             {/* PAPER 2 */}
             <Grid item xs={12} sm={6}>
-              <Paper sx={{ p: 2 }}>
+              <Paper sx={{ p: 2, borderRadius: 4 }}>
                 <Stack mb={2} direction="row" alignItems="center">
                   <AutorenewRoundedIcon color="secondary" />
                   <Typography ml={1} variant="h5" component="h3" color="secondary.main" fontWeight="bold">
@@ -85,7 +85,7 @@ function FourSquareInfo() {
 
             {/* PAPER 3 */}
             <Grid item xs={12} sm={6}>
-              <Paper sx={{ p: 2 }}>
+              <Paper sx={{ p: 2, borderRadius: 4 }}>
                 <Stack mb={2} direction="row" alignItems="center">
                   <EqualizerRoundedIcon color="secondary" />
                   <Typography ml={2} variant="h5" component="h3" color="secondary.main" fontWeight="bold">Référent pour la compétition</Typography>
@@ -110,7 +110,7 @@ function FourSquareInfo() {
 
             {/* PAPER 4 */}
             <Grid item xs={12} sm={6}>
-              <Paper sx={{ p: 2 }}>
+              <Paper sx={{ p: 2, borderRadius: 4 }}>
                 <Stack mb={2} direction="row" alignItems="center">
                   <AllInclusiveRoundedIcon color="secondary" />
                   <Typography ml={2} variant="h5" component="h3" color="secondary.main" fontWeight="bold">Pensé pour tou.te.s</Typography>

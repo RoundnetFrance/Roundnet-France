@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Fragment } from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 // MUI IMPORTS
@@ -71,18 +71,22 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
             spacing={2}
           >
             {mainButtonText && mainButtonLink && (
-              <Button sx={{ justifyContent: 'flex-start' }} href={mainButtonLink} size="large" variant="contained">
-                <QueryStatsIcon sx={{ mr: 2 }} />
-                {mainButtonText}
-              </Button>
+              <Link href={mainButtonLink} passHref>
+                <Button sx={{ justifyContent: 'flex-start' }} size="large" variant="contained">
+                  <QueryStatsIcon sx={{ mr: 2 }} />
+                  {mainButtonText}
+                </Button>
+              </Link>
             )}
 
 
             {altButtonText && altButtonLink && (
-              <Button sx={{ justifyContent: 'flex-start' }} href={altButtonLink} color="secondary" size="large" variant="contained">
-                <EqualizerIcon sx={{ mr: 2 }} />
-                {altButtonText}
-              </Button>
+              <Link href={altButtonLink} passHref>
+                <Button sx={{ justifyContent: 'flex-start' }} color="secondary" size="large" variant="contained">
+                  <EqualizerIcon sx={{ mr: 2 }} />
+                  {altButtonText}
+                </Button>
+              </Link>
             )}
           </Stack>
         </Stack>
