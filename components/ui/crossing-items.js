@@ -29,6 +29,7 @@ function CrossingItems({ items, roundedItems, height }) {
               chip={item.chip}
               image={item.image}
               description={item.description}
+              link={item.link}
               height={roundedItems ? 260 : height}
               imageToLeft={index % 2 === 0}
               roundedImage={roundedItems}
@@ -48,6 +49,11 @@ CrossingItems.propTypes = {
     chip: propTypes.string,
     image: propTypes.string.isRequired,
     description: propTypes.string.isRequired,
+    link: propTypes.shape({
+      url: propTypes.string.isRequired,
+      text: propTypes.string,
+      outLink: propTypes.bool,
+    }),
   })).isRequired,
   roundedItems: propTypes.bool,
   height: propTypes.number,

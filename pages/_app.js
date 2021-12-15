@@ -16,6 +16,7 @@ const muiTheme = createTheme(
     palette: {
       type: 'dark',
       primary: {
+        lightest: '#f1f3fb',
         lighter: '#c1cdf0',
         light: '#778edc',
         main: '#315bcd',
@@ -24,6 +25,7 @@ const muiTheme = createTheme(
         analogous: '#31a9cd',
       },
       secondary: {
+        lightest: '#feeef3',
         light: '#fb5d89',
         main: '#f50057',
         dark: '#cf0051',

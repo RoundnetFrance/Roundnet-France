@@ -38,8 +38,8 @@ const menuElements = [
     icon: 'supervised_user_circle',
     subElements: [
       {
-        name: 'Communautés',
-        url: '/clubs-et-communautes/communautes',
+        name: 'Liste des clubs',
+        url: '/clubs-et-communautes/liste-des-clubs',
       },
       {
         name: 'Adhérer à la fédération',

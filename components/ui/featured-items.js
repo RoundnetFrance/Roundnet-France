@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
+import Box from '@mui/material/Box';
 
 function FeaturedItems({ items, color }) {
   return (
@@ -21,7 +22,13 @@ function FeaturedItems({ items, color }) {
           alignItems="center"
           key={item.id}
         >
-          <Icon style={{ fontSize: 50 }} color={color}>{item.icon}</Icon>
+          <Box 
+          p={3}
+          sx={{
+            background: `url(/images/misc/blob-lighter-${color}.svg) no-repeat center center`,
+          }}>
+            <Icon style={{ fontSize: 50 }} color={color}>{item.icon}</Icon>
+          </Box>
           <Typography variant="h6" my={2} color={color}>{item.title}</Typography>
           <Typography variant="body1" align="center">{item.description}</Typography>
         </Stack>
