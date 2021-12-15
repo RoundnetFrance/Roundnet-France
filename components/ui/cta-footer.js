@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import propTypes from 'prop-types';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -11,12 +12,11 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
   return (
     <Container maxWidth="sm" align="center" sx={{
       my: 4,
-      py: 6,
+      p: 10,
       overflow: 'visible',
       backgroundImage: 'url(/images/misc/cta-footer.svg)',
-      backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
+      backgroundPosition: 'center center',
     }}>
       <Typography variant="h4" my={2}>
         {title}
@@ -40,16 +40,36 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
             <MUILink color="#fff" underline='none'>{mainLink.text}</MUILink>
           </Link>
         </Button>
-        <Button variant="contained" color="secondary" >
-          <Link href={altLink.url} passHref>
-            <MUILink color="#fff" underline='none'>{altLink.text}</MUILink>
-          </Link>
-        </Button>
+        {altLink && (
+          <Button variant="contained" color="secondary" >
+            <Link href={altLink.url} passHref>
+              <MUILink color="#fff" underline='none'>{altLink.text}</MUILink>
+            </Link>
+          </Button>
+        )}
+
       </Stack>
 
 
     </Container>
   )
+}
+
+CTAFooter.propTypes = {
+  title: propTypes.string.isRequired,
+  subtitle: propTypes.string.isRequired,
+  mainLink: propTypes.shape({
+    url: propTypes.string.isRequired,
+    text: propTypes.string.isRequired,
+  }).isRequired,
+  altLink: propTypes.shape({
+    url: propTypes.string,
+    text: propTypes.string,
+  }),
+}
+
+CTAFooter.defaultProps = {
+  altLink: null,
 }
 
 export default CTAFooter

@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -10,6 +10,7 @@ import Hero from '../../components/ui/hero';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
+import CTAFooter from '../../components/ui/cta-footer'; 
 
 function ClubListPage() {
 
@@ -33,7 +34,7 @@ function ClubListPage() {
       chip: 'Nantes',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       link: {
-        url: 'https://www.facebook.com/roundnet.paris/',
+        url: 'https://titansroundnet.fr/',
         outLink: true,
       },
     },
@@ -44,7 +45,7 @@ function ClubListPage() {
       title: 'Roundnet Toulouse',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       link: {
-        url: 'https://www.facebook.com/roundnet.paris/',
+        url: 'https://www.facebook.com/RoundnetToulouse/',
         outLink: true,
       },
     },
@@ -82,6 +83,15 @@ function ClubListPage() {
         />
         <CrossingItems items={items} roundedItems />
       </Container>
+
+      <CTAFooter 
+        title="Vous souhaitez inscrire votre&nbsp;club&nbsp;?"
+        subtitle="Adhérez à Roundnet France et rejoignez l'une des communautés de Roundnet les plus actives de France."
+        mainLink={{
+          url: '/clubs-et-communautes/liste-des-clubs',
+          text: 'Inscrire votre club'
+        }}
+      />
 
     </Fragment>
   )

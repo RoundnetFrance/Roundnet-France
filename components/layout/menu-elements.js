@@ -42,12 +42,8 @@ const menuElements = [
         url: '/clubs-et-communautes/liste-des-clubs',
       },
       {
-        name: 'Adhérer à la fédération',
+        name: 'Adhérer à la fédération / Créer votre club',
         url: '/clubs-et-communautes/adherer-a-la-federation',
-      },
-      {
-        name: 'Créer votre club',
-        url: '/clubs-et-communautes/creer-votre-club',
       },
     ]
   },

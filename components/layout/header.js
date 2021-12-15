@@ -98,9 +98,8 @@ function Header(props) {
   );
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <HideOnScroll {...props}>
-      <Box sx={{ flexGrow: 1, paddingBottom: "60px" }}>
+      <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
         <AppBar>
           <Toolbar>
             <MenuDrawer />
