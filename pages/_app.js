@@ -1,51 +1,29 @@
 // Reset margins and paddings
 import '../styles/globals.css';
 
-// Create a layout for all front pages (header + footer)
+// Create a layout and theme for all front pages (header + footer)
 import Layout from '../layout'
 import Head from 'next/head'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { frFR } from '@mui/material/locale';
+import { ThemeProvider } from '@mui/material/styles';
+import rfMuiTheme from '../styles/rf-mui-theme';
 
-// Create a theme instance. Affet colors, typography, and localization (frFR, imported from @mui/material/locale)
-const muiTheme = createTheme(
-  {
-    typography: {
-      fontFamily: 'Urbanist, sans-serif',
-    },
-    palette: {
-      type: 'dark',
-      primary: {
-        lightest: '#f1f3fb',
-        lighter: '#c1cdf0',
-        light: '#778edc',
-        main: '#315bcd',
-        dark: '#1e48b6',
-        darker: '#0f245b',
-        analogous: '#31a9cd',
-      },
-      secondary: {
-        lightest: '#feeef3',
-        light: '#fb5d89',
-        main: '#f50057',
-        dark: '#ab003c',
-      },
-    },
-  },
-  frFR,
-);
+// Import Provider from next/auth client to share session
+import { SessionProvider } from 'next-auth/react';
 
+// Render app
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={muiTheme}>
-      <Layout>
-        <Head>
-          <title>Roundnet France - Fédération française de roundnet</title>
-          <meta name="description" content="Site officiel de la fédération française de roundnet" />
-        </Head>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <SessionProvider session={pageProps.session}>
+      <ThemeProvider theme={rfMuiTheme}>
+        <Layout>
+          <Head>
+            <title>Roundnet France - Fédération française de roundnet</title>
+            <meta name="description" content="Site officiel de la fédération française de roundnet" />
+          </Head>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 
