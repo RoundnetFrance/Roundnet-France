@@ -60,8 +60,12 @@ const menuElements = [
     icon: 'info',
     subElements: [
       {
-        name: 'La fédération',
-        url: '/qui-sommes-nous/la-federation',
+        name: 'L\'équipe Roundnet France',
+        url: '/qui-sommes-nous/equipe-roundnet-france',
+      },
+      {
+        name: 'Le projet associatif',
+        url: '/qui-sommes-nous/projet-associatif',
       },
       {
         name: 'Contact',

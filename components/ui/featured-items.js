@@ -3,8 +3,9 @@ import propTypes from 'prop-types'
 // MUI IMPORTS
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Icon from '@mui/material/Icon';
-import Box from '@mui/material/Box';
+
+// COMPONENT IMPORTS
+import IconWithBackground from './icon-with-background';
 
 function FeaturedItems({ items, color }) {
   return (
@@ -22,13 +23,7 @@ function FeaturedItems({ items, color }) {
           alignItems="center"
           key={item.id}
         >
-          <Box 
-          p={4}
-          sx={{
-            background: `url(/images/misc/blob-lighter-${color}.svg) no-repeat center center`,
-          }}>
-            <Icon style={{ fontSize: 40 }} color={color}>{item.icon}</Icon>
-          </Box>
+          <IconWithBackground icon={item.icon} color={color} />
           <Typography variant="h6" my={2} color={color}>{item.title}</Typography>
           <Typography variant="body1" align="center">{item.description}</Typography>
         </Stack>

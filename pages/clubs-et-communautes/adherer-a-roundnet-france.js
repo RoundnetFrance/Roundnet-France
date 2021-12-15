@@ -101,8 +101,12 @@ function JoinRoundnetFrancePage() {
         <Box mb={4}>
           <HeaderWithIcon
             icon="arrow_circle_down"
-            title="Vos avantages"
-          />
+            title="Le kit des clubs"
+          >
+            <Typography variant="h6" color="primary">
+              Pour chaque nouveau club, Roundnet France vous offre un kit de matériel et de services qui vous permet de booster votre communauté.
+            </Typography>
+          </HeaderWithIcon>
         </Box>
 
         <CrossingItems items={crossingItems} height={250} />

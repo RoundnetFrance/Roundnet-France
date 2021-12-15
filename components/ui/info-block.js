@@ -71,7 +71,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
                       variant="h6"
                       color="secondary.main"
                     >
-                      {item.title}
+                      <strong>{item.title}</strong>
                     </Typography>
                     <Typography variant="body2">
                       {item.text}
