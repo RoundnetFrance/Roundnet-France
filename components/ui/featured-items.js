@@ -24,7 +24,7 @@ function FeaturedItems({ items, color }) {
           key={item.id}
         >
           <IconWithBackground icon={item.icon} color={color} />
-          <Typography variant="h6" my={2} color={color}>{item.title}</Typography>
+          <Typography variant="h6" my={2} color={color}><strong>{item.title}</strong></Typography>
           <Typography variant="body1" align="center">{item.description}</Typography>
         </Stack>
       ))}

@@ -18,7 +18,7 @@ function HeaderWithIcon({ icon, title, children }) {
         <Box textAlign="center">
           <Icon style={{ fontSize: 80 }} color="primary">{icon}</Icon>
         </Box>
-        {title}
+        <strong>{title}</strong>
       </Typography>
       {children && (
         <Typography variant="subtitle1" align="center" color="secondary" mb={4}>

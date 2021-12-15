@@ -13,7 +13,7 @@ function HalfImage({ image, children }) {
       justifyContent="center"
       alignItems="center"
       spacing={0}
-      backgroundColor="secondary.main"
+      backgroundColor="primary.main"
       minHeight="300px"
       maxHeight={{ lg: "700px" }}
     >

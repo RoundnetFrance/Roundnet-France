@@ -11,6 +11,7 @@ import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PageTitle from '../../components/ui/page-title';
 import InfoBlock from '../../components/ui/info-block';
 import PaperGrid from '../../components/ui/paper-grid';
+import CTAFooter from '../../components/ui/cta-footer';
 
 function AssociationPage() {
 
@@ -90,6 +91,19 @@ function AssociationPage() {
         </Box>
         <PaperGrid items={items} />
       </Container>
+
+      <CTAFooter 
+        title="Motivé.e ? Envie de jouer ou de participer ?"
+        subtitle="Nous sommes là pour vous accompagner !"
+        mainLink={{
+          url: '/competition/calendrier',
+          text: 'Je veux jouer'
+        }}
+        altLink={{
+          url: '/clubs-et-communautes/adherer-a-roundnet-france',
+          text: 'Je veux adhérer'
+        }}          
+      />
 
     </Fragment>
   )

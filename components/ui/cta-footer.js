@@ -19,7 +19,7 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
       backgroundPosition: 'center center',
     }}>
       <Typography variant="h4" my={2}>
-        {title}
+        <strong>{title}</strong>
       </Typography>
       <Typography variant="h6">
         {subtitle}
