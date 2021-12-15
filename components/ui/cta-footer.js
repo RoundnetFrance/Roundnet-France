@@ -36,9 +36,14 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
         }}
       >
         <Button variant="contained" color="primary" size="large">
-          <Link href={mainLink.url} passHref>
-            <MUILink color="#fff" underline='none'>{mainLink.text}</MUILink>
-          </Link>
+          {mainLink.outLink ? (
+            <MUILink href={mainLink.url} target="_blank" color="#fff">{mainLink.text}</MUILink>
+          ) : (
+            <Link href={mainLink.url} passHref>
+              <MUILink color="#fff" underline='none'>{mainLink.text}</MUILink>
+            </Link>
+          )}
+
         </Button>
         {altLink && (
           <Button variant="contained" color="secondary" size="large" >
@@ -61,10 +66,12 @@ CTAFooter.propTypes = {
   mainLink: propTypes.shape({
     url: propTypes.string.isRequired,
     text: propTypes.string.isRequired,
+    outLink: propTypes.bool,
   }).isRequired,
   altLink: propTypes.shape({
     url: propTypes.string,
     text: propTypes.string,
+    outLink: propTypes.bool,
   }),
 }
 

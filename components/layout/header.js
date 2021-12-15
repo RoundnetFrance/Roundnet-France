@@ -65,15 +65,28 @@ function Header(props) {
 
     return (
       <Fragment key={item.name}>
-        {/* <Link href={item.url} id={item.slug} passHref> */}
-        <Button
-          color="inherit"
-          onClick={(event) => { handleMenuHover(event, item.slug) }}
-        >
-          {item.name}
-          {item.subElements && expandIcon}
-        </Button>
-        {/* </Link> */}
+        {
+          !item.subElements ? (
+            <Link href={item.url} id={item.slug} passHref>
+              <Button
+                color="inherit"
+                onClick={(event) => { handleMenuHover(event, item.slug) }}
+              >
+                {item.name}
+                {item.subElements && expandIcon}
+              </Button>
+            </Link>
+          ) : (
+            <Button
+                color="inherit"
+                onClick={(event) => { handleMenuHover(event, item.slug) }}
+              >
+                {item.name}
+                {item.subElements && expandIcon}
+              </Button>
+          )
+        }
+
         {
           item.subElements && (
             <Menu

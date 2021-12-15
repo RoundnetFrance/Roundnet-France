@@ -12,6 +12,7 @@ import PageTitle from '../../components/ui/page-title';
 import FeaturedItems from '../../components/ui/featured-items';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
+import LogoCarousel from '../../components/home/logo-carousel';
 
 function JoinRoundnetFrancePage() {
 
@@ -94,9 +95,9 @@ function JoinRoundnetFrancePage() {
 
       <Container maxWidth="lg" sx={{ my: 4 }}>
         <FeaturedItems items={items} color="secondary" />
-        </Container>
+      </Container>
 
-        <Container maxWidth="sm" sx={{ my: 8 }}>
+      <Container maxWidth="sm" sx={{ my: 8 }}>
         <Box mb={4}>
           <HeaderWithIcon
             icon="arrow_circle_down"
@@ -107,7 +108,7 @@ function JoinRoundnetFrancePage() {
         <CrossingItems items={crossingItems} height={250} />
       </Container>
 
-      <CTAFooter 
+      <CTAFooter
         title="On saute le pas ?"
         subtitle="Créez votre club dès aujourd'hui et faites entrer votre ville et vos joueurs dans la compétition officielle."
         mainLink={{
@@ -115,9 +116,11 @@ function JoinRoundnetFrancePage() {
           text: 'Créer et inscrire votre club'
         }}
       />
+
+      <LogoCarousel />
     </Fragment>
 
-    
+
   )
 }
 

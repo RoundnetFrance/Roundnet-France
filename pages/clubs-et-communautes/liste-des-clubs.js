@@ -11,7 +11,7 @@ import Hero from '../../components/ui/hero';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
-import CTAFooter from '../../components/ui/cta-footer'; 
+import CTAFooter from '../../components/ui/cta-footer';
 
 function ClubListPage() {
 
@@ -97,6 +97,7 @@ function ClubListPage() {
           text: 'S\'informer sur l\'adhésion'
         }}
       />
+
 
     </Fragment>
   )
