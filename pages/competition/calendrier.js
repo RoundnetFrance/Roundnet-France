@@ -11,8 +11,9 @@ import Hero from '../../components/ui/hero';
 import Criteria from '../../components/competition/tournaments/criteria';
 import PlanningTable from '../../components/ui/planning-table';
 import PageTitle from '../../components/ui/page-title';
+import Error from '../../components/ui/error';
 
-function TournamentsPage({ tournamentCalendar }) {
+function TournamentsPage({ tournamentCalendar, error }) {
   console.log(tournamentCalendar);
   return (
     <Fragment>
@@ -32,7 +33,7 @@ function TournamentsPage({ tournamentCalendar }) {
       </Container>
 
       <Container maxWidth="lg" sx={{ mb: 4 }}>
-        <PlanningTable items={tournamentCalendar} />
+        {error ? <Error /> : <PlanningTable data={tournamentCalendar} />}
       </Container>
 
       <Container maxWidth="md" sx={{ my: 4 }}>
