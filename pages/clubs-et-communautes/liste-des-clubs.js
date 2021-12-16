@@ -13,8 +13,9 @@ import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
+import Error from '../../components/ui/error';
 
-function ClubListPage({ clubs }) {
+function ClubListPage({ clubs, error }) {
   return (
     <Fragment>
 
@@ -45,7 +46,7 @@ function ClubListPage({ clubs }) {
           icon="people"
           title="Liste des clubs"
         />
-        <CrossingItems items={clubs} roundedItems />
+        {error ? <Error /> : <CrossingItems items={clubs} />}
       </Container>
 
       <CTAFooter 
