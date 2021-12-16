@@ -123,7 +123,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
 InfoBlock.propTypes = {
   title: propTypes.string.isRequired,
   items: propTypes.arrayOf({
-    id: propTypes.string.isRequired,
+    _id: propTypes.string.isRequired,
     title: propTypes.string.isRequired,
     text: propTypes.string.isRequired,
   }),

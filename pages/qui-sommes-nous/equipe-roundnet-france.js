@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import localAPIFetcher from '../../helpers/local-api-fetcher';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -10,33 +11,9 @@ import Hero from '../../components/ui/hero';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
+import Error from '../../components/ui/error'
 
-function TeamPage() {
-
-  // Fake crossing items data
-  const crossingItems = [
-    {
-      id: '1',
-      title: 'Jean Roger',
-      chip: 'Président',
-      image: 'https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    },
-    {
-      id: '2',
-      title: 'Jeanne Simon',
-      chip: 'Vice-présidente',
-      image: 'https://images.unsplash.com/photo-1496361001419-80f0d1be777a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    },
-    {
-      id: '3',
-      title: 'André Martin',
-      chip: 'Trésorier',
-      image: 'https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=699&q=80',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    },
-  ];
+function TeamPage({ members, error }) {
 
   return (
     <Fragment>
@@ -56,16 +33,33 @@ function TeamPage() {
         <Box mb={4}>
           <HeaderWithIcon
             icon="workspaces"
-            title="Pourquoi créer un club de Roundnet ?"
+            title="C'est qui, Roundnet France ?"
           />
         </Box>
       </Container>
 
       <Container maxWidth="sm" sx={{ my: 8 }}>
-        <CrossingItems items={crossingItems} roundedItems />
+        {error ? <Error /> : <CrossingItems items={members} roundedItems />}
       </Container>
     </Fragment>
   )
+}
+
+export async function getStaticProps() {
+
+  try {
+    const members = await localAPIFetcher('/api/federation-members');
+    return {
+      props: { 
+        members,
+      },
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      props: { error: true },
+    }
+  }
 }
 
 export default TeamPage

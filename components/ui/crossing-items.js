@@ -18,7 +18,7 @@ function CrossingItems({ items, roundedItems, height }) {
       {
         items.map((item, index) => (
           <Box
-            key={item.id}
+            key={item._id}
             sx={{
               position: 'relative',
               left: { xs: 0, md: index % 2 === 0 ? '2.5rem' : '-2.5rem' },
@@ -44,7 +44,7 @@ function CrossingItems({ items, roundedItems, height }) {
 
 CrossingItems.propTypes = {
   items: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.string.isRequired,
+    _id: propTypes.string.isRequired,
     title: propTypes.string.isRequired,
     chip: propTypes.string,
     image: propTypes.string.isRequired,
