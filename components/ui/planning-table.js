@@ -1,4 +1,5 @@
 import propTypes from 'prop-types';
+import localAPIFetcher from '../../helpers/local-api-fetcher';
 
 // MUI IMPORTS
 import Table from '@mui/material/Table';
@@ -8,7 +9,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 
 // COMPONENTS IMPORTS
 import PlanningRow from './planning-row';
@@ -38,16 +38,7 @@ function createData(organization, place, date, players, price, url) {
   };
 }
 
-const rows = [
-  createData('Roundnet Paris', 'Vincennes', '2022-03-05', 120, 16.0, 'https://www.google.com'),
-  createData('Roundnet Rennes', 'Rennes', '2022-04-15', 65, 19.0, 'https://www.google.com'),
-  createData('Roundnet Lyon', 'Lyon', '2022-05-11', 85, 16.0, 'https://www.google.com'),
-  createData('Roundnet Toulouse', 'Toulouse', '2022-06-22', 105, 17, 'https://www.google.com'),
-  createData('Titans Roundnet', 'Nantes', '2022-07-19', 140, 16.0, 'https://www.google.com'),
-];
-
-
-function PlanningTable({ resultsTable }) {
+function PlanningTable({ resultsTable, items }) {
   return (
     <TableContainer variant="outlined" component={Paper}>
       <Table size="medium" aria-label="simple table">
@@ -63,8 +54,8 @@ function PlanningTable({ resultsTable }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => <PlanningRow
-            key={row.date}
+          {items.map((row) => <PlanningRow
+            key={row._id}
             row={row}
             resultsTable={resultsTable}
           />

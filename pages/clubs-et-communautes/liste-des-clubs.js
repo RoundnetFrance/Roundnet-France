@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import localAPIFetcher from '../../helpers/local-api-fetcher';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -13,45 +14,7 @@ import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
 
-function ClubListPage() {
-
-  // Fake data for the CrossingItems component
-  const items = [
-    {
-      id: '1',
-      image: '/images/pages/clubs-et-communautes/clubs/club-1.jpg',
-      title: 'Roundnet Paris',
-      chip: 'Paris',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      link: {
-        url: 'https://www.facebook.com/roundnet.paris/',
-        outLink: true,
-      },
-    },
-    {
-      id: '2',
-      image: '/images/pages/clubs-et-communautes/clubs/club-2.jpg',
-      title: 'Titans Roundnet',
-      chip: 'Nantes',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      link: {
-        url: 'https://titansroundnet.fr/',
-        outLink: true,
-      },
-    },
-    {
-      id: '3',
-      image: '/images/pages/clubs-et-communautes/clubs/club-3.jpg',
-      chip: 'Toulouse',
-      title: 'Roundnet Toulouse',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      link: {
-        url: 'https://www.facebook.com/RoundnetToulouse/',
-        outLink: true,
-      },
-    },
-  ];
-
+function ClubListPage({ clubs }) {
   return (
     <Fragment>
 
@@ -82,7 +45,7 @@ function ClubListPage() {
           icon="people"
           title="Liste des clubs"
         />
-        <CrossingItems items={items} roundedItems />
+        <CrossingItems items={clubs} roundedItems />
       </Container>
 
       <CTAFooter 
@@ -101,6 +64,25 @@ function ClubListPage() {
 
     </Fragment>
   )
+}
+
+export async function getStaticProps() {
+  // Try to fetch members on local API
+  try {
+    const clubs = await localAPIFetcher('/api/clubs');
+    return {
+      props: { 
+        clubs,
+      },
+    }
+  } 
+  // Return an error on props to display error message in UI
+  catch (e) {
+    console.error(e)
+    return {
+      props: { error: true },
+    }
+  }
 }
 
 export default ClubListPage
