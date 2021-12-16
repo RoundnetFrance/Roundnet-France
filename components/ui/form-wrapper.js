@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 
 // MUI IMPORTS
 import { 
-  Paper, Container, Stack, Typography,
+  Paper, Container, Stack, Typography, Box
 } from '@mui/material';
 
-function FormWrapper({ children, title, size }) {
+function FormWrapper({ children, title, size, onSubmit }) {
   return (
       <Stack
         alignItems="center"
@@ -20,9 +20,11 @@ function FormWrapper({ children, title, size }) {
             {title}/
           </Typography>
           <Paper variant="outlined" sx={{ p: 4 }}>
-              <Stack direction="column" spacing={2}>
-                {children}
-              </Stack>
+              <Box component="form" onSubmit={onSubmit}>
+                <Stack direction="column" spacing={2}>
+                  {children}
+                </Stack>
+              </Box>
           </Paper>
         </Container>
       </Stack>
@@ -33,6 +35,7 @@ FormWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   size: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 FormWrapper.defaultProps = {
