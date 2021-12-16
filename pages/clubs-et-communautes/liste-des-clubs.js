@@ -46,7 +46,7 @@ function ClubListPage({ clubs, error }) {
           icon="people"
           title="Liste des clubs"
         />
-        {error ? <Error /> : <CrossingItems items={clubs} />}
+        {error ? <Error /> : <CrossingItems items={clubs} roundedItems />}
       </Container>
 
       <CTAFooter 
