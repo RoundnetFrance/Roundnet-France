@@ -46,15 +46,17 @@ function TeamPage({ members, error }) {
 }
 
 export async function getStaticProps() {
-
+  // Try to fetch members on local API
   try {
     const members = await localAPIFetcher('/api/federation-members');
     return {
-      props: { 
+      props: {
         members,
       },
     }
-  } catch (e) {
+  }
+  // Return an error on props to display error message in UI
+  catch (e) {
     console.error(e)
     return {
       props: { error: true },
