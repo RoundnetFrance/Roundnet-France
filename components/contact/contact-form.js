@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import handleFormSubmit from '../../helpers/handle-form-submit';
 
 // MUI IMPORTS
 import {
@@ -29,8 +30,6 @@ function ContactForm() {
 
   // Handle errors
   const [errors, setErrors] = useState(initialFormState);
-  console.log(errors);
-
   // Handle loading
   const [loading, setLoading] = useState(false);
 
@@ -43,101 +42,17 @@ function ContactForm() {
   });
 
 
-  // Handle submission
+  // Handle submission (through handleFormSubmit helper function)
   const handleSubmit = (event) => {
-    // Prevent form from submitting
     event.preventDefault();
-
-    // Set loading to true
-    setLoading((prevLoading) => !prevLoading);
-
-    // Validate form
-    const validateInputs = (form) => {
-      const errors = {
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      };
-
-      // Check if empty
-      if (!form.name || form.name.trim() === '') errors.name = 'Le nom est requis';
-      if (!form.email || form.email.trim() === '') errors.email = 'L\'email est requis';
-      if (!form.subject || form.subject.trim() === '') errors.subject = 'L\'objet est requis';
-      if (!form.message || form.message.trim() === '') errors.message = 'Le message est requis';
-
-      // Check if email is valid by Regex
-      const validateEmail = (email) => {
-        return String(email)
-          .toLowerCase()
-          .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          );
-      };
-      if (!validateEmail(form.email)) errors.email = 'L\'email n\'est pas valide';
-
-      // Return errors
-      return errors;
-    };
-
-    // Check if all errors are empty strings
-    const validationErrors = validateInputs(form);
-    const isValid = Object.values(validationErrors).every((error) => error === '');
-    if (!isValid) {
-      setErrors(validationErrors);
-      setLoading((prevLoading) => !prevLoading);
-      return;
-    }
-
-    // If ok, proceed to send email
-    const data = {
-      name: form.name.trim(),
-      email: form.email.trim(),
-      subject: form.subject.trim(),
-      message: form.message.trim(),
-    }
-    const sendMail = async (messageData) => {
-      try {
-        const response = await fetch('/api/send-mail', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(messageData),
-        });
-
-        // If response is not OK, throw error
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
-        // Else, send success message
-        const data = await response.json();
-        setSubmitStatus({
-          open: true,
-          success: true,
-          message: data.message,
-        });
-        setForm(initialFormState);
-        setErrors(initialFormState);
-      }
-      // CATCH
-      catch (error) {
-        console.log(error);
-        setSubmitStatus({
-          open: true,
-          error: true,
-          message: 'Une erreur est survenue lors de l\'envoi du mail. Merci de réessayer',
-        }
-        );
-      }
-      // FINALLY
-      finally {
-        setLoading(false);
-      }
-    }
-    sendMail(data);
-  };
+    handleFormSubmit(
+      setLoading,
+      setErrors,
+      setForm,
+      setSubmitStatus,
+      form
+    );
+  }
 
   // Handle close of snackbar
   const handleSnackbarClose = (event, reason) => {
