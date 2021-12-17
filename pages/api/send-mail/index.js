@@ -7,6 +7,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function (req, res) {
   if (req.method === 'POST') {
+    console.log(req.body);
 
     // Create email template
     const html = emailTeplate(req.body);
@@ -21,9 +22,9 @@ export default async function (req, res) {
     };
 
     try {
-      await sgMail.send(msg);
+      // await sgMail.send(msg);
       // Wait for 2 seconds
-      // await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       res.status(200).json({ success: true, message: `Votre email a été envoyé ! Nous vous répondrons sous peu.` })
     } catch (error) {
       console.log(error);
