@@ -1,5 +1,5 @@
 import { useSession, getSession, signIn, signOut } from "next-auth/react";
-import { Fragment } from "react";
+import { Fragment } from "react";
 
 // MUI IMPORTS
 import Button from "@mui/material/Button";
@@ -13,22 +13,15 @@ export default function Component() {
   const { data: session } = useSession();
   console.log(session);
   return (
-    <Container maxWidth="sm" sx={{ minHeight: '75vh', mt: 8}}>
+    <Container maxWidth="sm" sx={{ minHeight: '75vh', mt: 8 }}>
       <FormWrapper title="Se connecter">
-        {session ? (
-          <Fragment>
-            Signed in as {session.user.name} <br />
-            <Button onClick={() => signOut()}>Sign out</Button>
-          </Fragment>
-        ) : (
-          <Fragment>
-            <Typography variant="h6" align="center">
-              Veuillez vous identifier pour accéder à l&apos;administration.
-            </Typography>
-            <Button onClick={signIn}>Se connecter</Button>
-          </Fragment>
-        )}
-        </FormWrapper>
+        <Fragment>
+          <Typography variant="h6" align="center">
+            Veuillez vous identifier pour accéder à l&apos;administration.
+          </Typography>
+          <Button onClick={signIn}>Se connecter</Button>
+        </Fragment>
+      </FormWrapper>
     </Container>
   )
 }
@@ -37,15 +30,15 @@ export async function getServerSideProps({ req }) {
   // If user is connected, redirect to dashboard
   const session = await getSession({ req });
   if (session) {
-      return {
-          redirect: {
-              destination: '/rf-admin/dashboard',
-              permanent: false,
-          },
-      };
+    return {
+      redirect: {
+        destination: '/rf-admin/dashboard',
+        permanent: false,
+      },
+    };
   }
   // If not, do nothing
   return {
-      props: { },
+    props: {},
   };
 }

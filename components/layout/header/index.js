@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 // MATERIAL COMPONENTS
 import {
-  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem
+  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Button,
 } from '@mui/material';
 
 // MUI ICONS
@@ -75,6 +75,12 @@ function Header(props) {
   }
   );
 
+  // Display the user name if session
+  let userName;
+  if (props.session) {
+    userName = props.session.user.name || props.session.user.email;
+  }
+
   // Check if regular or admin layout
   const adminLayout = props.adminLayout;
 
@@ -83,7 +89,7 @@ function Header(props) {
       <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
         <AppBar>
           <Toolbar>
-            <MenuDrawer />
+            {!adminLayout && <MenuDrawer />}
             <Link href="/" passHref>
               <a>
                 <Image
@@ -99,12 +105,12 @@ function Header(props) {
               <Link href="/" passHref>
                 <MUILink color="inherit" underline="none">
                   <strong>{adminLayout ? 'RF Admin' : 'Roundnet France'}</strong>
-                  </MUILink>
+                </MUILink>
               </Link>
             </Typography>
 
-            <ButtonGroup variant="text" sx={{ display: { xs: 'none', md: 'block' } }}>
-              {adminLayout ? 'Coucou' : navItems}
+            <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'block' } : { xs: 'none', md: 'block' } }}>
+              {adminLayout ? (<Typography variant="body1">{userName}</Typography>) : navItems}
             </ButtonGroup>
           </Toolbar>
         </AppBar>
