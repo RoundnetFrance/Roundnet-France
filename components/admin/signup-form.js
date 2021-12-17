@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import handleFormSubmit from '../../helpers/handle-form-submit';
 
 // MUI IMPORTS
@@ -10,9 +10,12 @@ import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
+import Divider from '@mui/material/Divider';
 
 // COMPONENT IMPORT
-import Link from '../../components/ui/link';
+import Link from '../ui/link';
+import FormWrapper from '../ui/form-wrapper';
+import PasswordInput from '../ui/password-input';
 
 // FUNCTIONAL COMPONENT
 function SignUpForm() {
@@ -21,8 +24,8 @@ function SignUpForm() {
   const initialFormState = {
     name: '',
     email: '',
-    subject: '',
-    message: '',
+    password: '',
+    passwordConfirm: '',
   }
   const [form, setForm] = useState(initialFormState);
   const handleChange = (event) => {
@@ -46,7 +49,6 @@ function SignUpForm() {
     error: false,
   });
 
-
   // Handle submission (through handleFormSubmit helper function)
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +59,7 @@ function SignUpForm() {
       setSubmitStatus,
       form
     );
-  }
+  };
 
   // Handle close of snackbar
   const handleSnackbarClose = (event, reason) => {
@@ -74,13 +76,18 @@ function SignUpForm() {
 
   return (
 
-    <Fragment>
+    <FormWrapper title="Créer un compte">
       <Typography>La validation d&apos;un compte administrateur Roundnet France permet aux associations d&apos;enregistrer les résultats des tournois automatiquement. Elle est soumise à l&apos;acceptation d&apos;un membre du board administratif de la fédération. </Typography>
       <Typography>Pour en savoir plus, <Link href="/qui-sommes-nous/contact">contactez-nous directement.</Link></Typography>
+
+      <Divider />
+
       <TextField id="name" label="Nom & Prénom" variant="outlined" value={form.name} onChange={handleChange} error={errors.name !== ""} helperText={errors.name} required />
       <TextField id="email" label="Email" variant="outlined" value={form.email} onChange={handleChange} error={errors.email !== ""} helperText={errors.email} required />
-      <TextField id="subject" label="Objet" variant="outlined" value={form.subject} onChange={handleChange} error={errors.subject !== ""} helperText={errors.subject} required />
-      <TextField id="message" label="Message" variant="outlined" multiline rows={4} value={form.message} error={errors.message !== ""} helperText={errors.message} onChange={handleChange} required />
+
+      <PasswordInput label="Mot de passe" value={form.password} name="password" handleChange={handleChange} error={errors.password !== ''} helperText={errors.password} />
+      <PasswordInput label="Confirmation du mot de passe" value={form.passwordConfirm} name="passwordConfirm" handleChange={handleChange} error={errors.passwordConfirm !== ''} helperText={errors.passwordConfirm} confirm />
+      
       <Typography variant="body2" >
         * Champs obligatoires
       </Typography>
@@ -105,7 +112,7 @@ function SignUpForm() {
           {submitStatus.message}
         </Alert>
       </Snackbar>
-    </Fragment>
+    </FormWrapper>
 
   )
 }
