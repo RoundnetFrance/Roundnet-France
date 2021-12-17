@@ -1,19 +1,24 @@
 import sgMail from '@sendgrid/mail'
+import emailTeplate from '../../../styles/email-template'
 
+// Sign SendGrid API key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 
 export default async function (req, res) {
   if (req.method === 'POST') {
-    const { email, subject, message, name } = req.body;
-    const msg = {
-      to: email,
-      from: 'robin.souriau@gmail.com',
-      subject,
-      name,
-      text: message,
-    };
 
-    console.log(req.body);
+    // Create email template
+    const html = emailTeplate(req.body);
+
+    // Create email object
+    const msg = {
+      to: 'robin.souriau@gmail.com',
+      from: 'robin.souriau@gmail.com',
+      subject : req.body.subject,
+      name: req.body.name,
+      html,
+    };
 
     try {
       await sgMail.send(msg);
