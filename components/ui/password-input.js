@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
+import FormHelperText from '@mui/material/FormHelperText';
 
 // MUI ICONS
 import Visibility from '@mui/icons-material/Visibility';
@@ -32,8 +33,8 @@ function PasswordInput({ value, name, handleChange, error, helperText, confirm }
         id={name}
         type={showPassword ? 'text' : 'password'}
         value={value}
-        onChange={handleChange}
         error={error}
+        onChange={handleChange}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -48,6 +49,9 @@ function PasswordInput({ value, name, handleChange, error, helperText, confirm }
         }
         label={label}
       />
+      {
+        error && <FormHelperText error id={`${name}-error`}>{helperText}</FormHelperText>
+      }
     </FormControl>
   )
 }
