@@ -1,5 +1,6 @@
-import { useSession, getSession, signIn, signOut } from "next-auth/react";
+import { useSession, getSession, signIn } from "next-auth/react";
 import { Fragment } from "react";
+import Link from "next/link";
 
 // MUI IMPORTS
 import Button from "@mui/material/Button";
@@ -13,14 +14,14 @@ export default function Component() {
   const { data: session } = useSession();
   console.log(session);
   return (
-    <Container maxWidth="sm" sx={{ minHeight: '75vh', mt: 8 }}>
+    <Container maxWidth="xs" sx={{ minHeight: '75vh', mt: 8 }}>
       <FormWrapper title="Se connecter">
         <Fragment>
           <Typography variant="h6" align="center">
             Veuillez vous identifier pour accéder à l&apos;administration.
           </Typography>
           <Button variant="outlined" onClick={signIn}>Se connecter</Button>
-          <Button color="secondary">Créer un compte</Button>
+          <Link href="/rf-admin/signup" passHref><Button color="secondary">Créer un compte</Button></Link>
         </Fragment>
       </FormWrapper>
     </Container>
