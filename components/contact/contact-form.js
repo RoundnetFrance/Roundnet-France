@@ -68,7 +68,6 @@ function ContactForm() {
   };
 
   return (
-    <Container maxWidth="lg">
       <FormWrapper title="Contactez Roundnet France" size="sm" onSubmit={handleSubmit}>
         <Typography>Une question à nous poser, une demande spécifique ? N&apos;hésitez pas à contacter Roundnet France, si vous souhaitez trouver de nouveaux joueurs, rejoindre une ligue en France, importer le Roundnet dans votre école, organiser un tournoi... </Typography>
 
@@ -104,7 +103,6 @@ function ContactForm() {
         </Snackbar >
 
       </FormWrapper>
-    </Container>
   )
 }
 
