@@ -5,7 +5,7 @@ import Alert from '@mui/material/Alert';
 
 function Error({ message }) {
   return (
-    <Alert severity="error">
+    <Alert severity="error" sx={{ my: 2 }}>
       {message}
     </Alert>
   )

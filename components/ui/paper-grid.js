@@ -23,7 +23,7 @@ function PaperGrid({ items }) {
               borderRadius: 2,
             }}>
               <IconWithBackground icon={item.icon} size={30} />
-              <Typography variant="h5" my={2}>
+              <Typography variant="h5" component="h4" my={2}>
                 <strong>{item.title}</strong>
               </Typography>
               <Typography variant="body1">

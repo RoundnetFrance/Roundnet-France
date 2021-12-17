@@ -1,7 +1,7 @@
 // NEXT API REQUEST
 // GET /api/v1/federation-members
 
-const { connectToDatabase } = require('../../../lib/mongodb');
+import { connectToDatabase } from '../../../lib/mongodb';
 
 export default async function handler(req, res) {
   // GET method to read federation members

@@ -1,10 +1,17 @@
 import { getSession } from 'next-auth/react'
 
+// MUI IMPORTS
+import Container from '@mui/material/Container';
+
+// COMPONENT IMPORTS
+import DashboardWrapper from '../../components/layout/admin/dashboard-wrapper';
+import PageTitle from '../../components/ui/page-title';
+
 function DashboardPage() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <DashboardWrapper>
+      <PageTitle title="Dashboard"></PageTitle>
+    </DashboardWrapper>
   )
 }
 

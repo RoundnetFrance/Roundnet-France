@@ -1,7 +1,7 @@
 // NEXT API REQUEST
 // GET /api/v1/tournament-calendar
 
-const { connectToDatabase } = require('../../../lib/mongodb');
+import { connectToDatabase } from '../../../lib/mongodb';
 
 export default async function handler(req, res) {
   // GET method to read federation members
