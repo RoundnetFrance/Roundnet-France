@@ -31,7 +31,7 @@ const validateInputs = (formData, initialFormState) => {
 
   // For each formData input, check if empty
   Object.keys(formData).forEach((key) => {
-    if (!formData[key] || formData[key].trim() === '') {
+    if (!formData[key] || formData[key] === '') {
       errors[key] = 'Ce champ est requis';
     }
   });
@@ -50,10 +50,8 @@ const validateInputs = (formData, initialFormState) => {
 };
 
 // Send mail through SendGrid function
-const sendMail = async (formData, setSubmitStatus, setForm, setErrors, setLoading) => {
+const sendMail = async (formData, initialFormState, setSubmitStatus, setForm, setErrors, setLoading) => {
   try {
-    const initialFormState = getInitialFormState(formData);
-    
     const response = await fetch('/api/send-mail', {
       method: 'POST',
       headers: {
@@ -101,9 +99,6 @@ export default async function handleFormSubmit(
   setSubmitStatus,
   form
 ) {
-  // Prevent form from submitting
-  event.preventDefault();
-
   // Set loading to true
   setLoading((prevLoading) => !prevLoading);
 
@@ -122,5 +117,5 @@ export default async function handleFormSubmit(
   }
 
   // If ok, proceed to send API request to send mail (with set[...] functions)
-  sendMail(formData, setSubmitStatus, setForm, setErrors, setLoading);
+  sendMail(formData, initialFormState, setSubmitStatus, setForm, setErrors, setLoading);
 }

@@ -22,9 +22,9 @@ export default async function (req, res) {
     };
 
     try {
-      // await sgMail.send(msg);
-      // Wait for 2 seconds
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await sgMail.send(msg);
+      //! FOR TESTING PURPOSES ONLY - Wait for 2 seconds
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
       res.status(200).json({ success: true, message: `Votre email a été envoyé ! Nous vous répondrons sous peu.` })
     } catch (error) {
       console.log(error);
