@@ -22,9 +22,10 @@ export default NextAuth({
         email: { label: "Email", type: "text", placeholder: "jean@roundnetfrance.fr" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
+      async authorize(credentials) {
         const { email } = credentials;
+
+        // Connect to database and check if user exists (throw error db malfunction)
         let user;
         try {
           const { db } = await connectToDatabase();
@@ -32,7 +33,6 @@ export default NextAuth({
         } catch (error) {
           throw new Error(error);
         }
-
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
@@ -60,6 +60,13 @@ export default NextAuth({
     })
     // ...add more providers here
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token from a provider.
+      session.plop = true
+      return session
+    }
+  },
   // A bit of theming
   theme: {
     colorScheme: 'light',
