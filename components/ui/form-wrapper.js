@@ -16,7 +16,7 @@ function FormWrapper({ children, title, size, onSubmit }) {
         }}
       >
         <Container maxWidth={size}>
-          <Typography variant="h6" sx={{ mb: 1 }}>
+          <Typography variant="h6" component="h3" sx={{ mb: 1 }}>
             {title}/
           </Typography>
           <Paper variant="outlined" sx={{ p: 4 }}>

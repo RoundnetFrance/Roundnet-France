@@ -19,7 +19,8 @@ export default function Component() {
           <Typography variant="h6" align="center">
             Veuillez vous identifier pour accéder à l&apos;administration.
           </Typography>
-          <Button onClick={signIn}>Se connecter</Button>
+          <Button variant="outlined" onClick={signIn}>Se connecter</Button>
+          <Button color="secondary">Créer un compte</Button>
         </Fragment>
       </FormWrapper>
     </Container>

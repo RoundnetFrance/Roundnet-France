@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 function PageTitle({ title }) {
   return (
     <Box sx={{ mb: 2 }}>
-      <Typography variant="h4">
+      <Typography variant="h4" component="h2">
         {title}
       </Typography>
       <Divider sx={{ pb: 2 }} />

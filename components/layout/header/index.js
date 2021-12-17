@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { signOut } from 'next-auth/react';
 
 // MATERIAL COMPONENTS
 import {
-  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Button,
+  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Button, Stack,
 } from '@mui/material';
 
 // MUI ICONS
@@ -15,6 +16,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 // OUTER COMPONENTS
 import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
+import AdminDrawer from '../admin/admin-drawer';
 import menuState from '../../../helpers/menu-state';
 import NavItem from './nav-items';
 
@@ -36,6 +38,7 @@ HideOnScroll.propTypes = {
 };
 
 function Header(props) {
+  console.log(props.session);
 
   // State for the different menu items
   const menuInitialState = menuState();
@@ -81,6 +84,18 @@ function Header(props) {
     userName = props.session.user.name || props.session.user.email;
   }
 
+  // Display the admin items
+  const adminItems = (
+    <Stack direction={{xs: "column", sm: "row"}} alignItems="center" spacing={{xs: 0, sm: 1}}>
+      <Typography variant="body2">{userName}&nbsp;
+      </Typography>
+      <Typography display={{xs: 'none', sm: 'inherit'}}> | </Typography>
+        <Button onClick={signOut} color="neutral" sx={{ 
+          textTransform: 'none',
+        }}> Déconnexion </Button>
+    </Stack>
+  )
+
   // Check if regular or admin layout
   const adminLayout = props.adminLayout;
 
@@ -89,7 +104,7 @@ function Header(props) {
       <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
         <AppBar>
           <Toolbar>
-            {!adminLayout && <MenuDrawer />}
+            {adminLayout ? <AdminDrawer /> : <MenuDrawer />}
             <Link href="/" passHref>
               <a>
                 <Image
@@ -109,8 +124,8 @@ function Header(props) {
               </Link>
             </Typography>
 
-            <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'block' } : { xs: 'none', md: 'block' } }}>
-              {adminLayout ? (<Typography variant="body1">{userName}</Typography>) : navItems}
+            <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'inherit' } : { xs: 'none', md: 'block' } }}>
+              {adminLayout ? adminItems : navItems}
             </ButtonGroup>
           </Toolbar>
         </AppBar>

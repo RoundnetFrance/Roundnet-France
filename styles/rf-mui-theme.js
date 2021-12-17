@@ -25,6 +25,9 @@ const rfMuiTheme = createTheme(
         main: '#f50057',
         dark: '#ab003c',
       },
+      neutral: {
+        main: '#fff',
+      }
     },
   },
   frFR,
