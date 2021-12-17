@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 
 // MATERIAL COMPONENTS
 import {
-  Link as MUILink, AppBar, Box, Toolbar, Typography, Button, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem
+  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Menu, MenuItem
 } from '@mui/material';
 
 // MUI ICONS
@@ -15,10 +15,10 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 // OUTER COMPONENTS
 import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
-import menuState from '../../helpers/menu-state';
+import menuState from '../../../helpers/menu-state';
+import NavItem from './nav-items';
 
-function HideOnScroll(props) {
-  const { children } = props;
+function HideOnScroll({ children }) {
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
   // This is only being set here because the demo is in an iframe.
@@ -58,57 +58,25 @@ function Header(props) {
     setAnchorEl(null);
   };
 
-  // Display 1st and 2nd level navigation items
+  // Display 1st and 2nd level navigation items for regular layout
   const navItems = menuElements.map((item) => {
     // Display arrow of expansion if subElement is chosen
     const expandIcon = menuOpen[item.slug] ? <ExpandLess /> : <ExpandMore />;
 
-    return (
-      <Fragment key={item.name}>
-        {
-          !item.subElements ? (
-            <Link href={item.url} id={item.slug} passHref>
-              <Button
-                color="inherit"
-                onClick={(event) => { handleMenuHover(event, item.slug) }}
-              >
-                {item.name}
-                {item.subElements && expandIcon}
-              </Button>
-            </Link>
-          ) : (
-            <Button
-                color="inherit"
-                onClick={(event) => { handleMenuHover(event, item.slug) }}
-              >
-                {item.name}
-                {item.subElements && expandIcon}
-              </Button>
-          )
-        }
-
-        {
-          item.subElements && (
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={menuOpen[item.slug]}
-              onClose={handleMenuClose}
-            >
-              {item.subElements.map((subItem) => (
-                <MenuItem key={subItem.name} onClick={handleMenuClose}>
-                  <Link href={subItem.url} passHref>
-                    <MUILink underline="none">{subItem.name}</MUILink>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          )
-        }
-      </Fragment>
-    )
+    return <NavItem
+      key={item.name}
+      item={item}
+      handleMenuClose={handleMenuClose}
+      handleMenuHover={handleMenuHover}
+      expandIcon={expandIcon}
+      anchorEl={anchorEl}
+      menuOpen={menuOpen}
+    />;
   }
   );
+
+  // Check if regular or admin layout
+  const adminLayout = props.adminLayout;
 
   return (
     <HideOnScroll {...props}>
@@ -129,12 +97,14 @@ function Header(props) {
 
             <Typography ml={2} variant="h6" component="h1" sx={{ flexGrow: 1 }}>
               <Link href="/" passHref>
-                <MUILink color="inherit" underline="none"><strong>Roundnet France</strong></MUILink>
+                <MUILink color="inherit" underline="none">
+                  <strong>{adminLayout ? 'RF Admin' : 'Roundnet France'}</strong>
+                  </MUILink>
               </Link>
             </Typography>
 
             <ButtonGroup variant="text" sx={{ display: { xs: 'none', md: 'block' } }}>
-              {navItems}
+              {adminLayout ? 'Coucou' : navItems}
             </ButtonGroup>
           </Toolbar>
         </AppBar>

@@ -1,4 +1,4 @@
-import menuElements from '../components/layout/menu-elements';
+import menuElements from '../components/layout/header/menu-elements';
 
 export default function() {
   const menuInitialState = {};

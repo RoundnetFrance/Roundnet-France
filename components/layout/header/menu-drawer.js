@@ -6,17 +6,12 @@ import { IconButton, Drawer, Divider, List, ListItem, ListItemButton, ListItemIc
 
 // MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
-import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
-import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
 
 // MENU DATA & HELPERS
 import menuElements from './menu-elements';
-import menuState from '../../helpers/menu-state'; 
+import menuState from '../../../helpers/menu-state'; 
 
 function MenuDrawer() {
   // Preparing states

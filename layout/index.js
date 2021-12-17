@@ -3,10 +3,10 @@ import Footer from '../components/layout/footer';
 
 import { Fragment } from 'react'
 
-function Layout({ children }) {
+function Layout({ children, adminLayout }) {
   return (
     <Fragment>
-      <Header />
+      <Header adminLayout={adminLayout} />
       {children}
       <Footer />
     </Fragment>

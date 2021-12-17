@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
       <ThemeProvider theme={rfMuiTheme}>
-        <Layout>
+        <Layout adminLayout={pageProps.adminLayout}>
           <Head>
             <title>Roundnet France - Fédération française de roundnet</title>
             <meta name="description" content="Site officiel de la fédération française de roundnet" />
