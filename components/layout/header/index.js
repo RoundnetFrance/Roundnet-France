@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 // MATERIAL COMPONENTS
 import {
@@ -86,13 +86,13 @@ function Header(props) {
 
   // Display the admin items
   const adminItems = (
-    <Stack direction={{xs: "column", sm: "row"}} alignItems="center" spacing={{xs: 0, sm: 1}}>
+    <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" spacing={{ xs: 0, sm: 1 }}>
       <Typography variant="body2">{userName}&nbsp;
       </Typography>
-      <Typography display={{xs: 'none', sm: 'inherit'}}> | </Typography>
-        <Button onClick={signOut} color="neutral" sx={{ 
-          textTransform: 'none',
-        }}> Déconnexion </Button>
+      <Typography display={{ xs: 'none', sm: 'inherit' }}> | </Typography>
+      <Button onClick={signOut} color="neutral" sx={{
+        textTransform: 'none',
+      }}> Déconnexion </Button>
     </Stack>
   )
 
