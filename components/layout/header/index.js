@@ -6,7 +6,7 @@ import { signOut } from 'next-auth/react';
 
 // MATERIAL COMPONENTS
 import {
-  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Button, Stack,
+  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Button, Stack, Avatar
 } from '@mui/material';
 
 // MUI ICONS
@@ -78,13 +78,18 @@ function Header(props) {
 
   // Display the user name if session
   let userName;
+  let userImage;
   if (props.session) {
     userName = props.session.user.name || props.session.user.email;
+    userImage = props.session.user.image;
   }
 
   // Display the admin items
   const adminItems = (
     <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" spacing={{ xs: 0, sm: 1 }}>
+      {userImage && (
+        <Avatar sx={{ width: 30, height: 30, mr: 1 }}><Image src={userImage} alt={userName} width="40" height="40" /></Avatar>
+      )}
       <Typography variant="body2">{userName}&nbsp;
       </Typography>
       <Typography display={{ xs: 'none', sm: 'inherit' }}> | </Typography>
