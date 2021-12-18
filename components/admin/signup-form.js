@@ -22,10 +22,10 @@ function SignUpForm() {
 
   // Handle controlled inputs
   const initialFormState = {
-    name: 'Robin',
-    email: 'robin.souriau@gmail.com',
-    password: 'lol',
-    passwordConfirm: 'lol',
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
   }
   const [form, setForm] = useState(initialFormState);
   const handleChange = (event) => {
@@ -98,6 +98,9 @@ function SignUpForm() {
           <CircularProgress color="inherit" size={30} />
         </Box>) : 'Envoyer'}
       </Button>
+      <Typography variant="body2" >
+        Vous avez déjà un compte ? <Link href="/rf-admin">Connectez-vous</Link>
+      </Typography>
 
       {/* SNACKBAR */}
       <Snackbar

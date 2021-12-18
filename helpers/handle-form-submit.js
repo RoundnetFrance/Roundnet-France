@@ -123,9 +123,8 @@ export default async function handleFormSubmit(
     if (!response.ok) {
       // In specific case of invalid input data
       if (response.status === 422) throw new InvalidFormInput(data);
-      if (response.status === 403) throw new Error(data.message);
       
-      throw new Error(response.statusText);
+      throw new Error(data.message || response.statusText);
     }
 
     // If everything is ok, return status of submission and reset form and errors

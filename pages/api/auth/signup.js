@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         //Send success response
         res.status(201).json({ message: 'Le compte a bien été créé. Vous serez notifié par email lorsqu\'il sera validé par la fédération.' });
         //Close DB connection
-        client.close();
+        // client.close();
     } else {
         //Response for other than POST method
         res.status(500).json({ message: 'Route not valid' });
