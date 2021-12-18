@@ -8,12 +8,12 @@ import Divider from '@mui/material/Divider';
 import MUILink from '@mui/material/Link';
 
 // COMPONENT IMPORTS
-import FormWrapper from '../ui/form-wrapper';
+import BoxWrapper from '../ui/box-wrapper';
 
 function CreateClubForm() {
   return (
 
-    <FormWrapper title="Formulaire de demande d'affiliation pour la saison 2022" size="sm">
+    <BoxWrapper title="Formulaire de demande d'affiliation pour la saison 2022" size="sm">
 
       <TextField id="city" label="Ville*" variant="outlined" />
       <TextField id="clubCreated" label="Date de création*" variant="outlined" />
@@ -33,7 +33,7 @@ function CreateClubForm() {
         Cette demande sera soumise à validation par la fédération française de Roundnet, dans le respect des <Link href="/clubs-et-communautes/adherer-a-roundnet-france" passHref><MUILink>règles d&apos;affiliation de l&apos;association</MUILink></Link>.
       </Typography>
       <Button variant="contained" color="primary">Envoyer</Button>
-    </FormWrapper>
+    </BoxWrapper>
   )
 }
 

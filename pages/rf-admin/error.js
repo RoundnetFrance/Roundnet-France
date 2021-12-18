@@ -8,7 +8,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Divider from "@mui/material/Divider";
 
 // COMPONENTS IMPORTS
-import FormWrapper from "../../components/ui/form-wrapper";
+import BoxWrapper from "../../components/ui/box-wrapper";
 import Link from '../../components/ui/link';
 
 export default function AdminErrorPage() {
@@ -17,7 +17,7 @@ export default function AdminErrorPage() {
 
   return (
     <Container maxWidth="xs" sx={{ minHeight: '75vh', mt: 8 }}>
-      <FormWrapper title="Connexion">
+      <BoxWrapper title="Connexion">
         <Alert severity="error">
           <AlertTitle><strong>Erreur</strong></AlertTitle>
           {error}
@@ -26,7 +26,7 @@ export default function AdminErrorPage() {
         <Typography variant="body2">
           <Link href="/rf-admin" passHref>Retour</Link>
         </Typography>
-      </FormWrapper>
+      </BoxWrapper>
     </Container>
   )
 }
