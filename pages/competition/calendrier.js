@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import localAPIFetcher from '../../helpers/local-api-fetcher';
+import { getCalendar } from '../../helpers/db/tournament-calendar';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -14,7 +14,6 @@ import PageTitle from '../../components/ui/page-title';
 import Error from '../../components/ui/error';
 
 function TournamentsPage({ tournamentCalendar, error }) {
-  console.log(tournamentCalendar);
   return (
     <Fragment>
       <Hero
@@ -33,7 +32,7 @@ function TournamentsPage({ tournamentCalendar, error }) {
       </Container>
 
       <Container maxWidth="lg" sx={{ mb: 4 }}>
-        {error ? <Error /> : <PlanningTable data={tournamentCalendar} />}
+        {error ? <Error /> : <PlanningTable items={tournamentCalendar} />}
       </Container>
 
       <Container maxWidth="md" sx={{ my: 4 }}>
@@ -67,7 +66,7 @@ function TournamentsPage({ tournamentCalendar, error }) {
 export async function getStaticProps() {
   // Try to fetch tournament calendar on local API
   try {
-    const tournamentCalendar = await localAPIFetcher('/api/tournament-calendar');
+    const tournamentCalendar = await getCalendar();
     return {
       props: {
         tournamentCalendar,

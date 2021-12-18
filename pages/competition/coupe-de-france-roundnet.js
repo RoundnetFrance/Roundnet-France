@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { getCalendar } from '../../helpers/db/tournament-calendar';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -10,8 +11,9 @@ import PageTitle from '../../components/ui/page-title';
 import TeamRanking from '../../components/competition/national-ranking/team-ranking';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PlanningTable from '../../components/ui/planning-table';
+import Error from '../../components/ui/error';
 
-function NationalRankingPage() {
+function NationalRankingPage({ error, previousEvents }) {
   return (
     <Fragment>
       <Hero
@@ -41,15 +43,34 @@ function NationalRankingPage() {
         </HeaderWithIcon>
       </Container>
 
-      <Container maxWidth="lg" sx={{ my: 4}}>
-      <Typography variant="h6">
+      <Container maxWidth="lg" sx={{ my: 4 }}>
+        <Typography variant="h6">
           Saison 2022/
         </Typography>
-        <PlanningTable resultsTable />
+        {error ? <Error /> : <PlanningTable items={previousEvents} />}
       </Container>
 
     </Fragment>
   )
+}
+
+export async function getStaticProps() {
+  // Try to fetch tournament calendar on local API
+  try {
+    const previousEvents = await getCalendar();
+    return {
+      props: {
+        previousEvents,
+      },
+    }
+  }
+  // Return an error on props to display error message in UI
+  catch (e) {
+    console.error(e)
+    return {
+      props: { error: true },
+    }
+  }
 }
 
 export default NationalRankingPage

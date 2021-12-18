@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import localAPIFetcher from '../../helpers/local-api-fetcher';
+import { getClubs } from '../../helpers/db/clubs';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -70,10 +70,10 @@ function ClubListPage({ clubs, error }) {
 export async function getStaticProps() {
   // Try to fetch members on local API
   try {
-    const clubs = await localAPIFetcher('/api/clubs');
+    const data = await getClubs();
     return {
       props: { 
-        clubs,
+        clubs: data,
       },
     }
   } 

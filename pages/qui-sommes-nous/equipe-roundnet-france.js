@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import localAPIFetcher from '../../helpers/local-api-fetcher';
+import { getFederationMembers } from '../../helpers/db/federation-members';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -48,7 +48,7 @@ function TeamPage({ members, error }) {
 export async function getStaticProps() {
   // Try to fetch members on local API
   try {
-    const members = await localAPIFetcher('/api/federation-members');
+    const members = await getFederationMembers();
     return {
       props: {
         members,
