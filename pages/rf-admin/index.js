@@ -8,12 +8,12 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 // COMPONENTS IMPORTS
-import FormWrapper from "../../components/ui/form-wrapper";
+import BoxWrapper from "../../components/ui/box-wrapper";
 
 export default function AdminPage() {
   return (
     <Container maxWidth="xs" sx={{ minHeight: '75vh', mt: 8 }}>
-      <FormWrapper title="Se connecter">
+      <BoxWrapper title="Se connecter">
         <Fragment>
           <Typography variant="h6" align="center">
             Veuillez vous identifier pour accéder à l&apos;administration.
@@ -21,7 +21,7 @@ export default function AdminPage() {
           <Button variant="outlined" onClick={signIn}>Se connecter</Button>
           <Link href="/rf-admin/signup" passHref><Button color="secondary">Créer un compte</Button></Link>
         </Fragment>
-      </FormWrapper>
+      </BoxWrapper>
     </Container>
   )
 }

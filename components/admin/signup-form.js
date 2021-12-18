@@ -14,7 +14,7 @@ import Divider from '@mui/material/Divider';
 
 // COMPONENT IMPORT
 import Link from '../ui/link';
-import FormWrapper from '../ui/form-wrapper';
+import BoxWrapper from '../ui/box-wrapper';
 import PasswordInput from '../ui/password-input';
 
 // FUNCTIONAL COMPONENT
@@ -78,7 +78,7 @@ function SignUpForm() {
 
   return (
 
-    <FormWrapper title="Créer un compte" onSubmit={handleSubmit}>
+    <BoxWrapper title="Créer un compte" onSubmit={handleSubmit}>
       <Typography>La validation d&apos;un compte administrateur Roundnet France permet aux associations d&apos;enregistrer les résultats des tournois automatiquement. Elle est soumise à l&apos;acceptation d&apos;un membre du board administratif de la fédération. </Typography>
       <Typography>Pour en savoir plus, <Link href="/qui-sommes-nous/contact">contactez-nous directement.</Link></Typography>
 
@@ -117,7 +117,7 @@ function SignUpForm() {
           {submitStatus.message}
         </Alert>
       </Snackbar>
-    </FormWrapper>
+    </BoxWrapper>
 
   )
 }

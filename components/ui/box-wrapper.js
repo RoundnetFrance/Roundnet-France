@@ -5,7 +5,7 @@ import {
   Paper, Container, Stack, Typography, Box
 } from '@mui/material';
 
-function FormWrapper({ children, title, size, onSubmit }) {
+function BoxWrapper({ children, title, size, onSubmit }) {
   return (
       <Stack
         alignItems="center"
@@ -20,7 +20,7 @@ function FormWrapper({ children, title, size, onSubmit }) {
             {title}/
           </Typography>
           <Paper variant="outlined" sx={{ p: 4 }}>
-              <Box component="form" onSubmit={onSubmit}>
+              <Box component={onSubmit ? 'form' : 'div'} onSubmit={onSubmit}>
                 <Stack direction="column" spacing={2}>
                   {children}
                 </Stack>
@@ -31,15 +31,16 @@ function FormWrapper({ children, title, size, onSubmit }) {
   );
 }
 
-FormWrapper.propTypes = {
+BoxWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   size: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
 };
 
-FormWrapper.defaultProps = {
+BoxWrapper.defaultProps = {
   size: 'md',
+  onSubmit: null,
 };
 
-export default FormWrapper;
+export default BoxWrapper;
