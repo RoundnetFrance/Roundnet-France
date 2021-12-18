@@ -38,8 +38,6 @@ HideOnScroll.propTypes = {
 };
 
 function Header(props) {
-  console.log(props.session);
-
   // State for the different menu items
   const menuInitialState = menuState();
   const [menuOpen, setMenuOpen] = useState(menuInitialState);

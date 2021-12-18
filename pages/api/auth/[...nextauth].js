@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import { connectToDatabase } from '../../../lib/mongodb';
+import { compare } from 'bcryptjs';
 
 // Providers
 import GoogleProvider from "next-auth/providers/google";
@@ -24,17 +25,22 @@ export default NextAuth({
       },
       async authorize(credentials) {
         const { email } = credentials;
+        const { client, db } = await connectToDatabase();
 
         // Connect to database and check if user exists (throw error db malfunction)
         let user;
         try {
-          const { db } = await connectToDatabase();
           user = await db.collection('users').findOne({ email });
         } catch (error) {
-          throw new Error(error);
+          throw new Error('Connexion à la base de données impossible');
         }
 
         if (user) {
+          const checkPassword = await compare(credentials.password, user.password);
+          //Incorrect password - send response
+          if (!checkPassword) {
+            return null;
+          }
           // Any object returned will be saved in `user` property of the JWT
           if (!user.authorized) {
             return null
