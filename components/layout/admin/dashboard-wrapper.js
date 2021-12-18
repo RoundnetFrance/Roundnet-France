@@ -2,18 +2,15 @@ import { Fragment } from 'react';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-
-// COMPONENT IMPORTS
-import DashboardDrawer from './dashboard-drawer';
+import Box from '@mui/material/Box';
 
 function DashboardWrapper({ children }) {
   return (
-    <Stack>
-      <Container maxWidth="xl" sx={{ my: 4 }}>
-        {children}
-      </Container>
-    </Stack>
+      <Box sx={{ backgroundColor: 'neutral.lightGrey', minHeight: '80vh' }}>
+        <Container maxWidth="md" sx={{ py: 4 }}>
+          {children}
+        </Container>
+      </Box>
   )
 }
 

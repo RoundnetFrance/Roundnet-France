@@ -44,7 +44,7 @@ const adminElements = [
       subElements: [
         {
           name: 'L\'équipe Roundnet France',
-          url: '/rf-admin/equipe-roundnet-france',
+          url: '/rf-admin/association/equipe-roundnet-france',
         },    
       ],
     },
@@ -55,7 +55,7 @@ const adminElements = [
         subElements: [
           {
             name: 'Administrateurs',
-            url: '/rf-france/administrateurs',
+            url: '/rf-admin/parametres/administrateurs',
           },    
         ],
       },
