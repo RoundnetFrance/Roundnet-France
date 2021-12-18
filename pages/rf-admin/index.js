@@ -1,4 +1,4 @@
-import { useSession, getSession, signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { Fragment } from "react";
 import Link from "next/link";
 
@@ -10,9 +10,7 @@ import Typography from "@mui/material/Typography";
 // COMPONENTS IMPORTS
 import FormWrapper from "../../components/ui/form-wrapper";
 
-export default function Component() {
-  const { data: session } = useSession();
-  console.log(session);
+export default function AdminPage() {
   return (
     <Container maxWidth="xs" sx={{ minHeight: '75vh', mt: 8 }}>
       <FormWrapper title="Se connecter">

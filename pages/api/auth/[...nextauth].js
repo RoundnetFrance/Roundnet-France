@@ -67,11 +67,35 @@ export default NextAuth({
     // ...add more providers here
   ],
   callbacks: {
+    // Called when a user is successfully authenticated
+    async signIn({ account, user }) {
+      // Everything is already authenticated, so we just need to sign in
+      if (account.provider === 'credentials') {
+        return true;
+      }
+
+      // For any other provider, we have to check if the user is in the database and authorized
+      const { db } = await connectToDatabase();
+      const authorizedUser = await db.collection('users').findOne({
+        email: user.email,
+        authorized: true,
+      });
+
+      if (!authorizedUser) {
+        return '/rf-admin/error?error=Connexion impossible.';
+      }
+
+      return true;
+    },
+    // Called when a user is successfully created
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.plop = true
       return session
     }
+  },
+  // Custom pages
+  pages: {
+    error: '/rf-admin/error',
   },
   // A bit of theming
   theme: {

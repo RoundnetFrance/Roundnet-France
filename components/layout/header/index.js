@@ -12,6 +12,7 @@ import {
 // MUI ICONS
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import PersonIcon from '@mui/icons-material/Person';
 
 // OUTER COMPONENTS
 import menuElements from './menu-elements';
@@ -87,9 +88,12 @@ function Header(props) {
   // Display the admin items
   const adminItems = (
     <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" spacing={{ xs: 0, sm: 1 }}>
-      {userImage && (
-        <Avatar sx={{ width: 30, height: 30, mr: 1 }}><Image src={userImage} alt={userName} width="40" height="40" /></Avatar>
-      )}
+
+      <Avatar sx={{ width: 30, height: 30, mr: 1 }}>
+        {userImage ? (
+          <Image src={userImage} alt={userName} width="40" height="40" />
+        ) : <PersonIcon />}
+      </Avatar>
       <Typography variant="body2">{userName}&nbsp;
       </Typography>
       <Typography display={{ xs: 'none', sm: 'inherit' }}> | </Typography>
