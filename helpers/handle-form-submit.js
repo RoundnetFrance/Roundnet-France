@@ -2,6 +2,10 @@
 const trimInputs = (form) => {
   const trimmedForm = {};
   Object.keys(form).forEach((key) => {
+    // If password or passwordConfirm, do not trim
+    if (key === 'password' || key === 'passwordConfirm') {
+      trimmedForm[key] = form[key];
+    }
     trimmedForm[key] = form[key].trim();
   });
   return trimmedForm;
@@ -38,52 +42,36 @@ const validateInputs = (formData, initialFormState) => {
       errors.email = 'L\'email n\'est pas valide';
     }
   }
-  
+
+  // If formData input is a password, check if valid by length and if it matches passwordConfirm
+  let passwordValid;
+  if (formData.password) {
+    // Check if password is valid by length
+    passwordValid = formData.password.length >= 6;
+    if (!passwordValid) {
+      errors.password = 'Le mot de passe n\'est pas valide. Il doit faire plus de 6 caractères.';
+    }
+
+    // Check if it matches password
+    if (formData.password !== formData.passwordConfirm) {
+      errors.passwordConfirm = 'Les mots de passe ne correspondent pas';
+    }
+
+  }
+
+
   // Return errors
   return errors;
 };
 
 // Send mail through SendGrid function
-const sendMail = async (formData, initialFormState, setSubmitStatus, setForm, setErrors, setLoading) => {
-  try {
-    const response = await fetch('/api/send-mail', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+import sendMail from "./send-mail";
 
-    // If response is not OK, throw error
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    // If everything is ok, return status of submission and reset form and errors
-    const data = await response.json();
-    setSubmitStatus({
-      open: true,
-      success: true,
-      message: data.message,
-    });
-    setForm(initialFormState);
-    setErrors(initialFormState);
-  }
-  // CATCH
-  catch (error) {
-    // Console log and set error message for UI
-    console.log(error);
-    setSubmitStatus({
-      open: true,
-      error: true,
-      message: 'Une erreur est survenue lors de l\'envoi du mail. Merci de réessayer',
-    }
-    );
-  }
-  // In any case, set loading to false
-  finally {
-    setLoading(false);
-  }
+// throwError function for invalid inputs
+function InvalidFormInput({ message, input }) {
+  this.message = message;
+  this.input = input;
+  this.invalidFormInput = true;
 }
 
 export default async function handleFormSubmit(
@@ -91,7 +79,9 @@ export default async function handleFormSubmit(
   setErrors,
   setForm,
   setSubmitStatus,
-  form
+  form,
+  errors,
+  url,
 ) {
   // Set loading to true
   setLoading((prevLoading) => !prevLoading);
@@ -100,6 +90,7 @@ export default async function handleFormSubmit(
   const initialFormState = getInitialFormState(form);
   // Trim inputs if need be
   const formData = trimInputs(form);
+  console.log(formData);
 
   // Check if all errors are empty strings
   const validationErrors = validateInputs(form, initialFormState);
@@ -110,6 +101,64 @@ export default async function handleFormSubmit(
     return;
   }
 
-  // If ok, proceed to send API request to send mail (with set[...] functions)
-  sendMail(formData, initialFormState, setSubmitStatus, setForm, setErrors, setLoading);
+  // If ok, proceed to send API request (mail or API call)
+  // If mail, send mail through SendGrid function
+  if (url === 'mail') {
+    await sendMail(formData, initialFormState, setSubmitStatus, setForm, setErrors, setLoading);
+    return;
+  }
+
+  // If API call, send API request through fetch function
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    const data = await response.json();
+
+    // If response is not OK, throw error
+    if (!response.ok) {
+      // In specific case of invalid input data
+      if (response.status === 422) throw new InvalidFormInput(data);
+      if (response.status === 403) throw new Error(data.message);
+      
+      throw new Error(response.statusText);
+    }
+
+    // If everything is ok, return status of submission and reset form and errors
+    setSubmitStatus({
+      open: true,
+      success: true,
+      message: data.message,
+    });
+    setForm(initialFormState);
+    setErrors(initialFormState);
+    // End of try
+  }
+
+  // Catch if errors
+  catch (error) {
+    // Console log and set error message for UI
+    console.error(error);
+
+    // If error is an InvalidFormInput, set specific error message
+    if (error.invalidFormInput) {
+      setErrors({
+        ...errors,
+        [error.input]: error.message,
+      });
+      return;
+    }
+
+    setSubmitStatus({
+      open: true,
+      error: true,
+      message: error.message || 'Une erreur est survenue. Merci de réessayer.',
+    });
+  } finally {
+    setLoading(false);
+  }
 }
