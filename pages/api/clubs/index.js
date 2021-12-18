@@ -1,14 +1,13 @@
 // NEXT API REQUEST
 // GET /api/v1/clubs
 
-import { connectToDatabase } from '../../../lib/mongodb';
+import { getClubs } from '../../../helpers/db/clubs';
 
 export default async function handler(req, res) {
   // GET method to read federation members
   if (req.method === 'GET') {
     try {
-      const { db } = await connectToDatabase();
-      const clubs = await db.collection('clubs').find({}).toArray();
+      const clubs = await getClubs();
       return res.status(200).json(clubs);
     } catch (error) {
       return res.status(500).json({ error: 'Internal server error', details: error.message });

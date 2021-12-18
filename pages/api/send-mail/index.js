@@ -4,7 +4,6 @@ import emailTeplate from '../../../styles/email-template'
 // Sign SendGrid API key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-
 export default async function (req, res) {
   if (req.method === 'POST') {
     console.log(req.body);
