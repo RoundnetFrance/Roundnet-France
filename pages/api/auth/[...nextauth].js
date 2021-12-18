@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { connectToDatabase } from '../../../lib/mongodb';
+import { getUser } from '../../../helpers/db/users';
 import { compare } from 'bcryptjs';
 
 // Providers
@@ -25,13 +25,13 @@ export default NextAuth({
       },
       async authorize(credentials) {
         const { email } = credentials;
-        const { client, db } = await connectToDatabase();
 
         // Connect to database and check if user exists (throw error db malfunction)
         let user;
         try {
-          user = await db.collection('users').findOne({ email });
+          user = await getUser({ email });
         } catch (error) {
+          console.log(error);
           throw new Error('Connexion à la base de données impossible');
         }
 
@@ -75,11 +75,7 @@ export default NextAuth({
       }
 
       // For any other provider, we have to check if the user is in the database and authorized
-      const { db } = await connectToDatabase();
-      const authorizedUser = await db.collection('users').findOne({
-        email: user.email,
-        authorized: true,
-      });
+      const authorizedUser = await getUser({ email: user.email, authorized: true });
 
       if (!authorizedUser) {
         return '/rf-admin/error?error=Connexion impossible.';
