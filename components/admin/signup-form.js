@@ -22,10 +22,10 @@ function SignUpForm() {
 
   // Handle controlled inputs
   const initialFormState = {
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
+    name: 'Robin',
+    email: 'robin.souriau@gmail.com',
+    password: 'lol',
+    passwordConfirm: 'lol',
   }
   const [form, setForm] = useState(initialFormState);
   const handleChange = (event) => {
@@ -57,7 +57,9 @@ function SignUpForm() {
       setErrors,
       setForm,
       setSubmitStatus,
-      form
+      form,
+      errors,
+      '/api/auth/signup',
     );
   };
 
@@ -76,7 +78,7 @@ function SignUpForm() {
 
   return (
 
-    <FormWrapper title="Créer un compte">
+    <FormWrapper title="Créer un compte" onSubmit={handleSubmit}>
       <Typography>La validation d&apos;un compte administrateur Roundnet France permet aux associations d&apos;enregistrer les résultats des tournois automatiquement. Elle est soumise à l&apos;acceptation d&apos;un membre du board administratif de la fédération. </Typography>
       <Typography>Pour en savoir plus, <Link href="/qui-sommes-nous/contact">contactez-nous directement.</Link></Typography>
 
