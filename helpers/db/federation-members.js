@@ -1,7 +1,7 @@
-import { getAllDocuments } from '../../helpers/db';
+import { getDocuments } from '../../helpers/db';
 
 // Get all federation members
 export async function getFederationMembers() {
-  const data = await getAllDocuments('federation-members');
+  const data = await getDocuments('federation-members');
   return data;
 }

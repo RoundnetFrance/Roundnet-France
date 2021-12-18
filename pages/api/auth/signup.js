@@ -1,14 +1,13 @@
-import { connectToDatabase } from "../../../lib/mongodb";
+import { getUser, insertUser } from "../../../helpers/db/users";
 import { hash } from 'bcryptjs';
 import validateEmail from "../../../helpers/validate-email";
-import { MongoClient } from "mongodb";
 
 export default async function handler(req, res) {
     //Only POST mothod is accepted
     if (req.method === 'POST') {
         //Getting email and password from body
         const { name, email, password, passwordConfirm } = req.body;
-        
+
         //Validate
         const emailIsValid = validateEmail(email);
         if (!email || !emailIsValid) {
@@ -21,7 +20,7 @@ export default async function handler(req, res) {
             return;
         }
 
-        if (!password || password.length < 6) {
+        if (!password || password.length < 6) {
             res.status(422).json({ input: 'password', message: 'Le mot de passe n\'est pas valide. Il doit faire plus de 6 caractères.' });
             return;
         }
@@ -30,29 +29,24 @@ export default async function handler(req, res) {
             res.status(422).json({ input: 'passwordConfirm', message: 'Les mots de passe ne correspondent pas' });
         }
 
-        //Connect with database
-        const { client, db } = await connectToDatabase();
-
         //Check existing
-        const userExists = await db.collection('users')
-            .findOne({ email });
+        const userExists = await getUser({ email });
         //Send error response if duplicate user is found
         if (userExists) {
             res.status(403).json({ message: 'User already exists' });
             return;
         }
-        //Hash password
-        const status = await db.collection('users').insertOne({
+        //Hash password & insert user
+        await insertUser({
             name,
             email,
             authorized: false,
             image: '',
             password: await hash(password, 12),
         });
+
         //Send success response
         res.status(201).json({ message: 'Le compte a bien été créé. Vous serez notifié par email lorsqu\'il sera validé par la fédération.' });
-        //Close DB connection
-        // client.close();
     } else {
         //Response for other than POST method
         res.status(500).json({ message: 'Route not valid' });
