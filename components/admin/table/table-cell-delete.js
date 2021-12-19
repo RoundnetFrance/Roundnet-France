@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function TableDelete({ id, endpoint, tableData }) {
+function TableCellDelete({ id, endpoint, tableData }) {
   const { mutate } = useSWRConfig();
 
   const handleDelete = async () => {
@@ -34,4 +34,4 @@ function TableDelete({ id, endpoint, tableData }) {
   );
 }
 
-export default TableDelete
+export default TableCellDelete

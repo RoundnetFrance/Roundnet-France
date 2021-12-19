@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { getSession } from "next-auth/react";
-import { getUsers, deleteUser } from "../../../helpers/db/users";
+import { getUsers, patchUser, deleteUser } from "../../../helpers/db/users";
 
 export default async function handler(req, res) {
 
@@ -17,9 +17,21 @@ export default async function handler(req, res) {
         return res.status(200).json(user);
       } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json(error);
       }
     }
+
+    // PATCH method to update specific app user
+    if (req.method === 'PATCH') {
+      try {
+        const response = await patchUser({ _id: ObjectId(userId) }, req.body);
+        return res.status(200).json(response);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json(error);
+      }
+    }
+
 
     // DEL method to delete specific app user
     if (req.method === 'DELETE') {
@@ -29,7 +41,7 @@ export default async function handler(req, res) {
         return res.status(200).json(user);
       } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json(error);
       }
     }
 

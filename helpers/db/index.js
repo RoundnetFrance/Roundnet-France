@@ -45,6 +45,19 @@ export function insertDocument(collection, document) {
   });
 }
 
+// Patch a document into a mongoDB collection
+export function patchDocument(collection, params, document) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { db } = await connectToDatabase();
+      const result = await db.collection(collection).updateOne(params, { $set: document });
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 // Delete a document from a mongoDB collection
 export function deleteDocument(collection, params) {
   return new Promise(async (resolve, reject) => {

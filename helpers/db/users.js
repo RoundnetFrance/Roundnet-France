@@ -1,4 +1,4 @@
-import { getDocuments, getDocument, insertDocument, deleteDocument } from '../../helpers/db';
+import { getDocuments, getDocument, insertDocument, deleteDocument, patchDocument } from '../../helpers/db';
 
 // Get all users of the app
 export async function getUsers(params, fields) {
@@ -14,8 +14,13 @@ export async function getUser(params, fields) {
 
 // Insert a new user
 export async function insertUser(user) {
-  console.log(user);
   const data = await insertDocument('users', user);
+  return data;
+}
+
+// Patch a user
+export async function patchUser(params, user) {
+  const data = await patchDocument('users', params, user);
   return data;
 }
 
