@@ -23,7 +23,7 @@ export function getDocument(collection, params) {
     try {
       const { db } = await connectToDatabase();
       const document = await db.collection(collection).findOne(params);
-      const data = JSON.parse(JSON.stringify(document));
+      // const data = JSON.parse(JSON.stringify(document[0]));
       
       resolve(document);
     } catch (error) {
@@ -38,6 +38,20 @@ export function insertDocument(collection, document) {
     try {
       const { db } = await connectToDatabase();
       const result = await db.collection(collection).insertOne(document);
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+// Delete a document from a mongoDB collection
+export function deleteDocument(collection, params) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { db } = await connectToDatabase();
+      const result = await db.collection(collection).deleteOne(params);
+      
       resolve(result);
     } catch (error) {
       reject(error);

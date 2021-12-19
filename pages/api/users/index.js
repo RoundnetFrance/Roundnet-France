@@ -8,11 +8,11 @@ export default async function handler(req, res) {
   // If user is authorized
   if (session) {
 
-    // GET method to read federation members
+    // GET method to read app members
     if (req.method === 'GET') {
       try {
-        const upcomingEvents = await getUsers({}, { password: 0, image: 0 });
-        return res.status(200).json(upcomingEvents);
+        const users = await getUsers({}, { password: 0, image: 0 });
+        return res.status(200).json(users);
       } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal server error' });

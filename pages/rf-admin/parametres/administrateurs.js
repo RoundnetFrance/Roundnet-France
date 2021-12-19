@@ -4,7 +4,6 @@ import useUser from '../../../hooks/useUser';
 // MUI IMPORTS
 import Container from '@mui/material/Container';
 import AdminTable from '../../../components/admin/table/admin-table';
-import Alert from '@mui/material/Alert';
 
 // COMPONENT IMPORTS
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
@@ -35,6 +34,8 @@ function AdministratorAdminPage() {
     },
   ];
 
+  const keysToDisplay = ['name', 'email', 'authorized'];
+
   return (
     <DashboardWrapper>
       <PageTitle title="Administrateurs"></PageTitle>
@@ -44,8 +45,10 @@ function AdministratorAdminPage() {
             name="Administrateurs"
             tableHead={tableHead}
             tableData={user}
+            keysToDisplay={keysToDisplay}
             loading={isLoading}
             error={isError}
+            deletable
           />
 
       </Container>

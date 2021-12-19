@@ -9,44 +9,50 @@ import Skeleton from '@mui/material/Skeleton';
 // COMPONENT IMPORTS
 import TableDataCell from './table-data-cell.js';
 
-function TableBody({ tableData, loading, nbOfElements, showId }) {
+function TableBody({ tableData, loading, nbOfElements, keysToDisplay }) {
   // Handle loading skeleton animation
   if (loading) {
     return (
       <MUITableBody>
         <TableRow>
-          
-          <TableCell colSpan={ showId ? nbOfElements : nbOfElements - 1 }>
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
-          <Skeleton animation="wave" />
+          <TableCell colSpan={nbOfElements}>
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
           </TableCell>
         </TableRow>
       </MUITableBody>
     )
   }
 
-    return (
-      <MUITableBody>
-        {tableData.map(item => {
+  return (
+    <MUITableBody>
+      {tableData.map(item => {
 
-          return (
-            <TableRow
-              key={item._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              {Object.keys(item).map(
-                key => (
-                  <TableDataCell key={key} value={item[key]} element={key} showId={showId} />
-                )
-              )}
-            </TableRow>
-          )
-        }
-        )}
-      </MUITableBody>
-    )
-  }
+        return (
+          <TableRow
+            key={item._id}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+          >
+            {Object.keys(item).map(
+              key => (
+                <TableDataCell
+                  key={key}
+                  id={item._id}
+                  value={item[key]}
+                  element={key}
+                  keysToDisplay={keysToDisplay}
+                  tableData={tableData}
+                />
+              )
+            )}
+          </TableRow>
+        )
+      }
+      )}
+    </MUITableBody>
+  )
+}
 
-  export default TableBody
+export default TableBody
