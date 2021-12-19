@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-import { useSWRConfig } from 'swr';
 
 // MUI IMPORTS
 import TableCell from '@mui/material/TableCell';
@@ -8,13 +7,11 @@ import IconButton from '@mui/material/IconButton';
 // MUI ICONS
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 // COMPONENTS IMPORTS
 import TableDelete from './table-delete';
 
-function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint }) {
-  const { mutate } = useSWRConfig();
+function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint, editableFields }) {
   const specialElements = ['$deletable'];
 
   // If element is a key in keysToDisplay, display it.
@@ -25,6 +22,7 @@ function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint 
     return null;
   }
 
+  // 
   const smallCell = (typeof value === 'number' || typeof value === 'boolean');
 
   // If value is a boolean, replace raw bool with custom UI icon button
@@ -66,6 +64,7 @@ TableDataCell.propTypes = {
   id: propTypes.string.isRequired,
   showId: propTypes.bool,
   keysToDisplay: propTypes.array.isRequired,
+  editableFields: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
 TableDataCell.defaultProps = {

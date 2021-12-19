@@ -12,7 +12,6 @@ import TableBody from './table-body.js';
 import TableHead from './table-head.js';
 
 function AdminTable({ tableConfig }) {
-
   // Extract infos & data from tableConfig
   const {
     name,
@@ -25,7 +24,10 @@ function AdminTable({ tableConfig }) {
   } = tableConfig;
 
   // Gather the actual keys to display in the table by checking hidden key. Will be used to filter the data in Head and Body.
-  const keysToDisplay = tableHead.filter(key => !key.hidden).map(key => key._id);
+  const keysToDisplay = tableHead.map(key => key._id);
+
+  // Gather the editable fields in the table by checking editable key. Will be used to dynamically add editable fields in Body by checking its value type (input for string, clickable icon button for bool...)
+  const editableFields = tableHead.filter(key => key.editable).map(key => key._id);
 
   // Return an Alert if there's an error
   if (error) return (
@@ -59,7 +61,7 @@ function AdminTable({ tableConfig }) {
 
         {
           loading ?
-            <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} />
+            <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
         }
 
       </Table>
