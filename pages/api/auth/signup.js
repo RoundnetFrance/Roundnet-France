@@ -29,6 +29,7 @@ export default async function handler(req, res) {
             res.status(422).json({ input: 'passwordConfirm', message: 'Les mots de passe ne correspondent pas' });
         }
 
+
         //Check existing
         const userExists = await getUser({ email });
         //Send error response if duplicate user is found
@@ -36,12 +37,18 @@ export default async function handler(req, res) {
             res.status(403).json({ message: 'User already exists' });
             return;
         }
+
+        
+
+
         //Hash password & insert user
         await insertUser({
             name,
             email,
             authorized: false,
             image: '',
+            // createdAt: new Date(),
+            // updatedAt: new Date(),
             password: await hash(password, 12),
         });
 
@@ -49,6 +56,6 @@ export default async function handler(req, res) {
         res.status(201).json({ message: 'Le compte a bien été créé. Vous serez notifié par email lorsqu\'il sera validé par la fédération.' });
     } else {
         //Response for other than POST method
-        res.status(500).json({ message: 'Route not valid' });
+        res.status(405).json({ message: 'Method not allowed' });
     }
 }

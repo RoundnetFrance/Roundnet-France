@@ -90,7 +90,6 @@ export default async function handleFormSubmit(
   const initialFormState = getInitialFormState(form);
   // Trim inputs if need be
   const formData = trimInputs(form);
-  console.log(formData);
 
   // Check if all errors are empty strings
   const validationErrors = validateInputs(form, initialFormState);
@@ -113,11 +112,13 @@ export default async function handleFormSubmit(
     const response = await fetch(url, {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     });
     const data = await response.json();
+
 
     // If response is not OK, throw error
     if (!response.ok) {
