@@ -29,7 +29,7 @@ const adminElements = [
       subElements: [
         {
           name: 'Liste des clubs',
-          url: '/rf-admin/liste-des-clubs',
+          url: '/rf-admin/clubs-et-communautes/liste-des-clubs',
         },
         {
           name: 'Demandes d\'adhésion',
