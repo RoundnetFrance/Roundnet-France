@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { getClubs } from '../../helpers/db/clubs';
+import { getDocuments } from '../../helpers/db';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -70,7 +70,7 @@ function ClubListPage({ clubs, error }) {
 export async function getStaticProps() {
   // Try to fetch members on local API
   try {
-    const data = await getClubs();
+    const data = await getDocuments('clubs', { validated: true });
     return {
       props: { 
         clubs: data,
