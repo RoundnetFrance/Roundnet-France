@@ -6,7 +6,7 @@ import SignUpForm from "../../components/admin/signup-form";
 
 function SignUpPage() {
   return (
-    <Container maxWidth="sm" sx={{ minHeight: '75vh', mt: 8 }}>
+    <Container maxWidth="sm">
       <SignUpForm />
     </Container>
   )
