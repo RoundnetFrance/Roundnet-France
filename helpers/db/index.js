@@ -2,11 +2,11 @@
 import { connectToDatabase } from "../../lib/mongodb"
 
 // Get all documents from a mongoDB collection
-export function getDocuments(collection, params) {
+export function getDocuments(collection, params, fields) {
   return new Promise(async (resolve, reject) => {
     try {
       const { db } = await connectToDatabase();
-      const documents = await db.collection(collection).find(params).toArray();
+      const documents = await db.collection(collection).find(params).project(fields).toArray();
       // Clean the _id field  from the documents
       const data = JSON.parse(JSON.stringify(documents));
 
