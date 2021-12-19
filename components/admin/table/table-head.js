@@ -5,7 +5,7 @@ import MUITableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
-function TableHead({ tableHead, showId, deletable }) {
+function TableHead({ tableHead, showId }) {
   return (
     <MUITableHead>
       <TableRow>
@@ -28,12 +28,10 @@ function TableHead({ tableHead, showId, deletable }) {
 TableHead.propTypes = {
   tableHead: propTypes.array.isRequired,
   showId: propTypes.bool,
-  deletable: propTypes.bool
 };
 
 TableHead.defaultProps = {
   showId: false,
-  deletable: false,
 };
 
 export default TableHead

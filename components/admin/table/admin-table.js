@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-import { useState } from 'react';
 
 // MUI IMPORTS
 import Table from '@mui/material/Table';
@@ -12,7 +11,21 @@ import Container from '@mui/material/Container';
 import TableBody from './table-body.js';
 import TableHead from './table-head.js';
 
-function AdminTable({ name, tableHead, tableData, deletable, error, loading, keysToDisplay }) {
+function AdminTable({ tableConfig }) {
+
+  // Extract infos & data from tableConfig
+  const {
+    name,
+    tableHead,
+    tableData,
+    endpoint,
+    deletable,
+    error,
+    loading,
+  } = tableConfig;
+
+  // Gather the actual keys to display in the table by checking hidden key. Will be used to filter the data in Head and Body.
+  const keysToDisplay = tableHead.filter(key => !key.hidden).map(key => key._id);
 
   // Return an Alert if there's an error
   if (error) return (
@@ -42,11 +55,11 @@ function AdminTable({ name, tableHead, tableData, deletable, error, loading, key
     <TableContainer component={Paper}>
       <Table aria-label={name}>
 
-        <TableHead tableHead={tableHead} deletable={deletable} />
+        <TableHead tableHead={tableHead} />
 
         {
           loading ?
-            <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} deletable={deletable} keysToDisplay={keysToDisplay} />
+            <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} />
         }
 
       </Table>
@@ -56,13 +69,20 @@ function AdminTable({ name, tableHead, tableData, deletable, error, loading, key
 
 
 AdminTable.propTypes = {
-  name: propTypes.string,
-  tableHead: propTypes.array.isRequired,
-  tableData: propTypes.array,
-  error: propTypes.bool,
-  loading: propTypes.bool,
-  deletable: propTypes.bool,
-  keysToDisplay: propTypes.arrayOf(propTypes.string),
+  tableConfig: propTypes.shape({
+    name: propTypes.string,
+    tableHead: propTypes.arrayOf(propTypes.shape({
+      _id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired,
+      align: propTypes.string,
+      hidden: propTypes.bool,
+    })),
+    tableData: propTypes.array,
+    endpoint: propTypes.string,
+    error: propTypes.bool,
+    loading: propTypes.bool,
+    deletable: propTypes.bool,
+  }).isRequired,
 }
 
 AdminTable.defaultProps = {

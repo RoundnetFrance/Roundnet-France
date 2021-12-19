@@ -3,53 +3,69 @@ import useUser from '../../../hooks/useUser';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
-import AdminTable from '../../../components/admin/table/admin-table';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 // COMPONENT IMPORTS
+import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 
 function AdministratorAdminPage() {
   // Get user info
-  const { user, isLoading, isError } = useUser();
+  const { user: users, isLoading, isError } = useUser();
 
-  // Define table head
-  const tableHead = [
-    {
-      _id: '_id',
-      name: 'ID',
-    },
-    {
-      _id: 'name',
-      name: 'Nom',
-    },
-    {
-      _id: 'email',
-      name: 'Email',
-    },
-    {
-      _id: 'role',
-      name: 'Administrateur',
-      align: 'right',
-    },
-  ];
-
-  const keysToDisplay = ['name', 'email', 'authorized'];
+  // Define a table config object. Comments with * are required.
+  const tableConfig = {
+    // * Name of the table (for reference and aria labels)
+    name: 'administrators table',
+    // Content of columns. Must have :
+    // '_id' key, which is the unique id of the column 
+    // 'name' key, which is the name displayed on the column
+    // 'align' key, for alignement of name ('right', defaults to 'left' if undefined)
+    // 'hidden' key, for visibility (true, defaults to false if undefined)
+    tableHead: [
+      {
+        _id: '_id',
+        name: 'ID',
+        hidden: true,
+      },
+      {
+        _id: 'name',
+        name: 'Nom',
+      },
+      {
+        _id: 'email',
+        name: 'Email',
+      },
+      {
+        _id: 'authorized',
+        name: 'Administrateur',
+        align: 'right',
+      },
+    ],
+    // * Content of rows. Must be an array of objects
+    tableData: users,
+    // * API endpoint to fetch data from
+    endpoint: 'users',
+    // * Loading state
+    loading: isLoading,
+    // * Error state
+    error: isError,
+    // The following keys are optional
+    // Dynamically add a '$deletable' key to each row, with a boolean value, to delete the row
+    deletable: true,
+  };
 
   return (
     <DashboardWrapper>
       <PageTitle title="Administrateurs"></PageTitle>
       <Container maxWidth="lg" sx={{ py: 4 }}>
 
-          <AdminTable
-            name="Administrateurs"
-            tableHead={tableHead}
-            tableData={user}
-            keysToDisplay={keysToDisplay}
-            loading={isLoading}
-            error={isError}
-            deletable
-          />
+        {isLoading ? <Stack sx={{ height: '200px' }} justifyContent="center" alignItems="center">
+          <CircularProgress />
+        </Stack> : <AdminTable tableConfig={tableConfig} />}
 
       </Container>
     </DashboardWrapper>

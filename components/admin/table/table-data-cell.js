@@ -10,12 +10,15 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function TableDataCell({ value, element, id, keysToDisplay, tableData }) {
+// COMPONENTS IMPORTS
+import TableDelete from './table-delete';
+
+function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint }) {
   const { mutate } = useSWRConfig();
+  const specialElements = ['$deletable'];
 
   // If element is a key in keysToDisplay, display it.
   // Ignore if keysToDisplay is not defined, or if element is a special $element.
-  const specialElements = ['$deletable'];
   if (keysToDisplay.length > 0 &&
     !keysToDisplay.includes(element) &&
     !specialElements.includes(element)) {
@@ -40,27 +43,10 @@ function TableDataCell({ value, element, id, keysToDisplay, tableData }) {
       );
   }
 
-  // If value is $deletable, add a delete button
+  // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
   if (element === '$deletable') {
-    
-    const handleDelete = async () => {
-      console.log('to delete : ', id);
-      const deleteRow = async () => {
-        const response = await fetch(`/api/users/${id}`, {
-          method: 'DELETE'
-        });
-        console.log('response from delete : ', response);
-        const newRows = tableData.filter(row => row._id !== id);
-        console.log(newRows);
-        return newRows;
-      };
-      mutate(`/api/users`, deleteRow);
-    };
-
     value = (
-      <IconButton aria-label="delete" size="medium" color="error" onClick={handleDelete}>
-        <DeleteIcon fontSize="inherit" />
-      </IconButton>
+      <TableDelete id={id} endpoint={endpoint} tableData={tableData} />
     );
   }
 
