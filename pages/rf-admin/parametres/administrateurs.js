@@ -1,14 +1,20 @@
-import { getSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react';
+import useUser from '../../../hooks/useUser';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
 import AdminTable from '../../../components/admin/table/admin-table';
+import Alert from '@mui/material/Alert';
 
 // COMPONENT IMPORTS
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 
 function AdministratorAdminPage() {
+  // Get user info
+  const { user, isLoading, isError } = useUser();
+
+  // Define table head
   const tableHead = [
     {
       _id: '_id',
@@ -29,36 +35,19 @@ function AdministratorAdminPage() {
     },
   ];
 
-  const tableData = [
-    {
-      _id: '1',
-      name: 'John Doe',
-      email: 'john.doe@gmail.com',
-      authorized: true,
-    },
-    {
-      _id: '2',
-      name: 'Jane Doe',
-      email: 'jane.doe@gmail.com',
-      authorized: true,
-    },
-    {
-      _id: '3',
-      name: 'Fred Doe',
-      email: 'fred.doe@gmail.com',
-      authorized: false,
-    },
-  ];
-
   return (
     <DashboardWrapper>
       <PageTitle title="Administrateurs"></PageTitle>
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        <AdminTable 
-          name="Administrateurs"
-          tableHead={tableHead}
-          tableData={tableData}
-        />
+
+          <AdminTable
+            name="Administrateurs"
+            tableHead={tableHead}
+            tableData={user}
+            loading={isLoading}
+            error={isError}
+          />
+
       </Container>
     </DashboardWrapper>
   )

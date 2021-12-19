@@ -7,17 +7,20 @@ import TableCell from '@mui/material/TableCell';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
-function TableDataCell({ item, element, showId }) {
-  let value = item[element];
+function TableDataCell({ value, element, showId }) {
+  console.log(typeof value);
   if (element === '_id' && !showId) {
     return null;
   }
+  
+  const align = (typeof value === 'number' || typeof value === 'boolean')  ? 'right' : 'left';
 
-  if (typeof item[element] === 'boolean') {
-    value = item[element] ? <CheckBoxIcon fontSize="small" sx={{ cursor: 'pointer' }} /> : <CheckBoxOutlineBlankIcon fontSize="small" sx={{ cursor: 'pointer' }} />;
+
+  if (typeof value === 'boolean') {
+    value = value ? <CheckBoxIcon fontSize="small" sx={{ cursor: 'pointer' }} color="primary" /> : <CheckBoxOutlineBlankIcon fontSize="small" sx={{ cursor: 'pointer' }} />;
   }
 
-  const align = typeof item[element] === 'number' || typeof item[element] === 'boolean'  ? 'right' : 'left';
+  
 
   return (
     <TableCell
@@ -29,7 +32,7 @@ function TableDataCell({ item, element, showId }) {
 }
 
 TableDataCell.propTypes = {
-  item: propTypes.object.isRequired,
+  value: propTypes.any.isRequired,
   element: propTypes.string.isRequired,
   showId: propTypes.bool,
 };
