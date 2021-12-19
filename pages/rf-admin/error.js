@@ -16,7 +16,7 @@ export default function AdminErrorPage() {
   const { error } = router.query;
 
   return (
-    <Container maxWidth="xs" sx={{ minHeight: '75vh', mt: 8 }}>
+    <Container maxWidth="xs" sx={{ my: 8 }}>
       <BoxWrapper title="Connexion">
         <Alert severity="error">
           <AlertTitle><strong>Erreur</strong></AlertTitle>

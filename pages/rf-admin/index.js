@@ -12,7 +12,7 @@ import BoxWrapper from "../../components/ui/box-wrapper";
 
 export default function AdminPage() {
   return (
-    <Container maxWidth="xs" sx={{ minHeight: '75vh', mt: 8 }}>
+    <Container maxWidth="xs">
       <BoxWrapper title="Se connecter">
         <Fragment>
           <Typography variant="h6" align="center">
