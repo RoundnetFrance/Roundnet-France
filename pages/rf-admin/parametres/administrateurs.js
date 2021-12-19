@@ -5,7 +5,6 @@ import useUser from '../../../hooks/useUser';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
-import Alert from '@mui/material/Alert';
 
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
@@ -24,13 +23,7 @@ function AdministratorAdminPage() {
     // '_id' key, which is the unique id of the column 
     // 'name' key, which is the name displayed on the column
     // 'align' key, for alignement of name ('right', defaults to 'left' if undefined)
-    // 'hidden' key, for visibility (true, defaults to false if undefined)
     tableHead: [
-      {
-        _id: '_id',
-        name: 'ID',
-        hidden: true,
-      },
       {
         _id: 'name',
         name: 'Nom',
@@ -43,6 +36,7 @@ function AdministratorAdminPage() {
         _id: 'authorized',
         name: 'Administrateur',
         align: 'right',
+        editable: true,
       },
     ],
     // * Content of rows. Must be an array of objects

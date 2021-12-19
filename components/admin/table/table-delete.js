@@ -11,20 +11,23 @@ function TableDelete({ id, endpoint, tableData }) {
 
   const handleDelete = async () => {
     // Fetch API to delete element, then mutate tableData and return it for SWR to handle
+    // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
     const deleteRow = async () => {
-      const response = await fetch(`/api/${endpoint}/${id}`, {
+      // Fetch API to delete element
+      await fetch(`/api/${endpoint}/${id}`, {
         method: 'DELETE'
       });
-      console.log('response from delete : ', response);
+
+      // Send back the updated tableData (minus the deleted element) to SWR /api/${component}' key
       const newRows = tableData.filter(row => row._id !== id);
       return newRows;
     };
 
     // Actual action of mutate via SWR
-    mutate(`/api/users`, deleteRow);
+    mutate(`/api/${endpoint}`, deleteRow);
   };
 
-  return(
+  return (
     <IconButton aria-label="delete" size="medium" color="error" onClick={handleDelete}>
       <DeleteIcon fontSize="inherit" />
     </IconButton>
