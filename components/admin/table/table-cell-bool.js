@@ -47,10 +47,7 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
     uneditableIcon = value ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />;
   }
 
-
-
   return (
-
     isEditable ? (
       <Box component="form" aria-label="editable-item" size="medium" color="primary" >
         <Checkbox checked={value} onChange={handleChange} />

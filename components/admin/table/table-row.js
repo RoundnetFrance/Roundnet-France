@@ -26,7 +26,8 @@ function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint,
     return null;
   }
 
-  // 
+  // Affects alignment and padding of the cell
+  // Padding is commented because it renders weird
   const smallCell = (typeof value === 'number' || typeof value === 'boolean');
 
   // If value is a boolean, replace raw bool with custom UI icon button
