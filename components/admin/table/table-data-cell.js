@@ -54,7 +54,7 @@ function TableDataCell({ value, element, id, keysToDisplay, tableData }) {
         console.log(newRows);
         return newRows;
       };
-      mutate(`/api/users/${id}`, deleteRow);
+      mutate(`/api/users`, deleteRow);
     };
 
     value = (
