@@ -3,25 +3,25 @@ import React from 'react'
 // MUI IMPORTS
 import MUITableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
+import MUITableRow from '@mui/material/TableRow';
 import Skeleton from '@mui/material/Skeleton';
 
 // COMPONENT IMPORTS
-import TableDataCell from './table-data-cell.js';
+import TableRow from './table-row.js';
 
 function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, editableFields }) {
   // Handle loading skeleton animation
   if (loading) {
     return (
       <MUITableBody>
-        <TableRow>
+        <MUITableRow>
           <TableCell colSpan={nbOfElements}>
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
           </TableCell>
-        </TableRow>
+        </MUITableRow>
       </MUITableBody>
     )
   }
@@ -31,13 +31,13 @@ function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, 
       {tableData.map(item => {
 
         return (
-          <TableRow
+          <MUITableRow
             key={item._id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             {Object.keys(item).map(
               key => (
-                <TableDataCell
+                <TableRow
                   key={key}
                   id={item._id}
                   value={item[key]}
@@ -49,7 +49,7 @@ function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, 
                 />
               )
             )}
-          </TableRow>
+          </MUITableRow>
         )
       }
       )}
