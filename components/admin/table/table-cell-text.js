@@ -1,4 +1,6 @@
 import { Fragment, useState } from 'react';
+import { useSWRConfig } from 'swr';
+import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 
 // MUI IMPORTS
 import TableCell from '@mui/material/TableCell';
@@ -15,7 +17,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 // MUI ICONS
 import EditIcon from '@mui/icons-material/Edit';
 
-function TableCellText({ value, id, element, isEditable, tableData }) {
+function TableCellText({ value, id, element, isEditable, tableData, endpoint }) {
+  // Get the mutate function from swr
+  const { mutate } = useSWRConfig();
+
   // Define a state for the editable text field
   const [controlledElement, setControlledElement] = useState(value);
 
@@ -36,6 +41,13 @@ function TableCellText({ value, id, element, isEditable, tableData }) {
 
   // If element is editable, add an edit icon button with onClick event
   if (isEditable) {
+    // Handle change on confirm button click (patch and mutate)
+    const handleClick = async () => {
+      await patchTableCell(endpoint, id, { [element]: controlledElement }, tableData, element, controlledElement, mutate);
+      // Close the modal
+      setOpen(false);
+    };
+
     return (
       <Fragment>
         <TableCell>
@@ -66,7 +78,7 @@ function TableCellText({ value, id, element, isEditable, tableData }) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Annuler</Button>
-            <Button variant="contained" onClick={handleClose}>Modifier</Button>
+            <Button variant="contained" onClick={handleClick}>Modifier</Button>
           </DialogActions>
         </Dialog>
 

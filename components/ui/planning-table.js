@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-import localAPIFetcher from '../../helpers/local-api-fetcher';
 
 // MUI IMPORTS
 import Table from '@mui/material/Table';
