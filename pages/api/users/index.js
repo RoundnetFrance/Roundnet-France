@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import { getUsers } from "../../../helpers/db/users";
+import { getDocuments } from "../../../helpers/db";
 
 export default async function handler(req, res) {
 
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     // GET method to read app members
     if (req.method === 'GET') {
       try {
-        const users = await getUsers({}, { password: 0, image: 0 });
+        const users = await getDocuments('users', {}, { password: 0, image: 0 });
         return res.status(200).json(users);
       } catch (error) {
         console.error(error);

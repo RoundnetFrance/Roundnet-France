@@ -30,11 +30,11 @@ function AdminTable({ tableConfig }) {
   const editableFields = tableHead.filter(key => key.editable).map(key => key._id);
 
   // Return an Alert if there's an error
-  if (error) return (
-    <Container maxWidth="sm">
-      <Alert severity="error" variant="filled">Une erreur est survenue lors du chargement des données.</Alert>
-    </Container>
-  )
+  // if (error) return (
+  //   <Container maxWidth="sm">
+  //     <Alert severity="error" variant="filled">Une erreur est survenue lors du chargement des données.</Alert>
+  //   </Container>
+  // )
 
   // If deletable option, add a new '$deletable' element on the tableHead object and on each tableData object.
   if (deletable && !tableHead.find(item => item._id === '$deletable')) {
@@ -59,10 +59,11 @@ function AdminTable({ tableConfig }) {
 
         <TableHead tableHead={tableHead} />
 
-        {
+        {/* {
           loading ?
             <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
-        }
+        } */}
+        <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
 
       </Table>
     </TableContainer>

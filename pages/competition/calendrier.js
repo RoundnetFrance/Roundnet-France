@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { getCalendar } from '../../helpers/db/tournament-calendar';
+import { getDocuments } from '../../helpers/db';
 
 // MUI IMPORTS
 import Container from '@mui/material/Container';
@@ -66,7 +66,7 @@ function TournamentsPage({ tournamentCalendar, error }) {
 export async function getStaticProps() {
   // Try to fetch tournament calendar on local API
   try {
-    const tournamentCalendar = await getCalendar();
+    const tournamentCalendar = await getDocuments('calendar');
     return {
       props: {
         tournamentCalendar,

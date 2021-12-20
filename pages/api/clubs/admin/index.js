@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import { getClubs } from "../../../../helpers/db/clubs";
+import { getDocuments } from "../../../../helpers/db";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     // GET method to read federation members (including non-validated ones)
     if (req.method === 'GET') {
       try {
-        const clubs = await getClubs();
+        const clubs = await getDocuments('clubs');
         return res.status(200).json(clubs);
       } catch (error) {
         return res.status(500).json({ error: 'Internal server error', details: error.message });

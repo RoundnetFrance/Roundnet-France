@@ -2,17 +2,13 @@ import propTypes from 'prop-types';
 
 // MUI IMPORTS
 import TableCell from '@mui/material/TableCell';
-import IconButton from '@mui/material/IconButton';
-
-// MUI ICONS
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 
 // COMPONENTS IMPORTS
 import TableCellDelete from './table-cell-delete';
 import TableCellBool from './table-cell-bool';
+import TableCellText from './table-cell-text';
 
-function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint, editableFields }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
@@ -43,6 +39,18 @@ function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint,
       />)
   }
 
+  // If value is a string or a number and is editable, replace raw string with custom input
+  if ((typeof value === 'string' || typeof value === 'number')) {
+    return <TableCellText
+      value={value}
+      isEditable={isEditable}
+      id={id}
+      element={element}
+      tableData={tableData}
+      endpoint={endpoint}
+    />
+  }
+
   // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
   if (element === '$deletable') {
     value = (
@@ -60,7 +68,7 @@ function TableDataCell({ value, element, id, keysToDisplay, tableData, endpoint,
   )
 }
 
-TableDataCell.propTypes = {
+TableRow.propTypes = {
   value: propTypes.any.isRequired,
   element: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
@@ -69,8 +77,8 @@ TableDataCell.propTypes = {
   editableFields: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-TableDataCell.defaultProps = {
+TableRow.defaultProps = {
   showId: false,
 };
 
-export default TableDataCell
+export default TableRow
