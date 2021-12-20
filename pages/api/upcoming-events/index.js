@@ -1,13 +1,13 @@
 // NEXT API REQUEST
 // GET /api/v1/tournament-calendar
 
-import { getCalendar } from "../../../helpers/db/tournament-calendar";
+import { getDocuments } from "../../../helpers/db";
 
 export default async function handler(req, res) {
   // GET method to read federation members
   if (req.method === 'GET') {
     try {
-      const upcomingEvents = await getCalendar();
+      const upcomingEvents = await getDocuments('calendar');
       return res.status(200).json(upcomingEvents);
     } catch (error) {
       console.error(error);

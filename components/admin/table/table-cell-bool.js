@@ -15,7 +15,7 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
     // Fetch API to patch element, then mutate tableData and return it for SWR to handle
     // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
     const patchRow = async () => {
-      // Fetch API to delete element
+      // Fetch API to patch element
       await fetch(`/api/${endpoint}/${id}`, {
         method: 'PATCH',
         headers: {

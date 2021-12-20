@@ -27,14 +27,17 @@ function ClubsAdminPage() {
       {
         _id: 'title',
         name: 'Club',
+        editable: true,
       },
       {
         _id: 'chip',
         name: 'Ville',
+        editable: true,
       },
       {
         _id: 'description',
         name: 'Description',
+        editable: true,
       },
       {
         _id: 'validated',
@@ -45,7 +48,8 @@ function ClubsAdminPage() {
     ],
     // * Content of rows. Must be an array of objects
     tableData: clubs,
-    // * API endpoint to fetch data from
+    // * API endpoint to fetch data from (without 'api/' nor trailing slash) and to record as SWR mutate key. 
+    // Example : http://localhost:3000/api/users becomes 'users'
     endpoint: 'clubs/admin',
     // * Loading state
     loading: isLoading,
