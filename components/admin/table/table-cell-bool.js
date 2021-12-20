@@ -13,8 +13,8 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
   const { mutate } = useSWRConfig();
 
   const handleChange = async () => {
-      await patchTableCell(endpoint, id, { [element]: !value }, tableData, element, !value, mutate);
-    };
+    await patchTableCell(endpoint, id, { [element]: !value }, tableData, element, !value, mutate);
+  };
 
   let uneditableIcon;
   if (!isEditable) {
