@@ -1,4 +1,5 @@
 import { useSWRConfig } from 'swr';
+import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 
 // MUI IMPORTS
 import Box from '@mui/material/Box';
@@ -12,35 +13,8 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
   const { mutate } = useSWRConfig();
 
   const handleChange = async () => {
-    // Fetch API to patch element, then mutate tableData and return it for SWR to handle
-    // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
-    const patchRow = async () => {
-      // Fetch API to patch element
-      await fetch(`/api/${endpoint}/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          [element]: !value,
-        }),
-      });
-
-      // Mutate tableData to update the element
-      const newRows = tableData.map((row) => {
-        if (row._id === id) {
-          row[element] = !value;
-        }
-        return row;
-      });
-
-      // Send back the updated tableData (with the patched row on authorized) to SWR /api/${component}' key
-      return newRows;
+      await patchTableCell(endpoint, id, { [element]: !value }, tableData, element, !value, mutate);
     };
-
-    // Actual action of mutate via SWR
-    mutate(`/api/${endpoint}`, patchRow);
-  };
 
   let uneditableIcon;
   if (!isEditable) {
