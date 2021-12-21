@@ -20,24 +20,24 @@ function ClubsAdminPage() {
     // * Name of the table (for reference and aria labels)
     name: 'administrators table',
     // Content of columns. Must have :
-    // '_id' key, which is the unique id of the column 
+    // '_id' key, which is the unique id of the column. It has to match the keys of the data object. 
     // 'name' key, which is the name displayed on the column
     // 'align' key, for alignement of name ('right', defaults to 'left' if undefined)
     tableHead: [
       {
         _id: 'title',
         name: 'Club',
-        editable: false,
+        editable: true,
       },
       {
         _id: 'chip',
         name: 'Ville',
-        editable: false,
+        editable: true,
       },
       {
         _id: 'description',
         name: 'Description',
-        editable: false,
+        editable: true,
       },
       {
         _id: 'validated',

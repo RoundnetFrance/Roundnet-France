@@ -1,4 +1,11 @@
-export default async function patchTableCell(endpoint, id, body, tableData, element, value, mutate) {
+export default async function patchTableCell({
+  endpoint,
+  id,
+  body,
+  tableData,
+  element,
+  value,
+  mutate }) {
   // Fetch API to patch element, then mutate tableData and return it for SWR to handle
   // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
   const patchData = async () => {
