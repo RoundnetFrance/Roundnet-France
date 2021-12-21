@@ -27,17 +27,17 @@ function ClubsAdminPage() {
       {
         _id: 'title',
         name: 'Club',
-        editable: true,
+        editable: false,
       },
       {
         _id: 'chip',
         name: 'Ville',
-        editable: true,
+        editable: false,
       },
       {
         _id: 'description',
         name: 'Description',
-        editable: true,
+        editable: false,
       },
       {
         _id: 'validated',

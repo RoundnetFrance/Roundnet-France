@@ -16,13 +16,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 // MUI ICONS
 import EditIcon from '@mui/icons-material/Edit';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 function TableCellText({ value, id, element, isEditable, tableData, endpoint }) {
   // Get the mutate function from swr
   const { mutate } = useSWRConfig();
 
   // Define a state for the editable text field
-  const [controlledElement, setControlledElement] = useState(value);
+  const [controlledValue, setControlledElement] = useState(value);
 
   // Handle modal state and open/close functions
   const [open, setOpen] = useState(false);
@@ -34,8 +36,8 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
   };
 
   // If value is too long, cut it into ellipsis
-  const stringLength = value.length;
-  if (stringLength > 60) {
+  const isLongString = value.length > 60;
+  if (isLongString) {
     value = value.substring(0, 60) + '...';
   }
 
@@ -43,7 +45,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
   if (isEditable) {
     // Handle change on confirm button click (patch and mutate)
     const handleClick = async () => {
-      await patchTableCell(endpoint, id, { [element]: controlledElement }, tableData, element, controlledElement, mutate);
+      await patchTableCell(endpoint, id, { [element]: controlledValue }, tableData, element, controlledValue, mutate);
       // Close the modal
       setOpen(false);
     };
@@ -71,8 +73,8 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
               id={element}
               fullWidth
               variant="standard"
-              multiline={stringLength > 60}
-              value={controlledElement}
+              multiline={isLongString}
+              value={controlledValue}
               onChange={(event) => setControlledElement(event.target.value)}
             />
           </DialogContent>
@@ -86,9 +88,24 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
     )
   }
 
+  // Handle click for displaying long strings
+  const handleDisplayClick = () => {
+    setOpen(prevState => !prevState);
+  };
+
   return (
     <TableCell>
-      {value}
+      {
+        isLongString ? (
+          <Stack direction="row" alignItems="center"
+            justifyContent="flex-start" spacing={1}>
+            <IconButton aria-label={`${element}-see-more`} size="small" onClick={handleDisplayClick}>
+              {open ? <ArrowDropDownIcon color="primary" fontSize="inherit" /> : <ArrowDropUpIcon color="primary" fontSize="inherit" />}
+            </IconButton>
+            <Box>{open ? value : controlledValue}</Box>
+          </Stack>
+        ) : value
+      }
     </TableCell>
   )
 }
