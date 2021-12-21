@@ -10,7 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-function TableCellBool({ value, isEditable, id, element, endpoint, tableData, setError }) {
+function TableCellBool({ value, isEditable, id, element, endpoint, tableData, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
 
   const handleChange = async () => {
@@ -22,7 +22,8 @@ function TableCellBool({ value, isEditable, id, element, endpoint, tableData, se
       element,
       value: !value,
       mutate,
-      setError
+      setError,
+      setSuccess,
     });
   };
 

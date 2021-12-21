@@ -8,7 +8,7 @@ import TableCellDelete from './table-cell-delete';
 import TableCellBool from './table-cell-bool';
 import TableCellText from './table-cell-text';
 
-function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, setError }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, setError, setSuccess }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
@@ -25,7 +25,13 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
   // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
   if (element === '$deletable') {
     return (
-      <TableCellDelete id={id} endpoint={endpoint} tableData={tableData} setError={setError} />
+      <TableCellDelete
+        id={id}
+        endpoint={endpoint}
+        tableData={tableData}
+        setError={setError}
+        setSuccess={setSuccess}
+      />
     );
   }
 
@@ -40,6 +46,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
         tableData={tableData}
         endpoint={endpoint}
         setError={setError}
+        setSuccess={setSuccess}
       />
     )
   }
@@ -55,6 +62,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
         tableData={tableData}
         endpoint={endpoint}
         setError={setError}
+        setSuccess={setSuccess}
       />
     );
   }

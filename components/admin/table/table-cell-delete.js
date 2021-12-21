@@ -17,7 +17,7 @@ import Alert from '@mui/material/Alert';
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function TableCellDelete({ id, endpoint, tableData, setError }) {
+function TableCellDelete({ id, endpoint, tableData, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
 
   // Define a state for the loading
@@ -40,7 +40,8 @@ function TableCellDelete({ id, endpoint, tableData, setError }) {
       id,
       data: tableData,
       mutate,
-      setError: setError,
+      setError,
+      setSuccess
     })
 
     setLoading(false);
