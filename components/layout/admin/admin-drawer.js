@@ -112,26 +112,26 @@ function AdminDrawer() {
 
   // Actual JSX return
   return (
-    <>
+    <Fragment>
       <IconButton
         onClick={toggleDrawer}
         size="large"
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ mr: 2 }}
+        sx={{ ml: 1 }}
       >
         <MenuIcon />
       </IconButton>
       <Drawer
-        anchor="left"
+        anchor="right"
         variant="temporary"
         open={isDrawerOpen}
         onClose={toggleDrawer}
       >
         {list()}
       </Drawer>
-    </>
+    </Fragment>
   );
 }
 
