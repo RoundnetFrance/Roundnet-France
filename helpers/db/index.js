@@ -1,11 +1,12 @@
 // HELPER FUNCTIONS FOR EVERYDAY DB ACTIONS
-import { connectToDatabase } from "../../lib/mongodb"
+import clientPromise from "../../lib/mongodb"
 
 // Get all documents from a mongoDB collection
 export function getDocuments(collection, params, fields) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { db } = await connectToDatabase();
+      const client = await clientPromise;
+      const db = client.db();
       const documents = await db.collection(collection).find(params).project(fields).toArray();
       // Clean the _id field  from the documents
       const data = JSON.parse(JSON.stringify(documents));
@@ -13,6 +14,8 @@ export function getDocuments(collection, params, fields) {
       resolve(data);
     } catch (error) {
       reject(error);
+    } finally {
+      client.close();
     }
   });
 }
@@ -21,13 +24,16 @@ export function getDocuments(collection, params, fields) {
 export function getDocument(collection, params) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { db } = await connectToDatabase();
+      const client = await clientPromise;
+      const db = client.db();
       const document = await db.collection(collection).findOne(params);
       // const data = JSON.parse(JSON.stringify(document[0]));
       
       resolve(document);
     } catch (error) {
       reject(error);
+    } finally {
+      client.close();
     }
   });
 }
@@ -36,11 +42,14 @@ export function getDocument(collection, params) {
 export function insertDocument(collection, document) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { db } = await connectToDatabase();
+      const client = await clientPromise;
+      const db = client.db();
       const result = await db.collection(collection).insertOne(document);
       resolve(result);
     } catch (error) {
       reject(error);
+    } finally {
+      client.close();
     }
   });
 }
@@ -49,11 +58,14 @@ export function insertDocument(collection, document) {
 export function patchDocument(collection, params, document) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { db } = await connectToDatabase();
+      const client = await clientPromise;
+      const db = client.db();
       const result = await db.collection(collection).updateOne(params, { $set: document });
       resolve(result);
     } catch (error) {
       reject(error);
+    } finally {
+      client.close();
     }
   });
 }
@@ -62,12 +74,15 @@ export function patchDocument(collection, params, document) {
 export function deleteDocument(collection, params) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { db } = await connectToDatabase();
+      const client = await clientPromise;
+      const db = client.db();
       const result = await db.collection(collection).deleteOne(params);
       
       resolve(result);
     } catch (error) {
       reject(error);
+    } finally {
+      client.close();
     }
   });
 }
