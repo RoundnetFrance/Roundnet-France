@@ -7,12 +7,16 @@ import TableCell from '@mui/material/TableCell';
 import TableCellDelete from './table-cell-delete';
 import TableCellBool from './table-cell-bool';
 import TableCellText from './table-cell-text';
+import TableCellFile from './table-cell-file';
 
-function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, setError, setSuccess }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, fileFields, setError, setSuccess }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
   const isEditable = editableFields.includes(element);
+
+  // Check if the element is a file
+  const isFile = fileFields.includes(element);
 
   // If element is a key in keysToDisplay, display it.
   // Ignore if keysToDisplay is not defined, or if element is a special $element.
@@ -22,11 +26,27 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
     return null;
   }
 
-  // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
+  // If element is $deletable, replate the bool by a delete button (with automated deletion handling)
   if (element === '$deletable') {
     return (
       <TableCellDelete
         id={id}
+        endpoint={endpoint}
+        tableData={tableData}
+        setError={setError}
+        setSuccess={setSuccess}
+      />
+    );
+  }
+
+  // If element is a file, display it as an image
+  if (isFile) {
+    return (
+      <TableCellFile
+        value={value}
+        isEditable={isEditable}
+        id={id}
+        element={element}
         endpoint={endpoint}
         tableData={tableData}
         setError={setError}

@@ -1,43 +1,51 @@
 import { getSession } from 'next-auth/react';
-import useUser from '../../../hooks/useUser';
+import useFederationMembers from '../../../hooks/useFederationMembers';
 
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 
-function AdministratorAdminPage() {
+function ClubsAdminPage() {
   // Get user info
-  const { user: users, isLoading, isError } = useUser();
+  const { members, isLoading, isError } = useFederationMembers();
 
   // Define a table config object. Comments with * are required.
   const tableConfig = {
     // * Name of the table (for reference and aria labels)
     name: 'administrators table',
     // Content of columns. Must have :
-    // '_id' key, which is the unique id of the column 
+    // '_id' key, which is the unique id of the column. It has to match the keys of the data object. 
     // 'name' key, which is the name displayed on the column
     // 'align' key, for alignement of name ('right', defaults to 'left' if undefined)
     tableHead: [
       {
-        _id: 'name',
+        _id: 'title',
         name: 'Nom',
+        editable: true,
       },
       {
-        _id: 'email',
-        name: 'Email',
+        _id: 'chip',
+        name: 'Fonction',
+        editable: true,
       },
       {
-        _id: 'authorized',
-        name: 'Administrateur',
-        align: 'right',
+        _id: 'image',
+        name: 'Image',
+        editable: true,
+        file: true,
+      },
+      {
+        _id: 'description',
+        name: 'Description',
         editable: true,
       },
     ],
     // * Content of rows. Must be an array of objects
-    tableData: users,
-    // * API endpoint to fetch data from
-    endpoint: 'users',
+    tableData: members,
+    // * API endpoint to fetch data from (without 'api/' nor trailing slash) and to record as SWR mutate key. 
+    // Example : http://localhost:3000/api/users becomes 'users'
+    endpoint: 'federation-members',
     // * Loading state
     loading: isLoading,
     // * Error state
@@ -49,7 +57,7 @@ function AdministratorAdminPage() {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Administrateurs"></PageTitle>
+      <PageTitle title="Liste des membres de la fédération"></PageTitle>
       <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
   )
@@ -73,4 +81,4 @@ export async function getServerSideProps({ req }) {
   };
 }
 
-export default AdministratorAdminPage
+export default ClubsAdminPage

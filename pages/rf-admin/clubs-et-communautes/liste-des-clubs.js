@@ -1,11 +1,6 @@
 import { getSession } from 'next-auth/react';
 import useClubs from '../../../hooks/useClubs';
 
-// MUI IMPORTS
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
-
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
@@ -63,13 +58,7 @@ function ClubsAdminPage() {
   return (
     <DashboardWrapper>
       <PageTitle title="Liste des clubs"></PageTitle>
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-
-        {isLoading ? <Stack sx={{ height: '200px' }} justifyContent="center" alignItems="center">
-          <CircularProgress />
-        </Stack> : <AdminTable tableConfig={tableConfig} />}
-
-      </Container>
+      <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
   )
 }

@@ -89,9 +89,9 @@ function Header(props) {
   const adminItems = (
     <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" spacing={{ xs: 0, sm: 1 }}>
 
-      <Avatar sx={{ width: 30, height: 30, mr: 1 }}>
+      <Avatar sx={{ width: 35, height: 35, mr: 1 }}>
         {userImage ? (
-          <Image src={userImage} alt={userName} width="40" height="40" />
+          <Image src={userImage} alt={userName} width="35" height="35" />
         ) : <PersonIcon />}
       </Avatar>
 
