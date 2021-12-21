@@ -1,11 +1,13 @@
 import propTypes from 'prop-types';
+import { useState, Fragment } from 'react';
 
 // MUI IMPORTS
 import Table from '@mui/material/Table';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
-import Container from '@mui/material/Container';
+import Slide from '@mui/material/Slide';
+import Snackbar from '@mui/material/Snackbar';
 
 // COMPONENT IMPORTS
 import TableBody from './table-body.js';
@@ -50,23 +52,48 @@ function AdminTable({ tableConfig }) {
     });
   }
 
+  // State to handle errors
+  const [errorSnackbar, setErrorSnackbar] = useState(null);
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setErrorSnackbar(null);
+  }
+
   // Used for width of loading skeleton animation
-  const nbOfElements = keysToDisplay.length;
+  // const nbOfElements = keysToDisplay.length;
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label={name}>
+    <Fragment>
+      <TableContainer component={Paper}>
+        <Table aria-label={name}>
+          <TableHead tableHead={tableHead} />
+          {/* {
+            loading ?
+              <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
+          } */}
+          <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} setError={setErrorSnackbar} />
+        </Table>
+      </TableContainer>
 
-        <TableHead tableHead={tableHead} />
-
-        {/* {
-          loading ?
-            <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
-        } */}
-        <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
-
-      </Table>
-    </TableContainer>
+      {/* Snackbar for error display */}
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }
+        }
+        open={errorSnackbar?.name === "Error"}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        TransitionComponent={Slide}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="error" sx={{ width: '100%' }}>
+          <strong>Une erreur est survenue :</strong> <br />
+          {errorSnackbar?.message}
+        </Alert>
+      </Snackbar>
+    </Fragment>
   )
 }
 

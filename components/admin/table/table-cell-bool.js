@@ -10,7 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) {
+function TableCellBool({ value, isEditable, id, element, endpoint, tableData, setError }) {
   const { mutate } = useSWRConfig();
 
   const handleChange = async () => {
@@ -21,7 +21,8 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
       tableData,
       element,
       value: !value,
-      mutate
+      mutate,
+      setError
     });
   };
 
@@ -33,7 +34,7 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
   return (
     <TableCell align="right">
       {isEditable ? (
-        <Box component="form" aria-label="editable-item" size="medium" color="primary" >
+        <Box component="form" aria-label="editable-item" size="medium" color="primary">
           <Checkbox checked={value} onChange={handleChange} />
         </Box >
       ) : uneditableIcon}
@@ -41,4 +42,4 @@ function TableEditBool({ value, isEditable, id, element, endpoint, tableData }) 
   )
 }
 
-export default TableEditBool
+export default TableCellBool

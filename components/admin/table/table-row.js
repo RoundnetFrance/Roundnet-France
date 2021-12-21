@@ -8,7 +8,7 @@ import TableCellDelete from './table-cell-delete';
 import TableCellBool from './table-cell-bool';
 import TableCellText from './table-cell-text';
 
-function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, setError }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
@@ -22,14 +22,10 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
     return null;
   }
 
-  // Affects alignment and padding of the cell
-  // Padding is commented because it renders weird
-  const smallCell = (typeof value === 'number' || typeof value === 'boolean');
-
   // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
   if (element === '$deletable') {
     return (
-      <TableCellDelete id={id} endpoint={endpoint} tableData={tableData} />
+      <TableCellDelete id={id} endpoint={endpoint} tableData={tableData} setError={setError} />
     );
   }
 
@@ -43,26 +39,28 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
         element={element}
         tableData={tableData}
         endpoint={endpoint}
-      />)
+        setError={setError}
+      />
+    )
   }
 
   // If value is a string or a number and is editable, replace raw string with custom input
   if ((typeof value === 'string' || typeof value === 'number')) {
-    return <TableCellText
-      value={value}
-      isEditable={isEditable}
-      id={id}
-      element={element}
-      tableData={tableData}
-      endpoint={endpoint}
-    />
+    return (
+      <TableCellText
+        value={value}
+        isEditable={isEditable}
+        id={id}
+        element={element}
+        tableData={tableData}
+        endpoint={endpoint}
+        setError={setError}
+      />
+    );
   }
 
   return (
-    <TableCell
-      align={smallCell ? 'right' : 'left'}
-      // padding={smallCell ? 'checkbox' : 'normal'}
-    >
+    <TableCell>
       {value}
     </TableCell>
   )

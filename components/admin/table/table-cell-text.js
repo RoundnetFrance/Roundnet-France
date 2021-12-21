@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
-function TableCellText({ value, id, element, isEditable, tableData, endpoint }) {
+function TableCellText({ value, id, element, isEditable, tableData, endpoint, setError }) {
   // Get the mutate function from swr
   const { mutate } = useSWRConfig();
 
@@ -49,13 +49,15 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
     const handleClick = async () => {
       setLoading(true);
       await patchTableCell({
-        endpoint, 
-        id, 
-        body: { [element]: controlledValue }, 
-        tableData, 
-        element, 
-        value: controlledValue, 
-        mutate});
+        endpoint,
+        id,
+        body: { [element]: controlledValue },
+        tableData,
+        element,
+        value: controlledValue,
+        mutate,
+        setError
+      });
       // Close the modal
       setLoading(false);
       setOpen(false);
