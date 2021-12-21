@@ -10,13 +10,10 @@ export function getDocuments(collection, params, fields) {
       const documents = await db.collection(collection).find(params).project(fields).toArray();
       // Clean the _id field  from the documents
       const data = JSON.parse(JSON.stringify(documents));
-
       resolve(data);
     } catch (error) {
       reject(error);
-    } finally {
-      client.close();
-    }
+    } 
   });
 }
 
@@ -30,10 +27,9 @@ export function getDocument(collection, params) {
       // const data = JSON.parse(JSON.stringify(document[0]));
       
       resolve(document);
+
     } catch (error) {
       reject(error);
-    } finally {
-      client.close();
     }
   });
 }
@@ -46,10 +42,9 @@ export function insertDocument(collection, document) {
       const db = client.db();
       const result = await db.collection(collection).insertOne(document);
       resolve(result);
+
     } catch (error) {
       reject(error);
-    } finally {
-      client.close();
     }
   });
 }
@@ -62,10 +57,9 @@ export function patchDocument(collection, params, document) {
       const db = client.db();
       const result = await db.collection(collection).updateOne(params, { $set: document });
       resolve(result);
+
     } catch (error) {
       reject(error);
-    } finally {
-      client.close();
     }
   });
 }
@@ -79,10 +73,9 @@ export function deleteDocument(collection, params) {
       const result = await db.collection(collection).deleteOne(params);
       
       resolve(result);
+
     } catch (error) {
       reject(error);
-    } finally {
-      client.close();
     }
   });
 }
