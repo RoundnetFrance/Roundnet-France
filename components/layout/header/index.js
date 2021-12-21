@@ -94,12 +94,12 @@ function Header(props) {
           <Image src={userImage} alt={userName} width="40" height="40" />
         ) : <PersonIcon />}
       </Avatar>
-      <Typography variant="body2">{userName}&nbsp;
-      </Typography>
-      <Typography display={{ xs: 'none', sm: 'inherit' }}> | </Typography>
+
       <Button onClick={signOut} color="neutral" sx={{
         textTransform: 'none',
-      }}> Déconnexion </Button>
+      }}>
+        Déconnexion
+      </Button>
     </Stack>
   )
 
@@ -111,7 +111,6 @@ function Header(props) {
       <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
         <AppBar>
           <Toolbar>
-            {adminLayout ? <AdminDrawer /> : <MenuDrawer />}
             <Link href="/" passHref>
               <a>
                 <Image
@@ -124,7 +123,7 @@ function Header(props) {
             </Link>
 
             <Typography ml={2} variant="h6" component="h1" sx={{ flexGrow: 1 }}>
-              <Link href="/" passHref>
+              <Link href={adminLayout ? '/rf-admin' : '/'} passHref>
                 <MUILink color="inherit" underline="none">
                   <strong>{adminLayout ? 'RF Admin' : 'Roundnet France'}</strong>
                 </MUILink>
@@ -134,6 +133,8 @@ function Header(props) {
             <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'inherit' } : { xs: 'none', md: 'block' } }}>
               {adminLayout ? adminItems : navItems}
             </ButtonGroup>
+            {adminLayout ? <AdminDrawer /> : <MenuDrawer />}
+
           </Toolbar>
         </AppBar>
       </Box>

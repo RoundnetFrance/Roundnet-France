@@ -47,7 +47,7 @@ function MenuDrawer() {
         return (
           <Collapse key={subElement.name} in={menuOpen[element.slug]} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} onClick={toggleDrawer}>
+              <ListItemButton onClick={toggleDrawer}>
                 <ListItemIcon>
                   <Icon>arrow_forward</Icon>
                 </ListItemIcon>
@@ -115,26 +115,26 @@ function MenuDrawer() {
 
   // Actual JSX return
   return (
-    <>
+    <Fragment>
       <IconButton
         onClick={toggleDrawer}
         size="large"
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ mr: 2, display: { xs: 'block', md: 'none' } }}
+        sx={{ display: { xs: 'block', md: 'none' } }}
       >
         <MenuIcon />
       </IconButton>
       <Drawer
-        anchor="left"
+        anchor="right"
         variant="temporary"
         open={isDrawerOpen}
         onClose={toggleDrawer}
       >
         {list()}
       </Drawer>
-    </>
+    </Fragment>
   );
 }
 
