@@ -20,7 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
-function TableCellText({ value, id, element, isEditable, tableData, endpoint, setError }) {
+function TableCellText({ value, id, element, isEditable, tableData, endpoint, setError, setSuccess }) {
   // Get the mutate function from swr
   const { mutate } = useSWRConfig();
 
@@ -56,7 +56,8 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, se
         element,
         value: controlledValue,
         mutate,
-        setError
+        setError,
+        setSuccess,
       });
       // Close the modal
       setLoading(false);

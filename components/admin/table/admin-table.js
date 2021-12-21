@@ -13,17 +13,16 @@ import Snackbar from '@mui/material/Snackbar';
 import TableBody from './table-body.js';
 import TableHead from './table-head.js';
 
-function AdminTable({ tableConfig }) {
-  // Extract infos & data from tableConfig
-  const {
-    name,
-    tableHead,
-    tableData,
-    endpoint,
-    deletable,
-    error,
-    loading,
-  } = tableConfig;
+function AdminTable({ tableConfig: {
+  name,
+  tableHead,
+  tableData,
+  endpoint,
+  deletable,
+  error,
+  loading,
+}
+}) {
 
   // Gather the actual keys to display in the table by checking hidden key. Will be used to filter the data in Head and Body.
   const keysToDisplay = tableHead.map(key => key._id);
@@ -52,13 +51,15 @@ function AdminTable({ tableConfig }) {
     });
   }
 
-  // State to handle errors
+  // State to handle errors & success messages
   const [errorSnackbar, setErrorSnackbar] = useState(null);
+  const [successSnackbar, setSuccessSnackbar] = useState(null);
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setErrorSnackbar(null);
+    setSuccessSnackbar(null);
   }
 
   // Used for width of loading skeleton animation
@@ -73,7 +74,14 @@ function AdminTable({ tableConfig }) {
             loading ?
               <TableBody loading={loading} nbOfElements={nbOfElements} /> : <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} />
           } */}
-          <TableBody tableData={tableData} keysToDisplay={keysToDisplay} endpoint={endpoint} editableFields={editableFields} setError={setErrorSnackbar} />
+          <TableBody
+            tableData={tableData}
+            keysToDisplay={keysToDisplay}
+            endpoint={endpoint}
+            editableFields={editableFields}
+            setError={setErrorSnackbar}
+            setSuccess={setSuccessSnackbar}
+          />
         </Table>
       </TableContainer>
 
@@ -81,18 +89,19 @@ function AdminTable({ tableConfig }) {
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }
         }
-        open={errorSnackbar?.name === "Error"}
+        open={errorSnackbar?.name === "Error" || successSnackbar?.name === "Success"}
         autoHideDuration={5000}
         onClose={handleSnackbarClose}
         TransitionComponent={Slide}
       >
         <Alert
           onClose={handleSnackbarClose}
-          severity="error" sx={{ width: '100%' }}>
-          <strong>Une erreur est survenue :</strong> <br />
-          {errorSnackbar?.message}
+          severity={errorSnackbar?.name.toLowerCase() || successSnackbar?.name.toLowerCase()} sx={{ width: '100%' }}>
+          {errorSnackbar && (<Fragment><strong>Une erreur est survenue :</strong> <br /></Fragment>)}
+          {errorSnackbar?.message || successSnackbar?.message}
         </Alert>
       </Snackbar>
+
     </Fragment>
   )
 }

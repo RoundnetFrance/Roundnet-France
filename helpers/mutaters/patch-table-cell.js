@@ -7,6 +7,7 @@ export default async function patchTableCell({
   value,
   mutate,
   setError,
+  setSuccess,
 }) {
   // Fetch API to patch element, then mutate tableData and return it for SWR to handle
   // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
@@ -47,4 +48,8 @@ export default async function patchTableCell({
 
   // Actual action of mutate via SWR 
   mutate(`/api/${endpoint}`, patchData);
+  setSuccess({
+    name: 'Success',
+    message: 'Mise à jour effectuée',
+  });
 };

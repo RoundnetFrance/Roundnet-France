@@ -4,6 +4,7 @@ export default async function deleteTableCell({
   data,
   mutate,
   setError,
+  setSuccess,
 }) {
   // Fetch API to delete element, then mutate data and return it for SWR to handle
   // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
@@ -32,4 +33,8 @@ export default async function deleteTableCell({
 
   // Actual action of mutate via SWR 
   mutate(`/api/${endpoint}`, deleteData);
+  setSuccess({
+    name: 'Success',
+    message: 'Suppression effectuée',
+  });
 };
