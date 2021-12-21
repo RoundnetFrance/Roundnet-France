@@ -26,9 +26,16 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
   // Padding is commented because it renders weird
   const smallCell = (typeof value === 'number' || typeof value === 'boolean');
 
+  // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
+  if (element === '$deletable') {
+    return (
+      <TableCellDelete id={id} endpoint={endpoint} tableData={tableData} />
+    );
+  }
+
   // If value is a boolean, replace raw bool with custom UI icon button
   if (typeof value === 'boolean') {
-    value = (
+    return (
       <TableCellBool
         value={value}
         isEditable={isEditable}
@@ -49,13 +56,6 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
       tableData={tableData}
       endpoint={endpoint}
     />
-  }
-
-  // If value is $deletable, replate the bool by a delete button (with automated deletion handling)
-  if (element === '$deletable') {
-    value = (
-      <TableCellDelete id={id} endpoint={endpoint} tableData={tableData} />
-    );
   }
 
   return (

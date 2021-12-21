@@ -2,6 +2,7 @@ import { useSWRConfig } from 'swr';
 
 // MUI IMPORTS
 import IconButton from '@mui/material/IconButton';
+import TableCell from '@mui/material/TableCell';
 
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,9 +29,11 @@ function TableCellDelete({ id, endpoint, tableData }) {
   };
 
   return (
-    <IconButton aria-label="delete" size="medium" color="error" onClick={handleDelete}>
-      <DeleteIcon fontSize="inherit" />
-    </IconButton>
+    <TableCell align="right">
+      <IconButton aria-label="delete" size="medium" color="error" onClick={handleDelete}>
+        <DeleteIcon fontSize="inherit" />
+      </IconButton>
+    </TableCell>
   );
 }
 

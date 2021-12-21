@@ -45,7 +45,14 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
   if (isEditable) {
     // Handle change on confirm button click (patch and mutate)
     const handleClick = async () => {
-      await patchTableCell(endpoint, id, { [element]: controlledValue }, tableData, element, controlledValue, mutate);
+      await patchTableCell({
+        endpoint, 
+        id, 
+        body: { [element]: controlledValue }, 
+        tableData, 
+        element, 
+        value: controlledValue, 
+        mutate});
       // Close the modal
       setOpen(false);
     };
