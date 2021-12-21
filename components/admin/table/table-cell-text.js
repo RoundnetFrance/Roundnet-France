@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -25,6 +26,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
 
   // Define a state for the editable text field
   const [controlledValue, setControlledElement] = useState(value);
+  const [loading, setLoading] = useState(false);
 
   // Handle modal state and open/close functions
   const [open, setOpen] = useState(false);
@@ -45,6 +47,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
   if (isEditable) {
     // Handle change on confirm button click (patch and mutate)
     const handleClick = async () => {
+      setLoading(true);
       await patchTableCell({
         endpoint, 
         id, 
@@ -54,6 +57,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
         value: controlledValue, 
         mutate});
       // Close the modal
+      setLoading(false);
       setOpen(false);
     };
 
@@ -87,7 +91,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint }) 
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Annuler</Button>
-            <Button variant="contained" onClick={handleClick}>Modifier</Button>
+            <LoadingButton loading={loading} variant="contained" onClick={handleClick}>Modifier</LoadingButton>
           </DialogActions>
         </Dialog>
 
