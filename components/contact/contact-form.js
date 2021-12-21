@@ -3,7 +3,7 @@ import handleFormSubmit from '../../helpers/handle-form-submit';
 
 // MUI IMPORTS
 import {
-  Container, TextField, Typography, Button, CircularProgress, Box, Snackbar, Alert, Slide,
+  TextField, Typography, Button, CircularProgress, Box, Snackbar, Alert, Slide,
 } from '@mui/material';
 
 // OWN IMPORTS

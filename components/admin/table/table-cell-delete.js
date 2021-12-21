@@ -1,5 +1,6 @@
 import { useSWRConfig } from 'swr';
 import { Fragment, useState } from 'react';
+import deleteTableData from '../../../helpers/mutaters/delete-table-cell';
 
 // MUI IMPORTS
 import IconButton from '@mui/material/IconButton';
@@ -16,7 +17,7 @@ import Alert from '@mui/material/Alert';
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function TableCellDelete({ id, endpoint, tableData }) {
+function TableCellDelete({ id, endpoint, tableData, setError }) {
   const { mutate } = useSWRConfig();
 
   // Define a state for the loading
@@ -33,21 +34,15 @@ function TableCellDelete({ id, endpoint, tableData }) {
 
   const handleDelete = async () => {
     setLoading(true);
-    // Fetch API to delete element, then mutate tableData and return it for SWR to handle
-    // We're using the endpoint specified in the tableConfig object to fetch and mutate dynamically
-    const deleteRow = async () => {
-      // Fetch API to delete element
-      await fetch(`/api/${endpoint}/${id}`, {
-        method: 'DELETE'
-      });
+    
+    await deleteTableData({
+      endpoint,
+      id,
+      data: tableData,
+      mutate,
+      setError: setError,
+    })
 
-      // Send back the updated tableData (minus the deleted element) to SWR /api/${component}' key
-      const newRows = tableData.filter(row => row._id !== id);
-      return newRows;
-    };
-
-    // Actual action of mutate via SWR
-    await mutate(`/api/${endpoint}`, deleteRow);
     setLoading(false);
   };
 

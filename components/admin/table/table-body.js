@@ -9,7 +9,7 @@ import Skeleton from '@mui/material/Skeleton';
 // COMPONENT IMPORTS
 import TableRow from './table-row.js';
 
-function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, editableFields }) {
+function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, editableFields, setError }) {
   // Handle loading skeleton animation
   if (loading) {
     return (
@@ -46,6 +46,7 @@ function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, 
                   tableData={tableData}
                   endpoint={endpoint}
                   editableFields={editableFields}
+                  setError={setError}
                 />
               )
             )}
