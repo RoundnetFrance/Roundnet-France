@@ -6,19 +6,19 @@ const adminElements = [
       subElements: [
         {
           name: 'Calendrier',
-          url: '/rf-admin/calendrier',
+          url: '/rf-admin/competition/calendrier',
         },
         {
           name: 'Coupe de France',
-          url: '/rf-admin/resultats-coupe-de-france',
+          url: '/rf-admin/competition/resultats-coupe-de-france',
         },
         {
           name: 'Rencontres inter-clubs',
-          url: '/rf-admin/rencontres-inter-clubs',
+          url: '/rf-admin/competition/rencontres-inter-clubs',
         },
         {
           name: 'Hall Of Fame',
-          url: '/rf-admin/hall-of-fame',
+          url: '/rf-admin/competition/hall-of-fame',
         },
       ]
     },
@@ -30,10 +30,6 @@ const adminElements = [
         {
           name: 'Liste des clubs',
           url: '/rf-admin/clubs-et-communautes/liste-des-clubs',
-        },
-        {
-          name: 'Demandes d\'adhésion',
-          url: '/rf-admin/demandes-adhesion',
         },
       ]
     },

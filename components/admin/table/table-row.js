@@ -1,4 +1,5 @@
 import propTypes from 'prop-types';
+import DateAdapter from '@mui/lab/AdapterLuxon';
 
 // MUI IMPORTS
 import TableCell from '@mui/material/TableCell';
@@ -8,8 +9,9 @@ import TableCellDelete from './table-cell-delete';
 import TableCellBool from './table-cell-bool';
 import TableCellText from './table-cell-text';
 import TableCellFile from './table-cell-file';
+// import TableCellDate from './table-cell-date';
 
-function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, fileFields, setError, setSuccess }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, fileFields, dateFields, setError, setSuccess }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
@@ -17,6 +19,10 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
 
   // Check if the element is a file
   const isFile = fileFields.includes(element);
+
+  // Check if the value is a date
+  const isDate = dateFields.includes(element);
+  console.log(value, isDate)
 
   // If element is a key in keysToDisplay, display it.
   // Ignore if keysToDisplay is not defined, or if element is a special $element.
@@ -83,6 +89,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
         endpoint={endpoint}
         setError={setError}
         setSuccess={setSuccess}
+        isDate={isDate}
       />
     );
   }
