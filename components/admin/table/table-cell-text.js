@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useSWRConfig } from 'swr';
 import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
+import { fr } from 'date-fns/locale';
 
 // MUI IMPORTS
 import TableCell from '@mui/material/TableCell';
@@ -15,7 +16,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DateAdapter from '@mui/lab/AdapterLuxon';
+import DateAdapter from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
 
 // MUI ICONS
@@ -29,6 +30,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
 
   // Define a state for the editable text field
   const [controlledValue, setControlledElement] = useState(value);
+  const [controlledDate, setControlledDate] = useState(value);
   const [loading, setLoading] = useState(false);
 
   // Handle modal state and open/close functions
@@ -59,10 +61,10 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
       await patchTableCell({
         endpoint,
         id,
-        body: { [element]: controlledValue },
+        body: { [element]: isDate ? controlledDate : controlledValue },
         tableData,
         element,
-        value: controlledValue,
+        value: isDate ? controlledDate : controlledValue,
         mutate,
         setError,
         setSuccess,
@@ -74,15 +76,14 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
 
     // Generate specific editable field if value is a date or a string/number
     const editableField = isDate ? (
-      <LocalizationProvider dateAdapter={DateAdapter}>
+      <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
         <DatePicker
-          disableFuture
           label="Date"
           openTo="year"
           views={['year', 'month', 'day']}
-          value={value}
+          value={controlledDate}
           onChange={(newValue) => {
-            setValue(newValue);
+            setControlledDate(newValue);
           }}
           renderInput={(params) => <TextField {...params} />}
         />

@@ -14,10 +14,16 @@ import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
 import Error from '../../components/ui/error';
+import Head from '../../components/head';
+
 
 function ClubListPage({ clubs, error }) {
   return (
     <Fragment>
+      <Head
+        title="Liste des clubs de roundnet en France - Roundnet France"
+        description="Liste des clubs de roundnet en France. Trouvez le club qui vous correspond le mieux, proche de chez vous !"
+      />
 
       <Hero
         title="Liste des clubs"
@@ -38,7 +44,7 @@ function ClubListPage({ clubs, error }) {
           />
         </Box>
 
-        <Paper elevation={6} sx={{ overflow: 'hidden', p: 1, pb: 0.5}}><iframe src="https://www.google.com/maps/d/embed?mid=1xtrSWM6WZKgx9nHKAXTdfTSLBVWUyCl7&ehbc=2E312F" width="100%" height="480"></iframe></Paper>
+        <Paper elevation={6} sx={{ overflow: 'hidden', p: 1, pb: 0.5 }}><iframe src="https://www.google.com/maps/d/embed?mid=1xtrSWM6WZKgx9nHKAXTdfTSLBVWUyCl7&ehbc=2E312F" width="100%" height="480"></iframe></Paper>
       </Container>
 
       <Container maxWidth="sm" sx={{ my: 8 }}>
@@ -49,7 +55,7 @@ function ClubListPage({ clubs, error }) {
         {error ? <Error /> : <CrossingItems items={clubs} roundedItems />}
       </Container>
 
-      <CTAFooter 
+      <CTAFooter
         title="Vous souhaitez inscrire votre&nbsp;club&nbsp;?"
         subtitle="Adhérez à Roundnet France et rejoignez l'une des communautés de Roundnet les plus actives de France."
         mainLink={{
@@ -72,12 +78,12 @@ export async function getStaticProps() {
   try {
     const data = await getDocuments('clubs', { validated: true });
     return {
-      props: { 
+      props: {
         clubs: data,
       },
       revalidate: 60,
     }
-  } 
+  }
   // Return an error on props to display error message in UI
   catch (e) {
     console.error(e)

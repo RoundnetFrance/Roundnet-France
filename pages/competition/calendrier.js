@@ -12,10 +12,17 @@ import Criteria from '../../components/competition/tournaments/criteria';
 import PlanningTable from '../../components/ui/planning-table';
 import PageTitle from '../../components/ui/page-title';
 import Error from '../../components/ui/error';
+import Head from '../../components/head';
+
 
 function TournamentsPage({ tournamentCalendar, error }) {
   return (
     <Fragment>
+      <Head
+        title="Calendrier des tournois de roundnet en France - Roundnet France"
+        description="Le planning des tournois officiels de roundnet pour la saison 2021-2022."
+      />
+
       <Hero
         title="Calendrier"
         image="/images/hero/competitions-tournois.jpg"

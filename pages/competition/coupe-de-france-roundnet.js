@@ -12,10 +12,16 @@ import TeamRanking from '../../components/competition/national-ranking/team-rank
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PlanningTable from '../../components/ui/planning-table';
 import Error from '../../components/ui/error';
+import Head from '../../components/head';
 
 function NationalRankingPage({ error, previousEvents }) {
   return (
     <Fragment>
+      <Head
+        title="Coupe de France de roundnet 2022 - Roundnet France"
+        description="Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram."
+      />
+
       <Hero
         title="Coupe de France"
         image="/images/hero/classement-national.jpg"

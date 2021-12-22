@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-import DateAdapter from '@mui/lab/AdapterLuxon';
 
 // MUI IMPORTS
 import TableCell from '@mui/material/TableCell';
@@ -22,7 +21,6 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
 
   // Check if the value is a date
   const isDate = dateFields.includes(element);
-  console.log(value, isDate)
 
   // If element is a key in keysToDisplay, display it.
   // Ignore if keysToDisplay is not defined, or if element is a special $element.
