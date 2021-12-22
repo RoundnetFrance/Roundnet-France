@@ -14,13 +14,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateAdapter from '@mui/lab/AdapterLuxon';
+import DatePicker from '@mui/lab/DatePicker';
 
 // MUI ICONS
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
-function TableCellText({ value, id, element, isEditable, tableData, endpoint, setError, setSuccess }) {
+function TableCellText({ value, id, element, isEditable, tableData, endpoint, isDate, setError, setSuccess }) {
   // Get the mutate function from swr
   const { mutate } = useSWRConfig();
 
@@ -36,6 +39,11 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, se
   const handleClose = () => {
     setOpen(false);
   };
+
+  // Make readable value if value is a date
+  if (isDate) {
+    value = new Date(value).toLocaleDateString();
+  }
 
   // If value is too long, cut it into ellipsis
   const isLongString = value.length > 60;
@@ -64,6 +72,36 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, se
       setOpen(false);
     };
 
+    // Generate specific editable field if value is a date or a string/number
+    const editableField = isDate ? (
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <DatePicker
+          disableFuture
+          label="Date"
+          openTo="year"
+          views={['year', 'month', 'day']}
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
+
+    ) : (
+      <TextField
+        autoFocus
+        margin="dense"
+        id={element}
+        fullWidth
+        variant="standard"
+        multiline={isLongString}
+        value={controlledValue}
+        onChange={(event) => setControlledElement(event.target.value)}
+      />
+    );
+
+
     return (
       <Fragment>
         <TableCell>
@@ -81,16 +119,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, se
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Modifier</DialogTitle>
           <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id={element}
-              fullWidth
-              variant="standard"
-              multiline={isLongString}
-              value={controlledValue}
-              onChange={(event) => setControlledElement(event.target.value)}
-            />
+            {editableField}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Annuler</Button>

@@ -52,6 +52,9 @@ function AdminTable({ tableConfig:
   // Gather the file fields in the table by checking file key. Will be used to dynamically add file fields in Body.
   const fileFields = tableHead.filter(key => key.file).map(key => key._id);
 
+  // Gather the date fields in the table by checking date key. Will be used to dynamically add date fields in Body.
+  const dateFields = tableHead.filter(key => key.date).map(key => key._id);
+
   // If deletable option, add a new '$deletable' element on the tableHead object and on each tableData object.
   if (!loading && deletable && !tableHead.find(item => item._id === '$deletable')) {
     tableHead.push({
@@ -88,6 +91,7 @@ function AdminTable({ tableConfig:
                     endpoint={endpoint}
                     editableFields={editableFields}
                     fileFields={fileFields}
+                    dateFields={dateFields}
                     setError={setErrorSnackbar}
                     setSuccess={setSuccessSnackbar}
                   />
