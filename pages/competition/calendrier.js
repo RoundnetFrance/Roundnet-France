@@ -71,6 +71,7 @@ export async function getStaticProps() {
       props: {
         tournamentCalendar,
       },
+      revalidate: 60,
     }
   }
   // Return an error on props to display error message in UI
