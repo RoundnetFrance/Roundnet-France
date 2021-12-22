@@ -75,6 +75,7 @@ export async function getStaticProps() {
       props: { 
         clubs: data,
       },
+      revalidate: 60,
     }
   } 
   // Return an error on props to display error message in UI
