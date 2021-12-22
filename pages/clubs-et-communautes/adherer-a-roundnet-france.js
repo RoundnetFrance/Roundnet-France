@@ -13,6 +13,7 @@ import FeaturedItems from '../../components/ui/featured-items';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
 import LogoCarousel from '../../components/home/logo-carousel';
+import Head from '../../components/head';
 
 function JoinRoundnetFrancePage() {
 
@@ -72,6 +73,10 @@ function JoinRoundnetFrancePage() {
 
   return (
     <Fragment>
+      <Head
+        title="Rejoignez la fédération Roundnet France"
+        description="Créez votre club et faites officiellement partie de Roundnet France !"
+      />
 
       <Hero
         title="Adhérer à Roundnet France"

@@ -8,11 +8,18 @@ import Typography from '@mui/material/Typography';
 import Hero from '../../components/ui/hero';
 import PageTitle from '../../components/ui/page-title';
 import CreateClubForm from '../../components/clubs/create-club-form';
+import Head from '../../components/head';
+
 
 function CreateClubPage() {
   return (
     <Fragment>
 
+      <Head
+        title="Créer votre club - Roundnet France"
+        description="Créez votre club et rejoignez la communauté Roundnet France."
+      />
+      
       <Hero
         title="Créer votre club"
         image="/images/hero/liste-clubs.jpg"

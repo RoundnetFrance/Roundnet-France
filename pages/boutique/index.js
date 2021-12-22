@@ -3,10 +3,15 @@ import { Fragment } from 'react'
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
 import CTAFooter from '../../components/ui/cta-footer';
+import Head from '../../components/head';
 
 function ShopPage() {
   return (
     <Fragment>
+      <Head
+        title="Boutique - Roundnet Francce"
+        description="Grâce à notre partenariat avec l'équipementier Spikeball, achetez vos sets et vos goodies en ligne via la fédération Roundnet France."
+      />
 
       <Hero
         title="Boutique"
@@ -14,7 +19,7 @@ function ShopPage() {
         imagePosition='center 35%'
         mini />
 
-      <CTAFooter 
+      <CTAFooter
         title="Votre propre équipement, vos propres règles !"
         subtitle="Grâce à notre partenariat avec l'équipementier Spikeball, achetez vos sets et vos goodies en ligne via la fédération Roundnet France."
         mainLink={{
