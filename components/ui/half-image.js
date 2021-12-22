@@ -26,7 +26,7 @@ function HalfImage({ image, children }) {
         <Image
           src={image}
           alt="Placeholder"
-          layout="fill"
+          layout="responsive"
           objectFit="cover"
           priority={true}
         />

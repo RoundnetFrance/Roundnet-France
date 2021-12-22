@@ -1,0 +1,35 @@
+import formidable from 'formidable';
+import fs from 'fs';
+import multer from 'multer';
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async function handler(req, res) {
+  const folder = req.query.folder;
+
+  const options = {
+    uploadDir: `./public/uploads/${folder}`,
+    keepExtensions: true,
+  }
+
+  const form = new formidable.IncomingForm(options);
+  form.on('fileBegin', (formname, file) => {
+    console.log('file', formname);
+    console.log('file', file);
+  });
+    
+
+  form.parse(req, (err, fields, files) => {
+    // console.log('err', err);
+    // console.log('fields', fields);
+    console.log('file', files.file);
+    res.status(200).json({
+      message: 'File uploaded',
+      file: files.file,
+    });
+  });
+};
