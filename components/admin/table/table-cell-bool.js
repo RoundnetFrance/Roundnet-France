@@ -5,6 +5,7 @@ import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
+import Tooltip from '@mui/material/Tooltip';
 
 // MUI ICONS IMPORTS
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
@@ -36,7 +37,9 @@ function TableCellBool({ value, isEditable, id, element, endpoint, tableData, se
     <TableCell align="right">
       {isEditable ? (
         <Box component="form" aria-label="editable-item" size="medium" color="primary">
-          <Checkbox checked={value} onChange={handleChange} />
+          <Tooltip title="Modifier">
+            <Checkbox checked={value} onChange={handleChange} />
+          </Tooltip>
         </Box >
       ) : uneditableIcon}
     </TableCell>

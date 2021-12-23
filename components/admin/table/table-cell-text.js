@@ -18,6 +18,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
+import Tooltip from '@mui/material/Tooltip';
 
 // MUI ICONS
 import EditIcon from '@mui/icons-material/Edit';
@@ -109,9 +110,11 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
           <Stack direction="row" alignItems="center"
             justifyContent="flex-start" spacing={1}>
 
-            <IconButton aria-label={`${element}-edit`} size="small" onClick={handleClickOpen}>
-              <EditIcon color="primary" fontSize="inherit" />
-            </IconButton>
+            <Tooltip title="Modifier">
+              <IconButton aria-label={`${element}-edit`} size="small" onClick={handleClickOpen}>
+                <EditIcon color="primary" fontSize="inherit" />
+              </IconButton>
+            </Tooltip>
             <Box>{value}</Box>
           </Stack>
         </TableCell>

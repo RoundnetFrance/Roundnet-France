@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
+import Tooltip from '@mui/material/Tooltip';
 
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -50,9 +51,11 @@ function TableCellDelete({ id, endpoint, tableData, setError, setSuccess }) {
   return (
     <Fragment>
       <TableCell align="right">
-        <IconButton aria-label="delete" size="medium" color="error" onClick={handleClickOpen}>
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
+        <Tooltip title="Supprimer">
+          <IconButton aria-label="delete" size="medium" color="error" onClick={handleClickOpen}>
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        </Tooltip>
       </TableCell>
 
       {/* Dialog component */}
