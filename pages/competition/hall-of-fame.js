@@ -8,8 +8,11 @@ import Typography from '@mui/material/Typography';
 import Hero from '../../components/ui/hero';
 import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
+import Head from '../../components/head';
+
 
 function HallOfFamePage() {
+  
 
   // Fake crossing items data
   const crossingItems = [
@@ -38,6 +41,11 @@ function HallOfFamePage() {
 
   return (
     <Fragment>
+      <Head 
+      title="Celles et ceux qui ont fait Roundnet France" 
+      description="Bien que jeune, Roundnet France possède déjà ses personnalités et ses membres historiques. Découvrez les !"
+      />
+
        <Hero
         title="Hall Of Fame"
         image="/images/hero/hall-of-fame.jpg"

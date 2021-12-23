@@ -11,6 +11,7 @@ import FeaturedItems from '../../components/ui/featured-items';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
+import Head from '../../components/head';
 
 function WorldChampionshipPage() {
 
@@ -42,6 +43,11 @@ function WorldChampionshipPage() {
 
   return (
     <Fragment>
+      <Head
+        title="Inscrivez-vous à la première compétition mondiale de roundnet - Roundnet France"
+        description="Les premiers championnats du monde de roundnet sous l’égide de Spikeball auront lieu en Belgique en septembre 2022 !"
+      />
+
       <Hero
         title="Mondiaux 2022"
         image="/images/hero/world-2022.jpg"
@@ -68,15 +74,15 @@ function WorldChampionshipPage() {
           icon="question_mark"
         />
         <FeaturedItems items={items} color="secondary" />
-        </Container>
+      </Container>
 
-        <Container maxWidth="md" sx={{ my: 8 }}>
+      <Container maxWidth="md" sx={{ my: 8 }}>
         <HeaderWithIcon
           title="Suis-je éligible ?"
           icon="add_task"
         />
         <CrossingItems items={items} height={300} />
-        </Container>
+      </Container>
 
       <Container maxWidth="md" sx={{ my: 4 }}>
         <CTAFooter
@@ -90,7 +96,7 @@ function WorldChampionshipPage() {
             url: '/competition',
             text: 'Rejoindre un club'
           }}
-          />
+        />
       </Container>
 
 
