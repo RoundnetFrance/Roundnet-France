@@ -3,18 +3,37 @@ import handleFormSubmit from '../../helpers/handle-form-submit';
 
 // MUI IMPORTS
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Divider from '@mui/material/Divider';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import CircularProgress from '@mui/material/CircularProgress';
 import Slide from '@mui/material/Slide';
 import Box from '@mui/material/Box';
 
 // COMPONENT IMPORTS
 import BoxWrapper from '../ui/box-wrapper';
-import PasswordInput from '../ui/password-input';
 import FormField from './form-field';
+
+//! HOW TO - FORM CONFIG
+// * Form config is an object that contains the following:
+
+//   * name: the name displayed on top of the form (litteral)
+
+//   * fields: an array of objects that contain the following:
+//     * id (required): the id of the input. Must match database column name
+//     * label (required): the label of the input
+//     * type (required): the type of input. Can be: (text, password, date, email)
+//     * required (optional): if the input is required or not. Defaults to false
+//     * dateConfig (optional): if the input is a date input, this object contains the following:
+//        disableFuture (optional): a bool that determines if the date picker should allow future dates. Defaults to false
+//        clearable (optional): a bool that determines if the date picker should allow clearing the date. Defaults to false
+//        openTo (optional): a string that determines which view the date picker should open to. Defaults to 'month'
+//        views (optional): an array of strings that determines which views the date picker should display. Defaults to ['year', 'month', 'day']
+
+//   * descriptionBefore: description shown before the form. Can be a string or a component
+//   * descriptionAfter: description shown after the form. Can be a string or a component
+
+
 
 export default function FormBuilder({ formConfig }) {
   // Get form Config values
@@ -102,20 +121,14 @@ export default function FormBuilder({ formConfig }) {
         />
       ))}
 
-      {/* <TextField id="name" label="Nom & Prénom" variant="outlined" value={form.name} onChange={handleChange} error={errors.name !== ""} helperText={errors.name} required />
-      <TextField id="email" label="Email" variant="outlined" value={form.email} onChange={handleChange} error={errors.email !== ""} helperText={errors.email} required />
-
-      <PasswordInput label="Mot de passe" value={form.password} name="password" handleChange={handleChange} error={errors.password !== ''} helperText={errors.password} />
-      <PasswordInput label="Confirmation du mot de passe" value={form.passwordConfirm} name="passwordConfirm" handleChange={handleChange} error={errors.passwordConfirm !== ''} helperText={errors.passwordConfirm} confirm /> */}
-
       <Typography variant="body2" >
         * Champs obligatoires
       </Typography>
-      <Button variant="contained" color="primary" type="submit">
-        {loading ? (<Box sx={{ display: 'flex' }}>
-          <CircularProgress color="inherit" size={30} />
-        </Box>) : 'Envoyer'}
-      </Button>
+
+      <LoadingButton loading={loading} variant="contained" color="primary" type="submit">
+        Faire une demande
+      </LoadingButton>
+
       <Typography variant="body2" >
         {descriptionAfter}
       </Typography>
