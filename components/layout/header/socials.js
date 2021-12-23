@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import SvgIcon from '@mui/material/SvgIcon';
+import Divider from '@mui/material/Divider';
 
 export default function Socials() {
   return (
@@ -35,6 +36,7 @@ export default function Socials() {
         </SvgIcon>
         </IconButton>
       </Box>
+      <Divider orientation="vertical" variant="middle" color="white" flexItem />
 
     </Stack>
   )

@@ -118,7 +118,7 @@ function MenuDrawer() {
     <Fragment>
       <IconButton
         onClick={toggleDrawer}
-        size="large"
+        size="small"
         edge="start"
         color="inherit"
         aria-label="menu"
