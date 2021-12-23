@@ -14,6 +14,7 @@ import InfoBlock from '../../components/ui/info-block';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import FeaturedItems from '../../components/ui/featured-items';
 import CTAFooter from '../../components/ui/cta-footer';
+import Head from '../../components/head';
 
 function TournamentsResultsPage() {
   // Fake InfoBlocks data
@@ -59,6 +60,11 @@ function TournamentsResultsPage() {
 
   return (
     <Fragment>
+      <Head
+        title="Rencontres inter-clubs - Roundnet France"
+        description="Les rencontres inter-clubs représentent l'initiative de Roundnet France de se faire rencontrer les différents viviers de joueurs nationaux."
+      />
+
       <Hero
         title="Rencontres inter-clubs"
         image="/images/hero/results.jpg"

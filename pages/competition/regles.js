@@ -15,6 +15,7 @@ import HalfImage from '../../components/ui/half-image';
 import Timeliner from '../../components/ui/timeliner';
 import PageTitle from '../../components/ui/page-title';
 import ColoredBackground from '../../components/ui/colored-background';
+import Head from '../../components/head';
 
 // MUI ICONS
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
@@ -46,6 +47,10 @@ const rulesItems = [
 function RulesPage() {
   return (
     <Fragment>
+      <Head
+        title="Comment jouer au roundnet ? Les règles du roundnet"
+        description="Réputé pour sa facilité de prise en main, le roundnet est un sport populaire qui emprunte au meilleur des mondes de nombreux sports pour le plaisir de tous les joueurs. "
+      />
 
       <Hero
         title="Règles"

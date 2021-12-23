@@ -11,12 +11,17 @@ import Hero from '../../components/ui/hero';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
 import PageTitle from '../../components/ui/page-title';
 import CrossingItems from '../../components/ui/crossing-items';
-import Error from '../../components/ui/error'
+import Error from '../../components/ui/error';
+import Head from '../../components/head';
 
 function TeamPage({ members, error }) {
 
   return (
     <Fragment>
+      <Head
+        title="Les membres du bureau - Fédération Française de Roundnet"
+        description="Retrouvez tous les membres du bureau de la Fédération Française de Roundnet."
+      />
 
       <Hero
         title="L'équipe Roundnet France"
