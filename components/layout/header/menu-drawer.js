@@ -122,7 +122,7 @@ function MenuDrawer() {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ display: { xs: 'block', md: 'none' } }}
+        sx={{ display: { xs: 'inherit', lg: 'none' } }}
       >
         <MenuIcon />
       </IconButton>

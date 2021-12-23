@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { signOut } from 'next-auth/react';
 
 // MATERIAL COMPONENTS
@@ -20,6 +20,7 @@ import MenuDrawer from './menu-drawer';
 import AdminDrawer from '../admin/admin-drawer';
 import menuState from '../../../helpers/menu-state';
 import NavItem from './nav-items';
+import Socials from './socials';
 
 function HideOnScroll({ children }) {
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -130,11 +131,15 @@ function Header(props) {
               </Link>
             </Typography>
 
-            <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'inherit' } : { xs: 'none', md: 'block' } }}>
+            <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'inherit' } : { xs: 'none', lg: 'block' } }}>
               {adminLayout ? adminItems : navItems}
             </ButtonGroup>
-            {adminLayout ? <AdminDrawer /> : <MenuDrawer />}
-
+            
+            {adminLayout ? <AdminDrawer /> : <Fragment>
+              <Socials />
+              <MenuDrawer />
+            </Fragment>}
+              
           </Toolbar>
         </AppBar>
       </Box>
