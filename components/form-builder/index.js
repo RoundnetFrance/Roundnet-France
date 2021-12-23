@@ -2,31 +2,38 @@ import { useState } from 'react';
 import handleFormSubmit from '../../helpers/handle-form-submit';
 
 // MUI IMPORTS
-import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import Slide from '@mui/material/Slide';
-import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Snackbar from '@mui/material/Snackbar';
-import Divider from '@mui/material/Divider';
 
-// COMPONENT IMPORT
-import Link from '../ui/link';
+// COMPONENT IMPORTS
 import BoxWrapper from '../ui/box-wrapper';
 import PasswordInput from '../ui/password-input';
+import FormField from './form-field';
 
-// FUNCTIONAL COMPONENT
-function SignUpForm() {
+export default function FormBuilder({ formConfig }) {
+  // Get form Config values
+  const {
+    name,
+    fields,
+    descriptionBefore,
+    descriptionAfter,
+    endpoint,
+  } = formConfig;
 
-  // Handle controlled inputs
-  const initialFormState = {
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  }
+  // Create an object from formFields where each id is an empty string
+  const initialFormState = fields.map(field => field.id).reduce((acc, curr) => ({
+    ...acc,
+    [curr]: '',
+  }), {});
+
+  // Handle state and state change onChange
+
   const [form, setForm] = useState(initialFormState);
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -60,7 +67,7 @@ function SignUpForm() {
       setSubmitStatus,
       form,
       errors,
-      '/api/auth/signup',
+      endpoint,
       requiredFields,
     );
   };
@@ -78,20 +85,29 @@ function SignUpForm() {
     }));
   };
 
+  // RETURN JSX
   return (
-
-    <BoxWrapper title="Créer un compte" onSubmit={handleSubmit}>
-      <Typography>La validation d&apos;un compte administrateur Roundnet France permet aux associations d&apos;enregistrer les résultats des tournois automatiquement. Elle est soumise à l&apos;acceptation d&apos;un membre du board administratif de la fédération. </Typography>
-      <Typography>Pour en savoir plus, <Link href="/qui-sommes-nous/contact">contactez-nous directement.</Link></Typography>
+    <BoxWrapper title={name} onSubmit={handleSubmit}>
+      <Typography>{descriptionBefore}</Typography>
 
       <Divider />
 
-      <TextField id="name" label="Nom & Prénom" variant="outlined" value={form.name} onChange={handleChange} error={errors.name !== ""} helperText={errors.name} required />
+      {fields.map(field => (
+        <FormField
+          key={field.id}
+          {...field}
+          value={form[field.id]}
+          error={errors[field.id]}
+          handleChange={handleChange}
+        />
+      ))}
+
+      {/* <TextField id="name" label="Nom & Prénom" variant="outlined" value={form.name} onChange={handleChange} error={errors.name !== ""} helperText={errors.name} required />
       <TextField id="email" label="Email" variant="outlined" value={form.email} onChange={handleChange} error={errors.email !== ""} helperText={errors.email} required />
 
       <PasswordInput label="Mot de passe" value={form.password} name="password" handleChange={handleChange} error={errors.password !== ''} helperText={errors.password} />
-      <PasswordInput label="Confirmation du mot de passe" value={form.passwordConfirm} name="passwordConfirm" handleChange={handleChange} error={errors.passwordConfirm !== ''} helperText={errors.passwordConfirm} confirm />
-      
+      <PasswordInput label="Confirmation du mot de passe" value={form.passwordConfirm} name="passwordConfirm" handleChange={handleChange} error={errors.passwordConfirm !== ''} helperText={errors.passwordConfirm} confirm /> */}
+
       <Typography variant="body2" >
         * Champs obligatoires
       </Typography>
@@ -101,7 +117,7 @@ function SignUpForm() {
         </Box>) : 'Envoyer'}
       </Button>
       <Typography variant="body2" >
-        Vous avez déjà un compte ? <Link href="/rf-admin">Connectez-vous</Link>
+        {descriptionAfter}
       </Typography>
 
       {/* SNACKBAR */}
@@ -120,8 +136,5 @@ function SignUpForm() {
         </Alert>
       </Snackbar>
     </BoxWrapper>
-
   )
 }
-
-export default SignUpForm

@@ -56,6 +56,12 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
 
   // If element is editable, add an edit icon button with onClick event
   if (isEditable) {
+
+    let date;
+    if (isDate) {
+      date = new Date(value).toLocaleDateString('fr-FR');
+    }
+
     // Handle change on confirm button click (patch and mutate)
     const handleClick = async () => {
       setLoading(true);
@@ -65,7 +71,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
         body: { [element]: isDate ? controlledDate : controlledValue },
         tableData,
         element,
-        value: isDate ? controlledDate : controlledValue,
+        value: isDate ? date : controlledValue,
         mutate,
         setError,
         setSuccess,
@@ -79,14 +85,13 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
     const editableField = isDate ? (
       <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
         <DatePicker
-          label="Date"
-          openTo="year"
+          openTo="month"
           views={['year', 'month', 'day']}
           value={controlledDate}
           onChange={(newValue) => {
             setControlledDate(newValue);
           }}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField label="Date" {...params} />}
         />
       </LocalizationProvider>
 

@@ -24,12 +24,15 @@ const getInitialFormState = (form) => {
 import validateEmail from "./validate-email";
 
 // Validation inputs function
-const validateInputs = (formData, initialFormState) => {
+function validateInputs(formData, initialFormState, requiredFields) {
   const errors = initialFormState;
 
   // For each formData input, check if empty
   Object.keys(formData).forEach((key) => {
-    if (!formData[key] || formData[key] === '') {
+    if (
+      (!formData[key] || formData[key] === '')
+      && requiredFields.includes(key)
+    ) {
       errors[key] = 'Ce champ est requis';
     }
   });
@@ -82,6 +85,7 @@ export default async function handleFormSubmit(
   form,
   errors,
   url,
+  requiredFields,
 ) {
   // Set loading to true
   setLoading((prevLoading) => !prevLoading);
@@ -92,7 +96,7 @@ export default async function handleFormSubmit(
   const formData = trimInputs(form);
 
   // Check if all errors are empty strings
-  const validationErrors = validateInputs(form, initialFormState);
+  const validationErrors = validateInputs(form, initialFormState, requiredFields);
   const isValid = Object.values(validationErrors).every((error) => error === '');
   if (!isValid) {
     setErrors(validationErrors);
@@ -124,8 +128,8 @@ export default async function handleFormSubmit(
     if (!response.ok) {
       // In specific case of invalid input data
       if (response.status === 422) throw new InvalidFormInput(data);
-      
-      throw new Error(data.message || response.statusText);
+
+      throw new Error(data.message || response.statusText);
     }
 
     // If everything is ok, return status of submission and reset form and errors
