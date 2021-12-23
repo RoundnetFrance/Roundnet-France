@@ -122,7 +122,7 @@ function CreateClubForm() {
       <Typography variant="body2">
         Cette demande sera soumise à validation par la fédération française de Roundnet, dans le respect des <Link href="/clubs-et-communautes/adherer-a-roundnet-france">règles d&apos;affiliation de l&apos;association</Link>.
       </Typography>
-      <Button variant="contained" color="primary">Envoyer</Button>
+      <Button variant="contained" color="primary" type="submit">Envoyer</Button>
 
       {/* SNACKBAR */}
       <Snackbar

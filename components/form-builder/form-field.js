@@ -1,13 +1,16 @@
+import { fr } from 'date-fns/locale';
+
+// MUI IMPORT
 import TextField from '@mui/material/TextField';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
-import { fr } from 'date-fns/locale';
 
 // COMPONENT IMPORTS
 import PasswordInput from '../ui/password-input';
 
-export default function FormField({ type, id, label, required, value, handleChange, error }) {
+export default function FormField({ type, id, label, required, value, dateConfig, passwordConfig, handleChange, error }) {
+
   // Conditional rendering of form field
   switch (type) {
     case 'text':
@@ -24,12 +27,12 @@ export default function FormField({ type, id, label, required, value, handleChan
       return (
         <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
           <DatePicker
-            disableFuture
-            clearable
+            disableFuture={dateConfig?.disableFuture}
+            clearable={dateConfig?.clearable}
             id={id}
             label={label}
-            openTo="month"
-            views={['year', 'month', 'day']}
+            openTo={dateConfig?.openTo || 'month'}
+            views={dateConfig?.views || ['year', 'month', 'day']}
             value={value || new Date()}
             onChange={(newValue) => {
               handleChange({
@@ -43,6 +46,11 @@ export default function FormField({ type, id, label, required, value, handleChan
           />
         </LocalizationProvider>
       );
+
+    case 'password':
+      return (
+        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={passwordConfig?.confirm} />
+      )
 
     default:
       return null;

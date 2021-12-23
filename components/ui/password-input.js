@@ -13,7 +13,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-function PasswordInput({ value, name, handleChange, error, helperText, confirm }) {
+function PasswordInput({ label, value, name, handleChange, error, helperText, confirm }) {
   const [showPassword, setShowPassword] = useState(false);
 
   // Handle password show/hide
@@ -23,8 +23,6 @@ function PasswordInput({ value, name, handleChange, error, helperText, confirm }
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  const label = confirm ? 'Confirmation du mot de passe' : 'Mot de passe';
 
   return (
     <FormControl sx={{ m: 1 }} variant="outlined" required>
