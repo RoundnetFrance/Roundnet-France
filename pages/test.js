@@ -36,7 +36,15 @@ function Test() {
           openTo: 'month',
           views: ['year', 'month', 'day'],
         },
-        dividerBottom: true,
+        options: {
+          dividerBottom: true,
+        }
+      },
+      {
+        id: 'description',
+        label: 'Description',
+        type: 'text',
+        required: true,
       },
       {
         id: 'website',

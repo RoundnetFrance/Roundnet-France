@@ -16,10 +16,6 @@ function schemaConstructor(fields) {
 
     // Define the global type via switch
     switch (type) {
-      case 'text':
-        schemaKeys[id] = Joi.string().trim();
-        break;
-
       case 'email':
         schemaKeys[id] = Joi.string().email({ tlds: { allow: false } });
         break;
@@ -36,9 +32,9 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().trim().uri();
         break;
 
-      // Defaults to an error
+      // Defaults to a regular string (text/longtext)
       default:
-        throw new Error('Type not supported in formConfig.fields for input ', id);
+        schemaKeys[id] = Joi.string().trim();
     }
     // If required, add the required property to the schema. Else, allow empty string, as it is the default value for all inputs
     if (required) {
@@ -94,7 +90,6 @@ export async function submitForm({
 
     return acc;
   }, {});
-  console.log('sanitaized data', data);
 
   // Fetch the endpoint
   const response = await fetch(endpoint, {
