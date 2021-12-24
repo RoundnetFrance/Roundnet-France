@@ -18,14 +18,15 @@ import FormField from './form-field';
 //     * id (required): the id of the input. Must match database column name
 //     * label (required): the label of the input
 //     * type (required): the type of input. Can be: (text, password, date, email, url). Will throw an error if not supported
-//     * required (optional): if the input is required or not. Defaults to false
-//     * dateConfig (optional): if the input is a date input, this object contains the following:
-//        disableFuture (optional): a bool that determines if the date picker should allow future dates. Defaults to false
-//        clearable (optional): a bool that determines if the date picker should allow clearing the date. Defaults to false
-//        openTo (optional): a string that determines which view the date picker should open to. Defaults to 'month'
-//        views (optional): an array of strings that determines which views the date picker should display. Defaults to ['year', 'month', 'day']
-//     * passwordConfig (optional): if the input is a password input, this object contains the following:
-//        confirm (optional): a bool that determines if the password input should have a confirm password input. Defaults to false
+//     * options: an object that contains the following:
+//        required (optional): if the input is required or not. Defaults to false
+//        passwordConfirm (optional): a bool that determines if the password input should have a confirm password input. Defaults to false
+//        dateConfig (optional): if the input is a date input, this object contains the following:
+//          disableFuture (optional): a bool that determines if the date picker should allow future dates. Defaults to false
+//          clearable (optional): a bool that determines if the date picker should allow clearing the date. Defaults to false
+//          openTo (optional): a string that determines which view the date picker should open to. Defaults to 'month'
+//          views (optional): an array of strings that determines which views the date picker should display. Defaults to ['year', 'month', 'day']
+
 
 //   * descriptionBefore: description shown before the form. Can be a string or a component
 //   * descriptionAfter: description shown after the form. Can be a string or a component
@@ -40,7 +41,6 @@ export default function FormBuilder({ formConfig }) {
     descriptionBefore,
     descriptionAfter,
     endpoint,
-    successMessage,
   } = formConfig;
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)

@@ -22,49 +22,54 @@ function CreateClubPage() {
         id: 'organization',
         label: 'Nom du club',
         type: 'text',
-        passwordConfig: {
-          confirm: true,
-        },
-        required: true,
+        options: {
+          required: true,
+        }
       },
       {
         id: 'city',
         label: 'Ville',
         type: 'text',
-        required: true,
+        options: {
+          required: true,
+        }
       },
       {
         id: 'clubCreated',
         label: 'Date de création du club',
         type: 'date',
-        dateConfig: {
-          disableFuture: true,
-          clearable: true,
-          openTo: 'month',
-          views: ['year', 'month', 'day'],
-        },
+        options: {
+          dateConfig: {
+            disableFuture: true,
+            clearable: true,
+            openTo: 'month',
+            views: ['year', 'month', 'day'],
+          },
+        }
       },
       {
         id: 'description',
         label: 'Description',
         type: 'longtext',
-        required: true,
         options: {
+          required: true,
           multilineRows: 6,
-        }
+        },
       },
       {
         id: 'name',
         label: 'Nom & prénom du président du club',
         type: 'text',
-        required: true,
+        options: {
+          required: true,
+        }
       },
       {
         id: 'email',
         label: 'Email',
         type: 'email',
-        required: true,
         options: {
+          required: true,
           dividerBottom: true,
         }
       },
@@ -82,7 +87,6 @@ function CreateClubPage() {
         id: 'instagram',
         label: 'Instagram',
         type: 'url',
-        dividerBottom: true,
       },
     ],
     endpoint: '/api/clubs',
