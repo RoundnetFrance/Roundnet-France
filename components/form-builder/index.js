@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import handleFormSubmit from '../../helpers/handle-form-submit';
+import { validateForm } from '../../helpers/form';
 
 // MUI IMPORTS
 import Typography from '@mui/material/Typography';
@@ -29,6 +29,8 @@ import FormField from './form-field';
 //        clearable (optional): a bool that determines if the date picker should allow clearing the date. Defaults to false
 //        openTo (optional): a string that determines which view the date picker should open to. Defaults to 'month'
 //        views (optional): an array of strings that determines which views the date picker should display. Defaults to ['year', 'month', 'day']
+//     * passwordConfig (optional): if the input is a password input, this object contains the following:
+//        confirm (optional): a bool that determines if the password input should have a confirm password input. Defaults to false
 
 //   * descriptionBefore: description shown before the form. Can be a string or a component
 //   * descriptionAfter: description shown after the form. Can be a string or a component
@@ -51,6 +53,11 @@ export default function FormBuilder({ formConfig }) {
     [curr]: '',
   }), {});
 
+  const initialFormErrors = fields.map(field => field.id).reduce((acc, curr) => ({
+    ...acc,
+    [curr]: false,
+  }), {});
+
   // Handle state and state change onChange
 
   const [form, setForm] = useState(initialFormState);
@@ -63,7 +70,7 @@ export default function FormBuilder({ formConfig }) {
   };
 
   // Handle errors
-  const [errors, setErrors] = useState(initialFormState);
+  const [errors, setErrors] = useState(initialFormErrors);
   // Handle loading
   const [loading, setLoading] = useState(false);
 
@@ -74,22 +81,6 @@ export default function FormBuilder({ formConfig }) {
     message: '',
     error: false,
   });
-
-  // Handle submission (through handleFormSubmit helper function)
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const requiredFields = ['name', 'email', 'password', 'passwordConfirm'];
-    handleFormSubmit(
-      setLoading,
-      setErrors,
-      setForm,
-      setSubmitStatus,
-      form,
-      errors,
-      endpoint,
-      requiredFields,
-    );
-  };
 
   // Handle close of snackbar
   const handleSnackbarClose = (event, reason) => {
@@ -104,9 +95,40 @@ export default function FormBuilder({ formConfig }) {
     }));
   };
 
+  // Handle submission (through handleFormSubmit helper function)
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    // Validate the form
+    try {
+      const response = validateForm({ form, fields, initialFormErrors });
+      console.log(response);
+    } catch (error) {
+      console.log(error.details)
+      // Set errors to inputs
+      setErrors(error.details);
+      // Display an error snackbar
+      setSubmitStatus({
+        open: true,
+        error: true,
+        message: error.message,
+      });
+      // Stop loading
+      setLoading(false);
+    }
+
+    // Submit the validated form
+
+
+
+  };
+
+
+
   // RETURN JSX
   return (
-    <BoxWrapper title={name} onSubmit={handleSubmit}>
+    <BoxWrapper title={name} onSubmit={handleSubmit} noValidate>
       <Typography>{descriptionBefore}</Typography>
 
       <Divider />
