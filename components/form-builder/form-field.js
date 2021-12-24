@@ -1,7 +1,7 @@
 import { fr } from 'date-fns/locale';
 
 // MUI IMPORT
-import TextField from '@mui/material/TextField';
+import { TextField } from '@mui/material';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
@@ -35,7 +35,7 @@ export default function FormField({ type, id, label, required, value, dateConfig
                 },
               });
             }}
-            renderInput={(params) => <TextField  label="Date" {...params} />}
+            renderInput={(params) => <TextField label="Date" {...params} />}
           />
         </LocalizationProvider>
       );
@@ -46,7 +46,7 @@ export default function FormField({ type, id, label, required, value, dateConfig
       )
 
     default:
-      return(
+      return (
         <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} />
       )
   }

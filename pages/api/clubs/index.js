@@ -1,7 +1,7 @@
 // NEXT API REQUEST
 // GET /api/clubs
 
-import { getDocuments } from '../../../helpers/db';
+import { getDocuments, insertDocument } from '../../../helpers/db';
 
 export default async function handler(req, res) {
   // GET method to read validated clubs (for public access)
@@ -13,5 +13,32 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Internal server error', details: error.message });
     }
   }
+
+  // POST method to create a new club
+  if (req.method === 'POST') {
+    try {
+      const { body } = req;
+      const newClub = {
+        title: body.organization || body.title,
+        chip: body.city || body.chip,
+        description: body.description,
+        link: {
+          url: body.website,
+          outLink: true,
+        },
+        president: body.name || body.president,
+        validated: false,
+      }
+
+      const response = await insertDocument('clubs', newClub);
+      console.log(response);
+
+      return res.status(201).json({ message: 'Le club a bien été enregistré. Il sera validé par un membre de la fédération.' });
+    } catch (error) {
+      return res.status(500).json({ error: 'Une erreur est survenue lors de la création du club. Veuillez réessayer.', details: error.message });
+    }
+  }
+
+
   return res.status(405).json({ error: 'Method not allowed' });
 }
