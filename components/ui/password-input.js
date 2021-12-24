@@ -13,7 +13,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-function PasswordInput({ label, value, name, handleChange, error, helperText, confirm }) {
+function PasswordInput({ label, value, name, handleChange, error, helperText, required }) {
   const [showPassword, setShowPassword] = useState(false);
 
   // Handle password show/hide
@@ -25,7 +25,7 @@ function PasswordInput({ label, value, name, handleChange, error, helperText, co
   };
 
   return (
-    <FormControl sx={{ m: 1 }} variant="outlined" required>
+    <FormControl sx={{ m: 1 }} variant="outlined" required={required}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <OutlinedInput
         id={name}

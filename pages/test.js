@@ -11,7 +11,7 @@ function Test() {
       {
         id: 'organization',
         label: 'Nom du club',
-        type: 'password',
+        type: 'text',
         passwordConfig: {
           confirm: true,
         },

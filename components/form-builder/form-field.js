@@ -10,25 +10,18 @@ import DatePicker from '@mui/lab/DatePicker';
 import PasswordInput from '../ui/password-input';
 
 export default function FormField({ type, id, label, required, value, dateConfig, passwordConfig, handleChange, error }) {
+  // Define error as a bool for MUI error prop 
+  const booleanError = error === false ? false : true;
 
   // Conditional rendering of form field
   switch (type) {
-    case 'text':
-      return (
-        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={error !== ""} helperText={error} required={required} />
-      );
-
-    case 'email':
-      return (
-        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={error !== ""} helperText={error} required={required} />
-      );
-
     case 'date':
       return (
         <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
           <DatePicker
             disableFuture={dateConfig?.disableFuture}
             clearable={dateConfig?.clearable}
+            errorText={booleanError}
             id={id}
             label={label}
             openTo={dateConfig?.openTo || 'month'}
@@ -42,17 +35,19 @@ export default function FormField({ type, id, label, required, value, dateConfig
                 },
               });
             }}
-            renderInput={(params) => <TextField label="Date" {...params} />}
+            renderInput={(params) => <TextField  label="Date" {...params} />}
           />
         </LocalizationProvider>
       );
 
     case 'password':
       return (
-        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={passwordConfig?.confirm} />
+        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={passwordConfig?.confirm} required={required} />
       )
 
     default:
-      return null;
+      return(
+        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} />
+      )
   }
 }
