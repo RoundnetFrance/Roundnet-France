@@ -1,22 +1,32 @@
 import { fr } from 'date-fns/locale';
+import { Fragment } from 'react';
 
 // MUI IMPORT
-import { TextField } from '@mui/material';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { TextField, Divider } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import DatePicker from '@mui/lab/DatePicker';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 
 // COMPONENT IMPORTS
 import PasswordInput from '../ui/password-input';
 
-export default function FormField({ type, id, label, required, value, dateConfig, passwordConfig, handleChange, error }) {
+export default function FormField({ type, id, label, required, options, value, dateConfig, passwordConfig, handleChange, error }) {
   // Define error as a bool for MUI error prop 
   const booleanError = error === false ? false : true;
 
-  // Conditional rendering of form field
+  // If there's a dividerBottom option, add a MUI Divider.
+  const dividerBottom = options?.dividerBottom ? <Fragment><Divider /></Fragment> : null;
+
+  // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
+  let input;
   switch (type) {
+    case 'longtext':
+      input = (
+        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} multiline rows={options.multilineRows || 4} />
+      );
+      break;
+
     case 'date':
-      return (
+      input = (
         <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
           <DatePicker
             disableFuture={dateConfig?.disableFuture}
@@ -39,15 +49,22 @@ export default function FormField({ type, id, label, required, value, dateConfig
           />
         </LocalizationProvider>
       );
+      break;
 
     case 'password':
-      return (
+      input = (
         <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={passwordConfig?.confirm} required={required} />
       )
+      break;
 
     default:
-      return (
+      input = (
         <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} />
       )
+      break;
   }
+
+  return (
+    <Fragment>{input} {dividerBottom}</Fragment>
+  );
 }
