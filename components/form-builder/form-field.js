@@ -9,7 +9,7 @@ import { DatePicker, LocalizationProvider } from '@mui/lab';
 // COMPONENT IMPORTS
 import PasswordInput from '../ui/password-input';
 
-export default function FormField({ type, id, label, required, options, value, dateConfig, passwordConfig, handleChange, error }) {
+export default function FormField({ type, id, label, required, options, value, handleChange, error }) {
   // Define error as a bool for MUI error prop 
   const booleanError = error === false ? false : true;
 
@@ -29,13 +29,13 @@ export default function FormField({ type, id, label, required, options, value, d
       input = (
         <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
           <DatePicker
-            disableFuture={dateConfig?.disableFuture}
-            clearable={dateConfig?.clearable}
+            disableFuture={options?.dateConfig?.disableFuture}
+            clearable={options?.dateConfig?.clearable}
             errorText={booleanError}
             id={id}
             label={label}
-            openTo={dateConfig?.openTo || 'month'}
-            views={dateConfig?.views || ['year', 'month', 'day']}
+            openTo={options?.dateConfig?.openTo || 'month'}
+            views={options?.dateConfig?.views || ['year', 'month', 'day']}
             value={value || new Date()}
             onChange={(newValue) => {
               handleChange({
@@ -53,7 +53,7 @@ export default function FormField({ type, id, label, required, options, value, d
 
     case 'password':
       input = (
-        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={passwordConfig?.confirm} required={required} />
+        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={options?.passwordConfirm} required={required} />
       )
       break;
 
@@ -65,6 +65,9 @@ export default function FormField({ type, id, label, required, options, value, d
   }
 
   return (
-    <Fragment>{input} {dividerBottom}</Fragment>
+    <Fragment>
+      {input}
+      {dividerBottom}
+    </Fragment>
   );
 }

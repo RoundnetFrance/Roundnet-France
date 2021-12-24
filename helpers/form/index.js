@@ -12,7 +12,7 @@ class InvalidForm {
 function schemaConstructor(fields) {
   const schemaKeys = {};
   fields.forEach((field) => {
-    const { id, type, required } = field;
+    const { id, type, options } = field;
 
     // Define the global type via switch
     switch (type) {
@@ -37,7 +37,7 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().trim();
     }
     // If required, add the required property to the schema. Else, allow empty string, as it is the default value for all inputs
-    if (required) {
+    if (options?.required) {
       schemaKeys[id] = schemaKeys[id].required();
     }
     else {
@@ -73,6 +73,25 @@ export function validateForm({ form, fields, initialFormErrors }) {
   return value;
 }
 
+export function validateAPIForm({ form, schema }) {
+  // Validate the form
+  const { error, value } = schema.validate(form, {
+    abortEarly: false,
+  });
+
+
+  if (error) {
+    // Get all keys where there is an error
+    const listOfErrorKeys = error.details.map(({ context }) => context.key);
+    // Stringify the list of keys
+    const errorKeysString = listOfErrorKeys.join(', ');
+    // Throw explicit error
+    throw new Error('These keys are invalid :' + errorKeysString);
+  }
+
+  return value;
+}
+
 // * Handle form submission. Requires the endpoint and definitive values.
 export async function submitForm({
   endpoint,
@@ -97,7 +116,10 @@ export async function submitForm({
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      data,
+      formBuilder: true,
+    }),
   });
   return response;
 }
