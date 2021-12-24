@@ -12,8 +12,7 @@ class InvalidForm {
 function schemaConstructor(fields) {
   const schemaKeys = {};
   fields.forEach((field) => {
-    const { id, type, required, label, passwordConfig } = field;
-
+    const { id, type, required } = field;
 
     // Define the global type via switch
     switch (type) {
@@ -33,10 +32,15 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().min(6);
         break;
 
+      case 'url':
+        schemaKeys[id] = Joi.string().trim().uri();
+        break;
+
+      // Defaults to an error
       default:
         throw new Error('Type not supported in formConfig.fields for input ', id);
     }
-    // If required, add the required property to the schema
+    // If required, add the required property to the schema. Else, allow empty string, as it is the default value for all inputs
     if (required) {
       schemaKeys[id] = schemaKeys[id].required();
     }
@@ -74,9 +78,31 @@ export function validateForm({ form, fields, initialFormErrors }) {
 }
 
 // * Handle form submission. Requires the endpoint and definitive values.
-export function submitForm({
+export async function submitForm({
   endpoint,
   values,
 }) {
-  return true;
+
+  // Get rid of empty values
+  const data = Object.entries(values).reduce((acc, [key, value]) => {
+    if (value) {
+      return {
+        ...acc,
+        [key]: value,
+      };
+    }
+
+    return acc;
+  }, {});
+  console.log('sanitaized data', data);
+
+  // Fetch the endpoint
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  return response;
 }

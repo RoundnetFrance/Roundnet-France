@@ -1,14 +1,9 @@
 import { useState } from 'react';
-import { validateForm } from '../../helpers/form';
+import { validateForm, submitForm } from '../../helpers/form';
 
 // MUI IMPORTS
-import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Divider from '@mui/material/Divider';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import Slide from '@mui/material/Slide';
-import Box from '@mui/material/Box';
+import { Typography, Divider, Snackbar, Alert, Slide } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 // COMPONENT IMPORTS
 import BoxWrapper from '../ui/box-wrapper';
@@ -22,7 +17,7 @@ import FormField from './form-field';
 //   * fields: an array of objects that contain the following:
 //     * id (required): the id of the input. Must match database column name
 //     * label (required): the label of the input
-//     * type (required): the type of input. Can be: (text, password, date, email)
+//     * type (required): the type of input. Can be: (text, password, date, email, url). Will throw an error if not supported
 //     * required (optional): if the input is required or not. Defaults to false
 //     * dateConfig (optional): if the input is a date input, this object contains the following:
 //        disableFuture (optional): a bool that determines if the date picker should allow future dates. Defaults to false
@@ -45,9 +40,10 @@ export default function FormBuilder({ formConfig }) {
     descriptionBefore,
     descriptionAfter,
     endpoint,
+    successMessage,
   } = formConfig;
 
-  // Create an object from formFields where each id is an empty string
+  // Create an object from formFields where each id is an empty string (or false if initial error object)
   const initialFormState = fields.map(field => field.id).reduce((acc, curr) => ({
     ...acc,
     [curr]: '',
@@ -59,7 +55,6 @@ export default function FormBuilder({ formConfig }) {
   }), {});
 
   // Handle state and state change onChange
-
   const [form, setForm] = useState(initialFormState);
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -96,7 +91,7 @@ export default function FormBuilder({ formConfig }) {
   };
 
   // Handle submission (through handleFormSubmit helper function)
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
@@ -116,15 +111,39 @@ export default function FormBuilder({ formConfig }) {
       });
       // Stop loading
       setLoading(false);
+
+      // Stop the handleSubmit function
+      return;
     }
 
     // Submit the validated form
+    try {
+      // Submit the form to the endpoint API
+      const response = await submitForm({ values: form, endpoint });
+      const data = await response.json();
+      // Re-init the UI
+      // setForm(initialFormState);
+      setErrors(initialFormErrors);
 
+      // Display a success snackbar
+      setSubmitStatus({
+        open: true,
+        success: true,
+        message: data.message || 'Les données ont bien été envoyées.',
+      });
+
+    } catch (error) {
+      setSubmitStatus({
+        open: true,
+        error: true,
+        message: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
 
 
   };
-
-
 
   // RETURN JSX
   return (

@@ -1,9 +1,12 @@
+import { Fragment } from 'react';
+
 // COMPONENT IMPORTS
 import FormBuilder from '../components/form-builder'
+import Link from '../components/ui/link';
 
 function Test() {
-  const descriptionBefore = "Pré-description";
-  const descriptionAfter = "Après-description";
+  const descriptionBefore = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe corrupti amet esse ad culpa suscipit recusandae ut aperiam quibusdam doloremque, optio accusamus temporibus alias illo quae cupiditate libero dolores, perferendis quo dolore? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt dolorem soluta ipsam quas necessitatibus, laboriosam adipisci blanditiis dignissimos recusandae harum quaerat nostrum exercitationem aut nihil a veritatis quisquam minus sint eos ducimus.";
+  const descriptionAfter = <Fragment>Cette demande sera soumise à validation par la fédération française de Roundnet, dans le respect des <Link href="/clubs-et-communautes/adherer-a-roundnet-france">règles d&apos;affiliation de l&apos;association</Link>.</Fragment>;
 
   const formConfig = {
     name: 'Formulaire de demande d\'affiliation pour la saison 2022',
@@ -33,21 +36,22 @@ function Test() {
           openTo: 'month',
           views: ['year', 'month', 'day'],
         },
+        dividerBottom: true,
       },
       {
         id: 'website',
         label: 'Site internet',
-        type: 'text',
+        type: 'url',
       },
       {
         id: 'facebook',
         label: 'Facebook',
-        type: 'text',
+        type: 'url',
       },
       {
         id: 'instagram',
         label: 'Instagram',
-        type: 'text',
+        type: 'url',
         dividerBottom: true,
       },
       {
@@ -63,7 +67,7 @@ function Test() {
         required: true,
       },
     ],
-    endpoint: '/clubs',
+    endpoint: '/api/clubs',
     descriptionBefore,
     descriptionAfter,
   };
