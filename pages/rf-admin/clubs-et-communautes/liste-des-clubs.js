@@ -35,8 +35,13 @@ function ClubsAdminPage() {
         editable: true,
       },
       {
+        _id: 'president',
+        name: 'Président',
+        editable: true,
+      },
+      {
         _id: 'validated',
-        name: 'Public',
+        name: 'Validé',
         align: 'right',
         editable: true,
       },
@@ -57,7 +62,7 @@ function ClubsAdminPage() {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Liste des clubs"></PageTitle>
+      <PageTitle title="Liste des clubs" />
       <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
   )
