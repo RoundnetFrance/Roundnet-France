@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { validateForm, submitForm } from '../../helpers/form';
 
 // MUI IMPORTS
@@ -155,10 +155,15 @@ export default function FormBuilder({ formConfig }) {
 
   // RETURN JSX
   return (
-    <BoxWrapper title={name} onSubmit={handleSubmit} noValidate>
-      <Typography>{descriptionBefore}</Typography>
+    <BoxWrapper title={name} onSubmit={handleSubmit}>
+      {descriptionBefore && (
+      <Fragment>
+        <Typography>{descriptionBefore}</Typography>
+        <Divider />
+      </Fragment>
 
-      <Divider />
+      )}
+
 
       {fields.map(field => (
         <FormField
