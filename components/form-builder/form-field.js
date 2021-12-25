@@ -32,6 +32,7 @@ export default function FormField({ type, id, label, required, options, value, h
             disableFuture={options?.dateConfig?.disableFuture}
             clearable={options?.dateConfig?.clearable}
             errorText={booleanError}
+            invalidDateMessage="Date invalide"
             id={id}
             label={label}
             openTo={options?.dateConfig?.openTo || 'month'}
