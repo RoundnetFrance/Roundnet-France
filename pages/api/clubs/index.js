@@ -3,6 +3,7 @@
 
 import { getDocuments, insertDocument } from '../../../helpers/db';
 import { validateForm } from '../../../helpers/form';
+import Joi from 'joi';
 
 export default async function handler(req, res) {
   // GET method to read validated clubs (for public access)
@@ -18,10 +19,10 @@ export default async function handler(req, res) {
   // POST method to create a new club
   if (req.method === 'POST') {
 
-    const { data, formBuilder } = req.body;
+    const { data } = req.body;
+    console.log(data)
 
     // * Validate the data
-    // Validate when submitted directly through API POST request
     try {
       console.log('validate');
     } catch (error) {

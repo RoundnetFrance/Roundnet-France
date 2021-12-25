@@ -162,7 +162,6 @@ export async function submitForm({
         [key]: value,
       };
     }
-
     return acc;
   }, {});
 

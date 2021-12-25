@@ -97,9 +97,9 @@ export default function FormBuilder({ formConfig }) {
     setLoading(true);
 
     // * Validate the form
+    let validatedForm;
     try {
-      fields = validateForm({ form, fields, initialFormErrors, apiSchema });
-      console.log(fields)
+      validatedForm = validateForm({ form, fields, initialFormErrors, apiSchema });
     } catch (error) {
       // Set errors to inputs if error is there
       if (error.details) {
@@ -120,11 +120,10 @@ export default function FormBuilder({ formConfig }) {
     }
 
 
-
     // * Submit the validated form
     try {
       // Submit the form to the endpoint API
-      const response = await submitForm({ values: form, endpoint });
+      const response = await submitForm({ values: validatedForm, endpoint });
       const data = await response.json();
       // Re-init the UI
       // setForm(initialFormState);
