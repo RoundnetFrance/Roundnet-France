@@ -122,7 +122,7 @@ export default function FormBuilder({ formConfig }) {
 
     // * Submit the validated form
     try {
-      // Submit the form to the endpoint API
+      // Submit the form to the endpoint API (with the validated form return by the function above)
       const response = await submitForm({ values: validatedForm, endpoint });
       const data = await response.json();
       // Re-init the UI
