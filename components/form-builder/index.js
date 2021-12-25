@@ -125,6 +125,12 @@ export default function FormBuilder({ formConfig }) {
       // Submit the form to the endpoint API (with the validated form return by the function above)
       const response = await submitForm({ values: validatedForm, endpoint });
       const data = await response.json();
+
+      // If response is not ok, throw an error
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
       // Re-init the UI
       // setForm(initialFormState);
       setErrors(initialFormErrors);

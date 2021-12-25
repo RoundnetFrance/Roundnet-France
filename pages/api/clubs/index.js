@@ -47,6 +47,12 @@ export default async function handler(req, res) {
 
     // * Send the validated data to the database
     try {
+      // Check if the club title alreay exists
+      const club = await getDocuments('clubs', { title: data.title });
+      if (club.length > 0) {
+        return res.status(400).json({ message: 'Ce nom de club existe déjà. Veuillez en indiquer un nouveau.' });
+      }
+
       // Add a validated:false property to the data
       data.validated = false;
 
