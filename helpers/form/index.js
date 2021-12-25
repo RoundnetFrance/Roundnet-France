@@ -1,5 +1,6 @@
 import Joi from 'joi';
 
+// * Helper functions
 // Add a custom throw error
 class InvalidForm {
   constructor({ message, details }) {
@@ -7,6 +8,44 @@ class InvalidForm {
     this.details = details;
   }
 }
+
+// Transform apiSchema to match values from fields (value return of Joi)
+function matchFormWithApiSchema({ formFields, apiSchema }) {
+  // Create a shallow copy to return to avoid mutating the original object
+  const matchingValueForApi = { ...apiSchema };
+
+  // We loop over apiSchema to match formFields into API Schema validation
+  for (const key in matchingValueForApi) {
+    const expectedValue = matchingValueForApi[key];
+
+    // If value of key is a string, simple process
+    if (typeof expectedValue === 'string') {
+      matchingValueForApi[key] = formFields[expectedValue];
+    }
+    // Else, has to build an array of elements
+    else {
+      const arrayElement = [];
+
+      // For every element of the array, we construct a new object in an array of elements
+      for (const field of expectedValue) {
+        // Get the key name of first key to display it dynamically
+        const keyName = Object.keys(field)[0];
+
+        // Construct and push the new object
+        arrayElement.push({
+          [keyName]: field[keyName],
+          [field.key]: formFields[field[keyName]],
+        });
+      }
+
+      matchingValueForApi[key] = arrayElement;
+    }
+  }
+
+  // Return 
+  return matchingValueForApi;
+}
+
 
 // * Build a dynamic schema for Joi based on the fields definition in formConfig (or any array of objects that matches that structure)
 function schemaConstructor(fields) {
@@ -48,8 +87,8 @@ function schemaConstructor(fields) {
   return Joi.object().keys(schemaKeys);
 }
 
-// * Handle form validation. Requires raw form alues and fields definition from formConfig. Uses schemaConstructor() to generate the schema and validates it with Joi against the form values. If error, returns an custom InvalidForm throw. If valid, return fields.
-export function validateForm({ form, fields, initialFormErrors }) {
+// * Handle form validation. Requires raw form values and fields definition from formConfig. Uses schemaConstructor() to generate the schema and validates it with Joi against the form values. If error, returns an custom InvalidForm throw. If valid, return fields. Can alter fields to match an API schema if apiSchema is provided.
+export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
   // Dynamic constructor of the Joi schema (reading tableConfig.fields for info)
   const schema = schemaConstructor(fields);
 
@@ -67,13 +106,29 @@ export function validateForm({ form, fields, initialFormErrors }) {
 
     // Throw the custom error (see InvalidForm class)
     throw new InvalidForm({ message: 'Le formulaire comporte des erreurs.', details });
-    // throw new Error(error.details.length > 1 ? 'Plusieurs champs sont invalides' : error.details[0].message);
   }
 
-  return value;
+  // If no apiSchema is provided, it means that original form fields are already adapted to API Schema. Return the raw form values.
+  if (!apiSchema) {
+    return value;
+  }
+
+  // If apiSchema is defined, validate the form against the apiSchema
+  try {
+    const apiValue = matchFormWithApiSchema({
+      formFields: value,
+      apiSchema,
+    });
+    return apiValue;
+  } catch (error) {
+    throw new Error('Une erreur est survenue au moment de la traduction des données du formulaire vers le serveur.');
+  }
+
 }
 
-export function validateAPIForm({ form, schema }) {
+
+// * Handles form validation for the server/API. 
+export function validateAPI({ form, schema }) {
   // Validate the form
   const { error, value } = schema.validate(form, {
     abortEarly: false,
@@ -91,6 +146,7 @@ export function validateAPIForm({ form, schema }) {
 
   return value;
 }
+
 
 // * Handle form submission. Requires the endpoint and definitive values.
 export async function submitForm({

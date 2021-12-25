@@ -41,6 +41,7 @@ export default function FormBuilder({ formConfig }) {
     descriptionBefore,
     descriptionAfter,
     endpoint,
+    apiSchema,
   } = formConfig;
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
@@ -95,14 +96,16 @@ export default function FormBuilder({ formConfig }) {
     event.preventDefault();
     setLoading(true);
 
-    // Validate the form
+    // * Validate the form
     try {
-      const response = validateForm({ form, fields, initialFormErrors });
-      console.log(response);
+      fields = validateForm({ form, fields, initialFormErrors, apiSchema });
+      console.log(fields)
     } catch (error) {
-      console.log(error.details)
-      // Set errors to inputs
-      setErrors(error.details);
+      // Set errors to inputs if error is there
+      if (error.details) {
+        setErrors(error.details);
+      }
+
       // Display an error snackbar
       setSubmitStatus({
         open: true,
@@ -116,7 +119,9 @@ export default function FormBuilder({ formConfig }) {
       return;
     }
 
-    // Submit the validated form
+
+
+    // * Submit the validated form
     try {
       // Submit the form to the endpoint API
       const response = await submitForm({ values: form, endpoint });
@@ -141,8 +146,6 @@ export default function FormBuilder({ formConfig }) {
     } finally {
       setLoading(false);
     }
-
-
   };
 
   // RETURN JSX
@@ -157,7 +160,7 @@ export default function FormBuilder({ formConfig }) {
           key={field.id}
           {...field}
           value={form[field.id]}
-          error={errors[field.id]}
+          error={errors && errors[field.id]}
           handleChange={handleChange}
         />
       ))}

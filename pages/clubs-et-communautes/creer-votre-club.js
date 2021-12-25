@@ -90,6 +90,28 @@ function CreateClubPage() {
       },
     ],
     endpoint: '/api/clubs',
+    apiSchema: {
+      title: "organization",
+      chip: "city",
+      description: "description",
+      clubCreated: "clubCreated",
+      president: "name",
+      email: "email",
+      links: [
+        {
+          source: "website",
+          key: 'url',
+        },
+        {
+          source: "instagram",
+          key: 'url'
+        },
+        {
+          source: "facebook",
+          key: 'url'
+        }
+      ],
+    },
     descriptionBefore,
     descriptionAfter,
   };
@@ -101,7 +123,7 @@ function CreateClubPage() {
         title="Créer votre club - Roundnet France"
         description="Créez votre club et rejoignez la communauté Roundnet France."
       />
-      
+
       <Hero
         title="Créer votre club"
         image="/images/hero/liste-clubs.jpg"
