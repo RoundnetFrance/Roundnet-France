@@ -127,17 +127,22 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
 }
 
 
-// * Handles form validation for the server/API. 
-export function validateAPI({ form, schema }) {
-  // Validate the form
-  const { error, value } = schema.validate(form, {
+// * Handles form validation for the server/API. Requires a definite schema and values that should be validated against it. Uses Joi to validate the values against the schema. If error, returns an custom InvalidForm throw. If valid, return fields. Can alter fields to match an API schema if apiSchema is provided.
+export function validateAPI({ data, schema }) {
+
+  if (!data) {
+    throw new Error('Aucune donnée reçue.');
+  }
+
+
+  // Validate the data
+  const { error, value } = schema.validate(data, {
     abortEarly: false,
   });
 
-
   if (error) {
     // Get all keys where there is an error
-    const listOfErrorKeys = error.details.map(({ context }) => context.key);
+    const listOfErrorKeys = error.details.map(({ path }) => path);
     // Stringify the list of keys
     const errorKeysString = listOfErrorKeys.join(', ');
     // Throw explicit error
@@ -171,10 +176,7 @@ export async function submitForm({
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      data,
-      formBuilder: true,
-    }),
+    body: JSON.stringify({ data }),
   });
   return response;
 }
