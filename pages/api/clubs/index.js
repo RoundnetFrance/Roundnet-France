@@ -20,61 +20,70 @@ export default async function handler(req, res) {
 
     const { data, formBuilder } = req.body;
 
-    // Validate the data
-    try {
-      if (!formBuilder) {
-        console.log('Create a specific function to validate from API (with schema, without fields');
+    // * Validate the data
+    // Validate when submitted directly through API POST request
+    if (!formBuilder) {
+      try {
+        console.log('Create a specific function to validate from API (with schema, without fields)');
       }
-
-      console.log('Transform form and validate it');
-
-    } catch (error) {
-      // Return an error message concerning invalid data values
-      return res.status(400).json({ error: error.message || 'Invalid data' });
+      catch (error) {
+        // Return an error message concerning invalid data values
+        return res.status(400).json({ error: error.message || 'Invalid data' });
+      }
     }
-
-    // Send the data to the database
-    try {
-      // Add links if any
-      const links = [];
-      if (data.facebook) {
-        links.push({
-          name: 'facebook',
-          url: data.facebook,
-        });
+    // Validate when the form is submitted from the client
+    else {
+      try {
+        // Add links if any
+        const links = [];
+        if (data.facebook) {
+          links.push({
+            name: 'facebook',
+            url: data.facebook,
+          });
+        }
+        if (data.instagram) {
+          links.push({
+            name: 'instagram',
+            url: data.instagram,
+          });
+        }
+        if (data.website) {
+          links.push({
+            name: 'website',
+            url: data.website,
+          });
+        }
+      } catch (error) {
+        console.log(error)
       }
-      if (data.instagram) {
-        links.push({
-          name: 'instagram',
-          url: data.instagram,
-        });
-      }
-      if (data.website) {
-        links.push({
-          name: 'website',
-          url: data.website,
-        });
-      }
-
-      // Creating the club data object
-      const newClub = {
-        title: data.organization || data.title,
-        chip: data.city || data.chip,
-        description: data.description,
-        links: links.length > 0 ? links : data.links,
-        president: data.name || data.president,
-        validated: false,
-      }
-
-      const response = await insertDocument('clubs', newClub);
-      console.log(response);
-
-      return res.status(201).json({ message: 'Le club a bien été enregistré. Il sera validé par un membre de la fédération.' });
-    } catch (error) {
-      return res.status(500).json({ error: 'Une erreur est survenue lors de la création du club dans la base de données. Veuillez réessayer.', details: error.message });
     }
   }
 
+  // Send the data to the database
+  try {
 
-  return res.status(405).json({ error: 'Method not allowed' });
+
+    // Creating the club data object
+    const newClub = {
+      title: data.organization || data.title,
+      chip: data.city || data.chip,
+      description: data.description,
+      links: links.length > 0 ? links : data.links,
+      president: data.name || data.president,
+      validated: false,
+    }
+
+    const response = await insertDocument('clubs', newClub);
+    console.log(response);
+
+    // return res.status(201).json({ message: 'Le club a bien été enregistré. Il sera validé par un membre de la fédération.' });
+
+  } catch (error) {
+    return res.status(500).json({ error: 'Une erreur est survenue lors de la création du club dans la base de données. Veuillez réessayer.', details: error.message });
+  }
+}
+
+
+return res.status(405).json({ error: 'Method not allowed' });
 }
