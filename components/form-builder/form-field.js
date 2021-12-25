@@ -2,7 +2,7 @@ import { fr } from 'date-fns/locale';
 import { Fragment } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider } from '@mui/material';
+import { TextField, Divider, FormHelperText } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 
@@ -31,13 +31,12 @@ export default function FormField({ type, id, label, required, options, value, h
           <DatePicker
             disableFuture={options?.dateConfig?.disableFuture}
             clearable={options?.dateConfig?.clearable}
-            errorText={booleanError}
-            invalidDateMessage="Date invalide"
+            error={booleanError}
             id={id}
             label={label}
             openTo={options?.dateConfig?.openTo || 'month'}
             views={options?.dateConfig?.views || ['year', 'month', 'day']}
-            value={value || new Date()}
+            value={value || null}
             onChange={(newValue) => {
               handleChange({
                 target: {
@@ -46,7 +45,12 @@ export default function FormField({ type, id, label, required, options, value, h
                 },
               });
             }}
-            renderInput={(params) => <TextField label="Date" {...params} />}
+            renderInput={(params) => (
+              <Fragment>
+                <TextField label="Date" {...params} />
+                <FormHelperText error={booleanError} id={`${label}-error`} sx={{ position: 'relative', bottom: 10 }}>{error}</FormHelperText>
+              </Fragment>
+            )}
           />
         </LocalizationProvider>
       );
@@ -54,7 +58,7 @@ export default function FormField({ type, id, label, required, options, value, h
 
     case 'password':
       input = (
-        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={error !== ''} helperText={error} confirm={options?.passwordConfirm} required={required} />
+        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={booleanError} helperText={error} confirm={options?.passwordConfirm} required={required} />
       )
       break;
 

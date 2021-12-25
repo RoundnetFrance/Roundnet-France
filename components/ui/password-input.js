@@ -2,16 +2,10 @@ import { useState } from 'react';
 import propTypes from 'prop-types';
 
 // MUI IMPORT
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import IconButton from '@mui/material/IconButton';
-import FormHelperText from '@mui/material/FormHelperText';
+import { FormControl, InputLabel, InputAdornment, OutlinedInput, IconButton, FormHelperText } from '@mui/material';
 
 // MUI ICONS
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 function PasswordInput({ label, value, name, handleChange, error, helperText, required }) {
   const [showPassword, setShowPassword] = useState(false);
