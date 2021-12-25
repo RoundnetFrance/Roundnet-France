@@ -17,7 +17,7 @@ import FormField from './form-field';
 //   * fields: an array of objects that contain the following:
 //     * id (required): the id of the input. Must match database column name
 //     * label (required): the label of the input
-//     * type (required): the type of input. Can be: (text, password, date, email, url). Will throw an error if not supported
+//     * type (required): the type of input. Can be: (text, longtext, password, date, email, url, file). Will throw an error if not supported
 //     * options: an object that contains the following:
 //        required (optional): if the input is required or not. Defaults to false
 //        passwordConfirm (optional): a bool that determines if the password input should have a confirm password input. Defaults to false
@@ -157,10 +157,10 @@ export default function FormBuilder({ formConfig }) {
   return (
     <BoxWrapper title={name} onSubmit={handleSubmit}>
       {descriptionBefore && (
-      <Fragment>
-        <Typography>{descriptionBefore}</Typography>
-        <Divider />
-      </Fragment>
+        <Fragment>
+          <Typography>{descriptionBefore}</Typography>
+          <Divider />
+        </Fragment>
 
       )}
 

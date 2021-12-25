@@ -25,15 +25,16 @@ export default async function handler(req, res) {
 
       // Define the POST CLUB schema
       const schema = Joi.object({
-        title: Joi.string().required(),
-        chip: Joi.string().required(),
-        description: Joi.string().required(),
+        image: Joi.string().uri().required(),
+        title: Joi.string().trim().required(),
+        chip: Joi.string().trim().required(),
+        description: Joi.string().trim().required(),
         clubCreated: Joi.date().allow(''),
-        president: Joi.string().required(),
-        email: Joi.string().email({ tlds: { allow: false } }).required(),
+        president: Joi.string().trim().required(),
+        email: Joi.string().trim().email({ tlds: { allow: false } }).required(),
         links: Joi.array().items(Joi.object({
-          source: Joi.string().required(),
-          url: Joi.string().uri().allow(''),
+          source: Joi.string().trim().required(),
+          url: Joi.string().trim().uri().allow(''),
         })),
       });
 
