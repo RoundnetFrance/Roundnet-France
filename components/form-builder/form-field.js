@@ -1,8 +1,8 @@
 import { fr } from 'date-fns/locale';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider, FormHelperText } from '@mui/material';
+import { TextField, Divider, FormHelperText, Button } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 
@@ -13,8 +13,18 @@ export default function FormField({ type, id, label, required, options, value, h
   // Define error as a bool for MUI error prop 
   const booleanError = error === false ? false : true;
 
+  // Define state and function for file dialog
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const handleFileDialogOpen = () => {
+    setDialogOpen(true);
+  };
+  const handleFileDialogClose = () => {
+    setDialogOpen(false);
+  };
+
   // If there's a dividerBottom option, add a MUI Divider.
   const dividerBottom = options?.dividerBottom ? <Fragment><Divider /></Fragment> : null;
+  
 
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   let input;
@@ -60,6 +70,16 @@ export default function FormField({ type, id, label, required, options, value, h
       input = (
         <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={booleanError} helperText={error} confirm={options?.passwordConfirm} required={required} />
       )
+      break;
+
+    case 'file':
+      input = (
+        <Fragment>
+          <Button variant="outlined" color="primary" component="label" onClick={handleFileDialogOpen}>
+            {label} - Upload
+          </Button>
+        </Fragment>
+      );
       break;
 
     default:

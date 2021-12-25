@@ -11,6 +11,17 @@ function CreateClubForm() {
     name: 'Formulaire de demande d\'affiliation pour la saison 2022',
     fields: [
       {
+        id: 'image',
+        label: 'Logo du club',
+        type: 'file',
+        required: true,
+        options: {
+          fileConfig: {
+            type: 'image',
+          }
+        }
+      },
+      {
         id: 'organization',
         label: 'Nom du club',
         type: 'text',
