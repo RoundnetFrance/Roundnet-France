@@ -1,5 +1,6 @@
 import { useState, Fragment } from 'react';
 import { validateForm, submitForm } from '../../helpers/form';
+import handleFormUpload from '../../helpers/form/handle-form-upload';
 
 // MUI IMPORTS
 import { Typography, Divider, Snackbar, Alert, Slide } from '@mui/material';
@@ -43,6 +44,7 @@ export default function FormBuilder({ formConfig }) {
     endpoint,
     apiSchema,
   } = formConfig;
+
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
   const initialFormState = fields.map(field => field.id).reduce((acc, curr) => ({
@@ -101,7 +103,7 @@ export default function FormBuilder({ formConfig }) {
     let validatedForm;
     try {
       validatedForm = validateForm({ form, fields, initialFormErrors, apiSchema });
-    } 
+    }
     // If anything fails during validation
     catch (error) {
       // Set errors to inputs if error is there
@@ -125,25 +127,29 @@ export default function FormBuilder({ formConfig }) {
 
     // * Submit the validated form
     try {
+
+      // Upload files to storage if any (and they're not empty)
+      const formToSubmit = await handleFormUpload({ fields, form: validatedForm, endpoint });
+
       // Submit the form to the endpoint API (with the validated form return by the function above)
-      const response = await submitForm({ values: validatedForm, endpoint });
-      const data = await response.json();
+      // const response = await submitForm({ values: formToSubmit, endpoint });
+      // const data = await response.json();
 
-      // If response is not ok, throw an error
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
+      // // If response is not ok, throw an error
+      // if (!response.ok) {
+      //   throw new Error(data.message);
+      // }
 
-      // Re-init the UI
-      // setForm(initialFormState);
-      setErrors(initialFormErrors);
+      // // Re-init the UI
+      // // setForm(initialFormState);
+      // setErrors(initialFormErrors);
 
-      // Display a success snackbar
-      setSubmitStatus({
-        open: true,
-        success: true,
-        message: data.message || 'Les données ont bien été envoyées.',
-      });
+      // // Display a success snackbar
+      // setSubmitStatus({
+      //   open: true,
+      //   success: true,
+      //   message: data.message || 'Les données ont bien été envoyées.',
+      // });
 
     } catch (error) {
       setSubmitStatus({

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Fragment, useState } from 'react';
 import uploadFileTableCell from '../../../helpers/mutaters/upload-file-table-cell';
 // import storage from '../../../lib/init-firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { getDownloadURL } from 'firebase/storage';
 import { useSWRConfig } from 'swr';
 import uploadFileToStorage from '../../../helpers/form/upload-file';
 
@@ -54,9 +54,11 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
       setUploadingValue(progress);
     };
 
-    // Callback to call after upload completion
-    async function handleUploadSuccess(uploadTask) {
-      const url = await getDownloadURL(uploadTask.snapshot.ref);
+    try {
+      // Upload file to storage and get download url
+      const url = await uploadFileToStorage({ file, endpoint, handleStateChange: handleUploadStateChange });
+
+      // Patch database with download url and mutate local state
       await uploadFileTableCell({
         endpoint,
         id,
@@ -66,7 +68,8 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
         mutate,
         setError,
       });
-      // Update success state, init the other
+
+      // Update success state, init the others
       setLoading(false);
       setFile(null);
       setOpen(false);
@@ -75,10 +78,7 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
         name: 'Success',
         message: 'Le fichier a bien été uploadé.',
       });
-    }
 
-    try {
-      uploadFileToStorage({ file, endpoint, handleStateChange: handleUploadStateChange, handleSuccess: handleUploadSuccess });
     } catch (error) {
       setLoading(false);
       setError({
@@ -86,41 +86,7 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
         message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
       });
     }
-
   }
-
-  // const storageRef = ref(storage, `${endpoint}/${file.name}`);
-  // const uploadTask = uploadBytesResumable(storageRef, file);
-  // uploadTask.on('state_changed', (snapshot) => {
-  //   const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //   setUploadingValue(progress);
-  // }, (error) => {
-  //   setLoading(false);
-  //   setError({
-  //     name: 'Error',
-  //     message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
-  //   });
-  // }, async () => {
-  //   const url = await getDownloadURL(uploadTask.snapshot.ref);
-  //   await uploadFileTableCell({
-  //     endpoint,
-  //     id,
-  //     tableData,
-  //     url,
-  //     element,
-  //     mutate,
-  //     setError,
-  //   });
-  //   // Update success state, init the other
-  //   setLoading(false);
-  //   setFile(null);
-  //   setOpen(false);
-  //   setUploadingValue(0);
-  //   setSuccess({
-  //     name: 'success',
-  //     message: 'Le fichier a bien été uploadé.',
-  //   });
-  // });
 
   return (
     <Fragment>
