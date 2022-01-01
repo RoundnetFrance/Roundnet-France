@@ -2,9 +2,9 @@ import { fr } from 'date-fns/locale';
 import { Fragment, useState } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider, FormHelperText, Button } from '@mui/material';
+import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, LinearProgress, Box } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { DatePicker, LocalizationProvider } from '@mui/lab';
+import { DatePicker, LocalizationProvider, LoadingButton } from '@mui/lab';
 
 // COMPONENT IMPORTS
 import PasswordInput from '../ui/password-input';
@@ -21,10 +21,19 @@ export default function FormField({ type, id, label, required, options, value, h
   const handleFileDialogClose = () => {
     setDialogOpen(false);
   };
+  const handleFileDialogCancel = () => {
+    setDialogOpen(false);
+    handleChange({
+      target: {
+        id,
+        value: '',
+      },
+    })
+  };
 
   // If there's a dividerBottom option, add a MUI Divider.
   const dividerBottom = options?.dividerBottom ? <Fragment><Divider /></Fragment> : null;
-  
+
 
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   let input;
@@ -75,9 +84,47 @@ export default function FormField({ type, id, label, required, options, value, h
     case 'file':
       input = (
         <Fragment>
-          <Button variant="outlined" color="primary" component="label" onClick={handleFileDialogOpen}>
-            {label} - Upload
-          </Button>
+
+          <Box>
+            <Button size="large" variant="outlined" color="primary" component="label" onClick={handleFileDialogOpen} sx={{ mr: 2 }}>
+              {label} - Upload
+            </Button>
+            <Typography variant="span">{value.name || 'Aucun fichier séléctionné'}</Typography>
+          </Box>
+
+          {/* Dialog component */}
+          <Dialog open={dialogOpen} onClose={handleFileDialogClose}>
+            <DialogTitle>Uploader</DialogTitle>
+            <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
+              <Button
+                variant="contained"
+                component="label"
+                color="primary"
+              // startIcon={<FileUploadIcon />}
+              >
+                Envoyer un fichier
+                <input
+                  type="file"
+                  name="file"
+                  accept='image/*'
+                  hidden
+                  // onChange={(event) => setFile(event.target.files[0])}
+                  onChange={(event) => handleChange({
+                    target: {
+                      id,
+                      value: event.target.files[0],
+                    },
+                  })}
+                />
+              </Button>
+              <Typography variant="body2" mt={2} pl={2}>{value ? value.name : 'Aucun fichier sélectionné'}</Typography>
+
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleFileDialogCancel}>Annuler</Button>
+              <Button variant="contained" onClick={handleFileDialogClose}>Choisir ce fichier</Button>
+            </DialogActions>
+          </Dialog>
         </Fragment>
       );
       break;

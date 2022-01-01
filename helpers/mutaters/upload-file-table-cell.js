@@ -9,7 +9,7 @@ export default async function uploadFileTableCell({
 }) {
   // Fetch API to patch element
   try {
-    response = await fetch(`/api/${endpoint}/${id}`, {
+    const response = await fetch(`/api/${endpoint}/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,10 @@ export default async function uploadFileTableCell({
 
   } catch (error) {
     // If error, set error state and return original tableData for mutate function
-    setError(error);
+    setError({
+      name: 'Error',
+      message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
+    });
     return tableData;
   }
 

@@ -59,6 +59,11 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().email({ tlds: { allow: false } });
         break;
 
+      case 'file': {
+        schemaKeys[id] = Joi.object();
+        break;
+      }
+
       case 'date':
         schemaKeys[id] = Joi.date();
         break;
@@ -93,9 +98,10 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
   const schema = schemaConstructor(fields);
 
   // Validate the form
-  const { error, value } = schema.validate(form, {
-    abortEarly: false,
-  });
+  const { error, value } = schema.validate(
+    form,
+    { abortEarly: false }
+  );
 
   if (error) {
     // If error, return an custom InvalidForm throw with an adapted details object (key: message). Uses initialFormErrors to populate errors.
