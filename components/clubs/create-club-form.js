@@ -14,8 +14,8 @@ function CreateClubForm() {
         id: 'image',
         label: 'Logo du club',
         type: 'file',
-        required: true,
         options: {
+          required:true,
           fileConfig: {
             type: 'image',
           }
@@ -42,6 +42,7 @@ function CreateClubForm() {
         label: 'Date de création du club',
         type: 'date',
         options: {
+          required: true,
           dateConfig: {
             disableFuture: true,
             clearable: true,
@@ -94,6 +95,7 @@ function CreateClubForm() {
     ],
     endpoint: '/api/clubs',
     apiSchema: {
+      image: "image",
       title: "organization",
       chip: "city",
       description: "description",

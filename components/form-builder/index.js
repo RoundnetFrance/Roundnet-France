@@ -91,7 +91,8 @@ export default function FormBuilder({ formConfig }) {
     }));
   };
 
-  // Handle submission (through handleFormSubmit helper function)
+
+  // ** Handle submission (through handleFormSubmit helper function)
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -100,7 +101,9 @@ export default function FormBuilder({ formConfig }) {
     let validatedForm;
     try {
       validatedForm = validateForm({ form, fields, initialFormErrors, apiSchema });
-    } catch (error) {
+    } 
+    // If anything fails during validation
+    catch (error) {
       // Set errors to inputs if error is there
       if (error.details) {
         setErrors(error.details);

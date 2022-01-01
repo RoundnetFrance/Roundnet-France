@@ -1,24 +1,14 @@
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
 import uploadFileTableCell from '../../../helpers/mutaters/upload-file-table-cell';
-import storage from '../../../lib/init-firebase';
+// import storage from '../../../lib/init-firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useSWRConfig } from 'swr';
+import uploadFileToStorage from '../../../helpers/form/upload-file';
 
 // MUI IMPORTS
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import TableCell from '@mui/material/TableCell';
-import Stack from '@mui/material/Stack';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Typography from '@mui/material/Typography';
-import LinearProgress from '@mui/material/LinearProgress';
+import { Box, Avatar, IconButton, TableCell, Stack, Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, LinearProgress } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
 import FileUploadIcon from '@mui/icons-material/FileUpload';
@@ -58,18 +48,14 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
       return;
     }
 
-    const storageRef = ref(storage, `${endpoint}/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on('state_changed', (snapshot) => {
+    // Function to handle upload state change
+    const handleUploadStateChange = (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setUploadingValue(progress);
-    }, (error) => {
-      setLoading(false);
-      setError({
-        name: 'Error',
-        message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
-      });
-    }, async () => {
+    };
+
+    // Callback to call after upload completion
+    async function handleUploadSuccess(uploadTask) {
       const url = await getDownloadURL(uploadTask.snapshot.ref);
       await uploadFileTableCell({
         endpoint,
@@ -86,12 +72,55 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
       setOpen(false);
       setUploadingValue(0);
       setSuccess({
-        name: 'success',
+        name: 'Success',
         message: 'Le fichier a bien été uploadé.',
       });
-    });
+    }
 
-  };
+    try {
+      uploadFileToStorage({ file, endpoint, handleStateChange: handleUploadStateChange, handleSuccess: handleUploadSuccess });
+    } catch (error) {
+      setLoading(false);
+      setError({
+        name: 'Error',
+        message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
+      });
+    }
+
+  }
+
+  // const storageRef = ref(storage, `${endpoint}/${file.name}`);
+  // const uploadTask = uploadBytesResumable(storageRef, file);
+  // uploadTask.on('state_changed', (snapshot) => {
+  //   const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //   setUploadingValue(progress);
+  // }, (error) => {
+  //   setLoading(false);
+  //   setError({
+  //     name: 'Error',
+  //     message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
+  //   });
+  // }, async () => {
+  //   const url = await getDownloadURL(uploadTask.snapshot.ref);
+  //   await uploadFileTableCell({
+  //     endpoint,
+  //     id,
+  //     tableData,
+  //     url,
+  //     element,
+  //     mutate,
+  //     setError,
+  //   });
+  //   // Update success state, init the other
+  //   setLoading(false);
+  //   setFile(null);
+  //   setOpen(false);
+  //   setUploadingValue(0);
+  //   setSuccess({
+  //     name: 'success',
+  //     message: 'Le fichier a bien été uploadé.',
+  //   });
+  // });
 
   return (
     <Fragment>
@@ -150,8 +179,11 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
           <LoadingButton loading={loading} variant="contained" onClick={handleUpload}>Modifier</LoadingButton>
         </DialogActions>
       </Dialog>
+
     </Fragment>
   )
-}
+
+};
+
 
 export default TableCellFile
