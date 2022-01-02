@@ -2,9 +2,9 @@ import { fr } from 'date-fns/locale';
 import { Fragment, useState } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, LinearProgress, Box } from '@mui/material';
+import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, Box } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { DatePicker, LocalizationProvider, LoadingButton } from '@mui/lab';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 
 // COMPONENT IMPORTS
 import PasswordInput from '../ui/password-input';
@@ -32,7 +32,7 @@ export default function FormField({ type, id, label, required, options, value, h
   };
 
   // If there's a dividerBottom option, add a MUI Divider.
-  const dividerBottom = options?.dividerBottom ? <Fragment><Divider /></Fragment> : null;
+  const dividerBottom = options?.dividerBottom ? <Divider /> : null;
 
 
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
@@ -77,7 +77,16 @@ export default function FormField({ type, id, label, required, options, value, h
 
     case 'password':
       input = (
-        <PasswordInput label={label} value={value} name={id} handleChange={handleChange} error={booleanError} helperText={error} confirm={options?.passwordConfirm} required={required} />
+        <PasswordInput
+          label={label}
+          value={value}
+          name={id}
+          handleChange={handleChange}
+          error={booleanError}
+          helperText={error}
+          confirm={options?.passwordConfirm}
+          required={required}
+        />
       )
       break;
 
@@ -90,7 +99,7 @@ export default function FormField({ type, id, label, required, options, value, h
               {label} - Upload
             </Button>
             <Typography component="span" variant="body2">{value.name || 'Aucun fichier séléctionné'}</Typography>
-            {booleanError && <FormHelperText error={booleanError} id={`${label}-error`} sx={{  }}>{error}</FormHelperText>}
+            {booleanError && <FormHelperText error={booleanError} id={`${label}-error`}>{error}</FormHelperText>}
           </Box>
 
           {/* Dialog component */}
