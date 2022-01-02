@@ -13,8 +13,8 @@ const adminElements = [
           url: '/rf-admin/competition/resultats-coupe-de-france',
         },
         {
-          name: 'Rencontres inter-clubs',
-          url: '/rf-admin/competition/rencontres-inter-clubs',
+          name: 'Règles',
+          url: '/rf-admin/competition/regles',
         },
         {
           name: 'Hall Of Fame',

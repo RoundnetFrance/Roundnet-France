@@ -17,7 +17,11 @@ function ClubsAdminPage() {
     // Content of columns. Must have :
     // '_id' key, which is the unique id of the column. It has to match the keys of the data object. 
     // 'name' key, which is the name displayed on the column
+    // Options :
     // 'align' key, for alignement of name ('right', defaults to 'left' if undefined)
+    // 'file' key, for file upload (defaults to false if undefined)
+    // 'image' key, for image upload (defaults to false if undefined)
+    // 'date' key, for date picker (defaults to false if undefined)
     tableHead: [
       {
         _id: 'title',
@@ -33,7 +37,7 @@ function ClubsAdminPage() {
         _id: 'image',
         name: 'Image',
         editable: true,
-        file: true,
+        image: true,
       },
       {
         _id: 'description',
