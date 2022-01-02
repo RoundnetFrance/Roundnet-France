@@ -49,8 +49,12 @@ function AdminTable({ tableConfig:
   // Gather the editable fields in the table by checking editable key. Will be used to dynamically add editable fields in Body by checking its value type (input for string, clickable icon button for bool...)
   const editableFields = tableHead.filter(key => key.editable).map(key => key._id);
 
+  // Gather the image fields in the table by checking image key. Will be used to dynamically add image fields in Body.
+  const imageFields = tableHead.filter(key => key.image).map(key => key._id);
+
   // Gather the file fields in the table by checking file key. Will be used to dynamically add file fields in Body.
   const fileFields = tableHead.filter(key => key.file).map(key => key._id);
+
 
   // Gather the date fields in the table by checking date key. Will be used to dynamically add date fields in Body.
   const dateFields = tableHead.filter(key => key.date).map(key => key._id);
@@ -91,6 +95,7 @@ function AdminTable({ tableConfig:
                     endpoint={endpoint}
                     editableFields={editableFields}
                     fileFields={fileFields}
+                    imageFields={imageFields}
                     dateFields={dateFields}
                     setError={setErrorSnackbar}
                     setSuccess={setSuccessSnackbar}

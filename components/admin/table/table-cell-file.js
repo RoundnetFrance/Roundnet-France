@@ -7,13 +7,16 @@ import { useSWRConfig } from 'swr';
 import uploadFileToStorage from '../../../helpers/form/upload-file';
 
 // MUI IMPORTS
-import { Box, Avatar, IconButton, TableCell, Stack, Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, LinearProgress } from '@mui/material';
+import { Box, Avatar, IconButton, TableCell, Stack, Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, LinearProgress, Tooltip } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
-function TableCellFile({ value, isEditable, id, element, endpoint, tableData, setError, setSuccess }) {
+// COMPONENTS IMPORTS
+import Link from '../../../components/ui/link';
+
+function TableCellFile({ value, isEditable, id, element, endpoint, tableData, isImage, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
 
   // Handle file upload state
@@ -94,23 +97,30 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
         <Stack direction="row" alignItems="center"
           justifyContent="flex-start" spacing={1}>
           {isEditable && (
-            <IconButton
-              variant="contained"
-              component="label"
-              color="primary"
-              onClick={handleClickOpen}
-            >
-              <FileUploadIcon />
-            </IconButton>
+            <Tooltip title="Modifier">
+              <IconButton
+                variant="contained"
+                component="label"
+                color="primary"
+                onClick={handleClickOpen}
+              >
+                <FileUploadIcon />
+              </IconButton>
+            </Tooltip>
           )}
-          <Avatar>
-            <Image
-              src={value}
-              layout='fill'
-              objectFit='cover'
-              alt={element}
-            />
-          </Avatar>
+          {isImage ? (
+            <Avatar>
+              <Image
+                src={value}
+                layout='fill'
+                objectFit='cover'
+                alt={element}
+              />
+            </Avatar>
+          ) : (
+            <Link href={value}>Télécharger le fichier</Link>
+          )}
+
         </Stack>
       </TableCell>
 
@@ -128,6 +138,7 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, se
             <input
               type="file"
               name="file"
+              accept={isImage ? 'image/*' : '*'}
               hidden
               onChange={(event) => setFile(event.target.files[0])}
             />

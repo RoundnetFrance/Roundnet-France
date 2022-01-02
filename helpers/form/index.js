@@ -106,12 +106,29 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
   // Validate the form
   const { error, value } = schema.validate(
     form,
-    { abortEarly: false }
+    {
+      abortEarly: false,
+      errors: {
+        label: false,
+      },
+      messages: {
+        'any.required': 'Ce champ est requis',
+        'string.empty': 'Ce champ est requis',
+        'string.email': 'Ce champ doit être une adresse email valide',
+        'string.min': 'Ce champ doit contenir au moins 6 caractères',
+        'string.uri': 'Ce champ doit être une URL valide',
+        'date.base': 'Ce champ doit être une date valide',
+        'object.base': 'Ce champ doit être un fichier valide',
+        'any.only': 'Les mots de passe ne correspondent pas',
+        '*': 'Ce champ est invalide',
+      },
+    }
   );
 
   if (error) {
     // If error, return an custom InvalidForm throw with an adapted details object (key: message). Uses initialFormErrors to populate errors.
     const details = initialFormErrors;
+    console.log(error.details)
     error.details.forEach(({ context, message }) => {
       details[context.key] = message;
     });

@@ -10,11 +10,14 @@ import TableCellText from './table-cell-text';
 import TableCellFile from './table-cell-file';
 // import TableCellDate from './table-cell-date';
 
-function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, fileFields, dateFields, setError, setSuccess }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, imageFields, fileFields, dateFields, setError, setSuccess }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
   const isEditable = editableFields.includes(element);
+
+  // Check if element is an image
+  const isImage = imageFields.includes(element);
 
   // Check if the element is a file
   const isFile = fileFields.includes(element);
@@ -44,11 +47,12 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
   }
 
   // If element is a file, display it as an image
-  if (isFile) {
+  if (isFile || isImage) {
     return (
       <TableCellFile
         value={value}
         isEditable={isEditable}
+        isImage={isImage}
         id={id}
         element={element}
         endpoint={endpoint}
