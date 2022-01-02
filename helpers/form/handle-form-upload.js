@@ -1,7 +1,7 @@
 import uploadFileToStorage from './upload-file';
 
 export default async function handleFormUpload({ fields, form, endpoint }) {
-  const updatedForm = { ...form }; 
+  const updatedForm = { ...form };
 
   // * Upload files to storage
   // Check if input fields are in fields. Else, return
@@ -28,14 +28,14 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
   }
 
   // Upload files
-  for (const file of filesToUpload) {
+  for (const { id, file } of filesToUpload) {
     // Upload and get the download url
     const url = await uploadFileToStorage({
       file,
       endpoint,
     });
     // Update the form with the download url
-    updatedForm[file.id] = url;
+    updatedForm[id] = url;
   }
 
   return updatedForm;

@@ -93,7 +93,7 @@ function CreateClubForm() {
         type: 'url',
       },
     ],
-    endpoint: '/api/clubs',
+    endpoint: 'clubs',
     apiSchema: {
       image: "image",
       title: "organization",
