@@ -86,10 +86,11 @@ export default function FormField({ type, id, label, required, options, value, h
         <Fragment>
 
           <Box>
-            <Button size="large" variant="outlined" color="primary" component="label" onClick={handleFileDialogOpen} sx={{ mr: 2 }}>
+            <Button size="large" variant="outlined" color={booleanError ? 'error' : 'primary'} component="label" onClick={handleFileDialogOpen} sx={{ mr: 2 }}>
               {label} - Upload
             </Button>
-            <Typography variant="span">{value.name || 'Aucun fichier séléctionné'}</Typography>
+            <Typography component="span" variant="body2">{value.name || 'Aucun fichier séléctionné'}</Typography>
+            {booleanError && <FormHelperText error={booleanError} id={`${label}-error`} sx={{  }}>{error}</FormHelperText>}
           </Box>
 
           {/* Dialog component */}
