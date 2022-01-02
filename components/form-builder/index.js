@@ -127,29 +127,28 @@ export default function FormBuilder({ formConfig }) {
 
     // * Submit the validated form
     try {
-
       // Upload files to storage if any (and they're not empty)
       const formToSubmit = await handleFormUpload({ fields, form: validatedForm, endpoint });
 
       // Submit the form to the endpoint API (with the validated form return by the function above)
-      // const response = await submitForm({ values: formToSubmit, endpoint });
-      // const data = await response.json();
+      const response = await submitForm({ values: formToSubmit, endpoint });
+      const data = await response.json();
 
-      // // If response is not ok, throw an error
-      // if (!response.ok) {
-      //   throw new Error(data.message);
-      // }
+      // If response is not ok, throw an error
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
 
-      // // Re-init the UI
-      // // setForm(initialFormState);
-      // setErrors(initialFormErrors);
+      // Re-init the UI
+      // setForm(initialFormState);
+      setErrors(initialFormErrors);
 
-      // // Display a success snackbar
-      // setSubmitStatus({
-      //   open: true,
-      //   success: true,
-      //   message: data.message || 'Les données ont bien été envoyées.',
-      // });
+      // Display a success snackbar
+      setSubmitStatus({
+        open: true,
+        success: true,
+        message: data.message || 'Les données ont bien été envoyées.',
+      });
 
     } catch (error) {
       setSubmitStatus({

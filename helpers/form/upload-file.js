@@ -3,8 +3,13 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 export default function uploadFileToStorage({ file, endpoint, handleStateChange }) {
 
+  // handleStateChange in optional, make it void if not provided
+  if (!handleStateChange) {
+    handleStateChange = () => {};
+  }
+ 
   // Create a Promise to return upload and return url
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // Prepare storage ref and upload task
     const storageRef = ref(storage, `${endpoint}/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
