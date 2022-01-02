@@ -1,13 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
+import { getDocument } from '../../helpers/db';
 
 // MUI IMPORTS
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import { Container, Typography, Divider, Box, CardMedia, Stack, Button } from '@mui/material'
 
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
@@ -44,7 +39,8 @@ const rulesItems = [
   }
 ]
 
-function RulesPage() {
+function RulesPage({ rule }) {
+  console.log(rule)
   return (
     <Fragment>
       <Head
@@ -152,12 +148,34 @@ function RulesPage() {
           Les nouvelles règles ajoutées en 2021 (consecutive blocks, 7 feet serve...) sont surlignées en jaune dans le document.
         </Typography>
 
-        <Button color="secondary" size="large" variant="contained" href="/docs/regles-2021.pdf">
-          Télécharger les règles 2021
+        <Button color="secondary" size="large" variant="contained" href={rule.url} target="_blank">
+          Télécharger les règles - Version {rule.version}
         </Button>
       </HalfImage>
     </Fragment >
   )
 }
 
-export default RulesPage
+export async function getStaticProps() {
+  // Try to fetch latest rule document on DB
+  try {
+    const ruleDocument = await getDocument('rules');
+    const rule = JSON.parse(JSON.stringify(ruleDocument));
+    return {
+      props: {
+        rule,
+      },
+      revalidate: 3600,
+    }
+  }
+  // Return an error on props to display error message in UI
+  catch (e) {
+    return {
+      props: { error: true },
+    }
+  }
+}
+
+export default RulesPage;
+
+
