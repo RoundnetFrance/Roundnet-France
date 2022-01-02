@@ -29,7 +29,7 @@ function CrossingItems({ items, roundedItems, height }) {
               chip={item.chip}
               image={item.image}
               description={item.description}
-              link={item.link}
+              links={item.links}
               height={roundedItems ? 260 : height}
               imageToLeft={index % 2 === 0}
               roundedImage={roundedItems}

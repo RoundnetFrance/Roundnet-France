@@ -3,94 +3,16 @@ import propTypes from 'prop-types';
 import { Fragment } from 'react';
 
 // MUI IMPORTS
-import { Stack, Box, Typography, Paper, Chip, Button, IconButton, Icon } from '@mui/material';
+import { Stack, Box, Typography, Paper, Chip } from '@mui/material';
 
 // MUI ICONS
-import { InsertLink, Facebook, Instagram } from '@mui/icons-material';
 
-function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, link }) {
+// COMPONENT IMPORTS
+import LinkButtons from './link-buttons';
+
+function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, links }) {
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
-
-  // * Handle link display
-  let linkComponent;
-
-  // Dummy data
-  const links = [
-    {
-      source: 'website',
-      url: 'https://www.google.com',
-    },
-    {
-      source: 'facebook',
-      url: 'https://www.facebook.com',
-    },
-    {
-      source: 'instagram',
-      url: 'https://www.instagram.com',
-    },
-  ]
-
-  // If link is a string
-  if (typeof links === 'string') {
-    // Check if link is an external link
-    const isExternal = link.startsWith('http');
-
-    linkComponent = (
-      <Button
-        sx={{
-          width: 'fit-content',
-        }}
-        variant="contained"
-        color="secondary"
-        href={link}
-        target={isExternal ? '_blank' : '_self'}
-        rel={isExternal ? 'noopener noreferrer' : ''}
-        startIcon={isExternal ? <InsertLink /> : null}
-      >
-        Lien
-      </Button>
-    );
-  } else {
-    linkComponent = links.map(link => {
-      const isExternal = link.url.startsWith('http');
-
-      switch (link.source) {
-        case 'website':
-          return (
-            <Button
-              key={link.url}
-              sx={{
-                width: 'fit-content',
-                mr: 1
-              }}
-              variant="contained"
-              size="small"
-              color="secondary"
-              href={link.url}
-              target={isExternal ? '_blank' : '_self'}
-              rel={isExternal ? 'noopener noreferrer' : ''}
-              startIcon={isExternal ? <InsertLink /> : null}
-            >
-              Site
-            </Button>
-          );
-
-        default:
-          return (
-            <IconButton
-              key={link.url}
-              aria-label={link.source + ' icon'}
-              href={link.url}
-              color="secondary"
-              size="small"
-            >
-              {link.source === 'facebook' ? <Facebook /> : <Instagram />}
-            </IconButton>
-          );
-      }
-    });
-  }
 
   return (
     <Stack
@@ -161,9 +83,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
         }
 
         {/* LINK DISPLAY, IF ANY */}
-        <Stack direction="row" spacing={0}>
-          {linkComponent}
-        </Stack>
+        {links && <LinkButtons links={links} />}
 
       </Stack>
 
