@@ -71,7 +71,7 @@ function TournamentsPage({ tournamentCalendar, error }) {
 }
 
 export async function getStaticProps() {
-  // Try to fetch tournament calendar on local API
+  // Try to fetch tournament calendar on DB
   try {
     const tournamentCalendar = await getDocuments('calendar');
     return {
@@ -83,7 +83,6 @@ export async function getStaticProps() {
   }
   // Return an error on props to display error message in UI
   catch (e) {
-    console.error(e)
     return {
       props: { error: true },
     }
