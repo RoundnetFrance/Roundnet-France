@@ -80,6 +80,12 @@ function schemaConstructor(fields) {
       default:
         schemaKeys[id] = Joi.string().trim();
     }
+
+    // If passwordConfirm, passwordConfirm must match password
+    if (options?.passwordConfirm) {
+      schemaKeys[id] = Joi.any().valid(Joi.ref('password'));
+    }
+
     // If required, add the required property to the schema. Else, allow empty string, as it is the default value for all inputs
     if (options?.required) {
       schemaKeys[id] = schemaKeys[id].required();
