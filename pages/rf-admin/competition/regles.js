@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import useRules from '../../../hooks/useRules';
 
 // MUI IMPORTS
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
 
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
+import DataControl from '../../../components/admin/data-control';
+import CreateRuleForm from '../../../components/admin/create-rule-form'
 
 export default function RulesAdminPage() {
   // Hooks calls
@@ -26,7 +28,11 @@ export default function RulesAdminPage() {
 
   // If loading, display loading screen
   if (status === "loading") {
-    return <CircularProgress />
+    return (
+      <Stack sx={{ width: '100%' }} justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Stack>
+    )
   }
 
   // Define the table config object
@@ -55,7 +61,11 @@ export default function RulesAdminPage() {
   return (
     <DashboardWrapper>
       <PageTitle title="Administration du fichier de règles"></PageTitle>
+
+      <DataControl endpoint="rules" createForm={<CreateRuleForm />} />
+
       <AdminTable tableConfig={tableConfig} />
+
     </DashboardWrapper>
   )
 }
