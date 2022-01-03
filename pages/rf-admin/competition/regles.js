@@ -42,7 +42,6 @@ export default function RulesAdminPage() {
       {
         _id: 'url',
         name: 'Lien du fichier',
-        editable: true,
         file: true,
       },
       {
@@ -50,6 +49,11 @@ export default function RulesAdminPage() {
         name: 'Version',
         editable: true,
       },
+      {
+        _id: 'description',
+        name: 'Description',
+        editable: true,
+      }
     ],
     tableData: rules,
     endpoint: 'rules',

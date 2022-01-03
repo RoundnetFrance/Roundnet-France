@@ -63,7 +63,7 @@ function TableCellDelete({ id, endpoint, tableData, setError, setSuccess }) {
         <DialogTitle>Supprimer</DialogTitle>
         <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
           <Typography mb={2}>Êtes-vous sûr de vouloir supprimer cet élément ?</Typography>
-          <Alert severity="error">Toute suppression est définitive.</Alert>
+          <Alert severity="error">Toute suppression est définitive. Si des fichiers sont liés à la suppression (images, documents), ils seront également supprimés.</Alert>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="error">Annuler</Button>

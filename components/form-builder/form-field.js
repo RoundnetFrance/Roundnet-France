@@ -90,7 +90,22 @@ export default function FormField({ type, id, label, required, options, value, h
       )
       break;
 
-    case 'file':
+    case 'file': {
+      let accept;
+      switch (options?.fileConfig?.type) {
+        case 'image':
+          accept = 'image/*';
+          break;
+
+        case 'pdf':
+          accept = 'application/pdf';
+          break;
+
+        default:
+          accept = '*';
+          break;
+      }
+
       input = (
         <Fragment>
 
@@ -110,15 +125,13 @@ export default function FormField({ type, id, label, required, options, value, h
                 variant="contained"
                 component="label"
                 color="primary"
-              // startIcon={<FileUploadIcon />}
               >
                 Envoyer un fichier
                 <input
                   type="file"
                   name="file"
-                  accept='image/*'
+                  accept={accept}
                   hidden
-                  // onChange={(event) => setFile(event.target.files[0])}
                   onChange={(event) => handleChange({
                     target: {
                       id,
@@ -138,6 +151,7 @@ export default function FormField({ type, id, label, required, options, value, h
         </Fragment>
       );
       break;
+    }
 
     default:
       input = (
