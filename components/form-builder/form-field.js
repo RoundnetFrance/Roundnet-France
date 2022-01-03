@@ -40,7 +40,7 @@ export default function FormField({ type, id, label, required, options, value, h
   switch (type) {
     case 'longtext':
       input = (
-        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} multiline rows={options.multilineRows || 4} />
+        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} multiline rows={options?.multilineRows || 4} />
       );
       break;
 

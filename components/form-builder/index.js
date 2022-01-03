@@ -43,6 +43,7 @@ export default function FormBuilder({ formConfig }) {
     descriptionAfter,
     endpoint,
     apiSchema,
+    submitText,
   } = formConfig;
 
 
@@ -99,6 +100,9 @@ export default function FormBuilder({ formConfig }) {
     event.preventDefault();
     setLoading(true);
 
+    console.log(process.env.NODE_ENV)
+
+
     // * Validate the form
     let validatedForm;
     try {
@@ -139,8 +143,10 @@ export default function FormBuilder({ formConfig }) {
         throw new Error(data.message);
       }
 
-      // Re-init the UI
-      // setForm(initialFormState);
+      // Re-init the UI. Don't init the form if in development env
+      if (process.env.NODE_ENV !== 'development') {
+        setForm(initialFormState);
+      }
       setErrors(initialFormErrors);
 
       // Display a success snackbar
@@ -188,7 +194,7 @@ export default function FormBuilder({ formConfig }) {
       </Typography>
 
       <LoadingButton loading={loading} variant="contained" color="primary" type="submit">
-        Faire une demande
+        {submitText || 'Envoyer'}
       </LoadingButton>
 
       <Typography variant="body2" >
