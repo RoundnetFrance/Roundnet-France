@@ -21,6 +21,7 @@ export default function DataControl({ endpoint, createForm }) {
     setOpen(true);
   };
   const handleClose = () => {
+    handleRefresh();
     setOpen(false);
   };
 
@@ -43,7 +44,7 @@ export default function DataControl({ endpoint, createForm }) {
           {createForm}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Annuler</Button>
+          <Button onClick={handleClose}>Fermer</Button>
           {/* <Button onClick={handleClose}>Créer</Button> */}
         </DialogActions>
       </Dialog>

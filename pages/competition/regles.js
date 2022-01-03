@@ -40,7 +40,16 @@ const rulesItems = [
 ]
 
 function RulesPage({ rule }) {
-  console.log(rule)
+  let readableUpdateDate;
+  if (rule) {
+    readableUpdateDate = new Date(rule.createdAt).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  }
+
+
   return (
     <Fragment>
       <Head
@@ -139,18 +148,27 @@ function RulesPage({ rule }) {
           Distance au service, gênes, cas particuliers : pour ceux qui souhaitent être incollables, vous pouvez télécharger les règles officielles de roundnet, éditées par Spikeball et valables en tournoi, en cliquant sur le bouton ci-dessous (et en français !).
         </Typography>
 
-        <Typography
-          variant="body1"
-          sx={{
-            color: "white",
-            mb: 4,
-          }}>
-          Les nouvelles règles ajoutées en 2021 (consecutive blocks, 7 feet serve...) sont surlignées en jaune dans le document.
-        </Typography>
+        {rule?.description && (
+          <Typography
+            variant="body1"
+            sx={{
+              color: "white",
+              mb: 4,
+            }}>
+            {rule.description}
+          </Typography>
+        )}
 
-        <Button color="secondary" size="large" variant="contained" href={rule.url} target="_blank">
-          Télécharger les règles - Version {rule.version}
+
+        <Button color="secondary" size="large" variant="contained" href={rule?.url || '/docs/regles-2021.pdf'} target="_blank">
+          Télécharger les règles
         </Button>
+
+        <Typography variant="body2" mt={1} color="white">
+          Version {rule?.version || 'officielle'}
+          <br />
+          Dernière mise à jour : {readableUpdateDate || new Date().toLocaleDateString('fr-FR', { year: 'numeric' })}
+        </Typography>
       </HalfImage>
     </Fragment >
   )
@@ -159,8 +177,9 @@ function RulesPage({ rule }) {
 export async function getStaticProps() {
   // Try to fetch latest rule document on DB
   try {
-    const ruleDocument = await getDocument('rules');
+    const ruleDocument = await getDocument('rules', null, null, { _id: -1 });
     const rule = JSON.parse(JSON.stringify(ruleDocument));
+    console.log(rule)
     return {
       props: {
         rule,

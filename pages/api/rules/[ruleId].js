@@ -1,6 +1,8 @@
-import { ObjectId } from "mongodb";
-import { getSession } from "next-auth/react";
-import { getDocuments, patchDocument, deleteDocument } from "../../../helpers/db";
+import { ObjectId } from 'mongodb';
+import { getSession } from 'next-auth/react';
+import { getDocuments, patchDocument, deleteDocument, getDocument } from '../../../helpers/db';
+import storage from '../../../lib/init-firebase';
+import { ref, deleteObject } from 'firebase/storage';
 
 export default async function handler(req, res) {
 
@@ -35,9 +37,20 @@ export default async function handler(req, res) {
 
     // DEL method to delete specific app rule
     if (req.method === 'DELETE') {
+      // Delete from storage
+      let fileRef;
       try {
-        const rule = await deleteDocument('rules', { _id: ObjectId(ruleId) });
-        console.log(rule);
+        const document = await getDocument('rules', ObjectId(ruleId), { url: 1 }, { _id: -1 });
+        fileRef = ref(storage, document.url);
+        await deleteObject(fileRef);
+      } catch (error) {
+        console.error(error);
+      }
+
+      // Delete from mongoDB
+      let rule;
+      try {
+        rule = await deleteDocument('rules', { _id: ObjectId(ruleId) });
         return res.status(200).json(rule);
       } catch (error) {
         console.error(error);
