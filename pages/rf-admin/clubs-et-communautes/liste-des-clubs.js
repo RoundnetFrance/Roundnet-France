@@ -49,7 +49,7 @@ function ClubsAdminPage() {
       {
         _id: 'links',
         name: 'Liens',
-        // editable: true,
+        editable: true,
         array: {
           key: 'source',
           value: 'url',

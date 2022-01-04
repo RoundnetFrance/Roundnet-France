@@ -3,7 +3,7 @@
 
 import { getDocuments, insertDocument } from '../../../helpers/db';
 import { validateAPI } from '../../../helpers/form';
-import Joi from 'joi';
+import getSchema from '../../../helpers/schemas';
 
 export default async function handler(req, res) {
   // GET method to read validated clubs (for public access)
@@ -22,22 +22,7 @@ export default async function handler(req, res) {
 
     // * Validate the data
     try {
-
-      // Define the POST CLUB schema
-      const schema = Joi.object({
-        image: Joi.string().uri().required(),
-        title: Joi.string().trim().required(),
-        chip: Joi.string().trim().required(),
-        description: Joi.string().trim().required(),
-        clubCreated: Joi.date().allow(''),
-        president: Joi.string().trim().required(),
-        email: Joi.string().trim().email({ tlds: { allow: false } }).required(),
-        links: Joi.array().items(Joi.object({
-          source: Joi.string().trim().required(),
-          url: Joi.string().trim().uri().allow(''),
-        })),
-      });
-
+      const schema = getSchema('club');
       // Actual validation
       validateAPI({ data, schema });
 

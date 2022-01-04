@@ -3,7 +3,7 @@ import { useSWRConfig } from 'swr';
 import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 
 // MUI IMPORTS
-import { TableCell, Stack, IconButton, Box, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+import { TableCell, Stack, IconButton, Box, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
@@ -11,7 +11,6 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export default function TableCellArray({ values, id, element, isEditable, arrayValues, endpoint, tableData, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
-  console.log(isEditable)
 
   // Handle modal state and open/close functions
   const [open, setOpen] = useState(false);
@@ -37,12 +36,19 @@ export default function TableCellArray({ values, id, element, isEditable, arrayV
 
   const inputs = controlledArrayValues.map((value) => {
     return (
-      <TextField
-        key={value[arrayValues.key]}
-        value={value[arrayValues.value]}
-        label={value[arrayValues.key]}
-        onChange={(event) => handleChange(event, value)}
-      />
+      isEditable ? (
+        <TextField
+          key={value[arrayValues.key]}
+          value={value[arrayValues.value]}
+          label={value[arrayValues.key]}
+          onChange={(event) => handleChange(event, value)}
+        />
+      ) : (
+        
+          <Typography variant="body1" key={value[arrayValues.value]}>
+            {value[arrayValues.value]}
+          </Typography>
+      )
     )
   });
 
@@ -73,6 +79,7 @@ export default function TableCellArray({ values, id, element, isEditable, arrayV
   return (
     <Fragment>
       <TableCell>
+
         <Stack direction="row" alignItems="center"
           justifyContent="flex-start" spacing={1}>
           <Tooltip title="Modifier">
@@ -84,11 +91,12 @@ export default function TableCellArray({ values, id, element, isEditable, arrayV
             Liste ({values.length} éléments)
           </Box>
         </Stack>
+
       </TableCell>
 
       {/* Dialog component */}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Modifier</DialogTitle>
+        <DialogTitle>{isEditable ? "Modifier" : "Elements"}</DialogTitle>
         <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
           <Stack direction="column" spacing={2} my={2}>
             {inputs}
