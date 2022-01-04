@@ -1,6 +1,9 @@
 import { getSession } from 'next-auth/react';
 import useClubs from '../../../hooks/useClubs';
 
+// MUI IMPORTS
+import { Container } from '@mui/material';
+
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
@@ -40,6 +43,19 @@ function ClubsAdminPage() {
         editable: true,
       },
       {
+        _id: 'email',
+        name: 'Email',
+      },
+      {
+        _id: 'links',
+        name: 'Liens',
+        // editable: true,
+        array: {
+          key: 'source',
+          value: 'url',
+        },
+      },
+      {
         _id: 'validated',
         name: 'Validé',
         align: 'right',
@@ -62,7 +78,9 @@ function ClubsAdminPage() {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Liste des clubs" />
+      <Container maxWidth="sm">
+        <PageTitle title="Liste des clubs" />
+      </Container>
       <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
   )

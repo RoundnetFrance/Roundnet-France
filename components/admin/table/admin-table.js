@@ -55,6 +55,12 @@ function AdminTable({ tableConfig:
   // Gather the file fields in the table by checking file key. Will be used to dynamically add file fields in Body.
   const fileFields = tableHead.filter(key => key.file).map(key => key._id);
 
+  // Gather the array fields in the table by checking array key. Will be used to dynamically add array fields in Body.
+  const arrayFields = tableHead.filter(key => key.array).map(key => key._id);
+  const arrayValues = tableHead.filter(key => key.array).map(key => ({
+    key: key._id,
+    array: key.array,
+  }));
 
   // Gather the date fields in the table by checking date key. Will be used to dynamically add date fields in Body.
   const dateFields = tableHead.filter(key => key.date).map(key => key._id);
@@ -78,7 +84,7 @@ function AdminTable({ tableConfig:
 
   return (
     <Fragment>
-      <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Container maxWidth={nbOfElements > 5 ? 'lg' : 'sm' } sx={{ py: 4 }}>
 
         <TableContainer component={Paper}>
           <Table aria-label={name}>
@@ -97,6 +103,8 @@ function AdminTable({ tableConfig:
                     fileFields={fileFields}
                     imageFields={imageFields}
                     dateFields={dateFields}
+                    arrayFields={arrayFields}
+                    arrayValues={arrayValues}
                     setError={setErrorSnackbar}
                     setSuccess={setSuccessSnackbar}
                   />
@@ -105,9 +113,7 @@ function AdminTable({ tableConfig:
 
           </Table>
         </TableContainer>
-
       </Container>
-
 
       {/* Snackbar for error display */}
       <Snackbar
