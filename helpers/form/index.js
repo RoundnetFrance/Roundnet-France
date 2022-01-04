@@ -128,7 +128,6 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
   if (error) {
     // If error, return an custom InvalidForm throw with an adapted details object (key: message). Uses initialFormErrors to populate errors.
     const details = initialFormErrors;
-    console.log(error.details)
     error.details.forEach(({ context, message }) => {
       details[context.key] = message;
     });

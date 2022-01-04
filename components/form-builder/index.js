@@ -100,9 +100,6 @@ export default function FormBuilder({ formConfig }) {
     event.preventDefault();
     setLoading(true);
 
-    console.log(process.env.NODE_ENV)
-
-
     // * Validate the form
     let validatedForm;
     try {

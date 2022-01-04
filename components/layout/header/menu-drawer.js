@@ -34,8 +34,6 @@ function MenuDrawer() {
     // Check if newMenuOpen has any true values
     const newMenuOpenHasTrue = Object.values(newMenuOpen).some(value => value === true);
     setAreMenusOpen(newMenuOpenHasTrue);
-
-    // console.log(menuOpen);
   };
 
   //! TO TRANSFORM INTO A COMPONENT
