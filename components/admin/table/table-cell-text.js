@@ -4,21 +4,9 @@ import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 import { fr } from 'date-fns/locale';
 
 // MUI IMPORTS
-import TableCell from '@mui/material/TableCell';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import LoadingButton from '@mui/lab/LoadingButton';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { TableCell, Box, Stack, IconButton, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Tooltip} from '@mui/material';
+import { LoadingButton, DatePicker, LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import DatePicker from '@mui/lab/DatePicker';
-import Tooltip from '@mui/material/Tooltip';
 
 // MUI ICONS
 import EditIcon from '@mui/icons-material/Edit';

@@ -21,14 +21,14 @@ const menuElements = [
         name: 'Rencontres inter-clubs',
         url: '/competition/rencontres-inter-clubs',
       },
-      {
-        name: 'Hall Of Fame',
-        url: '/competition/hall-of-fame',
-      },
-      {
-        name: 'Mondiaux 2022',
-        url: '/competition/mondiaux-2022',
-      }
+      // {
+      //   name: 'Hall Of Fame',
+      //   url: '/competition/hall-of-fame',
+      // },
+      // {
+      //   name: 'Mondiaux 2022',
+      //   url: '/competition/mondiaux-2022',
+      // }
     ]
   },
   {
@@ -64,9 +64,13 @@ const menuElements = [
         url: '/qui-sommes-nous/equipe-roundnet-france',
       },
       {
-        name: 'Le projet associatif',
-        url: '/qui-sommes-nous/projet-associatif',
+        name: 'Statuts officiels',
+        url: '/qui-sommes-nous/statuts-roundnet-france',
       },
+      // {
+      //   name: 'Le projet associatif',
+      //   url: '/qui-sommes-nous/projet-associatif',
+      // },
       {
         name: 'Contact',
         url: '/qui-sommes-nous/contact',

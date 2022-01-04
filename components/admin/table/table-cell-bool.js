@@ -2,10 +2,7 @@ import { useSWRConfig } from 'swr';
 import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 
 // MUI IMPORTS
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import TableCell from '@mui/material/TableCell';
-import Tooltip from '@mui/material/Tooltip';
+import { Box, Checkbox, TableCell, Tooltip } from '@mui/material';
 
 // MUI ICONS IMPORTS
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';

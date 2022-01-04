@@ -8,9 +8,10 @@ import TableCellDelete from './table-cell-delete';
 import TableCellBool from './table-cell-bool';
 import TableCellText from './table-cell-text';
 import TableCellFile from './table-cell-file';
+import TableCellArray from './table-cell-array';
 // import TableCellDate from './table-cell-date';
 
-function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, imageFields, fileFields, dateFields, setError, setSuccess }) {
+function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, imageFields, fileFields, dateFields, arrayFields, arrayValues, setError, setSuccess }) {
   const specialElements = ['$deletable'];
 
   // Check if the element is editable
@@ -24,6 +25,11 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
 
   // Check if the value is a date
   const isDate = dateFields.includes(element);
+
+  // Check if the value is an array
+  const isArray = arrayFields.includes(element);
+
+  arrayValues = arrayValues.find(arrayValue => arrayValue.key === element);
 
   // If element is a key in keysToDisplay, display it.
   // Ignore if keysToDisplay is not defined, or if element is a special $element.
@@ -56,6 +62,23 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
         id={id}
         element={element}
         endpoint={endpoint}
+        tableData={tableData}
+        setError={setError}
+        setSuccess={setSuccess}
+      />
+    );
+  }
+
+  // if element is an array, display it as a list
+  if (isArray) {
+    return (
+      <TableCellArray
+        id={id}
+        element={element}
+        isEditable={isEditable}
+        values={value}
+        endpoint={endpoint}
+        arrayValues={arrayValues.array}
         tableData={tableData}
         setError={setError}
         setSuccess={setSuccess}

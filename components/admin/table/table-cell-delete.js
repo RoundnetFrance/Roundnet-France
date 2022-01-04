@@ -3,17 +3,8 @@ import { Fragment, useState } from 'react';
 import deleteTableData from '../../../helpers/mutaters/delete-table-cell';
 
 // MUI IMPORTS
-import IconButton from '@mui/material/IconButton';
-import TableCell from '@mui/material/TableCell';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
-import Tooltip from '@mui/material/Tooltip';
+import { IconButton, TableCell, Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Alert, Tooltip } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -35,7 +26,7 @@ function TableCellDelete({ id, endpoint, tableData, setError, setSuccess }) {
 
   const handleDelete = async () => {
     setLoading(true);
-    
+
     await deleteTableData({
       endpoint,
       id,
