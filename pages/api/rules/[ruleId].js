@@ -1,6 +1,8 @@
 import { ObjectId } from 'mongodb';
 import { getSession } from 'next-auth/react';
 import { getDocuments, patchDocument, deleteDocument, getDocument } from '../../../helpers/db';
+import getSchema from '../../../helpers/schemas';
+import { validateAPI } from '../../../helpers/form';
 import storage from '../../../lib/init-firebase';
 import { ref, deleteObject } from 'firebase/storage';
 
@@ -25,6 +27,20 @@ export default async function handler(req, res) {
 
     // PATCH method to update specific app rule
     if (req.method === 'PATCH') {
+      // * Validate the data
+      try {
+        // Get the rule schema and specificaly validate the partial data
+        const keyToValidate = Object.keys(req.body)[0];
+        const schema = getSchema('rule', keyToValidate);
+
+        // Actual validation
+        validateAPI({ data: req.body, schema });
+
+      } catch (error) {
+        console.error('ERROR 400 - rules', error.message);
+        return res.status(400).json({ message: error.message });
+      }
+
       try {
         const response = await patchDocument('rules', { _id: ObjectId(ruleId) }, req.body);
         return res.status(200).json(response);

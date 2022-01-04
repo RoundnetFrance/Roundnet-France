@@ -1,7 +1,7 @@
 import { getDocuments, insertDocument } from "../../../helpers/db";
 import { getSession } from "next-auth/react";
-import Joi from 'joi';
 import { validateAPI } from "../../../helpers/form";
+import getSchema from '../../../helpers/schemas';
 
 export default async function handler(req, res) {
 
@@ -24,15 +24,10 @@ export default async function handler(req, res) {
 
       const { data } = req.body;
 
-
       // * Validate the data
       try {
         // Define the POST CLUB schema
-        const schema = Joi.object({
-          url: Joi.string().uri().required(),
-          version: Joi.string().trim().required(),
-          description: Joi.string().trim(),
-        });
+        const schema = getSchema('rule');
 
         // Actual validation
         validateAPI({ data, schema });
@@ -47,7 +42,7 @@ export default async function handler(req, res) {
         // Add the createdAt timestamp
         data.createdAt = new Date();
 
-        const response = await insertDocument('rules', data);
+        await insertDocument('rules', data);
         return res.status(201).json({ message: 'Le fichier de règle a bien été enregistré.' });
 
       } catch (error) {
