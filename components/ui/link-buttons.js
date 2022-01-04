@@ -38,7 +38,6 @@ export default function LinkButtons({ links }) {
         }
 
         const isExternal = link.url.startsWith('http');
-        console.log(isExternal)
         switch (link.source) {
           case 'website':
             return (

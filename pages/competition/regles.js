@@ -179,7 +179,6 @@ export async function getStaticProps() {
   try {
     const ruleDocument = await getDocument('rules', null, null, { _id: -1 });
     const rule = JSON.parse(JSON.stringify(ruleDocument));
-    console.log(rule)
     return {
       props: {
         rule,

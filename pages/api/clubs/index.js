@@ -57,8 +57,7 @@ export default async function handler(req, res) {
       // Add a validated:false property to the data
       data.validated = false;
 
-      const response = await insertDocument('clubs', data);
-      console.log('Club created', response);
+      await insertDocument('clubs', data);
 
       return res.status(201).json({ message: 'Le club a bien été enregistré. Il sera validé par un membre de la fédération.' });
 
