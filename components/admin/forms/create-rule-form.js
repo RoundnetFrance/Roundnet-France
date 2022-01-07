@@ -1,5 +1,5 @@
 // COMPONENT IMPORTS
-import FormBuilder from '../../components/form-builder';
+import FormBuilder from '../../form-builder';
 
 export default function CreateRuleForm() {
   const formConfig = {

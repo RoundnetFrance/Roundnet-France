@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import useRules from '../../../hooks/useRules';
+import useOfficialDocs from '../../../hooks/use-official-docs';
 
 // MUI IMPORTS
 import { CircularProgress, Stack } from '@mui/material';
@@ -10,12 +10,12 @@ import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 import DataControl from '../../../components/admin/data-control';
-import CreateRuleForm from '../../../components/admin/forms/create-rule-form'
+import CreateOfficialDocForm from '../../../components/admin/forms/create-official-doc-form';
 
 export default function RulesAdminPage() {
   // Hooks calls
   const router = useRouter();
-  const { rules, isLoading, isError } = useRules();
+  const { officialDocs, isLoading, isError } = useOfficialDocs();
 
   // Handle redirect if no session
   const { status } = useSession({
@@ -37,7 +37,7 @@ export default function RulesAdminPage() {
 
   // Define the table config object
   const tableConfig = {
-    name: 'rules table',
+    name: 'official docs table',
     tableHead: [
       {
         _id: 'url',
@@ -55,8 +55,8 @@ export default function RulesAdminPage() {
         editable: true,
       }
     ],
-    tableData: rules,
-    endpoint: 'rules',
+    tableData: officialDocs,
+    endpoint: 'official-docs',
     loading: isLoading,
     error: isError,
     deletable: true,
@@ -64,9 +64,9 @@ export default function RulesAdminPage() {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Administration du fichier de règles"></PageTitle>
+      <PageTitle title="Administration des statuts de l'association"></PageTitle>
 
-      <DataControl endpoint="rules" createForm={<CreateRuleForm />} />
+      <DataControl endpoint="rules" createForm={<CreateOfficialDocForm />} />
 
       <AdminTable tableConfig={tableConfig} />
 
