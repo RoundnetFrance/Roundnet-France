@@ -13,10 +13,10 @@ import CTAFooter from '../../components/ui/cta-footer';
 
 // MUI ICONS
 
-function RulesPage({ rule }) {
+function StatusPage({ officialDoc }) {
   let readableUpdateDate;
-  if (rule) {
-    readableUpdateDate = new Date(rule.createdAt).toLocaleDateString('fr-FR', {
+  if (officialDoc) {
+    readableUpdateDate = new Date(officialDoc.createdAt).toLocaleDateString('fr-FR', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
@@ -70,24 +70,24 @@ function RulesPage({ rule }) {
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid porro necessitatibus eius quisquam suscipit laborum, odit in, cumque alias quam quibusdam! Assumenda consequatur delectus dolorum est consequuntur, veniam aperiam saepe voluptate, commodi ducimus beatae dolores dolorem odio velit ullam fuga minima doloribus voluptatem.
         </Typography>
 
-        {rule?.description && (
+        {officialDoc?.description && (
           <Typography
             variant="body1"
             sx={{
               color: "white",
               mb: 4,
             }}>
-            {rule.description}
+            {officialDoc.description}
           </Typography>
         )}
 
 
-        <Button color="secondary" size="large" variant="contained" href={rule?.url || '/docs/regles-2021.pdf'} target="_blank">
+        <Button color="secondary" size="large" variant="contained" href={officialDoc?.url || '/docs/regles-2021.pdf'} target="_blank">
           Télécharger les statuts
         </Button>
 
         <Typography variant="body2" mt={1} color="white">
-          Version {rule?.version || 'officielle'}
+          <strong>Note de mise à jour : </strong>{officialDoc?.version || 'officielle'}
           <br />
           Dernière mise à jour : {readableUpdateDate || new Date().toLocaleDateString('fr-FR', { year: 'numeric' })}
         </Typography>
@@ -97,7 +97,7 @@ function RulesPage({ rule }) {
         title="Vous avez une question précise à nous demander ?"
         subtitle="Contactez-nous directement via le formulaire du site."
         mainLink={{
-          url: '/contact',
+          url: '/qui-sommes-nous/contact',
           text: 'Nous écrire'
         }}
       />
@@ -107,13 +107,13 @@ function RulesPage({ rule }) {
 }
 
 export async function getStaticProps() {
-  // Try to fetch latest rule document on DB
+  // Try to fetch latest officialDoc document on DB
   try {
-    const ruleDocument = await getDocument('rules', null, null, { _id: -1 });
-    const rule = JSON.parse(JSON.stringify(ruleDocument));
+    const officialDocument = await getDocument('official-docs', null, null, { _id: -1 });
+    const officialDoc = JSON.parse(JSON.stringify(officialDocument));
     return {
       props: {
-        rule,
+        officialDoc,
       },
       revalidate: 3600,
     }
@@ -126,6 +126,6 @@ export async function getStaticProps() {
   }
 }
 
-export default RulesPage;
+export default StatusPage;
 
 

@@ -9,7 +9,6 @@ import TableCellBool from './table-cell-bool';
 import TableCellText from './table-cell-text';
 import TableCellFile from './table-cell-file';
 import TableCellArray from './table-cell-array';
-// import TableCellDate from './table-cell-date';
 
 function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, imageFields, fileFields, dateFields, arrayFields, arrayValues, setError, setSuccess }) {
   const specialElements = ['$deletable'];
@@ -37,6 +36,12 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
     !keysToDisplay.includes(element) &&
     !specialElements.includes(element)) {
     return null;
+  }
+
+  if (!value) {
+    return (
+      <TableCell>N/A</TableCell>
+    )
   }
 
   // If element is $deletable, replate the bool by a delete button (with automated deletion handling)
@@ -121,7 +126,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
 
   return (
     <TableCell>
-      {value}
+      {value || "Hello"}
     </TableCell>
   )
 }
