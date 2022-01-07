@@ -1,12 +1,10 @@
-// IMPORT FROM NEXT
 import Image from 'next/image';
 
-// IMPORT FROM MATERIAL
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+// MUI IMPORTS
+import { Box, Stack, Container, Typography } from '@mui/material';
+
+// COMPONENT IMPORTS
+import Link from '../../components/ui/link';
 
 function Footer() {
   const rawLogos = [
@@ -37,13 +35,12 @@ function Footer() {
           <Box>
             <Typography variant="h6" color="white">
               Roundnet France
-              {' '}
-              <br />
-              {' '}
-              Ranking
+            </Typography>
+            <Typography variant="body2" color="white" mb={2}>
+              Fédération française officielle de roundnet
             </Typography>
             <Typography variant="body2" color="white">
-              <Link sx={{ color: 'white' }} href="mailto:contact@roundnetfrance.fr">contact@roundnetfrance.fr</Link>
+              <Link href="/contact" color="#fff">Contact</Link>
             </Typography>
           </Box>
           <Box>
