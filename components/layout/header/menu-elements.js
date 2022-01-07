@@ -65,7 +65,7 @@ const menuElements = [
       },
       {
         name: 'Statuts officiels',
-        url: '/qui-sommes-nous/statuts-roundnet-france',
+        url: '/qui-sommes-nous/statuts-officiels-roundnet-france',
       },
       // {
       //   name: 'Le projet associatif',
@@ -74,7 +74,7 @@ const menuElements = [
       {
         name: 'Contact',
         url: '/qui-sommes-nous/contact',
-      },      
+      },
     ],
   },
 ];

@@ -133,11 +133,13 @@ function RulesPage({ rule }) {
           <strong>Règles officielles 2021 de Roundnet</strong>
         </Typography>
 
-        <Divider
-          color="white"
-          sx={{
-            mb: 4,
-          }} />
+        <Box width="50%">
+          <Divider
+            color="white"
+            sx={{
+              mb: 4,
+            }} />
+        </Box>
 
         <Typography
           variant="body1"
