@@ -1,11 +1,14 @@
 import { Fragment } from 'react';
 
+
+
 // COMPONENT IMPORTS
 import Hero from '../components/ui/hero';
 import HomeInfoBlock from '../components/home/home-info-block';
 import LogoCarousel from '../components/home/logo-carousel';
 import FourSquareInfo from '../components/home/four-square-info';
 import CTAFooter from '../components/ui/cta-footer';
+import RulesDemo from '../components/home/rules-demo';
 
 export default function Home() {
   return (
@@ -22,6 +25,8 @@ export default function Home() {
 
       <HomeInfoBlock />
       <FourSquareInfo />
+
+      <RulesDemo />
 
       <CTAFooter
         title="Motivé.e ? Envie de jouer ou de participer ?"

@@ -16,7 +16,7 @@ function Timeliner({ position, items, color }) {
           <TimelineDot />
           {index === items.length - 1 ? null : <TimelineConnector />}
         </TimelineSeparator>
-        <TimelineContent color={color}>{item.text}</TimelineContent>
+        <TimelineContent color={color}><strong>{item.text}</strong></TimelineContent>
       </TimelineItem>
     )
   })
