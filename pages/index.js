@@ -19,11 +19,11 @@ export default function Home() {
         altButtonText="Participer à un tournoi"
         altButtonLink="/competition/calendrier"
       />
+
       <HomeInfoBlock />
-      <LogoCarousel />
       <FourSquareInfo />
-      
-      <CTAFooter 
+
+      <CTAFooter
         title="Motivé.e ? Envie de jouer ou de participer ?"
         subtitle="Nous sommes là pour vous accompagner !"
         mainLink={{
@@ -33,8 +33,11 @@ export default function Home() {
         altLink={{
           url: '/clubs-et-communautes/adherer-a-roundnet-france',
           text: 'Je veux adhérer'
-        }}          
+        }}
       />
+
+      <LogoCarousel />
+
     </Fragment>
   )
 }
