@@ -15,29 +15,6 @@ import Head from '../../components/head';
 // MUI ICONS
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 
-// Rules
-const rulesItems = [
-  {
-    key: 1,
-    text: '4 joueurs (2 vs 2) sont autour du filet de Roundnet. Equipe A vs Equipe B.',
-  },
-  {
-    key: 2,
-    text: 'Un joueur de l\'équipe A sert sur un joueur de l\'équipe B.'
-  },
-  {
-    key: 3,
-    text: 'L\'équipe B a trois touches pour renvoyer la balle sur le filet. Ils peuvent librement bouger et se placer autour du filet après le service.'
-  },
-  {
-    key: 4,
-    text: 'Si l\'équipe B renvoie la balle sur le filet, l\'équipe A a désormais trois touches pour la renvoyer à son tour.'
-  },
-  {
-    key: 5,
-    text: 'L\'échange continue jusqu\'à ce qu\'une équipe ne puisse pas renvoyer la balle.'
-  }
-]
 
 function RulesPage({ rule }) {
   let readableUpdateDate;
