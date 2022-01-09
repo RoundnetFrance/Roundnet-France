@@ -26,7 +26,7 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
       </Typography>
 
       <Stack
-        direction={{xs: 'column', sm: 'row'}}
+        direction={{ xs: 'column', sm: 'row' }}
         justifyContent="center"
         alignItems="center"
         spacing={2}
