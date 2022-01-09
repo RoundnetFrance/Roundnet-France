@@ -7,14 +7,9 @@ import { Container, Typography, Divider, Box, CardMedia, Stack, Button } from '@
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
 import HalfImage from '../../components/ui/half-image';
-import Timeliner from '../../components/ui/timeliner';
 import PageTitle from '../../components/ui/page-title';
-import ColoredBackground from '../../components/ui/colored-background';
 import Head from '../../components/head';
-
-// MUI ICONS
-import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
-
+import CTAFooter from '../../components/ui/cta-footer';
 
 function RulesPage({ rule }) {
   let readableUpdateDate;
@@ -40,68 +35,16 @@ function RulesPage({ rule }) {
         imagePosition='center 80%'
         mini />
 
-      <Container maxWidth="md" sx={{ py: 4 }}>
-        <PageTitle title="Comment jouer au roundnet ?" />
-        <Typography variant="body1" sx={{ pb: 4 }}>
-          Réputé pour sa facilité de prise en main, le roundnet est un sport populaire qui emprunte au meilleur des mondes de nombreux sports pour le plaisir de tous les joueurs. Pratiquable autant en loisir qu&apos;à haut niveau, il ne possède en son coeur qu&apos;une poignée de règles très simples.
+      <Container maxWidth="md" sx={{ my: 4 }}>
+        <PageTitle title="Jouer au roundnet selon les règles officielles" />
+        <Typography variant="body1" color="initial">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi quisquam, illum architecto laboriosam sequi illo, cupiditate dolore vero ex perspiciatis, quae modi libero atque reiciendis aperiam sed velit in alias dignissimos porro necessitatibus. Rem sint, optio voluptatibus, necessitatibus magnam expedita blanditiis provident repellat corrupti, cumque aliquam omnis ipsam labore nam voluptatum sapiente dolor ad a natus quis? Aliquam deserunt quibusdam, veniam ipsa aperiam explicabo velit, numquam voluptas quasi, nihil obcaecati nesciunt nisi dolores. Explicabo eaque illum voluptatem odio. Commodi distinctio quidem id voluptatum atque voluptates debitis ratione illum omnis repellat quam cum excepturi tempore et laboriosam, labore accusantium similique vero, perferendis, unde ducimus qui! Quasi, modi cumque vero perferendis ad necessitatibus cupiditate ipsa minima hic cum obcaecati magni sit voluptate voluptatibus! Quas exercitationem doloremque illo, pariatur magni odit!
         </Typography>
       </Container>
 
-      <ColoredBackground>
-        <Box sx={{
-          pb: 4,
-        }}>
-          <Container maxWidth="sm">
-            <Stack
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-              spacing={4}
-            >
-              <Typography variant="h4" align="center" color="white">
-                <strong>Première chose à savoir : vous pouvez jouer sur n&apos;importe quel terrain. Indoor, gazon, synthétique, terre battue,  neige, boue, béton... Soyez créatifs.</strong>
-              </Typography>
-              <ArrowCircleDownIcon sx={{ fontSize: 80, color: 'secondary.lightest', mb: 4 }} />
-            </Stack>
-          </Container>
-        </Box>
-
-        <Container maxWidth="md" sx={{
-          mb: 4,
-          p: 20,
-          background: `url(/images/misc/blob-lighter-neutral.svg) no-repeat center center`,
-          backgroundSize: 'cover',
-        }}>
-          <Container maxWidth="sm">
-            <Timeliner items={rulesItems} color='black' />
-          </Container>
-        </Container>
-
-        <Typography align="center" variant="h4" color="white">
-          <strong>Si tout cela n&apos;est pas clair, <br />la vidéo ci-dessous devrait faire l&apos;affaire.</strong>
-        </Typography>
-
-
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={0}
-          sx={{
-            my: 4,
-          }}
-        >
-          <ArrowCircleDownIcon align="center" sx={{ fontSize: 80, color: 'secondary.lightest', mb: 4 }} />
-          <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600], border: 'none', boxShadow: 8 }} />
-
-        </Stack>
-
-      </ColoredBackground>
-
-
-
       <HalfImage
-        image='/images/pages/competition/regles/regles-pdf.jpg'>
+        image='/images/pages/competition/regles/regles-pdf.jpg'
+      >
 
         <Typography
           variant="h5"
@@ -149,6 +92,19 @@ function RulesPage({ rule }) {
           Dernière mise à jour : {readableUpdateDate || new Date().toLocaleDateString('fr-FR', { year: 'numeric' })}
         </Typography>
       </HalfImage>
+
+      <CTAFooter
+        title="Vous vous sentez prêts à en découdre ?"
+        subtitle="Passez à la prochaine étape !"
+        mainLink={{
+          url: '/clubs-et-communautes/liste-des-clubs',
+          text: 'Inscrivez votre club',
+        }}
+        altLink={{
+          url: '/competition/calendrier',
+          text: 'Participez à un tournoi',
+        }}
+      />
     </Fragment >
   )
 }
