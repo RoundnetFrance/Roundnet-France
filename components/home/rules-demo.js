@@ -55,18 +55,21 @@ export default function RulesDemo() {
 
       <Container maxWidth="md" sx={{
         mb: 4,
-        p: 20,
-        background: `url(/images/misc/blob-lighter-neutral.svg) no-repeat center center`,
+        p: { xs: 0, sm: 20 },
+        py: { xs: 2, sm: 20 },
+        background: { xs: 'white', sm: `url(/images/misc/blob-lighter-neutral.svg) no-repeat center center` },
         backgroundSize: 'cover',
       }}>
         <Container maxWidth="sm">
-          <Timeliner items={rulesItems} color='black' />
+          <Timeliner items={rulesItems} color='black' position="alternate" />
         </Container>
       </Container>
 
-      <Typography align="center" variant="h4" color="white">
-        <strong>Si tout cela n&apos;est pas clair, <br />la vidéo ci-dessous devrait faire l&apos;affaire.</strong>
-      </Typography>
+      <Container maxWidth="sm">
+        <Typography align="center" variant="h4" color="white">
+          <strong>Si tout cela n&apos;est pas clair, <br />la vidéo ci-dessous devrait faire l&apos;affaire.</strong>
+        </Typography>
+      </Container>
 
 
       <Stack
@@ -79,7 +82,16 @@ export default function RulesDemo() {
         }}
       >
         <ArrowCircleDownIcon align="center" sx={{ fontSize: 80, color: 'secondary.lightest', mb: 4 }} />
-        <CardMedia component="iframe" src="https://www.youtube.com/embed/vGIrNrLyZZg" sx={{ width: [300, 450, 900, 900], height: [200, 300, 600], border: 'none', boxShadow: 8 }} />
+        <CardMedia
+          component="iframe"
+          src="https://www.youtube.com/embed/vGIrNrLyZZg"
+          sx={{
+            width: ['100%', '100%', 1000, 1200],
+            height: [310, 430, 563.5, 675],
+            border: 'none',
+            boxShadow: 8
+          }}
+        />
 
       </Stack>
 
