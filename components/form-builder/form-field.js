@@ -2,7 +2,7 @@ import { fr } from 'date-fns/locale';
 import { Fragment, useState } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, Box } from '@mui/material';
+import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 
@@ -90,7 +90,43 @@ export default function FormField({ type, id, label, required, options, value, h
       )
       break;
 
+    case 'select': {
+      input = (
+        <FormControl>
+          <InputLabel id={id}>{label}</InputLabel>
+          <Select
+            labelId={id}
+            label={label}
+            id={id}
+            value={value}
+            onChange={(event) => {
+              handleChange({
+                target: {
+                  id,
+                  value: event.target.value,
+                },
+              });
+            }}
+          >
+            {
+              options?.selectValues.map(item => (
+                <MenuItem
+                  key={item.value}
+                  value={item.value}
+                >
+                  {item.label}
+                </MenuItem>
+              ))
+            }
+          </Select>
+        </FormControl>
+      );
+      break;
+    }
+
+
     case 'file': {
+      // Define which files are accept (HTML/Browser shallow validation only)
       let accept;
       switch (options?.fileConfig?.type) {
         case 'image':

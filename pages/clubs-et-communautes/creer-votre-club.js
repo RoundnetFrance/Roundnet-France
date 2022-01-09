@@ -7,9 +7,7 @@ import { Container, Typography } from '@mui/material';
 import Hero from '../../components/ui/hero';
 import PageTitle from '../../components/ui/page-title';
 import Head from '../../components/head';
-import FormBuilder from '../../components/form-builder';
-import Link from '../../components/ui/link';
-import CreateClubForm from '../../components/clubs/create-club-form';
+import CreateClubForm from '../../components/forms/create-club-form';
 
 function CreateClubPage() {
   return (
