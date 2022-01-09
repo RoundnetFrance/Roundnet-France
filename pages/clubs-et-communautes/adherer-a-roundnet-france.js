@@ -1,9 +1,7 @@
 import { Fragment } from 'react';
 
 // MUI IMPORTS
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Container, Typography, Box } from '@mui/material';
 
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
@@ -15,62 +13,10 @@ import CTAFooter from '../../components/ui/cta-footer';
 import LogoCarousel from '../../components/home/logo-carousel';
 import Head from '../../components/head';
 
+// CONTENT
+import { whyJoinUs, clubKit } from '../../contents/clubs-communautes'
+
 function JoinRoundnetFrancePage() {
-
-  // Fake data for the FeaturedItems component
-  const items = [
-    {
-      id: '1',
-      icon: 'public',
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      id: '2',
-      icon: 'emoji_flags',
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      id: '3',
-      icon: 'emoji_objects',
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    },
-    {
-      id: '4',
-      icon: 'emoji_events',
-      title: 'Lorem Ipsum',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    }
-  ];
-
-  // Fake items for the CrossingItems component
-  const crossingItems = [
-    {
-      id: '1',
-      icon: 'public',
-      title: 'Une première mondiale',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: '/images/pages/competition/world-championship/roundnet-world-championship-1.jpg',
-    },
-    {
-      id: '2',
-      icon: 'people_alt',
-      title: 'Faites partie de l\'aventure',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: '/images/pages/competition/world-championship/roundnet-world-championship-2.jpg'
-    },
-    {
-      id: '3',
-      icon: 'person_pin',
-      title: 'Pourquoi pas vous ?',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      image: '/images/pages/competition/world-championship/roundnet-world-championship-3.jpg'
-    },
-  ];
-
-
   return (
     <Fragment>
       <Head
@@ -99,7 +45,7 @@ function JoinRoundnetFrancePage() {
       </Container>
 
       <Container maxWidth="lg" sx={{ my: 4 }}>
-        <FeaturedItems items={items} color="secondary" />
+        <FeaturedItems items={whyJoinUs} color="secondary" />
       </Container>
 
       <Container maxWidth="sm" sx={{ my: 8 }}>
@@ -114,7 +60,7 @@ function JoinRoundnetFrancePage() {
           </HeaderWithIcon>
         </Box>
 
-        <CrossingItems items={crossingItems} height={250} />
+        <CrossingItems items={clubKit} height={250} />
       </Container>
 
       <CTAFooter
