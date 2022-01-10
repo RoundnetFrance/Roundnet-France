@@ -33,6 +33,7 @@ function ContactForm() {
             {
               value: 'question',
               label: 'Question',
+              default: true,
             },
             {
               value: 'demande',
