@@ -9,8 +9,6 @@ const sendMail = async (formData, initialFormState, setSubmitStatus, setForm, se
       body: JSON.stringify(formData),
     });
 
-    //! Add Validation
-
     // If response is not OK, throw error
     if (!response.ok) {
       throw new Error(response.statusText);

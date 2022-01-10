@@ -63,7 +63,7 @@ function ContactForm() {
         }
       },
     ],
-    endpoint: 'mail',
+    endpoint: 'send-mail',
     descriptionBefore,
   };
 

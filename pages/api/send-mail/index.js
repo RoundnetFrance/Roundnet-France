@@ -6,17 +6,18 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function (req, res) {
   if (req.method === 'POST') {
-    console.log(req.body);
+
+    const { data } = req.body;
 
     // Create email template
-    const html = emailTeplate(req.body);
+    const html = emailTeplate(data);
 
     // Create email object
     const msg = {
       to: 'robin.souriau@gmail.com',
       from: 'robin.souriau@gmail.com',
-      subject : req.body.subject,
-      name: req.body.name,
+      subject: data.subject,
+      name: data.name,
       html,
     };
 
@@ -26,8 +27,8 @@ export default async function (req, res) {
       // await new Promise((resolve) => setTimeout(resolve, 2000));
       res.status(200).json({ success: true, message: `Votre email a été envoyé ! Nous vous répondrons sous peu.` })
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Une erreur est survenue lors de l\'envoi du mail. Merci de réessayer' })
+      console.log(error.response.body.errors);
+      res.status(500).json({ message: 'Une erreur est survenue lors de l\'envoi du mail. Merci de réessayer' })
     }
   } else {
     res.status(405).json({ error: 'Method not allowed' })
