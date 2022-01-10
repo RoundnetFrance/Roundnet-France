@@ -34,7 +34,6 @@ export default function FormField({ type, id, label, required, options, value, h
   // If there's a dividerBottom option, add a MUI Divider.
   const dividerBottom = options?.dividerBottom ? <Divider /> : null;
 
-
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   let input;
   switch (type) {
@@ -91,6 +90,9 @@ export default function FormField({ type, id, label, required, options, value, h
       break;
 
     case 'select': {
+      // Get the default value from the options.
+      const { value: defaultValue } = options?.selectValues.find(value => value.default);
+
       input = (
         <FormControl>
           <InputLabel id={id}>{label}</InputLabel>

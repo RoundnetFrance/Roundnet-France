@@ -48,10 +48,20 @@ export default function FormBuilder({ formConfig }) {
 
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
-  const initialFormState = fields.map(field => field.id).reduce((acc, curr) => ({
-    ...acc,
-    [curr]: '',
-  }), {});
+  const initialFormState = fields.reduce((acc, curr) => {
+    if (curr.type === "select") {
+      const { value: defaultValue } = curr.options?.selectValues.find(option => option.default);
+      return {
+        ...acc,
+        [curr.id]: defaultValue,
+      }
+    }
+
+    return {
+      ...acc,
+      [curr.id]: '',
+    }
+  }, {});
 
   const initialFormErrors = fields.map(field => field.id).reduce((acc, curr) => ({
     ...acc,
@@ -62,7 +72,6 @@ export default function FormBuilder({ formConfig }) {
   const [form, setForm] = useState(initialFormState);
   const handleChange = (event) => {
     const { id, value } = event.target;
-    console.log(id, value);
     setForm((prevForm) => ({
       ...prevForm,
       [id]: value,
