@@ -198,7 +198,7 @@ export async function submitForm({
     return acc;
   }, {});
 
-  // Fetch the endpoint
+  // Fetch the endpoint.
   const response = await fetch(`/api/${endpoint}`, {
     method: 'POST',
     headers: {

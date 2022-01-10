@@ -143,7 +143,7 @@ export default function FormBuilder({ formConfig }) {
       // Upload files to storage if any (and they're not empty)
       const formToSubmit = await handleFormUpload({ fields, form: validatedForm, endpoint });
 
-      // Submit the form to the endpoint API (with the validated form return by the function above)
+      // Submit the form (with the validated form return by the function above).
       const response = await submitForm({ values: formToSubmit, endpoint });
       const data = await response.json();
 
