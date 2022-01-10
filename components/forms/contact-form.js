@@ -31,17 +31,25 @@ function ContactForm() {
           required: true,
           selectValues: [
             {
-              value: 'question',
-              label: 'Question',
-              default: true,
+              value: 'competition',
+              label: 'Organiser une compétition',
+              // default: true,
             },
             {
-              value: 'demande',
-              label: 'Demande',
+              value: 'clubs',
+              label: 'Créer une association, gérer un club',
+            },
+            {
+              value: 'achat',
+              label: 'Acheter des équipements de roundnet',
+            },
+            {
+              value: 'partenariat',
+              label: 'Réaliser un partenariat avec Roundnet France',
             },
             {
               value: 'autre',
-              label: 'Autre',
+              label: 'Autres demandes',
             }
           ],
         }
