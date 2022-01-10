@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useMemo } from 'react';
 import { validateForm, submitForm } from '../../helpers/form';
 import handleFormUpload from '../../helpers/form/handle-form-upload';
 
@@ -32,7 +32,27 @@ import FormField from './form-field';
 //   * descriptionBefore: description shown before the form. Can be a string or a component
 //   * descriptionAfter: description shown after the form. Can be a string or a component
 
+// Function to get InitialState. Will be called as a Memo to prevent unnecessary re-renders
+function getInitialState(fields, getInitialErrors = false) {
+  // Returns an object with form ids and void values (empty strings for inputs, false for error handling)
+  return fields.reduce((acc, curr) => {
+    // Only case where we want to set the value to (not) void is the default value for a select or a checkbox for getInitialState
+    if (!getInitialErrors && curr.type === "select") {
+      const optionDefault = curr.options?.selectValues.find(option => option.default);
+      const defaultValue = optionDefault?.value || "";
+      return {
+        ...acc,
+        [curr.id]: defaultValue,
+      }
+    }
 
+    // Returns false for errors, empty string for inputs
+    return {
+      ...acc,
+      [curr.id]: getInitialErrors ? false : '',
+    }
+  }, {})
+}
 
 export default function FormBuilder({ formConfig }) {
   // Get form Config values
@@ -46,27 +66,9 @@ export default function FormBuilder({ formConfig }) {
     submitText,
   } = formConfig;
 
-
   // Create an object from formFields where each id is an empty string (or false if initial error object)
-  const initialFormState = fields.reduce((acc, curr) => {
-    if (curr.type === "select") {
-      const { value: defaultValue } = curr.options?.selectValues.find(option => option.default);
-      return {
-        ...acc,
-        [curr.id]: defaultValue,
-      }
-    }
-
-    return {
-      ...acc,
-      [curr.id]: '',
-    }
-  }, {});
-
-  const initialFormErrors = fields.map(field => field.id).reduce((acc, curr) => ({
-    ...acc,
-    [curr]: false,
-  }), {});
+  const initialFormState = useMemo(() => getInitialState(fields), [fields]);
+  const initialFormErrors = getInitialState(fields, true);
 
   // Handle state and state change onChange
   const [form, setForm] = useState(initialFormState);

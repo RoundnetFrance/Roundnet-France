@@ -90,11 +90,8 @@ export default function FormField({ type, id, label, required, options, value, h
       break;
 
     case 'select': {
-      // Get the default value from the options.
-      const { value: defaultValue } = options?.selectValues.find(value => value.default);
-
       input = (
-        <FormControl>
+        <FormControl error={booleanError}>
           <InputLabel id={id}>{label}</InputLabel>
           <Select
             labelId={id}
@@ -121,6 +118,7 @@ export default function FormField({ type, id, label, required, options, value, h
               ))
             }
           </Select>
+          {booleanError && <FormHelperText error={booleanError} id={`${label}-error`}>{error}</FormHelperText>}
         </FormControl>
       );
       break;
