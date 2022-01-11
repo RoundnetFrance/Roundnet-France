@@ -53,7 +53,6 @@ PasswordInput.propTypes = {
   name: propTypes.string.isRequired,
   handleChange: propTypes.func.isRequired,
   error: propTypes.bool.isRequired,
-  helperText: propTypes.string.isRequired,
   confirm: propTypes.bool,
 }
 

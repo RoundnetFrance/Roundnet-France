@@ -28,6 +28,10 @@ const rfMuiTheme = createTheme(
       neutral: {
         main: '#fff',
         lightGrey: '#f1f1f1',
+      },
+      lightGrey: {
+        main: '#666',
+        contrastText: '#fff',
       }
     },
   },
