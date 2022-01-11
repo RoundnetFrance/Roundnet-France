@@ -1,5 +1,8 @@
 // MUI IMPORTS
-import { Box, Stack, Paper, Typography, Divider, Container, Grid, Icon, Button } from '@mui/material'
+import { Box, Stack, Paper, Typography, Divider, Container, Grid, Icon, Button } from '@mui/material';
+
+// MUI ICONS
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 // STATIC CONTENT
 import { fourSquareContent } from '../../contents/home/index';
@@ -47,7 +50,7 @@ function FourSquareInfo() {
                       {paragraph}
                     </Typography>
                   ))}
-                  <Button variant="contained" color="secondary" sx={{ width: 'fit-content' }}>
+                  <Button variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
                     <Link href={content.link} color="neutral.main" underline="none">
                       {content.linkText || 'En savoir plus'}
                     </Link>

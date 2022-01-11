@@ -2,7 +2,7 @@
 import Container from "@mui/material/Container";
 
 // COMPONENTS IMPORTS
-import SignUpForm from "../../components/admin/signup-form";
+import SignUpForm from "../../components/admin/forms/signup-form";
 
 function SignUpPage() {
   return (
