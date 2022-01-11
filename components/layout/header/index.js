@@ -110,7 +110,7 @@ function Header(props) {
   return (
     <HideOnScroll {...props}>
       <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
-        <AppBar>
+        <AppBar color={adminLayout ? 'lightGrey' : 'primary'}>
           <Toolbar>
             <Link href="/" passHref>
               <a>
@@ -134,12 +134,12 @@ function Header(props) {
             <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'inherit' } : { xs: 'none', lg: 'block' } }}>
               {adminLayout ? adminItems : navItems}
             </ButtonGroup>
-            
+
             {adminLayout ? <AdminDrawer /> : <Fragment>
               <Socials />
               <MenuDrawer />
             </Fragment>}
-              
+
           </Toolbar>
         </AppBar>
       </Box>

@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 // MUI IMPORTS
 import { Stack, Box, IconButton, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
