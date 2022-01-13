@@ -33,7 +33,7 @@ function ContactForm() {
             {
               value: 'competition',
               label: 'Organiser une compétition',
-              // default: true,
+              default: true,
             },
             {
               value: 'clubs',

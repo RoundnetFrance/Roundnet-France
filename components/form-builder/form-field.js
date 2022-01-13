@@ -2,7 +2,7 @@ import { fr } from 'date-fns/locale';
 import { Fragment, useState } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, Box, Select, MenuItem, FormControl, InputLabel, Autocomplete } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 
@@ -31,6 +31,18 @@ export default function FormField({ type, id, label, required, options, value, h
     })
   };
 
+  // If input is hidden, return hidden input with defaultValue
+  if (options?.hidden) {
+    return (
+      <input
+        id={id}
+        name={id}
+        type="hidden"
+        value={options?.defaultValue || ''}
+      />
+    );
+  }
+
   // If there's a dividerBottom option, add a MUI Divider.
   const dividerBottom = options?.dividerBottom ? <Divider /> : null;
 
@@ -39,7 +51,18 @@ export default function FormField({ type, id, label, required, options, value, h
   switch (type) {
     case 'longtext':
       input = (
-        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} multiline rows={options?.multilineRows || 4} />
+        <TextField
+          id={id}
+          label={label}
+          variant="outlined"
+          value={value}
+          onChange={handleChange}
+          error={booleanError}
+          helperText={error}
+          required={required}
+          multiline
+          rows={options?.multilineRows || 4}
+        />
       );
       break;
 
@@ -71,6 +94,32 @@ export default function FormField({ type, id, label, required, options, value, h
             )}
           />
         </LocalizationProvider>
+      );
+      break;
+
+    case 'autocomplete':
+      input = (
+        <Autocomplete
+          disablePortal
+          freeSolo
+          selectOnFocus
+          clearOnBlur
+          handleHomeEndKeys
+          id={id}
+          value={value}
+          onChange={(event, newValue) => {
+            handleChange({
+              target: {
+                id,
+                value: newValue,
+              },
+            });
+          }}
+          options={options?.selectValues}
+          renderInput={
+            (params) => <TextField {...params} label={label} />
+          }
+        />
       );
       break;
 
@@ -191,7 +240,16 @@ export default function FormField({ type, id, label, required, options, value, h
 
     default:
       input = (
-        <TextField id={id} label={label} variant="outlined" value={value} onChange={handleChange} error={booleanError} helperText={error} required={required} />
+        <TextField
+          id={id}
+          label={label}
+          variant="outlined"
+          value={value}
+          onChange={handleChange}
+          error={booleanError}
+          helperText={error}
+          required={required}
+        />
       )
       break;
   }

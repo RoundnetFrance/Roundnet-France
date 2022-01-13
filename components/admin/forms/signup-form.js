@@ -8,7 +8,8 @@ import FormBuilder from '../../form-builder';
 import Link from '../../ui/link';
 
 // FUNCTIONAL COMPONENT
-function SignUpForm() {
+function SignUpForm({ clubs }) {
+  console.log(clubs);
   const descriptionBefore = (
     <Fragment>
       <Typography>La validation d&apos;un compte administrateur Roundnet France permet aux associations d&apos;enregistrer les résultats des tournois automatiquement. Elle est soumise à l&apos;acceptation d&apos;un membre du board administratif de la fédération. </Typography>
@@ -32,6 +33,14 @@ function SignUpForm() {
         type: 'email',
         options: {
           required: true,
+        }
+      },
+      {
+        id: 'club',
+        label: 'Club',
+        type: 'select',
+        options: {
+          selectValues: clubs,
         }
       },
       {

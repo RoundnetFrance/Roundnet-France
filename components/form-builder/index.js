@@ -39,17 +39,23 @@ function getInitialState(fields, getInitialErrors = false) {
     // Only case where we want to set the value to (not) void is the default value for a select or a checkbox for getInitialState
     if (!getInitialErrors && curr.type === "select") {
       const optionDefault = curr.options?.selectValues.find(option => option.default);
-      const defaultValue = optionDefault?.value || "";
+      const defaultValue = optionDefault?.value || '';
       return {
         ...acc,
         [curr.id]: defaultValue,
       }
     }
 
+    let value = '';
+    // Populate specific values
+    if (!getInitialErrors && curr.options?.defaultValue) {
+      value = curr.options?.defaultValue || 'plop';
+    }
+
     // Returns false for errors, empty string for inputs
     return {
       ...acc,
-      [curr.id]: getInitialErrors ? false : '',
+      [curr.id]: getInitialErrors ? false : value,
     }
   }, {})
 }
@@ -67,7 +73,7 @@ export default function FormBuilder({ formConfig }) {
   } = formConfig;
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
-  const initialFormState = useMemo(() => getInitialState(fields), [fields]);
+  const initialFormState = getInitialState(fields);
   const initialFormErrors = getInitialState(fields, true);
 
   // Handle state and state change onChange
@@ -79,6 +85,9 @@ export default function FormBuilder({ formConfig }) {
       [id]: value,
     }));
   };
+
+
+  console.log('initial', initialFormState);
 
   // Handle errors
   const [errors, setErrors] = useState(initialFormErrors);
