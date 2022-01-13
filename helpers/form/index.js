@@ -76,7 +76,7 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().trim().uri();
         break;
 
-      // Defaults to a regular string (text/longtext)
+      // Defaults to a regular string (text/longtext/select)
       default:
         schemaKeys[id] = Joi.string().trim();
     }

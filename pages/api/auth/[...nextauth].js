@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import { getUser } from '../../../helpers/db/users';
+import { getDocument } from '../../../helpers/db';
 import { compare } from 'bcryptjs';
 
 // Providers
@@ -29,7 +30,8 @@ export default NextAuth({
         // Connect to database and check if user exists (throw error db malfunction)
         let user;
         try {
-          user = await getUser({ email });
+          // user = await getUser({ email });
+          user = await getDocument('users', { email });
         } catch (error) {
           console.log(error);
           throw new Error('Connexion à la base de données impossible');
@@ -43,7 +45,7 @@ export default NextAuth({
           }
           // Any object returned will be saved in `user` property of the JWT
           if (!user.authorized) {
-            return null
+            throw new Error('Connexion impossible');
           }
           return user
         } else {
@@ -75,9 +77,13 @@ export default NextAuth({
       }
 
       // For any other provider, we have to check if the user is in the database and authorized
-      const authorizedUser = await getUser({ email: user.email, authorized: true });
+      const userToLog = await getUser({ email: user.email });
 
-      if (!authorizedUser) {
+      if (!userToLog) {
+        return '/rf-admin/signup-oauth?email=' + user.email + '&name=' + user.name;
+      }
+
+      if (!userToLog.authorized) {
         return '/rf-admin/error?error=Connexion impossible.';
       }
 
