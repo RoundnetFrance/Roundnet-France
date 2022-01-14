@@ -1,5 +1,5 @@
 import sgMail from '@sendgrid/mail'
-import emailTeplate from '../../../styles/email-template'
+import emailTeplate from '../../../styles/email-templates/contact-email-template'
 
 // Sign SendGrid API key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -16,7 +16,7 @@ export default async function (req, res) {
     const msg = {
       to: 'robin.souriau@gmail.com',
       from: 'robin.souriau@gmail.com',
-      subject: data.subject,
+      subject: `Contact via le site - ${data.subject}`,
       name: data.name,
       html,
     };
