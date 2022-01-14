@@ -59,7 +59,7 @@ export default function FormField({ type, id, label, required, options, value, h
           onChange={handleChange}
           error={booleanError}
           helperText={error}
-          required={required}
+          required={options?.required}
           multiline
           rows={options?.multilineRows || 4}
         />
@@ -133,14 +133,14 @@ export default function FormField({ type, id, label, required, options, value, h
           error={booleanError}
           helperText={error}
           confirm={options?.passwordConfirm}
-          required={required}
+          required={options?.required}
         />
       )
       break;
 
     case 'select': {
       input = (
-        <FormControl error={booleanError}>
+        <FormControl error={booleanError} required={options?.required}>
           <InputLabel id={id}>{label}</InputLabel>
           <Select
             labelId={id}
@@ -247,11 +247,15 @@ export default function FormField({ type, id, label, required, options, value, h
           value={value}
           onChange={handleChange}
           error={booleanError}
-          helperText={error}
-          required={required}
+          helperText={error || options?.helperText}
+          required={options?.required}
         />
       )
       break;
+  }
+
+  if (options?.helperText) {
+    console.log(id)
   }
 
   return (

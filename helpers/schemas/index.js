@@ -12,12 +12,15 @@ export default function getSchema(schemaRef, partials) {
         chip: Joi.string().trim().required(),
         description: Joi.string().trim().required(),
         clubCreated: Joi.date().allow(''),
-        president: Joi.string().trim().required(),
+        referer: Joi.string().trim().required(),
         email: Joi.string().trim().email({ tlds: { allow: false } }).required(),
+        phone: Joi.string().trim().length(10).pattern(/^[0-9]+$/).required(),
+        players: Joi.string().trim().allow(''),
         links: Joi.array().items(Joi.object({
           source: Joi.string().trim().required(),
           url: Joi.string().trim().uri().allow(''),
         })),
+        discord: Joi.string().trim().allow(''),
       });
       break;
 

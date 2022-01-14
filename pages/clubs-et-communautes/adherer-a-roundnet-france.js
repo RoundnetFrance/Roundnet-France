@@ -68,7 +68,7 @@ function JoinRoundnetFrancePage() {
         subtitle="Créez votre club dès aujourd'hui et faites entrer votre ville et vos joueurs dans la compétition officielle."
         mainLink={{
           url: '/clubs-et-communautes/creer-votre-club',
-          text: 'Créer et inscrire votre club'
+          text: 'Adhérer à la fédération'
         }}
       />
 

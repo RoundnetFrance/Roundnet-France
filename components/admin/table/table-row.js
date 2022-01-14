@@ -38,12 +38,6 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
     return null;
   }
 
-  if (!value) {
-    return (
-      <TableCell>N/A</TableCell>
-    )
-  }
-
   // If element is $deletable, replate the bool by a delete button (with automated deletion handling)
   if (element === '$deletable') {
     return (
