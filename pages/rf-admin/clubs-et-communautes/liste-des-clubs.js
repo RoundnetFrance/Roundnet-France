@@ -38,13 +38,21 @@ function ClubsAdminPage() {
         editable: true,
       },
       {
-        _id: 'president',
-        name: 'Président',
+        _id: 'referer',
+        name: 'Référent',
         editable: true,
       },
       {
         _id: 'email',
         name: 'Email',
+      },
+      {
+        _id: 'phone',
+        name: 'Téléphone',
+      },
+      {
+        _id: 'players',
+        name: 'Joueurs',
       },
       {
         _id: 'links',
@@ -54,6 +62,10 @@ function ClubsAdminPage() {
           key: 'source',
           value: 'url',
         },
+      },
+      {
+        _id: 'discord',
+        name: 'Discord',
       },
       {
         _id: 'validated',

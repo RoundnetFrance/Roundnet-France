@@ -76,6 +76,10 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().trim().uri();
         break;
 
+      case 'phone':
+        schemaKeys[id] = Joi.string().length(10).pattern(/^[0-9]+$/);
+        break;
+
       // Defaults to a regular string (text/longtext/select)
       default:
         schemaKeys[id] = Joi.string().trim();

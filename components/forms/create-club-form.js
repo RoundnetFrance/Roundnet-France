@@ -15,7 +15,7 @@ function CreateClubForm() {
         label: 'Logo du club',
         type: 'file',
         options: {
-          required:true,
+          required: true,
           fileConfig: {
             type: 'image',
           }
@@ -42,7 +42,7 @@ function CreateClubForm() {
         label: 'Date de création du club',
         type: 'date',
         options: {
-          required: true,
+          // required: true,
           dateConfig: {
             disableFuture: true,
             clearable: true,
@@ -62,7 +62,7 @@ function CreateClubForm() {
       },
       {
         id: 'name',
-        label: 'Nom & prénom du président du club',
+        label: 'Nom & prénom du référent',
         type: 'text',
         options: {
           required: true,
@@ -74,7 +74,23 @@ function CreateClubForm() {
         type: 'email',
         options: {
           required: true,
+        }
+      },
+      {
+        id: 'phone',
+        label: 'Téléphone',
+        type: 'phone',
+        options: {
+          required: true,
           dividerBottom: true,
+        }
+      },
+      {
+        id: 'players',
+        label: 'Nombre de joueurs',
+        type: 'text',
+        options: {
+          helperText: 'Estimation du nombre de joueurs de votre communauté',
         }
       },
       {
@@ -92,6 +108,14 @@ function CreateClubForm() {
         label: 'Instagram',
         type: 'url',
       },
+      {
+        id: 'discord',
+        label: 'Discord',
+        type: 'text',
+        options: {
+          helperText: 'Si vous souhaitez être ajouté au serveur Discord Roundnet France, veuillez renseigner le nom d\'utilisateur de votre compte Discord.',
+        }
+      }
     ],
     endpoint: 'clubs',
     apiSchema: {
@@ -100,8 +124,10 @@ function CreateClubForm() {
       chip: "city",
       description: "description",
       clubCreated: "clubCreated",
-      president: "name",
+      referer: "name",
       email: "email",
+      phone: "phone",
+      players: "players",
       links: [
         {
           source: "website",
@@ -116,6 +142,7 @@ function CreateClubForm() {
           key: 'url'
         }
       ],
+      discord: "discord",
     },
     descriptionAfter,
   };
