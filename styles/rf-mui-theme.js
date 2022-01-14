@@ -7,6 +7,9 @@ const rfMuiTheme = createTheme(
   {
     typography: {
       fontFamily: 'Urbanist, sans-serif',
+      body1: {
+        lineHeight: 1.6,
+      }
     },
     palette: {
       type: 'dark',
