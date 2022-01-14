@@ -1,4 +1,4 @@
-import { useState, Fragment, useMemo } from 'react';
+import { useState, Fragment, useEffect, useMemo } from 'react';
 import { validateForm, submitForm } from '../../helpers/form';
 import handleFormUpload from '../../helpers/form/handle-form-upload';
 
@@ -49,7 +49,7 @@ function getInitialState(fields, getInitialErrors = false) {
     let value = '';
     // Populate specific values
     if (!getInitialErrors && curr.options?.defaultValue) {
-      value = curr.options?.defaultValue || 'plop';
+      value = curr.options?.defaultValue || '';
     }
 
     // Returns false for errors, empty string for inputs
@@ -73,11 +73,12 @@ export default function FormBuilder({ formConfig }) {
   } = formConfig;
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
-  const initialFormState = getInitialState(fields);
+  const initialFormState = useMemo(() => getInitialState(fields), [fields]);
   const initialFormErrors = getInitialState(fields, true);
 
   // Handle state and state change onChange
   const [form, setForm] = useState(initialFormState);
+  console.log('form', form);
   const handleChange = (event) => {
     const { id, value } = event.target;
     setForm((prevForm) => ({
@@ -85,14 +86,18 @@ export default function FormBuilder({ formConfig }) {
       [id]: value,
     }));
   };
-
-
-  console.log('initial', initialFormState);
-
   // Handle errors
   const [errors, setErrors] = useState(initialFormErrors);
   // Handle loading
   const [loading, setLoading] = useState(false);
+
+  // Handle consistent link between initialState (values sent from form via formConfig.fields) and form (state for form)
+  useEffect(() => {
+    if (JSON.stringify(form) != JSON.stringify(initialFormState)) {
+      setForm(initialFormState);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialFormState]);
 
   // Handle submit status
   const [submitStatus, setSubmitStatus] = useState({
