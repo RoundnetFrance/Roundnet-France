@@ -56,11 +56,11 @@ function ClubListPage({ clubs, error }) {
       </Container>
 
       <CTAFooter
-        title="Vous souhaitez inscrire votre&nbsp;club&nbsp;?"
+        title="Vous souhaitez apparaître sur cette page ?"
         subtitle="Adhérez à Roundnet France et rejoignez l'une des communautés de Roundnet les plus actives de France."
         mainLink={{
           url: '/clubs-et-communautes/creer-votre-club',
-          text: 'Créer et inscrire votre club'
+          text: 'Adhérer à la fédération'
         }}
         altLink={{
           url: '/clubs-et-communautes/adherer-a-roundnet-france',
