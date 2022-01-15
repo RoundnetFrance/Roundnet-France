@@ -44,10 +44,10 @@ export default function TableCellArray({ values, id, element, isEditable, arrayV
           onChange={(event) => handleChange(event, value)}
         />
       ) : (
-        
-          <Typography variant="body1" key={value[arrayValues.value]}>
-            {value[arrayValues.value]}
-          </Typography>
+
+        <Typography variant="body1" key={value[arrayValues.value]}>
+          {value[arrayValues.value]}
+        </Typography>
       )
     )
   });

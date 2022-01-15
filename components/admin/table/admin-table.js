@@ -2,13 +2,7 @@ import propTypes from 'prop-types';
 import { useState, Fragment } from 'react';
 
 // MUI IMPORTS
-import Table from '@mui/material/Table';
-import TableContainer from '@mui/material/TableContainer';
-import Paper from '@mui/material/Paper';
-import Alert from '@mui/material/Alert';
-import Slide from '@mui/material/Slide';
-import Snackbar from '@mui/material/Snackbar';
-import Container from '@mui/material/Container';
+import { Table, TableContainer, Paper, Alert, Slide, Snackbar, Container } from '@mui/material'
 
 // COMPONENT IMPORTS
 import TableBody from './table-body.js';
@@ -65,6 +59,15 @@ function AdminTable({ tableConfig:
   // Gather the date fields in the table by checking date key. Will be used to dynamically add date fields in Body.
   const dateFields = tableHead.filter(key => key.date).map(key => key._id);
 
+  // Check if every item of tableData has every keysToDisplay keys in it. If not, add them with a '$empty' value.
+  tableData?.forEach(item => {
+    keysToDisplay.forEach(key => {
+      if (!(key in item)) item[key] = '$empty';
+    });
+  });
+
+  // [If need be] Reorder each item of the tableData array to match the order of keysToDisplay the values in keysToDisplay.
+
   // If deletable option, add a new '$deletable' element on the tableHead object and on each tableData object.
   if (!loading && deletable && !tableHead.find(item => item._id === '$deletable')) {
     tableHead.push({
@@ -84,7 +87,7 @@ function AdminTable({ tableConfig:
 
   return (
     <Fragment>
-      <Container maxWidth={nbOfElements > 5 ? 'lg' : 'sm' } sx={{ py: 4 }}>
+      <Container maxWidth={nbOfElements > 5 ? 'lg' : 'sm'} sx={{ py: 4 }}>
 
         <TableContainer component={Paper}>
           <Table aria-label={name}>

@@ -14,13 +14,14 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import PersonIcon from '@mui/icons-material/Person';
 
-// OUTER COMPONENTS
+// COMPONENTS IMPORT
 import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
 import AdminDrawer from '../admin/admin-drawer';
 import menuState from '../../../helpers/menu-state';
 import NavItem from './nav-items';
 import Socials from './socials';
+import AvatarMenu from './avatar-menu';
 
 function HideOnScroll({ children }) {
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -96,11 +97,11 @@ function Header(props) {
         ) : <PersonIcon />}
       </Avatar>
 
-      <Button onClick={signOut} color="neutral" sx={{
+      {/* <Button onClick={signOut} color="neutral" sx={{
         textTransform: 'none',
       }}>
         Déconnexion
-      </Button>
+      </Button> */}
     </Stack>
   )
 
@@ -131,8 +132,10 @@ function Header(props) {
               </Link>
             </Typography>
 
-            <ButtonGroup variant="text" sx={{ display: adminLayout ? { xs: 'inherit' } : { xs: 'none', lg: 'block' } }}>
-              {adminLayout ? adminItems : navItems}
+            <ButtonGroup variant="text" sx={{
+              display: adminLayout ? { xs: 'inherit' } : { xs: 'none', lg: 'block' }
+            }}>
+              {adminLayout ? <AvatarMenu image={userImage} name={userName} signOut={signOut} /> : navItems}
             </ButtonGroup>
 
             {adminLayout ? <AdminDrawer /> : <Fragment>
