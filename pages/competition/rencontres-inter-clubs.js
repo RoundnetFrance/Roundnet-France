@@ -99,7 +99,7 @@ function TournamentsResultsPage() {
         <FeaturedItems items={featuredItems} />
       </Container>
 
-      <CTAFooter 
+      <CTAFooter
         title="Vous souhaitez participer aux rencontres inter-clubs ?"
         subtitle="Inscrivez votre club ou crééz votre équipe !"
         mainLink={{
@@ -107,7 +107,7 @@ function TournamentsResultsPage() {
           text: 'Inscrivez votre club',
         }}
         altLink={{
-          url: '/clubs-et-communautes/adherer-a-la-federation',
+          url: '/clubs-et-communautes/adherer-a-roundnet-france',
           text: 'Adhérer à la Fédération',
         }}
       />
