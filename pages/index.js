@@ -18,7 +18,7 @@ export default function Home() {
         subtitle="Le site officiel de la fédération française de roundnet"
         image="/images/home-slide.jpg"
         mainButtonText="Découvrir"
-        mainButtonLink="/competition/regles"
+        mainButtonLink="/regles"
         altButtonText="Participer à un tournoi"
         altButtonLink="/competition/calendrier"
       />

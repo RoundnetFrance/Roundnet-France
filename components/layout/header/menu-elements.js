@@ -7,7 +7,7 @@ const menuElements = [
     subElements: [
       {
         name: 'Règles Officielles',
-        url: '/competition/regles',
+        url: '/regles',
       },
       {
         name: 'Calendrier',
