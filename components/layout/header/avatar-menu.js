@@ -34,6 +34,7 @@ export default function AvatarMenu({ image, name, signOut }) {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
+
       <Tooltip title="Préférences du compte">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar sx={{ width: 35, height: 35, mr: 1 }}>
@@ -43,6 +44,7 @@ export default function AvatarMenu({ image, name, signOut }) {
           </Avatar>
         </IconButton>
       </Tooltip>
+
       <Menu
         sx={{ mt: '35px' }}
         id="account-appbar"
@@ -65,7 +67,7 @@ export default function AvatarMenu({ image, name, signOut }) {
             <PersonIcon />
           </ListItemIcon>
           <Typography textAlign="center">
-            <Link href="/rf-admin/me" color="initial" underline="none">Mes informations</Link>
+            <Link href="/rf-admin/mon-compte" color="initial" underline="none">Mes informations</Link>
           </Typography>
         </MenuItem>
 

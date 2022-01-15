@@ -11,7 +11,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 // MENU DATA & HELPERS
 import menuElements from './menu-elements';
-import menuState from '../../../helpers/menu-state'; 
+import menuState from '../../../helpers/menu-state';
 
 function MenuDrawer() {
   // Preparing states
@@ -77,10 +77,10 @@ function MenuDrawer() {
               {element.subElements ? (
                 element.name
               ) : (
-                  <Link href={element.url} passHref>
-                    <MUILink underline="none">{element.name}</MUILink>
-                  </Link>
-              )}             
+                <Link href={element.url} passHref>
+                  <MUILink underline="none">{element.name}</MUILink>
+                </Link>
+              )}
             </ListItemText>
             {element.subElements && expandIcon}
           </ListItemButton>
@@ -99,6 +99,7 @@ function MenuDrawer() {
         gutterBottom
         sx={{
           mt: 2, ml: 2, mb: 2,
+          lineHeight: 1,
         }}
       >
         Roundnet France
