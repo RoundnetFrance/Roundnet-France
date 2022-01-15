@@ -105,7 +105,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
   if ((typeof value === 'string' || typeof value === 'number')) {
     return (
       <TableCellText
-        value={value}
+        value={value === '$empty' ? 'N/A' : value}
         isEditable={isEditable}
         id={id}
         element={element}
@@ -120,7 +120,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
 
   return (
     <TableCell>
-      {value || "Hello"}
+      {value}
     </TableCell>
   )
 }
