@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import propTypes from 'prop-types';
 
 // MUI IMPORTS
@@ -7,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import MUILink from '@mui/material/Link';
+
+// CONTENT IMPORTS
+import Link from '../ui/link';
 
 function CTAFooter({ title, subtitle, mainLink, altLink }) {
   return (
@@ -37,11 +39,9 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
       >
         <Button variant="contained" color="primary" size="large">
           {mainLink.outLink ? (
-            <MUILink href={mainLink.url} target="_blank" color="#fff">{mainLink.text}</MUILink>
+            <MUILink href={mainLink.url} target="_blank" color="#fff" underline="none">{mainLink.text}</MUILink>
           ) : (
-            <Link href={mainLink.url} passHref>
-              <MUILink color="#fff" underline='none'>{mainLink.text}</MUILink>
-            </Link>
+            <Link href={mainLink.url}>{mainLink.text}</Link>
           )}
 
         </Button>

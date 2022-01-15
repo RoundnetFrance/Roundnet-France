@@ -4,7 +4,7 @@ import { Button, IconButton, Stack } from '@mui/material';
 // MUI ICONS
 import { InsertLink, Facebook, Instagram } from '@mui/icons-material';
 
-export default function LinkButtons({ links }) {
+export default function LinkButtons({ links, imageToLeft }) {
 
   // If links is a single string link, display it as is
   if (typeof links === 'string') {
@@ -18,19 +18,23 @@ export default function LinkButtons({ links }) {
         }}
         variant="contained"
         color="secondary"
-        href={link}
+        href={links}
         target={isExternal ? '_blank' : '_self'}
         rel={isExternal ? 'noopener noreferrer' : ''}
         startIcon={isExternal ? <InsertLink /> : null}
       >
-        Lien
+        Visiter le site
       </Button>
     );
   }
 
   // If links is an array of links, display them as buttons
   return (
-    <Stack direction="row" spacing={0}>
+    <Stack
+      direction="row"
+      spacing={0}
+      justifyContent={{ xs: 'center', md: imageToLeft ? 'flex-start' : 'flex-end' }}
+      sx={{ flexWrap: 'wrap' }}>
       {links.map(link => {
         // If no link is provided, skip the render
         if (!link.url) {
@@ -45,7 +49,7 @@ export default function LinkButtons({ links }) {
                 key={link.url}
                 sx={{
                   width: 'fit-content',
-                  mr: 1
+                  mr: 1,
                 }}
                 variant="contained"
                 size="small"
@@ -59,7 +63,7 @@ export default function LinkButtons({ links }) {
               </Button>
             );
 
-          default:
+          case 'facebook':
             return (
               <IconButton
                 key={link.url}
@@ -70,8 +74,45 @@ export default function LinkButtons({ links }) {
                 target={isExternal ? '_blank' : '_self'}
                 rel={isExternal ? 'noopener noreferrer' : ''}
               >
-                {link.source === 'facebook' ? <Facebook /> : <Instagram />}
+                <Facebook />
               </IconButton>
+            );
+
+          case 'instagram':
+            return (
+              <IconButton
+                key={link.url}
+                aria-label={link.source + ' icon'}
+                href={link.url}
+                color="secondary"
+                size="small"
+                target={isExternal ? '_blank' : '_self'}
+                rel={isExternal ? 'noopener noreferrer' : ''}
+              >
+                <Instagram />
+              </IconButton>
+            );
+
+          default:
+            return (
+              <Button
+                key={link.url}
+                sx={{
+                  width: 'fit-content',
+                  mr: imageToLeft ? 1 : 0,
+                  ml: imageToLeft ? 0 : 1,
+                  mb: 1,
+                }}
+                variant="contained"
+                // size="small"
+                color="secondary"
+                href={link.url}
+                target={isExternal ? '_blank' : '_self'}
+                rel={isExternal ? 'noopener noreferrer' : ''}
+                startIcon={isExternal ? <InsertLink /> : null}
+              >
+                {link.text}
+              </Button>
             );
         }
       })
