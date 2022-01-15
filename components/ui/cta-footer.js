@@ -41,15 +41,13 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
           {mainLink.outLink ? (
             <MUILink href={mainLink.url} target="_blank" color="#fff" underline="none">{mainLink.text}</MUILink>
           ) : (
-            <Link href={mainLink.url}>{mainLink.text}</Link>
+            <Link href={mainLink.url} color="#fff" underline="none">{mainLink.text}</Link>
           )}
 
         </Button>
         {altLink && (
           <Button variant="contained" color="secondary" size="large" >
-            <Link href={altLink.url} passHref>
-              <MUILink color="#fff" underline='none'>{altLink.text}</MUILink>
-            </Link>
+            <Link href={altLink.url} color="#fff" underline="none">{altLink.text}</Link>
           </Button>
         )}
 

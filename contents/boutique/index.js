@@ -17,22 +17,6 @@ const urbanPartnership = [
         url: 'https://www.facebook.com/RoundnetToulouse',
         text: 'Toulouse',
       },
-      {
-        url: 'https://titansroundnet.fr/boutique/',
-        text: 'Nantes',
-      },
-      {
-        url: 'https://www.facebook.com/RoundnetToulouse',
-        text: 'Toulouse',
-      },
-      {
-        url: 'https://titansroundnet.fr/boutique/',
-        text: 'Nantes',
-      },
-      {
-        url: 'https://www.facebook.com/RoundnetToulouse',
-        text: 'Toulouse',
-      },
     ]
   },
 ]
