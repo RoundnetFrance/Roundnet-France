@@ -83,7 +83,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
         }
 
         {/* LINK DISPLAY, IF ANY */}
-        {links && <LinkButtons links={links} />}
+        {links && <LinkButtons links={links} imageToLeft={imageToLeft} />}
 
       </Stack>
 
