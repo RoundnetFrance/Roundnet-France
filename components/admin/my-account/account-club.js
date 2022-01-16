@@ -15,12 +15,14 @@ export default function AccountClub({ clubValue, setClubValue, setSnackbar, club
     label: club.title,
     value: club._id,
   }));
-  console.log(clubsSelect);
 
   // Handle form submit
   function handleSubmit(event) {
     // Prevent form from submitting
     event.preventDefault();
+
+    // Transform select into an object to be set by MongoDB
+    const body = { club: clubValue };
 
     // Get user data, patch it in the db, then return new patched local state
     mutate('/api/users/me', async (user) => {
@@ -30,7 +32,7 @@ export default function AccountClub({ clubValue, setClubValue, setSnackbar, club
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(body),
         });
 
         // If error on response status, throw
@@ -47,7 +49,7 @@ export default function AccountClub({ clubValue, setClubValue, setSnackbar, club
         });
       }
 
-      const updatedUser = { ...user, ...values };
+      const updatedUser = { ...user, ...body };
       return updatedUser;
     });
     setSnackbar({
