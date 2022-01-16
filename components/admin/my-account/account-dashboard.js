@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useMe from '../../../hooks/use-me';
 
 // MUI IMPORTS
-import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typography, Box, Alert } from '@mui/material';
+import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typography, Box, Alert, Snackbar } from '@mui/material';
 
 // COMPONENT IMPORTS
 import AccountMain from './account-main';
@@ -34,6 +34,24 @@ export default function AccountDashboard() {
     }
   }, [user]);
 
+  // Handle success/error state for snackbar
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: '',
+  });
+
+  function handleSnackbarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackbar((prev) => ({
+      ...prev,
+      open: false,
+    }));
+  };
+
   let contentToShow;
 
   // Handle loading & error of user data
@@ -43,7 +61,7 @@ export default function AccountDashboard() {
   switch (showContent) {
     case 'account':
       contentToShow =
-        <AccountMain values={mainValues} setValues={setMainValues} />;
+        <AccountMain values={mainValues} setValues={setMainValues} setSnackbar={setSnackbar} />;
       break;
     case 'password':
       // contentToShow = <AccountPassword values={passwordValues} />;
@@ -93,6 +111,13 @@ export default function AccountDashboard() {
         </Box>
 
       </Stack>
+
+      {/* Snackbar for succcess/error */}
+      <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity={snackbar.severity || 'info'} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Paper>
   )
 }
