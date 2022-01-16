@@ -54,6 +54,10 @@ const adminElements = [
     icon: 'settings',
     subElements: [
       {
+        name: 'Mon Compte',
+        url: '/rf-admin/parametres/mon-compte',
+      },
+      {
         name: 'Administrateurs',
         url: '/rf-admin/parametres/administrateurs',
       },

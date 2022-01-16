@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 // MUI IMPORTS
-import { Avatar, Box, Tooltip, Menu, IconButton, MenuItem, Typography, ListItemIcon } from '@mui/material';
+import { Avatar, Box, Tooltip, Menu, IconButton, MenuItem, Typography, ListItemIcon, Divider } from '@mui/material';
 
 // MUI ICONS
 import PersonIcon from '@mui/icons-material/Person';
@@ -64,26 +64,28 @@ export default function AvatarMenu({ image, name, signOut }) {
       >
 
         <MenuItem onClick={handleCloseNavMenu}>
-          <ListItemIcon>
-            <PersonIcon />
+          <ListItemIcon >
+            <PersonIcon color='primary' />
           </ListItemIcon>
           <Typography textAlign="center">
-            <Link href="/rf-admin/mon-compte" color="initial" underline="none">Mes informations</Link>
+            <Link href="/rf-admin/parametres/mon-compte" color="initial" underline="none">Mes informations</Link>
           </Typography>
         </MenuItem>
 
         <MenuItem onClick={handleCloseNavMenu}>
           <ListItemIcon>
-            <SupportIcon />
+            <SupportIcon color='primary' />
           </ListItemIcon>
           <Typography textAlign="center">
             <Link href="/rf-admin/support" color="initial" underline="none">Support</Link>
           </Typography>
         </MenuItem>
 
+        <Divider />
+
         <MenuItem onClick={handleCloseNavMenu}>
           <ListItemIcon>
-            <ExitToAppIcon />
+            <ExitToAppIcon color='primary' />
           </ListItemIcon>
           <Typography color="initial" textAlign="center" onClick={signOut}>Déconnexion</Typography>
         </MenuItem>

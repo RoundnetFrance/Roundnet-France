@@ -1,16 +1,51 @@
 import { useSWRConfig } from 'swr';
+import { useState } from 'react';
 
 // MUI IMPORTS
-import { Box, Typography, Divider, TextField, Stack, Button, Chip } from '@mui/material';
+import { Box, Typography, Divider, TextField, Stack, Button, Chip, Snackbar, Alert } from '@mui/material';
 
-export default function AccountMain({ values, setValues }) {
+export default function AccountMain({ values, setValues, setSnackbar }) {
   const { mutate } = useSWRConfig();
 
   // Handle form submit
   function handleSubmit(event) {
+    // Prevent form from submitting
     event.preventDefault();
-    console.log('submit', values);
-    mutate('/api/users/me', values);
+
+    // Get user data, patch it in the db, then return new patched local state
+    mutate('/api/users/me', async (user) => {
+      try {
+        const response = await fetch('/api/users/me', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+
+        // If error on response status, throw
+        if (!response.ok) {
+          const { message } = await response.json();
+          throw new Error(message);
+        };
+
+      } catch (err) {
+        setSnackbar({
+          open: true,
+          message: err.message || 'Une erreur est survenue',
+          severity: 'error',
+        });
+      }
+
+      const updatedUser = { ...user, ...values };
+      return updatedUser;
+    });
+    setSnackbar({
+      open: true,
+      message: 'Vos informations ont été mises à jour',
+      severity: 'success',
+    });
+
   }
 
   return (
@@ -54,7 +89,6 @@ export default function AccountMain({ values, setValues }) {
         </Stack>
 
       </Box>
-
-    </Box >
+    </Box>
   )
 }

@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
     // PATCH method to update specific app rule
     if (req.method === 'PATCH') {
-      // * Validate the data
+      // * Validate partial data
       // try {
       //   // Get the rule schema and specificaly validate the partial data
       //   const keyToValidate = Object.keys(req.body)[0];
