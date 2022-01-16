@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useMe from '../../../hooks/use-me';
 
 // MUI IMPORTS
-import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typography, Box, Fade } from '@mui/material';
+import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typography, Box, Alert } from '@mui/material';
 
 // COMPONENT IMPORTS
 import AccountMain from './account-main';
 import AccountDelete from './account-delete';
+import Loader from '../../../components/ui/loader';
 
 // CONTENT
 import { accountMenuElements } from '../../../contents/admin';
@@ -15,12 +17,29 @@ export default function AccountDashboard() {
   // Handle content state
   const [showContent, setShowContent] = useState('account');
 
+  // Handle user data
+  const { user, isLoading, isError } = useMe();
+
   // Handle state for menu items
-  const [mainValues, setMainValues] = useState({});
+  const [mainValues, setMainValues] = useState({ name: '', email: '' });
   const [passwordValues, setPasswordValues] = useState({});
   const [clubsValues, setClubsValues] = useState({});
 
+  useEffect(() => {
+    if (user) {
+      setMainValues({
+        name: user.name,
+        email: user.email,
+      });
+    }
+  }, [user]);
+
   let contentToShow;
+
+  // Handle loading & error of user data
+  if (isLoading) return <Loader />
+  if (isError) contentToShow = <Alert severity='error'>Impossible de charger les données de votre compte</Alert>
+
   switch (showContent) {
     case 'account':
       contentToShow =
@@ -39,9 +58,7 @@ export default function AccountDashboard() {
       contentToShow = <AccountDelete />;
       break;
     default:
-      contentToShow = <Fade>
-        <AccountMain />
-      </Fade>;
+      contentToShow = <AccountMain values={mainValues} setValues={setMainValues} />;
   }
 
   return (
