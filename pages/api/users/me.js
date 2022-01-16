@@ -1,5 +1,6 @@
 import { getSession } from "next-auth/react";
-import { getDocument, patchDocument } from "../../../helpers/db";
+import { getDocument, patchDocument, deleteDocument } from "../../../helpers/db";
+import { hash } from 'bcryptjs';
 
 export default async function handler(req, res) {
 
@@ -8,7 +9,7 @@ export default async function handler(req, res) {
   // If user is authorized
   if (session) {
 
-    // GET method to read app members
+    // GET method to read self info
     if (req.method === 'GET') {
       try {
         const users = await getDocument('users', { email: session.user.email }, { password: 0, image: 0 });
@@ -19,12 +20,27 @@ export default async function handler(req, res) {
       }
     }
 
-    // PATCH method to update app members
+    // PATCH method to update self info
     if (req.method === 'PATCH') {
       console.log(req.body)
+      if (req.body.password) {
+        req.body.password = await hash(req.body.password, 12);
+        delete req.body.passwordConfirm;
+      }
       try {
         const user = await patchDocument('users', { email: session.user.email }, req.body);
         return res.status(200).json(user);
+      } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ error: 'Erreur serveur', message: error.message });
+      }
+    }
+
+    // DELETE method to delete self account
+    if (req.method === 'DELETE') {
+      try {
+        await deleteDocument('users', { email: session.user.email });
+        return res.status(200).json({ message: 'Compte supprimé' });
       } catch (error) {
         console.error(error.message);
         return res.status(500).json({ error: 'Erreur serveur', message: error.message });

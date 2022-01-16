@@ -6,6 +6,7 @@ import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typograp
 
 // COMPONENT IMPORTS
 import AccountMain from './account-main';
+import AccountPassword from './account-password';
 import AccountDelete from './account-delete';
 import Loader from '../../../components/ui/loader';
 
@@ -64,7 +65,7 @@ export default function AccountDashboard() {
         <AccountMain values={mainValues} setValues={setMainValues} setSnackbar={setSnackbar} />;
       break;
     case 'password':
-      // contentToShow = <AccountPassword values={passwordValues} />;
+      contentToShow = <AccountPassword setSnackbar={setSnackbar} />;
       break;
     case 'clubs':
       // contentToShow = <AccountClubs values={passwordValues} />;
@@ -73,7 +74,7 @@ export default function AccountDashboard() {
       // contentToShow = <AccountSupport />;
       break;
     case 'delete':
-      contentToShow = <AccountDelete />;
+      contentToShow = <AccountDelete confirmText={'delete-' + mainValues.email} setSnackbar={setSnackbar} />;
       break;
     default:
       contentToShow = <AccountMain values={mainValues} setValues={setMainValues} />;
@@ -84,7 +85,7 @@ export default function AccountDashboard() {
       <Stack direction="row" spacing={0}>
 
         {/* MenuList */}
-        <MenuList sx={{ mr: 2, width: '250px' }}>
+        <MenuList sx={{ mr: 2, width: '230px' }}>
 
           {accountMenuElements.map(element => (
             <MenuItem
