@@ -1,7 +1,6 @@
-// https://dribbble.com/shots/5893122-Account-Settings
-
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { getDocuments } from '../../../helpers/db';
 
 // MUI IMPORTS
 import { Container } from '@mui/material';
@@ -13,7 +12,7 @@ import PageTitle from '../../../components/ui/page-title';
 import Typography from '@mui/material/Typography';
 import AccountDashboard from '../../../components/admin/my-account/account-dashboard';
 
-export default function AccountAdminPage() {
+export default function AccountAdminPage({ clubs }) {
   const router = useRouter();
   // Handle redirect if no session
   const { status } = useSession({
@@ -38,16 +37,20 @@ export default function AccountAdminPage() {
         </Typography>
 
         {/* ACCOUNT DASHBOARD */}
-        <AccountDashboard />
+        <AccountDashboard clubs={clubs} />
 
       </Container>
     </DashboardWrapper>
   )
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
+  const clubs = await getDocuments('clubs');
+  console.log(clubs)
+
   return {
     props: {
+      clubs,
       adminLayout: true,
     }
   }

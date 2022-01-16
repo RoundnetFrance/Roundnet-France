@@ -90,6 +90,7 @@ export default function AccountPassword({ values, setValues, setSnackbar }) {
             value={passwordValues.password}
             handleChange={(event) => setPasswordValues({ ...passwordValues, password: event.target.value })}
             required
+            error={false}
           />
           <PasswordInput
             id="password-confirm"
@@ -98,6 +99,7 @@ export default function AccountPassword({ values, setValues, setSnackbar }) {
             value={passwordValues.passwordConfirm}
             handleChange={(event) => setPasswordValues({ ...passwordValues, passwordConfirm: event.target.value })}
             required
+            error={false}
           />
         </Stack>
 

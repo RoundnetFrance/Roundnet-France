@@ -7,13 +7,14 @@ import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typograp
 // COMPONENT IMPORTS
 import AccountMain from './account-main';
 import AccountPassword from './account-password';
+import AccountClub from './account-club';
 import AccountDelete from './account-delete';
 import Loader from '../../../components/ui/loader';
 
 // CONTENT
 import { accountMenuElements } from '../../../contents/admin';
 
-export default function AccountDashboard() {
+export default function AccountDashboard({ clubs }) {
 
   // Handle content state
   const [showContent, setShowContent] = useState('account');
@@ -23,8 +24,7 @@ export default function AccountDashboard() {
 
   // Handle state for menu items
   const [mainValues, setMainValues] = useState({ name: '', email: '' });
-  const [passwordValues, setPasswordValues] = useState({});
-  const [clubsValues, setClubsValues] = useState({});
+  const [clubValue, setClubValue] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -32,6 +32,7 @@ export default function AccountDashboard() {
         name: user.name,
         email: user.email,
       });
+      setClubValue(user.club);
     }
   }, [user]);
 
@@ -68,7 +69,7 @@ export default function AccountDashboard() {
       contentToShow = <AccountPassword setSnackbar={setSnackbar} />;
       break;
     case 'clubs':
-      // contentToShow = <AccountClubs values={passwordValues} />;
+      contentToShow = <AccountClub clubValue={clubValue} setClubValue={setClubValue} setSnackbar={setSnackbar} clubs={clubs} />;
       break;
     case 'support':
       // contentToShow = <AccountSupport />;

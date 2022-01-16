@@ -18,7 +18,7 @@ const accountMenuElements = [
   },
   {
     _id: 'clubs',
-    label: 'Clubs',
+    label: 'Club',
     icon: <GroupsIcon />,
   },
   {
