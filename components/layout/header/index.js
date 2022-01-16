@@ -111,7 +111,7 @@ function Header(props) {
   return (
     <HideOnScroll {...props}>
       <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
-        <AppBar color={adminLayout ? 'lightGrey' : 'primary'}>
+        <AppBar color={adminLayout ? 'secondary' : 'primary'}>
           <Toolbar>
             <Link href="/" passHref>
               <a>

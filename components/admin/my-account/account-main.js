@@ -1,11 +1,20 @@
+import { useSWRConfig } from 'swr';
+
 // MUI IMPORTS
 import { Box, Typography, Divider, TextField, Stack, Button, Chip } from '@mui/material';
 
 export default function AccountMain({ values, setValues }) {
+  const { mutate } = useSWRConfig();
 
+  // Handle form submit
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log('submit', values);
+    mutate('/api/users/me', values);
+  }
 
   return (
-    <Box component="form">
+    <Box component="form" onSubmit={handleSubmit}>
       <Stack direction="row" justifyContent="space-between" alignItems="flex-end" ml={4} mb={4} >
         <Stack direction="row" spacing={2}>
           <Typography variant="h5" >
