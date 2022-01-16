@@ -7,6 +7,7 @@ import { Avatar, Box, Tooltip, Menu, IconButton, MenuItem, Typography, ListItemI
 // MUI ICONS
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import SupportIcon from '@mui/icons-material/Support';
 
 // COMPONENT IMPORTS
 import Link from '../../ui/link';
@@ -68,6 +69,15 @@ export default function AvatarMenu({ image, name, signOut }) {
           </ListItemIcon>
           <Typography textAlign="center">
             <Link href="/rf-admin/mon-compte" color="initial" underline="none">Mes informations</Link>
+          </Typography>
+        </MenuItem>
+
+        <MenuItem onClick={handleCloseNavMenu}>
+          <ListItemIcon>
+            <SupportIcon />
+          </ListItemIcon>
+          <Typography textAlign="center">
+            <Link href="/rf-admin/support" color="initial" underline="none">Support</Link>
           </Typography>
         </MenuItem>
 

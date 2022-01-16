@@ -90,7 +90,13 @@ export default NextAuth({
       return true;
     },
     // Called when a user is successfully created
-    async session({ session, token, user }) {
+    async session({ session, token }) {
+      console.log('session', session);
+      console.log('token', token);
+
+      // Get user id from the database
+      const user = await getUser({ email: session.user.email });
+      console.log('user', user);
       // Send properties to the client, like an access_token from a provider.
       return session
     }
