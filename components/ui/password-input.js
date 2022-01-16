@@ -19,7 +19,7 @@ function PasswordInput({ label, value, name, handleChange, error, helperText, re
   };
 
   return (
-    <FormControl sx={{ m: 1 }} variant="outlined" required={required}>
+    <FormControl variant="outlined" required={required}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <OutlinedInput
         id={name}

@@ -1,15 +1,34 @@
 import { useSWRConfig } from 'swr';
+import { useState } from 'react';
 
 // MUI IMPORTS
-import { Box, Typography, Divider, TextField, Stack, Button, Chip } from '@mui/material';
+import { Box, Typography, Divider, Stack, Button } from '@mui/material';
 
-export default function AccountMain({ values, setValues, setSnackbar }) {
+// COMPONENT IMPORTS
+import PasswordInput from '../../../components/ui/password-input';
+
+export default function AccountPassword({ values, setValues, setSnackbar }) {
   const { mutate } = useSWRConfig();
+
+  // Handle password state
+  const [passwordValues, setPasswordValues] = useState({
+    password: '',
+    passwordConfirm: '',
+  });
 
   // Handle form submit
   function handleSubmit(event) {
     // Prevent form from submitting
     event.preventDefault();
+
+    // If passwords don't match, throw error
+    if (passwordValues.password !== passwordValues.passwordConfirm) {
+      return setSnackbar({
+        open: true,
+        message: 'Les mots de passe ne correspondent pas.',
+        severity: 'error',
+      });
+    }
 
     // Get user data, patch it in the db, then return new patched local state
     mutate('/api/users/me', async (user) => {
@@ -19,7 +38,7 @@ export default function AccountMain({ values, setValues, setSnackbar }) {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(passwordValues),
         });
 
         // If error on response status, throw
@@ -52,12 +71,8 @@ export default function AccountMain({ values, setValues, setSnackbar }) {
       <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'flex-end' }} ml={4} mb={4} >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
           <Typography variant="h5" >
-            Mon compte
+            Mot de passe
           </Typography>
-          <Chip
-            label="Administrateur"
-            color="secondary"
-          />
         </Stack>
         <Button variant="contained" color="primary" sx={{ mt: 2 }} type="submit">
           Enregistrer les modifications
@@ -66,23 +81,22 @@ export default function AccountMain({ values, setValues, setSnackbar }) {
 
       <Divider sx={{ my: 2 }} />
 
-      <Box px={4} py={2}>
-        <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
-          <TextField
-            id="name"
-            fullWidth
-            label="Nom & Prénom"
-            value={values.name}
-            onChange={e => setValues(prev => ({ ...prev, name: e.target.value }))}
+      <Box pl={4} py={2}>
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ width: '100%' }}>
+          <PasswordInput
+            id="password"
+            label="Nouveau mot de passe"
+            name="password"
+            value={passwordValues.password}
+            handleChange={(event) => setPasswordValues({ ...passwordValues, password: event.target.value })}
             required
           />
-          <TextField
-            id="email"
-            label="Email"
-            fullWidth
-            value={values.email}
-            onChange={e => setValues(prev => ({ ...prev, email: e.target.value }))}
-            helperText='Attention : changer votre adresse mail entraîne la perte de possibilité de connexion via les anciennes méthodes de connexion tierce (Google, Facebook...)'
+          <PasswordInput
+            id="password-confirm"
+            label="Confirmer le nouveau mot de passe"
+            name="password-confirm"
+            value={passwordValues.passwordConfirm}
+            handleChange={(event) => setPasswordValues({ ...passwordValues, passwordConfirm: event.target.value })}
             required
           />
         </Stack>
