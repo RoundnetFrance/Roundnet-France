@@ -2,7 +2,6 @@
 import FaceIcon from '@mui/icons-material/Face';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import GroupsIcon from '@mui/icons-material/Groups';
-import SupportIcon from '@mui/icons-material/Support';
 import ClearIcon from '@mui/icons-material/Clear';
 
 const accountMenuElements = [
@@ -20,11 +19,6 @@ const accountMenuElements = [
     _id: 'clubs',
     label: 'Club',
     icon: <GroupsIcon />,
-  },
-  {
-    _id: 'support',
-    label: 'Support',
-    icon: <SupportIcon />,
   },
   {
     _id: 'delete',
