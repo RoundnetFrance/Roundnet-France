@@ -50,7 +50,7 @@ export default function AccountMain({ values, setValues, setSnackbar }) {
   return (
     <Box component="form" onSubmit={handleSubmit}>
       <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'flex-end' }} ml={4} mb={4} >
-        <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+        <Stack direction='row' spacing={2}>
           <Typography variant="h5" >
             Mon compte
           </Typography>

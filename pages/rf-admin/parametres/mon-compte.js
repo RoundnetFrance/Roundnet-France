@@ -46,12 +46,11 @@ export default function AccountAdminPage({ clubs }) {
 
 export async function getStaticProps() {
   const clubs = await getDocuments('clubs');
-  console.log(clubs)
-
   return {
     props: {
       clubs,
       adminLayout: true,
-    }
+    },
+    revalidate: 600,
   }
 }
