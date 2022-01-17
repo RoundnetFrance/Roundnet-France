@@ -12,8 +12,7 @@ import ContactPageAdvice from '../../components/contact/contact-page-advice';
 
 function ContactPage() {
   // Handle state for displaying page info or contact form
-  const [selectedValue, setSelectedValue] = useState("");
-  console.log(selectedValue);
+  const [selectedValue, setSelectedValue] = useState("competition");
   function handleChange(event) {
     setSelectedValue(event.target.value);
   }
