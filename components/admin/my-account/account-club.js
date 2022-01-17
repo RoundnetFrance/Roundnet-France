@@ -61,7 +61,7 @@ export default function AccountClub({ clubValue, setClubValue, setSnackbar, club
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
-      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'flex-end' }} ml={4} mb={4} >
+      <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems={{ xs: 'flex-start', md: 'flex-end' }} ml={{ xs: 2, sm: 4 }} mb={4} >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
           <Typography variant="h5" >
             Mon club
