@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import useMe from '../../../hooks/use-me';
+import { useTheme } from '@mui/material/styles';
 
 // MUI IMPORTS
-import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typography, Box, Alert, Snackbar } from '@mui/material';
+import { Paper, Stack, MenuList, MenuItem, Divider, ListItemIcon, Icon, Typography, Box, Alert, Snackbar, useMediaQuery } from '@mui/material';
 
 // COMPONENT IMPORTS
 import AccountMain from './account-main';
@@ -15,6 +16,9 @@ import Loader from '../../../components/ui/loader';
 import { accountMenuElements } from '../../../contents/admin';
 
 export default function AccountDashboard({ clubs }) {
+  const theme = useTheme();
+  const higherThanMd = useMediaQuery(theme.breakpoints.up('md'));
+
 
   // Handle content state
   const [showContent, setShowContent] = useState('account');
@@ -81,12 +85,13 @@ export default function AccountDashboard({ clubs }) {
       contentToShow = <AccountMain values={mainValues} setValues={setMainValues} />;
   }
 
+
   return (
     <Paper sx={{ p: 4, my: 4 }}>
-      <Stack direction="row" spacing={0}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={0}>
 
         {/* MenuList */}
-        <MenuList sx={{ mr: 2, width: '230px' }}>
+        <MenuList sx={{ mr: 2, width: { xs: 'auto', md: '230px' } }}>
 
           {accountMenuElements.map(element => (
             <MenuItem
@@ -105,7 +110,7 @@ export default function AccountDashboard({ clubs }) {
 
         </MenuList>
 
-        <Divider orientation="vertical" flexItem />
+        <Divider orientation={higherThanMd ? 'vertical' : 'horizontal'} flexItem sx={{ mb: { xs: 4, md: 0 } }} />
 
         {/* Main Content */}
         <Box sx={{ flex: 1 }}>

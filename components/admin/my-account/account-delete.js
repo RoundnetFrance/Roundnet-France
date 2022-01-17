@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { signOut } from 'next-auth/react';
 
 // MUI IMPORTS
 import { Stack, Box, Typography, Divider, Alert, AlertTitle, TextField } from '@mui/material';
@@ -6,15 +7,34 @@ import { LoadingButton } from '@mui/lab'
 
 export default function AccountDelete({ confirmText, setSnackbar }) {
   const [confirmDelete, setConfirmDelete] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
     if (confirmDelete !== confirmText) {
+      setLoading(false);
       return setSnackbar({
         open: true,
         message: 'Vous devez confirmer la suppression de votre compte',
         severity: 'error',
       });
+    }
+
+    try {
+      await fetch('/api/users/me', {
+        method: 'DELETE',
+      });
+      signOut();
+    } catch (error) {
+      console.log(error);
+      setSnackbar({
+        open: true,
+        message: error.message || 'Une erreur est survenue',
+        severity: 'error',
+      });
+    } finally {
+      setLoading(false);
     }
 
     return setSnackbar({
@@ -52,7 +72,7 @@ export default function AccountDelete({ confirmText, setSnackbar }) {
               required
               sx={{ flexGrow: 1 }}
             />
-            <LoadingButton loading={false} type="submit" variant="contained" color="error" size="large" >Supprimer mon compte</LoadingButton>
+            <LoadingButton loading={loading} type="submit" variant="contained" color="error" size="large" >Supprimer mon compte</LoadingButton>
           </Stack>
         </Box>
       </Box>

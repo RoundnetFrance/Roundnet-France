@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         return res.status(200).json(users);
       } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Erreur serveur' });
+        return res.status(500).json({ error: 'Internal Server Error', message: error.message || 'Une erreur est survenue' });
       }
     }
 
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         return res.status(200).json(user);
       } catch (error) {
         console.error(error.message);
-        return res.status(500).json({ error: 'Erreur serveur', message: error.message });
+        return res.status(500).json({ error: 'Internal Server Error', message: error.message || 'Une erreur est survenue' });
       }
     }
 
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ message: 'Compte supprimé' });
       } catch (error) {
         console.error(error.message);
-        return res.status(500).json({ error: 'Erreur serveur', message: error.message });
+        return res.status(500).json({ error: 'Internal Server Error', message: error.message || 'Une erreur est survenue' });
       }
     }
 
