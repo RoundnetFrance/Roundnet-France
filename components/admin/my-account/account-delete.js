@@ -46,7 +46,7 @@ export default function AccountDelete({ confirmText, setSnackbar }) {
 
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="flex-end" ml={4} my={4} >
+      <Stack direction="row" justifyContent="space-between" alignItems="flex-end" ml={{ xs: 2, sm: 4 }} my={4} >
         <Typography variant="h5" >
           Supprimer le compte
         </Typography>

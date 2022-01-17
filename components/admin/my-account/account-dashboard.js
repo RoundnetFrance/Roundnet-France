@@ -87,15 +87,15 @@ export default function AccountDashboard({ clubs }) {
 
 
   return (
-    <Paper sx={{ p: 4, my: 4 }}>
+    <Paper sx={{ p: { xs: 1, sm: 1, md: 4 }, my: 4 }}>
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={0}>
 
         {/* MenuList */}
-        <MenuList sx={{ mr: 2, width: { xs: 'auto', md: '230px' } }}>
+        <MenuList sx={{ mr: 2, width: { xs: 'auto', md: '240px' } }}>
 
           {accountMenuElements.map(element => (
             <MenuItem
-              sx={{ mb: .5 }}
+              sx={{ mb: { xs: 0, md: 0.5 } }}
               key={element._id}
               onClick={() => setShowContent(element._id)}
             >
