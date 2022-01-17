@@ -3,13 +3,12 @@ import { useRouter } from 'next/router';
 import { getDocuments } from '../../../helpers/db';
 
 // MUI IMPORTS
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 // COMPONENT IMPORTS
 import Loader from '../../../components/ui/loader';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
-import Typography from '@mui/material/Typography';
 import AccountDashboard from '../../../components/admin/my-account/account-dashboard';
 
 export default function AccountAdminPage({ clubs }) {
