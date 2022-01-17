@@ -78,7 +78,6 @@ export default function FormBuilder({ formConfig }) {
 
   // Handle state and state change onChange
   const [form, setForm] = useState(initialFormState);
-  console.log('form', form);
   const handleChange = (event) => {
     const { id, value } = event.target;
     setForm((prevForm) => ({
