@@ -88,8 +88,8 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
       </Stack>
 
       <Paper elevation={3} sx={{
-        minWidth: { xs: height, md: '260px' },
-        width: { xs: height, md: '50%' },
+        minWidth: { xs: '100%', md: '260px' },
+        width: { xs: '100%', md: '50%' },
         height: { xs: height / 1.25, md: height },
         position: 'relative',
         overflow: 'hidden',
@@ -109,11 +109,6 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
 
 InfoBlock.propTypes = {
   title: propTypes.string.isRequired,
-  items: propTypes.arrayOf({
-    _id: propTypes.string.isRequired,
-    title: propTypes.string.isRequired,
-    text: propTypes.string.isRequired,
-  }),
   image: propTypes.string,
   description: propTypes.string.isRequired,
   imageToLeft: propTypes.bool,
