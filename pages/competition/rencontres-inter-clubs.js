@@ -1,11 +1,7 @@
 import { Fragment } from 'react';
 
 // MUI IMPORTS
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-
-// MUI ICONS
-import HelpCenterIcon from '@mui/icons-material/HelpCenter';
+import { Container, Typography } from '@mui/material';
 
 // COMPONENTS IMPORTS
 import Hero from '../../components/ui/hero';
