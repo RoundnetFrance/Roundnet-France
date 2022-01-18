@@ -9,6 +9,7 @@ import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 
+
 function ClubsAdminPage() {
   // Get user info
   const { clubs, isLoading, isError } = useClubs();

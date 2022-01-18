@@ -5,6 +5,8 @@ import useFederationMembers from '../../../hooks/useFederationMembers';
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
+import DataControl from '../../../components/admin/data-control';
+import CreateFederationMemberForm from '../../../components/admin/forms/create-federation-member-form';
 
 function ClubsAdminPage() {
   // Get user info
@@ -62,6 +64,7 @@ function ClubsAdminPage() {
   return (
     <DashboardWrapper>
       <PageTitle title="Liste des membres de la fédération"></PageTitle>
+      <DataControl endpoint="federation-members" createForm={<CreateFederationMemberForm />} />
       <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
   )

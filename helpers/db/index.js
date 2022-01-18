@@ -23,7 +23,7 @@ export function getDocument(collection, params, fields, sort) {
     try {
       const client = await clientPromise;
       const db = client.db();
-      const document = await db.collection(collection).findOne(params, { projection: fields, sort: { _id: -1 } });
+      const document = await db.collection(collection).findOne(params, { projection: fields, sort: sort || { _id: -1 } });
       // const data = JSON.parse(JSON.stringify(document[0]));
 
       resolve(document);
