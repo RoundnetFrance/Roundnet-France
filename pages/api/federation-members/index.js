@@ -45,11 +45,11 @@ export default async function handler(req, res) {
       try {
 
         await insertDocument('federation-members', data);
-        return res.status(201).json({ message: 'Le fichier de règle a bien été enregistré.' });
+        return res.status(201).json({ message: 'Le nouveau membre a bien été enregistré.' });
 
       } catch (error) {
         console.error('ERROR 500, federation-members', error.message);
-        return res.status(500).json({ error: 'Une erreur est survenue lors de la création du fichier de règles dans la base de données. Veuillez réessayer.', details: error.message });
+        return res.status(500).json({ error: 'Une erreur est survenue lors de la création du nouveau membre dans la base de données. Veuillez réessayer.', details: error.message });
       }
     }
   }
