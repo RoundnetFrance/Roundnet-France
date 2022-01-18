@@ -12,7 +12,7 @@ import ContactPageAdvice from '../../components/contact/contact-page-advice';
 
 function ContactPage() {
   // Handle state for displaying page info or contact form
-  const [selectedValue, setSelectedValue] = useState("competition");
+  const [selectedValue, setSelectedValue] = useState("regles");
   function handleChange(event) {
     setSelectedValue(event.target.value);
   }
@@ -33,7 +33,7 @@ function ContactPage() {
 
       <BoxWrapper title="Contactez Roundnet France">
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Que souhaitez-vous faire ?</InputLabel>
+          <InputLabel id="demo-simple-select-label">Que souhaitez-vous savoir ?</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -41,11 +41,22 @@ function ContactPage() {
             label="Que souhaitez-vous faire ?"
             onChange={handleChange}
           >
-            <MenuItem value="competition">Organiser une compétition</MenuItem>
+            {/* <MenuItem value="competition">Organiser une compétition</MenuItem>
             <MenuItem value="adhesion">Adhérer à la fédération</MenuItem>
             <MenuItem value="acheter">Acheter des équipements Spikeball</MenuItem>
             <MenuItem value="partenariat">Réaliser un partenariat avec Roundnet France</MenuItem>
+            <MenuItem value="autre-demande">Autre demande</MenuItem> */}
+            <MenuItem value="regles">Quelles sont les règles du roundnet (de services, sur un carry...) ?</MenuItem>
+            <MenuItem value="calendrier">Quand seront les prochains tournois ? Y a t-il des tournois européens/français ?</MenuItem>
+            <MenuItem value="cdf">Comment fonctionnera les championnats de France / la coupe de France ? Y’a t’il des tournois ? </MenuItem>
+            <MenuItem value="ric">Comment fonctionnera les inter-clubs ? Y’a t’il des tournois ?  </MenuItem>
+            <MenuItem value="clubs">Comment savoir s’il y a un club vers chez moi ? </MenuItem>
+            <MenuItem value="adhesion">Comment adhérer à RF ? Je souhaiterais construire une association en région </MenuItem>
+            <MenuItem value="acheter">Je souhaiterais/je cherche à acheter… Combien coûte un Spikeball Pro ?</MenuItem>
+            <MenuItem value="equipe">Qui est dans l&apos;équipe Roundnet France ?</MenuItem>
+            <MenuItem value="statuts">Comment fonctionne Roundnet France ?</MenuItem>
             <MenuItem value="autre-demande">Autre demande</MenuItem>
+
           </Select>
         </FormControl>
       </BoxWrapper>
