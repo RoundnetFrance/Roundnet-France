@@ -1,7 +1,5 @@
 import { Fragment } from 'react';
 
-
-
 // COMPONENT IMPORTS
 import Hero from '../components/ui/hero';
 import HomeInfoBlock from '../components/home/home-info-block';
