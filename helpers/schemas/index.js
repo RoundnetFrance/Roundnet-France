@@ -40,6 +40,15 @@ export default function getSchema(schemaRef, partials) {
       });
       break;
 
+    case 'federation-members':
+      schema = Joi.object({
+        title: Joi.string().trim().required(),
+        chip: Joi.string().trim().required(),
+        image: Joi.string().uri().required(),
+        description: Joi.string().trim().required(),
+      })
+      break;
+
     default:
       schema = Joi.any();
       break;

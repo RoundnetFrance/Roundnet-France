@@ -1,6 +1,8 @@
 import { ObjectId } from "mongodb";
 import { getSession } from "next-auth/react";
-import { patchDocument, deleteDocument } from "../../../helpers/db";
+import { getDocument, patchDocument, deleteDocument } from "../../../helpers/db";
+import storage from '../../../lib/init-firebase';
+import { ref, deleteObject } from 'firebase/storage';
 
 export default async function handler(req, res) {
 
@@ -23,10 +25,21 @@ export default async function handler(req, res) {
 
     // DEL method to delete specific app user
     if (req.method === 'DELETE') {
+      // Delete from storage
+      let fileRef;
       try {
-        const user = await deleteDocument('federation-members', { _id: ObjectId(federationMemberId) });
-        console.log(user);
-        return res.status(200).json(user);
+        const document = await getDocument('federation-members', ObjectId(federationMemberId), { image: 1, _id: 0 });
+        fileRef = ref(storage, document.image);
+        await deleteObject(fileRef);
+      } catch (error) {
+        console.error(error);
+      }
+
+      // Delete from mongoDB
+      let federationMember;
+      try {
+        federationMember = await deleteDocument('federation-members', { _id: ObjectId(federationMemberId) });
+        return res.status(200).json(federationMember);
       } catch (error) {
         console.error(error);
         return res.status(500).json(error);

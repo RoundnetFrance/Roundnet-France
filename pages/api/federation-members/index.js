@@ -1,9 +1,15 @@
 // NEXT API REQUEST
 // GET /api/v1/federation-members
 
-import { getDocuments } from "../../../helpers/db";
+import { getDocuments, insertDocument } from "../../../helpers/db";
+import { getSession } from "next-auth/react";
+import { validateAPI } from "../../../helpers/form";
+import getSchema from '../../../helpers/schemas';
 
 export default async function handler(req, res) {
+  // Get session info
+  const session = await getSession({ req })
+
   // GET method to read federation members
   if (req.method === 'GET') {
     try {
@@ -14,5 +20,39 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Internal server error' });
     }
   }
+
+  // Protected by session
+  if (session) {
+    // POST method to create a new rule file (only for admins)
+    if (req.method === 'POST') {
+
+      const { data } = req.body;
+
+      // * Validate the data
+      try {
+        // Define the POST CLUB schema
+        const schema = getSchema('federation-members');
+
+        // Actual validation
+        validateAPI({ data, schema });
+
+      } catch (error) {
+        console.error('ERROR 400 - federation-members', error.message);
+        return res.status(400).json({ message: error.message || 'Une erreur est survenue' });
+      }
+
+      // * Send the validated data to the database
+      try {
+
+        await insertDocument('federation-members', data);
+        return res.status(201).json({ message: 'Le fichier de règle a bien été enregistré.' });
+
+      } catch (error) {
+        console.error('ERROR 500, federation-members', error.message);
+        return res.status(500).json({ error: 'Une erreur est survenue lors de la création du fichier de règles dans la base de données. Veuillez réessayer.', details: error.message });
+      }
+    }
+  }
+
   return res.status(405).json({ error: 'Method not allowed' });
 }
