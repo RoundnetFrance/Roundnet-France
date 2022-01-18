@@ -56,7 +56,6 @@ function ContactPage() {
             <MenuItem value="equipe">Qui est dans l&apos;équipe Roundnet France ?</MenuItem>
             <MenuItem value="statuts">Comment fonctionne Roundnet France ?</MenuItem>
             <MenuItem value="autre-demande">Autre demande</MenuItem>
-
           </Select>
         </FormControl>
       </BoxWrapper>
