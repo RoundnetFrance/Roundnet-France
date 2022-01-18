@@ -38,24 +38,26 @@ function FourSquareInfo() {
               height: '95%'
             }}
             >
-              <Stack direction="column" justifyContent="space-between" sx={{ height: 'inherit' }}>
-                <Stack mb={2} direction="row" alignItems="center">
-                  <Icon sx={{ color: 'neutral.main' }}>{content.icon}</Icon>
-                  <Typography ml={2} variant="h5" component="h3" color="neutral.main" fontWeight="bold">{content.title}</Typography>
-                </Stack>
-                <Divider color="neutral.main" />
-                <Stack spacing={2} mt={4}>
+              <Stack direction="column" justifyContent="space-between" sx={{ height: '100%' }}>
+                <div>
+                  <Box mb={2}>
+                    <Stack mb={2} direction="row" alignItems="center">
+                      <Icon sx={{ color: 'neutral.main' }}>{content.icon}</Icon>
+                      <Typography ml={2} variant="h5" component="h3" color="neutral.main" fontWeight="bold">{content.title}</Typography>
+                    </Stack>
+                    <Divider color="neutral.main" flexItem />
+                  </Box>
                   {content.content.map(paragraph => (
-                    <Typography variant="body1" component="div" color="neutral.main" key={paragraph}>
+                    <Typography variant="body1" component="div" color="neutral.main" key={paragraph} mb={2}>
                       {paragraph}
                     </Typography>
                   ))}
-                  <Button variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
-                    <Link href={content.link} color="neutral.main" underline="none">
-                      {content.linkText || 'En savoir plus'}
-                    </Link>
-                  </Button>
-                </Stack>
+                </div>
+                <Button variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
+                  <Link href={content.link} color="neutral.main" underline="none">
+                    {content.linkText || 'En savoir plus'}
+                  </Link>
+                </Button>
               </Stack>
             </Paper>
           </Grid>
