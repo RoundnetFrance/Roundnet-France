@@ -45,7 +45,7 @@ function TournamentsResultsPage() {
           items={infoRIC}
           title="Comment se déroulent les rencontres inter-clubs ?"
           image="/images/pages/competition/inter-clubs/inter-club.jpg"
-          description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore eveniet possimus quidem, voluptas blanditiis rem beatae hic asperiores inventore nobis quos adipisci laboriosam earum in necessitatibus, accusantium itaque voluptatem aliquid error odio a autem officia eum maxime. Doloribus ducimus, debitis modi libero nesciunt similique excepturi laborum temporibus cumque esse deserunt labore aspernatur expedita consectetur, odit hic quos exercitationem quaerat dolore. Expedita modi neque quam."
+          description="Les clubs inscrivent une ou plusieurs équipes gratuitement auprès de la fédération. Chaque équipe est composée au maximum de 10 personnes, au minimum de 2 femmes et 4 hommes. Une rencontre est composée de 5 matchs en 2v2 : 1 femmes, 2 hommes et 2 mixtes. L’équipe qui a gagné le plus de matchs remporte la rencontre. Les clubs de la même région se mettent d’accord sur le lieu et la date de la rencontre sans intervention de la fédération. A la fin de la saison, les 2 premières équipes de chaque région sont qualifiées pour la phase finale qui se déroulera au dernier trimestre 2022, et désignera l’équipe championne de France."
         />
 
       </Container>

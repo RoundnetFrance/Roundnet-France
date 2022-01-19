@@ -12,7 +12,7 @@ function FeaturedItems({ items, color }) {
     <Stack
       direction={{ xs: 'column', sm: 'row' }}
       justifyContent="space-between"
-      alignItems="center"
+      alignItems="baseline"
       spacing={{ xs: 2, md: 4 }}
       my={4}
     >
