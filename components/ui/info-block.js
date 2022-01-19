@@ -88,9 +88,9 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
       </Stack>
 
       <Paper elevation={3} sx={{
-        minWidth: { xs: roundedEverywhere ? '210px' : '100%', md: '260px' },
-        width: { xs: roundedEverywhere ? '210px' : '100%', md: '50%' },
-        height: { xs: height / 1.25, md: height },
+        minWidth: { xs: roundedEverywhere ? '210px' : '300px', md: '260px' },
+        width: { xs: roundedEverywhere ? '210px' : '300px', md: '50%' },
+        height: roundedEverywhere ? height / 1.25 : { xs: height, md: height },
         position: 'relative',
         overflow: 'hidden',
         borderRadius: { xs: (roundedImage && roundedEverywhere) ? 60 : 2, md: roundedImage ? 60 : 2 }
