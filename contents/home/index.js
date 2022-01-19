@@ -10,8 +10,16 @@ const fourSquareContent = [
       'Chaque saison, les joueurs français de roundnet participent à une multitude de tournois. Roundnet France organise deux types de tournois: la coupe de France et les rencontres inter-clubs. La coupe de France s’agit de trois Tour Stops (tournois) et le championnat de France. Cela détermine les champions et championnes de France, mais aussi l\'équipe française qui représente la France lors des championnats du monde.',
       'Les rencontres inter-clubs est un nouveau format ou les clubs membres de la fédération s\'affrontent entre eux. Un seul club en sortira champion ! Pour plus d’informations et pour répondre à vos questions, allez consulter les pages dédiées à ces compétitions.',
     ],
-    link: '/clubs-et-communautes/liste-des-clubs',
-    linkText: 'Voir la liste des clubs',
+    links: [
+      {
+        href: '/competition/coupe-de-france-roundnet',
+        text: 'Coupe de France',
+      },
+      {
+        href: '/competition/rencontres-inter-clubs',
+        text: 'Rencontres inter-clubs',
+      },
+    ],
     icon: 'verified',
   },
   {
@@ -20,8 +28,10 @@ const fourSquareContent = [
     content: [
       'Roundnet France a pour but de faire rayonner les clubs qui y sont adhérents. Les tournois et les informations de ces clubs sont donc accessibles sur ce site. Vous cherchez un club dans votre région ? Vous partez en vacances en France et vous voulez jouer au roundnet lors de votre séjour ? Allez voir la liste des clubs !'
     ],
-    link: '/clubs-et-communautes/liste-des-clubs',
-    linkText: 'Consulter les tournois',
+    links: [{
+      href: '/clubs-et-communautes/liste-des-clubs',
+      text: 'Liste des clubs',
+    }],
     icon: 'event',
   },
   {
@@ -30,8 +40,10 @@ const fourSquareContent = [
     content: [
       'Vous êtes dans une ville avec une petite communauté qui joue au roundnet mais vous n’avez pas d’association pour représenter votre club ? Roundnet France accompagne les joueurs pour passer d’une communauté à un club français reconnus pour toutes les démarches administratives. Pour avoir plus d’informations, allez visiter la page d’adhésion.'
     ],
-    link: '/clubs-et-communautes/adherer-a-roundnet-france',
-    linkText: 'Adhérer à la fédération',
+    links: [{
+      href: '/clubs-et-communautes/adherer-a-roundnet-france',
+      text: 'Adhérer à la fédération',
+    }],
     icon: 'equalizer',
   },
   {
@@ -40,8 +52,10 @@ const fourSquareContent = [
     content: [
       'La fédération a été créée en 2021 pour rassembler et construire une communauté française autour du roundnet. L’équipe est constituée de plusieurs personnes (joueurs et non-joueurs) passionnés de roundnet.'
     ],
-    link: '/qui-sommes-nous/equipe-roundnet-france',
-    linkText: 'L\'équipe Roundnet France',
+    links: [{
+      href: '/qui-sommes-nous/equipe-roundnet-france',
+      text: 'L\'équipe Roundnet France',
+    }],
     icon: 'people',
   }
 ]

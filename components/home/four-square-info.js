@@ -53,11 +53,16 @@ function FourSquareInfo() {
                     </Typography>
                   ))}
                 </div>
-                <Button variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
-                  <Link href={content.link} color="neutral.main" underline="none">
-                    {content.linkText || 'En savoir plus'}
-                  </Link>
-                </Button>
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+                  {content.links.map(link => (
+                    <Button key={link.href} variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
+                      <Link href={link.href} color="neutral.main" underline="none">
+                        {link.text || 'En savoir plus'}
+                      </Link>
+                    </Button>
+                  ))}
+                </Stack>
+
               </Stack>
             </Paper>
           </Grid>
