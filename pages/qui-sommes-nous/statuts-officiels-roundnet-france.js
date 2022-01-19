@@ -36,9 +36,9 @@ function StatusPage({ officialDoc }) {
         imagePosition='center 20%'
         mini />
 
-      <Container maxWidth="md" sx={{ py: 4 }}>
+      <Container maxWidth="md" sx={{ my: { xs: 4, md: 12 } }}>
         <PageTitle title="Comment est constituée la fédération française de roundnet ?" />
-        <Typography variant="body1" sx={{ pb: 4 }}>
+        <Typography variant="body1" sx={{ mb: 4 }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae accusantium a aperiam debitis sapiente optio officia neque, eligendi sed quas fugiat vero placeat natus laudantium recusandae vitae deleniti, veritatis minima nihil. Molestias incidunt enim omnis cum corporis culpa alias, commodi quisquam, quasi modi, unde minima voluptates similique dolorum! Suscipit sint dolor ut omnis velit. Eos, quisquam laboriosam voluptatem reprehenderit ab minus id consequuntur quod, a cupiditate soluta blanditiis modi voluptatum molestiae in expedita, iusto deleniti eveniet ullam? Aut distinctio omnis, quasi similique ea ut labore ex dolorem architecto nesciunt doloribus optio assumenda totam aliquid deserunt doloremque quae necessitatibus. Nostrum aspernatur quidem tenetur assumenda quae laborum aperiam mollitia fuga, ex placeat expedita, consequuntur culpa rem ea, error eveniet aut deserunt sint quo accusantium voluptatem recusandae. Eos impedit vero optio!
         </Typography>
       </Container>
