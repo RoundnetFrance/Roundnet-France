@@ -30,7 +30,7 @@ function FourSquareInfo() {
       >
 
         {fourSquareContent.map(content => (
-          <Grid item xs={12} sm={6} key={content._id} >
+          <Grid item xs={12} md={6} key={content._id} >
             <Paper sx={{
               p: 2,
               borderRadius: 4,
@@ -57,7 +57,7 @@ function FourSquareInfo() {
                 </div>
 
                 {/* Buttons */}
-                <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+                <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 2 }}>
                   {content.links.map(link => (
                     <Button key={link.href} variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
                       <Link href={link.href} color="neutral.main" underline="none">

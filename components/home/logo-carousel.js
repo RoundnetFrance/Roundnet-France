@@ -1,48 +1,17 @@
 import Slider from 'react-slick';
 import Image from 'next/image';
 
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+// MUI IMPORTS
+import { Container, Box, Typography, Stack } from '@mui/material';
 
-function LogoCarousel() {
-
-  const rawLogos = [
-    {
-      src: '/images/logos/roundnet-france.jpg',
-      alt: 'Roundnet France',
-    },
-    {
-      src: '/images/logos/roundnet-coc.jpg',
-      alt: 'Roundnet COC',
-    },
-    {
-      src: '/images/logos/roundnet-lyon.jpg',
-      alt: 'Roundnet Lyon',
-    },
-    {
-      src: '/images/logos/roundnet-paris.jpg',
-      alt: 'Roundnet Paris',
-    },
-    {
-      src: '/images/logos/roundnet-toulouse.jpg',
-      alt: 'Roundnet Toulouse',
-    },
-    {
-      src: '/images/logos/spikebees.jpg',
-      alt: 'Roundnet Abbeville - Spikebees',
-    },
-    {
-      src: '/images/logos/titans-roundnet.jpg',
-      alt: 'Roundnet Nantes - Titans Roundnet',
-    },
-  ];
-
-  const logos = rawLogos.map((logo) => (
-    <Box key={logo.alt}>
+function LogoCarousel({ logos }) {
+  const logosSlider = logos.map((logo) => (
+    <Box key={logo.alt} sx={{ textAlign: "center" }}>
       <Image src={logo.src} alt={logo.alt} width="150px" height="150px" title={logo.alt} />
     </Box>
   ));
+
+  const numberOfLogos = logos.length;
 
   // RETURN
   return (
@@ -52,34 +21,18 @@ function LogoCarousel() {
         mb: 6,
       }}
     >
-      <Box mb={2}>
+      <Stack mb={2} sx={{ textAlign: "center" }}>
         <Typography align="center" variant="h5" component="h2"> Ils adhèrent à Roundnet France </Typography>
-      </Box>
+      </Stack>
       <Slider
         dots
         arrows={false}
         autoplay
-        infinite
+        infinite={false}
         speed={800}
-        slidesToShow={4}
-        responsive={[
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 4,
-            },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 2,
-              centerMode: false,
-            },
-          },
-        ]}
+        slidesToShow={numberOfLogos}
       >
-        {logos}
-
+        {logosSlider}
       </Slider>
     </Container>
   );

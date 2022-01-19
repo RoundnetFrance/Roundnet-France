@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { getDocuments } from '../helpers/db';
 
 // COMPONENT IMPORTS
 import Hero from '../components/ui/hero';
@@ -8,7 +9,7 @@ import FourSquareInfo from '../components/home/four-square-info';
 import CTAFooter from '../components/ui/cta-footer';
 import RulesDemo from '../components/home/rules-demo';
 
-export default function Home() {
+export default function HomePage({ clubLogos }) {
   return (
     <Fragment>
       <Hero
@@ -39,8 +40,22 @@ export default function Home() {
         }}
       />
 
-      <LogoCarousel />
-
+      <LogoCarousel logos={clubLogos} />
     </Fragment>
   )
+}
+
+export async function getStaticProps() {
+  const clubs = await getDocuments('clubs', null, { image: 1, title: 1 }, { chip: 1 });
+  const clubLogos = clubs.map((club) => ({
+    src: club.image,
+    alt: club.title,
+  }));
+
+  return {
+    props: {
+      clubLogos
+    },
+    revalidate: 600
+  }
 }
