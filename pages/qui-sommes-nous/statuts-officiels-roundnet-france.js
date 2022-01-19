@@ -38,9 +38,35 @@ function StatusPage({ officialDoc }) {
 
       <Container maxWidth="md" sx={{ my: { xs: 4, md: 12 } }}>
         <PageTitle title="Comment est constituée la fédération française de roundnet ?" />
-        <Typography variant="body1" sx={{ mb: 4 }}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae accusantium a aperiam debitis sapiente optio officia neque, eligendi sed quas fugiat vero placeat natus laudantium recusandae vitae deleniti, veritatis minima nihil. Molestias incidunt enim omnis cum corporis culpa alias, commodi quisquam, quasi modi, unde minima voluptates similique dolorum! Suscipit sint dolor ut omnis velit. Eos, quisquam laboriosam voluptatem reprehenderit ab minus id consequuntur quod, a cupiditate soluta blanditiis modi voluptatum molestiae in expedita, iusto deleniti eveniet ullam? Aut distinctio omnis, quasi similique ea ut labore ex dolorem architecto nesciunt doloribus optio assumenda totam aliquid deserunt doloremque quae necessitatibus. Nostrum aspernatur quidem tenetur assumenda quae laborum aperiam mollitia fuga, ex placeat expedita, consequuntur culpa rem ea, error eveniet aut deserunt sint quo accusantium voluptatem recusandae. Eos impedit vero optio!
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          La fédération est constituée de membres adhérents, qui sont les clubs de roundnet en France. Chaque année, les membres adhérents élisent un Conseil d’Administration (CA). Le CA est composé de membres de plusieurs clubs, il est chargé de diriger la fédération, en lien direct avec les clubs et les joueurs et joueuses de France.
         </Typography>
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          Le CA a un fonctionnement collégial, c’est à dire qu’il n’y a aucune hiérarchie, chaque membre a les mêmes droits et les mêmes devoirs que les autres. Chacun peut intervenir sur les sujets qu’il souhaite. Mais pour simplifier, il y a quand même des équipes spécialisées, car chaque membre a ses sujets de prédilection.
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          Les équipes sont :
+        </Typography>
+        <ul>
+          <Typography component="li" variant="body1">
+            Communauté
+          </Typography>
+          <Typography component="li" variant="body1">
+            Communication
+          </Typography>
+          <Typography component="li" variant="body1">
+            Compétition
+          </Typography>
+          <Typography component="li" variant="body1">
+            Partenariats
+          </Typography>
+          <Typography component="li" variant="body1">
+            Secrétariat
+          </Typography>
+          <Typography component="li" variant="body1">
+            Trésorerie
+          </Typography>
+        </ul>
       </Container>
 
       <HalfImage
@@ -61,14 +87,14 @@ function StatusPage({ officialDoc }) {
             }} />
         </Box>
 
-        <Typography
+        {/* <Typography
           variant="body1"
           sx={{
             mb: 2,
             color: "white",
           }}>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid porro necessitatibus eius quisquam suscipit laborum, odit in, cumque alias quam quibusdam! Assumenda consequatur delectus dolorum est consequuntur, veniam aperiam saepe voluptate, commodi ducimus beatae dolores dolorem odio velit ullam fuga minima doloribus voluptatem.
-        </Typography>
+        </Typography> */}
 
         {officialDoc?.description && (
           <Typography

@@ -5,8 +5,6 @@ import { Fragment } from 'react';
 // MUI IMPORTS
 import { Stack, Box, Typography, Paper, Chip } from '@mui/material';
 
-// MUI ICONS
-
 // COMPONENT IMPORTS
 import LinkButtons from './link-buttons';
 
@@ -56,14 +54,14 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
         {
           items && (
             <Stack
-              direction="row"
+              direction={{ xs: 'column', sm: 'row' }}
               justifyContent="space-between"
-              alignItems="center"
+              alignItems={{ xs: 'center', sm: 'flex-start' }}
               spacing={{ xs: 1, md: 2 }}
             >
               {
                 items.map((item) => (
-                  <Box width="50%" key={item._id}>
+                  <Box width={{ xs: '90%', sm: '50%' }} key={item._id}>
                     <Typography
                       variant="h6"
                       color="secondary.main"
