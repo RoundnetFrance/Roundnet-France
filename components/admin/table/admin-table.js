@@ -87,7 +87,7 @@ function AdminTable({ tableConfig:
 
   return (
     <Fragment>
-      <Container maxWidth={nbOfElements > 5 ? 'lg' : 'sm'} sx={{ py: 4 }}>
+      <Container maxWidth="lg" sx={{ py: 4 }}>
 
         <TableContainer component={Paper}>
           <Table aria-label={name}>
