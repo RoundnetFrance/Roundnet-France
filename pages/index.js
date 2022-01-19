@@ -46,6 +46,7 @@ export default function HomePage({ clubLogos }) {
 }
 
 export async function getStaticProps() {
+
   const clubs = await getDocuments('clubs', null, { image: 1, title: 1 }, { chip: 1 });
   const clubLogos = clubs.map((club) => ({
     src: club.image,
@@ -58,4 +59,5 @@ export async function getStaticProps() {
     },
     revalidate: 600
   }
+
 }

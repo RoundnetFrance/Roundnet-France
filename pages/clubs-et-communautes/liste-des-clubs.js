@@ -2,10 +2,7 @@ import { Fragment } from 'react';
 import { getDocuments } from '../../helpers/db';
 
 // MUI IMPORTS
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import { Container, Typography, Box, Paper, Divider } from '@mui/material';
 
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
@@ -44,16 +41,22 @@ function ClubListPage({ clubs, error }) {
           />
         </Box>
 
-        <Paper elevation={6} sx={{ overflow: 'hidden', p: 1, pb: 0.5 }}><iframe src="https://www.google.com/maps/d/embed?mid=1xtrSWM6WZKgx9nHKAXTdfTSLBVWUyCl7&ehbc=2E312F" width="100%" height="480"></iframe></Paper>
+        <Paper elevation={6} sx={{ overflow: 'hidden', p: 1, pb: 0.5 }}>
+          <iframe src="https://www.google.com/maps/d/embed?mid=1xtrSWM6WZKgx9nHKAXTdfTSLBVWUyCl7&ehbc=2E312F" width="100%" height="480"></iframe>
+        </Paper>
       </Container>
 
-      <Container maxWidth="sm" sx={{ my: 8 }}>
+      <Divider />
+
+      <Container maxWidth="sm" sx={{ my: 4 }}>
         <HeaderWithIcon
           icon="people"
           title="Liste des clubs"
         />
-        {error ? <Error /> : <CrossingItems items={clubs} roundedItems />}
+        {error ? <Error /> : <CrossingItems items={clubs} roundedItems roundedEverywhere />}
       </Container>
+
+      <Divider />
 
       <CTAFooter
         title="Vous souhaitez apparaître sur cette page ?"
@@ -67,8 +70,6 @@ function ClubListPage({ clubs, error }) {
           text: 'S\'informer sur l\'adhésion'
         }}
       />
-
-
     </Fragment>
   )
 }
@@ -81,14 +82,13 @@ export async function getStaticProps() {
       props: {
         clubs: data,
       },
-      revalidate: 60,
+      revalidate: 600,
     }
   }
   // Return an error on props to display error message in UI
   catch (e) {
-    console.error(e)
     return {
-      props: { error: true },
+      props: { error: true, errorDetails: e.message || 'Une erreur est survenue' },
     }
   }
 }
