@@ -21,7 +21,7 @@ function HeaderWithIcon({ icon, title, children }) {
         <strong>{title}</strong>
       </Typography>
       {children && (
-        <Typography variant="subtitle1" align="center" color="secondary" mb={4}>
+        <Typography variant="h6" align="center" color="primary" mb={4}>
           {children}
         </Typography>
       )}

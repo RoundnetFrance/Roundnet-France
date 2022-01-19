@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { Container, Box, Typography, Stack } from '@mui/material';
 
 function LogoCarousel({ logos }) {
+  if (!logos) return null
+
   const logosSlider = logos.map((logo) => (
     <Box key={logo.alt} sx={{ textAlign: "center" }}>
       <Image src={logo.src} alt={logo.alt} width="150px" height="150px" title={logo.alt} />
