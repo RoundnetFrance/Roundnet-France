@@ -39,6 +39,8 @@ function FourSquareInfo() {
             }}
             >
               <Stack direction="column" justifyContent="space-between" sx={{ height: '100%' }}>
+
+                {/* Content */}
                 <div>
                   <Box mb={2}>
                     <Stack mb={2} direction="row" alignItems="center">
@@ -53,6 +55,8 @@ function FourSquareInfo() {
                     </Typography>
                   ))}
                 </div>
+
+                {/* Buttons */}
                 <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
                   {content.links.map(link => (
                     <Button key={link.href} variant="contained" color="secondary" sx={{ width: 'fit-content' }} startIcon={<ArrowCircleRightIcon />}>
