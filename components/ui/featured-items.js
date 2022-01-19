@@ -21,7 +21,7 @@ function FeaturedItems({ items, color }) {
         <Stack
           width={{ xs: '100%', md: '30%' }}
           alignItems="center"
-          key={item.id}
+          key={item._id}
         >
           <IconWithBackground icon={item.icon} color={color} />
           <Typography variant="h6" component="h3" my={2} color={color}><strong>{item.title}</strong></Typography>
@@ -35,7 +35,7 @@ function FeaturedItems({ items, color }) {
 
 FeaturedItems.propTypes = {
   items: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.string.isRequired,
+    _id: propTypes.string.isRequired,
     icon: propTypes.string.isRequired,
     title: propTypes.string.isRequired,
     description: propTypes.string.isRequired,

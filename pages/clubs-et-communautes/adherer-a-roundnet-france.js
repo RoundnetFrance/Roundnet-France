@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
+import { getDocuments } from '../../helpers/db';
 
 // MUI IMPORTS
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box, Divider } from '@mui/material';
 
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
@@ -10,13 +11,13 @@ import PageTitle from '../../components/ui/page-title';
 import FeaturedItems from '../../components/ui/featured-items';
 import CrossingItems from '../../components/ui/crossing-items';
 import CTAFooter from '../../components/ui/cta-footer';
-import LogoCarousel from '../../components/home/logo-carousel';
+import LogoCarousel from '../../components/ui/logo-carousel';
 import Head from '../../components/head';
 
 // CONTENT
 import { whyJoinUs, clubKit } from '../../contents/clubs-communautes'
 
-function JoinRoundnetFrancePage() {
+function JoinRoundnetFrancePage({ clubLogos }) {
   return (
     <Fragment>
       <Head
@@ -48,20 +49,26 @@ function JoinRoundnetFrancePage() {
         <FeaturedItems items={whyJoinUs} color="secondary" />
       </Container>
 
-      <Container maxWidth="sm" sx={{ my: 8 }}>
+      <Divider />
+
+      <Container maxWidth="sm" sx={{ my: 4 }}>
         <Box mb={4}>
           <HeaderWithIcon
             icon="arrow_circle_down"
             title="Le kit des clubs"
           >
-            <Typography variant="h6" color="primary">
-              Pour chaque nouveau club, Roundnet France vous offre un kit de matériel et de services qui vous permet de booster votre communauté.
-            </Typography>
+            Pour chaque nouveau club, Roundnet France vous offre un kit de matériel et de services qui vous permet de booster votre communauté.
           </HeaderWithIcon>
         </Box>
 
         <CrossingItems items={clubKit} height={250} />
       </Container>
+
+      <Divider />
+
+      <Box mt={6}>
+        <LogoCarousel logos={clubLogos} />
+      </Box>
 
       <CTAFooter
         title="On saute le pas ?"
@@ -72,11 +79,25 @@ function JoinRoundnetFrancePage() {
         }}
       />
 
-      <LogoCarousel />
     </Fragment>
 
 
   )
+}
+
+export async function getStaticProps() {
+  const clubs = await getDocuments('clubs', null, { image: 1, title: 1 }, { chip: 1 });
+  const clubLogos = clubs.map((club) => ({
+    src: club.image,
+    alt: club.title,
+  }));
+
+  return {
+    props: {
+      clubLogos
+    },
+    revalidate: 600
+  }
 }
 
 export default JoinRoundnetFrancePage

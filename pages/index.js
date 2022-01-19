@@ -4,7 +4,7 @@ import { getDocuments } from '../helpers/db';
 // COMPONENT IMPORTS
 import Hero from '../components/ui/hero';
 import HomeInfoBlock from '../components/home/home-info-block';
-import LogoCarousel from '../components/home/logo-carousel';
+import LogoCarousel from '../components/ui/logo-carousel';
 import FourSquareInfo from '../components/home/four-square-info';
 import CTAFooter from '../components/ui/cta-footer';
 import RulesDemo from '../components/home/rules-demo';
