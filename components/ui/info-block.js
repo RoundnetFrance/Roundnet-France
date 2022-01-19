@@ -10,7 +10,7 @@ import { Stack, Box, Typography, Paper, Chip } from '@mui/material';
 // COMPONENT IMPORTS
 import LinkButtons from './link-buttons';
 
-function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, links }) {
+function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, links, roundedEverywhere }) {
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
 
@@ -63,7 +63,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
             >
               {
                 items.map((item) => (
-                  <Box width="50%" key={item.id}>
+                  <Box width="50%" key={item._id}>
                     <Typography
                       variant="h6"
                       color="secondary.main"
@@ -88,12 +88,12 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
       </Stack>
 
       <Paper elevation={3} sx={{
-        minWidth: { xs: '100%', md: '260px' },
-        width: { xs: '100%', md: '50%' },
+        minWidth: { xs: roundedEverywhere ? '210px' : '100%', md: '260px' },
+        width: { xs: roundedEverywhere ? '210px' : '100%', md: '50%' },
         height: { xs: height / 1.25, md: height },
         position: 'relative',
         overflow: 'hidden',
-        borderRadius: { xs: 2, md: roundedImage ? 60 : 2 }
+        borderRadius: { xs: (roundedImage && roundedEverywhere) ? 60 : 2, md: roundedImage ? 60 : 2 }
       }}>
         <Image
           src={image || '/images/misc/placeholder.jpg'}
@@ -120,6 +120,7 @@ InfoBlock.propTypes = {
     text: propTypes.string,
     outLink: propTypes.bool,
   }),
+  roundedEverywhere: propTypes.bool,
 }
 
 InfoBlock.defaultProps = {
@@ -130,6 +131,7 @@ InfoBlock.defaultProps = {
   roundedImage: false,
   chip: null,
   link: null,
+  roundedEverywhere: false,
 }
 
 export default InfoBlock

@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
 // MUI IMPORTS
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Divider } from '@mui/material';
 
 // COMPONENTS IMPORTS
 import Hero from '../../components/ui/hero';
@@ -12,47 +12,11 @@ import FeaturedItems from '../../components/ui/featured-items';
 import CTAFooter from '../../components/ui/cta-footer';
 import Head from '../../components/head';
 
-function TournamentsResultsPage() {
-  // Fake InfoBlocks data
-  const infoBlocks = [
-    {
-      id: 1,
-      title: '24+',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quisquam aliquid et.',
-    },
-    {
-      id: 2,
-      title: '6+',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quisquam aliquid et.',
-    },
-    {
-      id: 3,
-      title: '12+',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quisquam aliquid et.',
-    },
-  ];
+// CONTENT
+import { infoRIC, featuredRIC } from '../../contents/competition/';
 
-  // Fake FeaturedItems data
-  const featuredItems = [
-    {
-      id: 1,
-      icon: 'groups',
-      title: 'Accompagnement',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quisquam aliquid et.',
-    },
-    {
-      id: 2,
-      icon: 'emoji_events',
-      title: 'Challenge',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quisquam aliquid et.',
-    },
-    {
-      id: 3,
-      icon: 'sports',
-      title: 'Compétition',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quisquam aliquid et.',
-    },
-  ];
+function TournamentsResultsPage() {
+
 
   return (
     <Fragment>
@@ -78,7 +42,7 @@ function TournamentsResultsPage() {
         <InfoBlock
           imageToLeft
           height={450}
-          items={infoBlocks}
+          items={infoRIC}
           title="Comment se déroulent les rencontres inter-clubs ?"
           image="/images/pages/competition/inter-clubs/inter-club.jpg"
           description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore eveniet possimus quidem, voluptas blanditiis rem beatae hic asperiores inventore nobis quos adipisci laboriosam earum in necessitatibus, accusantium itaque voluptatem aliquid error odio a autem officia eum maxime. Doloribus ducimus, debitis modi libero nesciunt similique excepturi laborum temporibus cumque esse deserunt labore aspernatur expedita consectetur, odit hic quos exercitationem quaerat dolore. Expedita modi neque quam."
@@ -86,14 +50,18 @@ function TournamentsResultsPage() {
 
       </Container>
 
-      <Container maxWidth="lg" sx={{ my: 8 }}>
+      <Divider />
+
+      <Container maxWidth="lg" sx={{ my: 4 }}>
         <HeaderWithIcon
           title="Comment s'organisent les rencontres ?"
           icon="help_center"
         />
 
-        <FeaturedItems items={featuredItems} />
+        <FeaturedItems items={featuredRIC} />
       </Container>
+
+      <Divider />
 
       <CTAFooter
         title="Vous souhaitez participer aux rencontres inter-clubs ?"

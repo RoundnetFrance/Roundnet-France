@@ -2,9 +2,7 @@ import { Fragment } from 'react';
 import propTypes from 'prop-types';
 
 // MUI IMPORTS
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Icon from '@mui/material/Icon';
+import { Typography, Box, Icon } from '@mui/material';
 
 function HeaderWithIcon({ icon, title, children }) {
   return (
@@ -33,10 +31,12 @@ function HeaderWithIcon({ icon, title, children }) {
 HeaderWithIcon.propTypes = {
   icon: propTypes.string,
   title: propTypes.string.isRequired,
+  children: propTypes.node,
 }
 
 HeaderWithIcon.defaultProps = {
   icon: null,
+  children: null,
 }
 
 export default HeaderWithIcon
