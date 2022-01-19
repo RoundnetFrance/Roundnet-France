@@ -36,8 +36,11 @@ function RulesPage({ rule }) {
 
       <Container maxWidth="md" sx={{ my: { xs: 4, md: 12 } }}>
         <PageTitle title="Jouer au roundnet selon les règles officielles" />
-        <Typography variant="body1" color="initial">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi quisquam, illum architecto laboriosam sequi illo, cupiditate dolore vero ex perspiciatis, quae modi libero atque reiciendis aperiam sed velit in alias dignissimos porro necessitatibus. Rem sint, optio voluptatibus, necessitatibus magnam expedita blanditiis provident repellat corrupti, cumque aliquam omnis ipsam labore nam voluptatum sapiente dolor ad a natus quis? Aliquam deserunt quibusdam, veniam ipsa aperiam explicabo velit, numquam voluptas quasi, nihil obcaecati nesciunt nisi dolores. Explicabo eaque illum voluptatem odio. Commodi distinctio quidem id voluptatum atque voluptates debitis ratione illum omnis repellat quam cum excepturi tempore et laboriosam, labore accusantium similique vero, perferendis, unde ducimus qui! Quasi, modi cumque vero perferendis ad necessitatibus cupiditate ipsa minima hic cum obcaecati magni sit voluptate voluptatibus! Quas exercitationem doloremque illo, pariatur magni odit!
+        <Typography variant="body1" mb={2}>
+          La fédération française de roundnet met régulièrement à jour les règles. Les règles ci-dessous sont la référence des compétitions officielles françaises. N’oubliez pas que le fair-play est la première règle de notre sport !
+        </Typography>
+        <Typography variant="body1">
+          Les règles modifiées dans la dernière version sont surlignées en jaune.
         </Typography>
       </Container>
 
