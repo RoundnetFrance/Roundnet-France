@@ -12,6 +12,9 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
 
+  // Check if description is aa string or an array
+  const descriptionIsArray = Array.isArray(description);
+
   return (
     <Stack
       direction={{ xs: 'column-reverse', md: rowOrder }}
@@ -32,7 +35,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
           color="secondary.main"
           sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
         >
-          {title}
+          <strong>{title}</strong>
           {chip && (
             <Fragment>
               <br />
@@ -41,14 +44,30 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
           )
           }
 
+          {/* CONTENT. If rray, map of paragraphs */}
         </Typography>
-        <Typography
-          variant="body2"
-          mb={4}
-          sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
-        >
-          {description}
-        </Typography>
+        {descriptionIsArray ? (
+          <Box mb={2}>
+            {description.map((item) => (
+              <Typography
+                key={item}
+                variant="body2"
+                mb={2}
+                sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
+              >
+                {item}
+              </Typography>
+            ))}
+          </Box>
+        ) : (
+          <Typography
+            variant="body2"
+            mb={4}
+            sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
+          >
+            {description}
+          </Typography>
+        )}
 
         {/* ITEMS DISPLAY, IF ANY */}
         {
