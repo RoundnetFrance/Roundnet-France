@@ -41,6 +41,7 @@ function JoinRoundnetFrancePage({ clubLogos }) {
           <HeaderWithIcon
             icon="workspaces"
             title="Pourquoi créer un club de Roundnet ?"
+            color="secondary"
           />
         </Box>
       </Container>

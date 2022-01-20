@@ -54,7 +54,7 @@ function TournamentsResultsPage() {
 
       <Container maxWidth="lg" sx={{ my: 4 }}>
         <HeaderWithIcon
-          title="Comment s'organisent les rencontres ?"
+          title="Les avantages du format"
           icon="help_center"
         />
 

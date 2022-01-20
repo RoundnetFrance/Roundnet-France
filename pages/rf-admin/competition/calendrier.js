@@ -1,14 +1,31 @@
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import useUpcomingEvents from '../../../hooks/useUpcomingEvents';
 
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
+import Loader from '../../../components/ui/loader';
 
-function ClubsAdminPage() {
-  // Get user info
+export default function ClubsAdminPage() {
+  // Hooks calls
+  const router = useRouter();
+
+  // Handle redirect if no session
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      return router.push('/rf-admin');
+    }
+  })
+
+  // Get events info
   const { events, isLoading, isError } = useUpcomingEvents();
+
+  // If loading, display loading screen
+  if (status === "loading") return <Loader />
 
   // Define a table config object. Comments with * are required.
   const tableConfig = {
@@ -72,22 +89,10 @@ function ClubsAdminPage() {
   )
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/rf-admin',
-        permanent: false,
-      },
-    };
-  }
+export function getStaticProps() {
   return {
     props: {
-      session,
       adminLayout: true,
-    },
-  };
+    }
+  }
 }
-
-export default ClubsAdminPage

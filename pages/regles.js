@@ -69,7 +69,7 @@ function RulesPage({ rule }) {
             mb: 2,
             color: "white",
           }}>
-          Distance au service, gênes, cas particuliers : pour ceux qui souhaitent être incollables, vous pouvez télécharger les règles officielles de roundnet, éditées par Spikeball et valables en tournoi, en cliquant sur le bouton ci-dessous (et en français !).
+          Distance au service, gênes, cas particuliers : pour ceux qui souhaitent être incollables, vous pouvez télécharger les règles officielles de roundnet et valables en tournoi, en cliquant sur le bouton ci-dessous (et en français !).
         </Typography>
 
         {rule?.description && (

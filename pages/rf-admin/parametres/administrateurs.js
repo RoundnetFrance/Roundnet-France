@@ -1,14 +1,31 @@
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import useUser from '../../../hooks/useUser';
 
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
+import Loader from '../../../components/ui/loader';
 
-function AdministratorAdminPage() {
+export default function AdministratorAdminPage() {
+  // Hooks calls
+  const router = useRouter();
+
+  // Handle redirect if no session
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      return router.push('/rf-admin');
+    }
+  })
+
   // Get user info
   const { user: users, isLoading, isError } = useUser();
+
+  // If loading, display loading screen
+  if (status === "loading") return <Loader />
 
   // Define a table config object. Comments with * are required.
   const tableConfig = {
@@ -55,22 +72,10 @@ function AdministratorAdminPage() {
   )
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/rf-admin',
-        permanent: false,
-      },
-    };
-  }
+export function getStaticProps() {
   return {
     props: {
-      session,
       adminLayout: true,
-    },
-  };
+    }
+  }
 }
-
-export default AdministratorAdminPage

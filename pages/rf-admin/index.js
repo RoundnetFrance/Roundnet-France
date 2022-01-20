@@ -3,9 +3,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 
 // MUI IMPORTS
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+import { Button, Container, Typography } from '@mui/material';
 
 // COMPONENTS IMPORTS
 import BoxWrapper from "../../components/ui/box-wrapper";
