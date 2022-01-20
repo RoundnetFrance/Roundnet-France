@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 // COMPONENT IMPORTS
 import MobileNavItems from './mobile-nav-items';
 
-function MenuDrawer({ menuElements }) {
+function MenuDrawer({ menuElements, adminLayout }) {
 
   // Preparing states
   const [menuOpen, setMenuOpen] = useState({});
@@ -33,7 +33,7 @@ function MenuDrawer({ menuElements }) {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ display: { xs: 'inherit', lg: 'none' } }}
+        sx={{ display: { xs: 'inherit', lg: adminLayout ? 'inherit' : 'none' } }}
       >
         <MenuIcon />
       </IconButton>
