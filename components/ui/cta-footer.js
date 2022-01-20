@@ -1,14 +1,14 @@
-import Link from 'next/link';
 import propTypes from 'prop-types';
 
 // MUI IMPORTS
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import MUILink from '@mui/material/Link';
+import { Container, Typography, Stack, Button, Link as MUILink } from '@mui/material';
+
+// CONTENT IMPORTS
+import Link from '../ui/link';
 
 function CTAFooter({ title, subtitle, mainLink, altLink }) {
+  const isExternalLink = mainLink?.url.startsWith('http');
+
   return (
     <Container maxWidth="sm" align="center" sx={{
       my: 4,
@@ -26,7 +26,7 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
       </Typography>
 
       <Stack
-        direction={{xs: 'column', sm: 'row'}}
+        direction={{ xs: 'column', sm: 'row' }}
         justifyContent="center"
         alignItems="center"
         spacing={2}
@@ -36,26 +36,20 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
         }}
       >
         <Button variant="contained" color="primary" size="large">
-          {mainLink.outLink ? (
-            <MUILink href={mainLink.url} target="_blank" color="#fff">{mainLink.text}</MUILink>
+          {isExternalLink ? (
+            <MUILink href={mainLink.url} target="_blank" color="#fff" underline="none">{mainLink.text}</MUILink>
           ) : (
-            <Link href={mainLink.url} passHref>
-              <MUILink color="#fff" underline='none'>{mainLink.text}</MUILink>
-            </Link>
+            <Link href={mainLink.url} color="#fff" underline="none">{mainLink.text}</Link>
           )}
 
         </Button>
         {altLink && (
           <Button variant="contained" color="secondary" size="large" >
-            <Link href={altLink.url} passHref>
-              <MUILink color="#fff" underline='none'>{altLink.text}</MUILink>
-            </Link>
+            <Link href={altLink.url} color="#fff" underline="none">{altLink.text}</Link>
           </Button>
         )}
 
       </Stack>
-
-
     </Container>
   )
 }

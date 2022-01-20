@@ -1,14 +1,12 @@
 import propTypes from 'prop-types';
 
 // MUI IMPORTS
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
+import { Box, Divider, Typography } from '@mui/material'
 
 function PageTitle({ title }) {
   return (
     <Box sx={{ mb: 2 }}>
-      <Typography variant="h4">
+      <Typography variant="h4" component="h2">
         {title}
       </Typography>
       <Divider sx={{ pb: 2 }} />

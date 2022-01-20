@@ -12,6 +12,7 @@ import PageTitle from '../../components/ui/page-title';
 import InfoBlock from '../../components/ui/info-block';
 import PaperGrid from '../../components/ui/paper-grid';
 import CTAFooter from '../../components/ui/cta-footer';
+import Head from '../../components/head';
 
 function AssociationPage() {
 
@@ -45,6 +46,11 @@ function AssociationPage() {
 
   return (
     <Fragment>
+      <Head 
+      title="Le projet associatif - Fédération Française de Roundnet"
+      />
+
+
       <Hero
         title="Le projet associatif"
         image="/images/hero/equipe-roundnet-france.jpg"
