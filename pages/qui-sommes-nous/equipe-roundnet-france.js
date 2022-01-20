@@ -2,9 +2,7 @@ import { Fragment } from 'react';
 import { getDocuments } from '../../helpers/db';
 
 // MUI IMPORTS
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Container, Typography, Box } from '@mui/material';
 
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';

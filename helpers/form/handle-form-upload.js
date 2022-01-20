@@ -23,7 +23,6 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
   }
 
   if (filesToUpload.length === 0) {
-    console.log('no files to upload');
     return updatedForm;
   }
 

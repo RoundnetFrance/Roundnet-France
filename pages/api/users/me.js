@@ -22,7 +22,6 @@ export default async function handler(req, res) {
 
     // PATCH method to update self info
     if (req.method === 'PATCH') {
-      console.log(req.body)
       if (req.body.password) {
         req.body.password = await hash(req.body.password, 12);
         delete req.body.passwordConfirm;

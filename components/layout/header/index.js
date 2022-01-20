@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 
 // MATERIAL COMPONENTS
 import { Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide } from '@mui/material';
@@ -36,6 +35,9 @@ HideOnScroll.propTypes = {
 };
 
 function Header(props) {
+
+  const { data: session } = useSession();
+
   // State for the different menu items
   const [menuOpen, setMenuOpen] = useState({});
   const [anchorEl, setAnchorEl] = useState(null);
@@ -74,12 +76,8 @@ function Header(props) {
   );
 
   // Display the user name if session
-  let userName;
-  let userImage;
-  if (props.session) {
-    userName = props.session.user.name || props.session.user.email;
-    userImage = props.session.user.image;
-  }
+  const userName = session?.user.name || session?.user.email;
+  const userImage = session?.user.image;
 
   // Check if regular or admin layout
   const adminLayout = props.adminLayout;

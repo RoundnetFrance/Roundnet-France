@@ -27,7 +27,6 @@ const sendMail = async (formData, initialFormState, setSubmitStatus, setForm, se
   // CATCH
   catch (error) {
     // Console log and set error message for UI
-    console.log(error);
     setSubmitStatus({
       open: true,
       error: true,

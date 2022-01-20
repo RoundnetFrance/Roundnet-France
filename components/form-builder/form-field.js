@@ -254,10 +254,6 @@ export default function FormField({ type, id, label, required, options, value, h
       break;
   }
 
-  if (options?.helperText) {
-    console.log(id)
-  }
-
   return (
     <Fragment>
       {input}

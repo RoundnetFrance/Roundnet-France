@@ -56,8 +56,8 @@ export default function getSchema(schemaRef, partials) {
 
   if (partials) {
     // Return the specific key of the schema based on the value of partials
-    console.log('plop');
-    console.log(schema.keys(partials));
+    // console.log('plop');
+    // console.log(schema.keys(partials));
   }
 
   return schema;
