@@ -50,8 +50,6 @@ function CTAFooter({ title, subtitle, mainLink, altLink }) {
         )}
 
       </Stack>
-
-
     </Container>
   )
 }
