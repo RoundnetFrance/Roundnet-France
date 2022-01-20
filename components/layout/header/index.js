@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOut, useSession } from 'next-auth/react';
 
 // MATERIAL COMPONENTS
 import { Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide } from '@mui/material';
@@ -35,8 +34,6 @@ HideOnScroll.propTypes = {
 };
 
 function Header(props) {
-
-  const { data: session } = useSession();
 
   // State for the different menu items
   const [menuOpen, setMenuOpen] = useState({});
@@ -75,9 +72,7 @@ function Header(props) {
   }
   );
 
-  // Display the user name if session
-  const userName = session?.user.name || session?.user.email;
-  const userImage = session?.user.image;
+
 
   // Check if regular or admin layout
   const adminLayout = props.adminLayout;
@@ -109,7 +104,7 @@ function Header(props) {
             <ButtonGroup variant="text" sx={{
               display: adminLayout ? { xs: 'inherit' } : { xs: 'none', lg: 'block' }
             }}>
-              {adminLayout ? <AvatarMenu image={userImage} name={userName} signOut={signOut} /> : desktopNavItems}
+              {adminLayout ? <AvatarMenu /> : desktopNavItems}
             </ButtonGroup>
 
             {!adminLayout && <Socials />}

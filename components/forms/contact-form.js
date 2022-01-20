@@ -56,11 +56,10 @@ function ContactForm({ subject }) {
       // },
       {
         id: 'subject',
-        type: 'hidden',
+        label: 'Objet',
+        type: 'text',
         options: {
           required: true,
-          hidden: true,
-          defaultValue: subject || 'contact',
         }
       },
       {

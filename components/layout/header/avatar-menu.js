@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
+
 
 // MUI IMPORTS
 import { Avatar, Box, Tooltip, Menu, IconButton, MenuItem, Typography, ListItemIcon, Divider } from '@mui/material';
@@ -12,9 +14,13 @@ import SupportIcon from '@mui/icons-material/Support';
 // COMPONENT IMPORTS
 import Link from '../../ui/link';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+export default function AvatarMenu() {
+  const { data: session } = useSession();
 
-export default function AvatarMenu({ image, name, signOut }) {
+  // Display the user name if session
+  const name = session?.user.name || session?.user.email;
+  const image = session?.user.image;
+
   // Handle avatar menu state
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);

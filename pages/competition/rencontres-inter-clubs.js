@@ -67,7 +67,7 @@ function TournamentsResultsPage() {
         title="Vous souhaitez participer aux rencontres inter-clubs ?"
         subtitle="Inscrivez votre club ou crééz votre équipe !"
         mainLink={{
-          url: '/qui-sommes-nous/contact',
+          url: 'https://docs.google.com/forms/d/e/1FAIpQLSfWm8xlQtrY-RoK2B-eB-gRN384btFC1IY2G0K2Wu9THa9xDQ/viewform',
           text: 'Inscrivez votre club',
         }}
         altLink={{
