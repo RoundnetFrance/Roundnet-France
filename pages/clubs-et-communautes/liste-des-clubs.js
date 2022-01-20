@@ -62,10 +62,6 @@ function ClubListPage({ clubs, error }) {
         title="Vous souhaitez apparaître sur cette page ?"
         subtitle="Adhérez à Roundnet France et rejoignez l'une des communautés de Roundnet les plus actives de France."
         mainLink={{
-          url: '/clubs-et-communautes/creer-votre-club',
-          text: 'Adhérer à la fédération'
-        }}
-        altLink={{
           url: '/clubs-et-communautes/adherer-a-roundnet-france',
           text: 'S\'informer sur l\'adhésion'
         }}

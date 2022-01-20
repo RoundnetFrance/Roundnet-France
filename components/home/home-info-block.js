@@ -38,7 +38,7 @@ function HomeInfoBlock() {
         <Divider variant="middle" />
         <Stack spacing={2} mt={4}>
           <Typography align="center" variant="body1" component="div">
-            Roundnet France est la fédération française de Roundnet. Les objectifs de la fédération sont de développer le roundnet en France, d’organiser des compétitions et des rencontres, de faire rayonner nos clubs et nos joueurs français au niveau national, européen et international, et de rendre le roundnet un sport reconnu par l’Etat.
+            Roundnet France est la fédération française de Roundnet. Les objectifs de la fédération sont de développer le roundnet en France, d’organiser des compétitions et des rencontres, de faire rayonner nos clubs et nos joueurs français au niveau national, européen et international, et de faire du roundnet un sport reconnu par l’Etat.
           </Typography>
           <Typography align="center" variant="body1" component="div">
             Depuis quelques années, le roundnet se développe énormément. Il y a plus d’une dizaine de clubs qui adhèrent à la fédération française et participent à l’organisation de tournois. Cette année, Roundnet France organise deux séries de tournois: des Tour Stops pour nommer les champions et championnes de France et des tournois inter-clubs pour organiser plus de rencontres et nommer un club champion de France ! La fédération aide notamment les clubs à s’assurer que les compétitions suivent les règles officielles de roundnet et commence à former des observateurs pour les tournois.

@@ -25,15 +25,15 @@ const featuredRIC = [
   },
   {
     _id: '2',
-    icon: 'emoji_events',
-    title: 'Challenge',
-    description: 'Les rencontres inter-clubs sont un excellent moyen de découvrir les différents clubs de France.',
+    icon: 'celebration',
+    title: 'Fun',
+    description: 'Mixez la bonne ambiance réputée du roundnet avec des matchs à haute intensité !',
   },
   {
     _id: '3',
-    icon: 'sports',
-    title: 'Compétition',
-    description: 'Faites briller la tactique et les associations gagnantes pour surprendre vos adversaires !',
+    icon: 'forum',
+    title: 'Communauté',
+    description: 'Les rencontres inter-clubs sont un excellent moyen de découvrir les différents clubs de France.',
   },
 ];
 

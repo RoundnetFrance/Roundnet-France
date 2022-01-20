@@ -2,14 +2,14 @@ const urbanPartnership = [
   {
     _id: '1',
     title: 'Roundnet France possède des liens privilégiés avec Urban Roundnet',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam soluta omnis sapiente fugit, ab amet quidem architecto quod commodi cupiditate dolore repellendus delectus quia distinctio odit velit sunt eaque consequuntur. Cumque itaque illo harum, quas ab voluptatem ratione. Quaerat ipsum pariatur error dignissimos sint. Voluptates neque minus, ratione laborum deleniti alias dicta aut quis excepturi, libero repellendus quas porro reprehenderit adipisci dolorem exercitationem delectus!',
+    description: 'Urban Roundnet est la première salle dédiée intégralement au roundnet en France ! En plus d’accueillir des joueurs toute l’année sur Paris, Urban Roundnet proposera bientôt la vente de sets Spikeball en livraison sur toute la France !',
     links: 'https://www.urbanroundnet.com/fr/',
   },
   {
     _id: '2',
     title: '...ou passez par votre association locale !',
     image: '/images/pages/boutique/association-boutique.jpg',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam soluta omnis sapiente fugit, ab amet quidem architecto quod commodi cupiditate dolore repellendus delectus quia distinctio odit velit sunt eaque consequuntur. Cumque itaque illo harum, quas ab voluptatem ratione. Quaerat ipsum pariatur error dignissimos sint. Voluptates neque minus, ratione laborum deleniti alias dicta aut quis excepturi, libero repellendus quas porro reprehenderit adipisci dolorem exercitationem delectus!',
+    description: 'Vous pouvez passer par votre association locale afin d\'obtenir un set. Les conditions d\'envoi sont variables en fonction des clubs.',
     links: [
       {
         url: 'https://titansroundnet.fr/boutique/',
