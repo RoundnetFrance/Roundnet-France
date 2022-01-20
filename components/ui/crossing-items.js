@@ -47,7 +47,7 @@ CrossingItems.propTypes = {
     _id: propTypes.string.isRequired,
     title: propTypes.string.isRequired,
     chip: propTypes.string,
-    image: propTypes.string.isRequired,
+    image: propTypes.string,
     description: propTypes.string.isRequired,
     link: propTypes.shape({
       url: propTypes.string.isRequired,

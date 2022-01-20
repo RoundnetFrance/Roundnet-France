@@ -1,32 +1,26 @@
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 
 // MATERIAL COMPONENTS
-import {
-  Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide, Button, Stack, Avatar
-} from '@mui/material';
+import { Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide } from '@mui/material';
 
 // MUI ICONS
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import PersonIcon from '@mui/icons-material/Person';
 
 // COMPONENTS IMPORT
-import menuElements from './menu-elements';
 import MenuDrawer from './menu-drawer';
-import AdminDrawer from '../admin/admin-drawer';
-import menuState from '../../../helpers/menu-state';
-import NavItem from './nav-items';
+import DesktopNavItems from './desktop-nav-items';
 import Socials from './socials';
 import AvatarMenu from './avatar-menu';
 
+// CONTENT
+import { menuElements, adminElements } from '../../../contents/header';
+
 function HideOnScroll({ children }) {
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger();
 
   return (
@@ -42,8 +36,7 @@ HideOnScroll.propTypes = {
 
 function Header(props) {
   // State for the different menu items
-  const menuInitialState = menuState();
-  const [menuOpen, setMenuOpen] = useState(menuInitialState);
+  const [menuOpen, setMenuOpen] = useState({});
   const [anchorEl, setAnchorEl] = useState(null);
 
   // Handle the menu appearing : first reinitialize the state, then open the menu and set the anchor
@@ -58,16 +51,16 @@ function Header(props) {
   };
 
   const handleMenuClose = () => {
-    setMenuOpen(menuInitialState);
+    setMenuOpen({});
     setAnchorEl(null);
   };
 
   // Display 1st and 2nd level navigation items for regular layout
-  const navItems = menuElements.map((item) => {
+  const desktopNavItems = menuElements.map((item) => {
     // Display arrow of expansion if subElement is chosen
     const expandIcon = menuOpen[item.slug] ? <ExpandLess /> : <ExpandMore />;
 
-    return <NavItem
+    return <DesktopNavItems
       key={item.name}
       item={item}
       handleMenuClose={handleMenuClose}
@@ -86,24 +79,6 @@ function Header(props) {
     userName = props.session.user.name || props.session.user.email;
     userImage = props.session.user.image;
   }
-
-  // Display the admin items
-  const adminItems = (
-    <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" spacing={{ xs: 0, sm: 1 }}>
-
-      <Avatar sx={{ width: 35, height: 35, mr: 1 }}>
-        {userImage ? (
-          <Image src={userImage} alt={userName} width="35" height="35" />
-        ) : <PersonIcon />}
-      </Avatar>
-
-      {/* <Button onClick={signOut} color="neutral" sx={{
-        textTransform: 'none',
-      }}>
-        Déconnexion
-      </Button> */}
-    </Stack>
-  )
 
   // Check if regular or admin layout
   const adminLayout = props.adminLayout;
@@ -135,13 +110,11 @@ function Header(props) {
             <ButtonGroup variant="text" sx={{
               display: adminLayout ? { xs: 'inherit' } : { xs: 'none', lg: 'block' }
             }}>
-              {adminLayout ? <AvatarMenu image={userImage} name={userName} signOut={signOut} /> : navItems}
+              {adminLayout ? <AvatarMenu image={userImage} name={userName} signOut={signOut} /> : desktopNavItems}
             </ButtonGroup>
 
-            {adminLayout ? <AdminDrawer /> : <Fragment>
-              <Socials />
-              <MenuDrawer />
-            </Fragment>}
+            {!adminLayout && <Socials />}
+            <MenuDrawer menuElements={adminLayout ? adminElements : menuElements} />
 
           </Toolbar>
         </AppBar>

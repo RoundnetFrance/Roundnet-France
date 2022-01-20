@@ -2,12 +2,11 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 
 // MUI IMPORTS
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import { Button, Menu, MenuItem } from '@mui/material';
 import MUILink from '@mui/material/Link';
 
-function NavItem({ item, handleMenuHover, handleMenuClose, expandIcon, anchorEl, menuOpen }) {
+function DesktopNavItem({ item, handleMenuHover, handleMenuClose, expandIcon, anchorEl, menuOpen }) {
+
   return (
     <Fragment key={item.name}>
       {
@@ -37,7 +36,7 @@ function NavItem({ item, handleMenuHover, handleMenuClose, expandIcon, anchorEl,
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
-            open={menuOpen[item.slug]}
+            open={menuOpen[item.slug] || false}
             onClose={handleMenuClose}
           >
             {item.subElements.map((subItem) => (
@@ -54,4 +53,4 @@ function NavItem({ item, handleMenuHover, handleMenuClose, expandIcon, anchorEl,
   )
 }
 
-export default NavItem
+export default DesktopNavItem
