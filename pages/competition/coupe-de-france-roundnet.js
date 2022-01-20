@@ -40,7 +40,12 @@ function NationalRankingPage() {
           items={infoCDF}
           title="Comment se déroule la Coupe de France de roundnet ?"
           image="/images/pages/competition/coupe-de-france/coupe-de-france-roundnet.jpg"
-          description="La coupe de France est le format classique de la compétition : des équipes de 2 joueurs s’affrontent dans les 3 catégories : femmes, hommes, mixtes. La coupe de France est composée, de :"
+          description={
+            [
+              "La coupe de France est le format classique de la compétition : des équipes de 2 joueurs s’affrontent dans les 3 catégories : femmes, hommes, mixtes.",
+              "La coupe de France est composée, de :",
+            ]
+          }
         />
       </Container>
 
