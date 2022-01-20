@@ -1,14 +1,12 @@
 import { Fragment } from 'react'
 
 // MUI IMPORTS
-import { Container, Typography, Divider, Box } from '@mui/material'
+import { Container } from '@mui/material'
 
 // COMPONENT IMPORTS
 import Hero from '../../components/ui/hero';
 import CTAFooter from '../../components/ui/cta-footer';
 import Head from '../../components/head';
-import PageTitle from '../../components/ui/page-title';
-import InfoBlock from '../../components/ui/info-block';
 import CrossingItems from '../../components/ui/crossing-items';
 
 // CONTENTS
