@@ -34,7 +34,7 @@ function JoinRoundnetFrancePage({ clubLogos }) {
       <Container maxWidth="md" sx={{ my: 4 }}>
         <PageTitle title="Créez votre club et faites officiellement partie de Roundnet France !" />
         <Typography variant="body1" sx={{ pb: 4 }}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus quae ipsum quisquam quis numquam, odit vel exercitationem accusamus dolore deserunt iusto dicta id deleniti dolores et ipsa, magnam animi debitis dolorem pariatur architecto quo repellendus asperiores odio. Vitae quia sed autem ab in, ipsam blanditiis, repellendus eos itaque iure illo deleniti doloribus tempora, quam ex iste necessitatibus provident. Voluptates iusto ducimus libero voluptas id.
+          Chaque année, le nombre de clubs de roundnet en France augmente de façon exponentiel. La communauté grandit de plus en plus et avec ce grandissement de cette communauté le format des compétitions se concrétise. Pour continuer à partager ce sport avec des passionnés partout en France, n&apos;hésitez pas à remplir le formulaire ci-dessous de la fédération pour créer votre club dans une nouvelle ville. Lors de la création d’un club, des membres de l’équipe de Roundnet France seront présents pour vous accompagner au niveau administratif et légal.
         </Typography>
 
         <Box mb={4}>
