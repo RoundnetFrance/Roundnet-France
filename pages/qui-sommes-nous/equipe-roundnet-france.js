@@ -30,7 +30,6 @@ function TeamPage({ members, error }) {
       <Container maxWidth="md" sx={{ my: 4 }}>
         <PageTitle title="Découvrez celles et ceux qui font la fédération" />
         <Typography variant="body1" sx={{ pb: 4 }}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus quae ipsum quisquam quis numquam, odit vel exercitationem accusamus dolore deserunt iusto dicta id deleniti dolores et ipsa, magnam animi debitis dolorem pariatur architecto quo repellendus asperiores odio. Vitae quia sed autem ab in, ipsam blanditiis, repellendus eos itaque iure illo deleniti doloribus tempora, quam ex iste necessitatibus provident. Voluptates iusto ducimus libero voluptas id.
         </Typography>
 
         <Box mb={4}>
