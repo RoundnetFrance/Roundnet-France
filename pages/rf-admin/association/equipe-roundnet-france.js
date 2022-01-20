@@ -88,7 +88,7 @@ function ClubsAdminPage() {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   return {
     props: {
       adminLayout: true,
