@@ -1,51 +1,40 @@
-// IMPORT FROM NEXT
 import Image from 'next/image';
 
-// IMPORT FROM MATERIAL
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+// MUI IMPORTS
+import { Box, Stack, Container, Typography } from '@mui/material';
+
+// COMPONENT IMPORTS
+import Link from '../../components/ui/link';
+
+// CONTENTS
+import { rawLogos } from '../../contents/footer/index.js';
 
 function Footer() {
-  const rawLogos = [
-    {
-      src: '/images/logos/roundnet-france-tp-blanc.png',
-      alt: 'Roundnet France',
-      height: '80px',
-      width: '80px',
-    },
-    {
-      src: '/images/logos/eusra.png',
-      alt: 'EUSRA',
-      height: '80px',
-      width: '80px',
-    },
-    {
-      src: '/images/logos/sra.png',
-      alt: 'SRA',
-      height: '80px',
-      width: '150px',
-    },
-  ];
-
   return (
     <Box bgcolor="primary.dark" py={4}>
       <Container maxWidth="lg">
         <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between">
+          {/* Footer left */}
           <Box>
+            {/* Footer title */}
             <Typography variant="h6" color="white">
               Roundnet France
-              {' '}
-              <br />
-              {' '}
-              Ranking
             </Typography>
+            <Typography variant="body2" color="white" mb={2}>
+              Fédération française officielle de roundnet
+            </Typography>
+
+            {/* Footer links */}
             <Typography variant="body2" color="white">
-              <Link sx={{ color: 'white' }} href="mailto:contact@roundnetfrance.fr">contact@roundnetfrance.fr</Link>
+              <Link href="/qui-sommes-nous/contact" color="#fff">Contact</Link>
+              {' | '}
+              <Link href="/mentions-legales" color="#fff">Mentions légales</Link>
+              {' | '}
+              <Link href="/liens" color="#fff">Liens</Link>
             </Typography>
           </Box>
+
+          {/* Footer right - Logos */}
           <Box>
             {rawLogos.map((logo) => (
               <Image

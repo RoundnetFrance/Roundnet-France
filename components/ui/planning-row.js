@@ -10,7 +10,6 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Stack';
 
 // MUI ICONS
@@ -74,14 +73,15 @@ function PlanningRow({ row, resultsTable }) {
       </TableRow>
 
       {/* COLLAPSABLE SUBTABLE */}
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: {xs: 1, sm: 2} }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Podium
-              </Typography>
-                <Table size="small" sx={{ maxWidth: '600px'}} aria-label="tournament podium">
+      {row.results && (
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: { xs: 1, sm: 2 } }}>
+                <Typography variant="h6" gutterBottom component="div">
+                  Podium
+                </Typography>
+                <Table size="small" sx={{ maxWidth: '600px' }} aria-label="tournament podium">
                   <TableHead>
                     <TableRow>
                       <TableCell>Pos.</TableCell>
@@ -104,10 +104,12 @@ function PlanningRow({ row, resultsTable }) {
                   </TableBody>
                 </Table>
                 <Divider />
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      )}
+
     </Fragment>
   )
 }

@@ -12,7 +12,7 @@ function FeaturedItems({ items, color }) {
     <Stack
       direction={{ xs: 'column', sm: 'row' }}
       justifyContent="space-between"
-      alignItems="center"
+      alignItems="baseline"
       spacing={{ xs: 2, md: 4 }}
       my={4}
     >
@@ -21,10 +21,10 @@ function FeaturedItems({ items, color }) {
         <Stack
           width={{ xs: '100%', md: '30%' }}
           alignItems="center"
-          key={item.id}
+          key={item._id}
         >
           <IconWithBackground icon={item.icon} color={color} />
-          <Typography variant="h6" my={2} color={color}><strong>{item.title}</strong></Typography>
+          <Typography align="center" variant="h6" component="h3" my={2} color={color}><strong>{item.title}</strong></Typography>
           <Typography variant="body1" align="center">{item.description}</Typography>
         </Stack>
       ))}
@@ -35,7 +35,7 @@ function FeaturedItems({ items, color }) {
 
 FeaturedItems.propTypes = {
   items: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.string.isRequired,
+    _id: propTypes.string.isRequired,
     icon: propTypes.string.isRequired,
     title: propTypes.string.isRequired,
     description: propTypes.string.isRequired,

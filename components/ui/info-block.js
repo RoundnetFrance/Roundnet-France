@@ -3,19 +3,17 @@ import propTypes from 'prop-types';
 import { Fragment } from 'react';
 
 // MUI IMPORTS
-import Stack from '@mui/material/Stack'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
-import Chip from '@mui/material/Chip'
-import Button from '@mui/material/Button';
+import { Stack, Box, Typography, Paper, Chip } from '@mui/material';
 
-// MUI ICONS
-import InsertLinkIcon from '@mui/icons-material/InsertLink';
+// COMPONENT IMPORTS
+import LinkButtons from './link-buttons';
 
-function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, link }) {
+function InfoBlock({ title, chip, items, image, description, imageToLeft, height, roundedImage, links, roundedEverywhere }) {
   // Put the image to left or right on desktops
   const rowOrder = imageToLeft ? 'row-reverse' : 'row';
+
+  // Check if description is aa string or an array
+  const descriptionIsArray = Array.isArray(description);
 
   return (
     <Stack
@@ -37,7 +35,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
           color="secondary.main"
           sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
         >
-          {title}
+          <strong>{title}</strong>
           {chip && (
             <Fragment>
               <br />
@@ -46,27 +44,43 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
           )
           }
 
+          {/* CONTENT. If rray, map of paragraphs */}
         </Typography>
-        <Typography
-          variant="body2"
-          mb={4}
-          sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
-        >
-          {description}
-        </Typography>
+        {descriptionIsArray ? (
+          <Box mb={2}>
+            {description.map((item) => (
+              <Typography
+                key={item}
+                variant="body2"
+                mb={2}
+                sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
+              >
+                {item}
+              </Typography>
+            ))}
+          </Box>
+        ) : (
+          <Typography
+            variant="body2"
+            mb={4}
+            sx={{ textAlign: { xs: 'center', md: imageToLeft ? 'left' : 'right' } }}
+          >
+            {description}
+          </Typography>
+        )}
 
         {/* ITEMS DISPLAY, IF ANY */}
         {
           items && (
             <Stack
-              direction="row"
+              direction={{ xs: 'column', sm: 'row' }}
               justifyContent="space-between"
-              alignItems="center"
+              alignItems={{ xs: 'center', sm: 'flex-start' }}
               spacing={{ xs: 1, md: 2 }}
             >
               {
                 items.map((item) => (
-                  <Box width="50%" key={item.id}>
+                  <Box width={{ xs: '90%', sm: '50%' }} key={item._id}>
                     <Typography
                       variant="h6"
                       color="secondary.main"
@@ -86,30 +100,20 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
         }
 
         {/* LINK DISPLAY, IF ANY */}
-        {
-          link && (
-            <Button
-              sx={{
-                width: 'fit-content',
-              }}
-              variant="contained"
-              color="secondary"
-              href={link.url}
-              target={link.outLink ? '_blank' : '_self'}
-              rel={link.outLink ? 'noopener noreferrer' : ''}
-              startIcon={link.outLink ? <InsertLinkIcon /> : null}
-            >
-              {link.text ? link.text : 'Site'}
-            </Button>
-          )
-        }
-
+        {links && <LinkButtons links={links} imageToLeft={imageToLeft} />}
 
       </Stack>
 
-      <Paper elevation={3} sx={{ width: { xs: '100%', md: '50%' }, height: { xs: height / 1.25, md: height }, position: 'relative', overflow: 'hidden', borderRadius: { xs: 2, md: roundedImage ? 60 : 2 } }}>
+      <Paper elevation={3} sx={{
+        minWidth: { xs: roundedEverywhere ? '210px' : '300px', md: '260px' },
+        width: { xs: roundedEverywhere ? '210px' : '300px', md: '50%' },
+        height: roundedEverywhere ? height / 1.25 : { xs: height, md: height },
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: { xs: (roundedImage && roundedEverywhere) ? 60 : 2, md: roundedImage ? 60 : 2 }
+      }}>
         <Image
-          src={image}
+          src={image || '/images/misc/placeholder.jpg'}
           layout='fill'
           alt={title}
           objectFit="cover"
@@ -122,12 +126,7 @@ function InfoBlock({ title, chip, items, image, description, imageToLeft, height
 
 InfoBlock.propTypes = {
   title: propTypes.string.isRequired,
-  items: propTypes.arrayOf({
-    id: propTypes.string.isRequired,
-    title: propTypes.string.isRequired,
-    text: propTypes.string.isRequired,
-  }),
-  image: propTypes.string.isRequired,
+  image: propTypes.string,
   description: propTypes.string.isRequired,
   imageToLeft: propTypes.bool,
   height: propTypes.number,
@@ -138,15 +137,18 @@ InfoBlock.propTypes = {
     text: propTypes.string,
     outLink: propTypes.bool,
   }),
+  roundedEverywhere: propTypes.bool,
 }
 
 InfoBlock.defaultProps = {
+  image: null,
   items: null,
   imageToLeft: false,
   height: 400,
   roundedImage: false,
   chip: null,
   link: null,
+  roundedEverywhere: false,
 }
 
 export default InfoBlock

@@ -3,13 +3,9 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 // MUI IMPORTS
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Box, Container, Stack, Button, Typography } from '@mui/material';
 
-// MATERIAL ICONS
+// MUI ICONS
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
@@ -37,15 +33,15 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
       }}
     >
 
-        <Image
-          src={image}
-          alt={title}
-          layout="fill"
-          objectFit="cover"
-          objectPosition={imagePosition}
-          priority={true}
-          placeholder="shimmer"
-        />
+      <Image
+        src={image}
+        alt={title}
+        layout="fill"
+        objectFit="cover"
+        objectPosition={imagePosition}
+        priority={true}
+        placeholder="shimmer"
+      />
 
       <Container sx={{ height: '100%' }}>
         <Stack justifyContent="center" minHeight="100%" spacing={1}>
