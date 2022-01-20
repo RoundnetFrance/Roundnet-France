@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 // MATERIAL COMPONENTS
 import { Link as MUILink, AppBar, Box, Toolbar, Typography, ButtonGroup, useScrollTrigger, Slide } from '@mui/material';
@@ -114,7 +115,7 @@ function Header(props) {
             </ButtonGroup>
 
             {!adminLayout && <Socials />}
-            <MenuDrawer menuElements={adminLayout ? adminElements : menuElements} />
+            <MenuDrawer adminLayout={adminLayout} menuElements={adminLayout ? adminElements : menuElements} />
 
           </Toolbar>
         </AppBar>

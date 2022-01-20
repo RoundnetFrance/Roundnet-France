@@ -40,11 +40,13 @@ function DesktopNavItem({ item, handleMenuHover, handleMenuClose, expandIcon, an
             onClose={handleMenuClose}
           >
             {item.subElements.map((subItem) => (
-              <MenuItem key={subItem.name} onClick={handleMenuClose}>
-                <Link href={subItem.url} passHref>
-                  <MUILink underline="none">{subItem.name}</MUILink>
-                </Link>
-              </MenuItem>
+              <Link href={subItem.url} key={subItem.name} passHref>
+                <MUILink underline="none">
+                  <MenuItem onClick={handleMenuClose}>
+                    {subItem.name}
+                  </MenuItem>
+                </MUILink>
+              </Link>
             ))}
           </Menu>
         )
