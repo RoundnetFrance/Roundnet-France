@@ -37,4 +37,17 @@ const featuredRIC = [
   },
 ];
 
-export { infoRIC, featuredRIC };
+const infoCDF = [
+  {
+    _id: 1,
+    title: '3 Tour Stops',
+    text: '3 étapes permettant de se qualifier pour la phase finale',
+  },
+  {
+    _id: 2,
+    title: '1 Championnat',
+    text: 'Dernier tournoi, définissant le classement français de la saison',
+  },
+];
+
+export { infoRIC, featuredRIC, infoCDF };
