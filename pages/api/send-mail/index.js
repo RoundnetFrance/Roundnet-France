@@ -27,7 +27,6 @@ export default async function (req, res) {
       // await new Promise((resolve) => setTimeout(resolve, 2000));
       res.status(200).json({ success: true, message: `Votre email a été envoyé ! Nous vous répondrons sous peu.` })
     } catch (error) {
-      console.log(error.response.body.errors);
       res.status(500).json({ message: 'Une erreur est survenue lors de l\'envoi du mail. Merci de réessayer' })
     }
   } else {

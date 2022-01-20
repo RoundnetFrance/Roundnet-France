@@ -36,9 +36,8 @@ export default async function handler(req, res) {
     // DEL method to delete specific app user
     if (req.method === 'DELETE') {
       try {
-        const user = await deleteDocument('clubs', { _id: ObjectId(clubId) });
-        console.log(user);
-        return res.status(200).json(user);
+        const response = await deleteDocument('clubs', { _id: ObjectId(clubId) });
+        return res.status(200).json(response);
       } catch (error) {
         console.error(error);
         return res.status(500).json(error);

@@ -27,7 +27,6 @@ export default function AccountDelete({ confirmText, setSnackbar }) {
       });
       signOut();
     } catch (error) {
-      console.log(error);
       setSnackbar({
         open: true,
         message: error.message || 'Une erreur est survenue',
