@@ -48,7 +48,7 @@ module.exports = {
       },
       {
         source: '/club-roundnet-france-club-spikeball',
-        destination: '/',
+        destination: '/clubs-et-communautes/liste-des-clubs',
         permanent: true,
       },
       {
@@ -141,7 +141,6 @@ module.exports = {
         destination: '/',
         permanent: true,
       },
-
     ];
   }
 }
