@@ -3,7 +3,7 @@ import Link from 'next/link';
 // MUI IMPORTS
 import { ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Collapse, Icon } from '@mui/material';
 
-export default function MobileNavCollapse({ items, elementOpen, toggleDrawer }) {
+export default function MobileNavCollapse({ items, elementOpen, toggleDrawer, adminLayout }) {
   return items.map((subElement) => {
     return (
       <Collapse key={subElement.name} in={elementOpen} timeout="auto" unmountOnExit>
@@ -14,7 +14,7 @@ export default function MobileNavCollapse({ items, elementOpen, toggleDrawer }) 
                 <Icon>arrow_forward</Icon>
               </ListItemIcon>
               <ListItemText>
-                <MUILink underline="none">{subElement.name}</MUILink>
+                <MUILink color={adminLayout ? 'secondary' : 'primary'} underline="none">{subElement.name}</MUILink>
               </ListItemText>
             </ListItemButton>
           </Link>

@@ -28,4 +28,68 @@ const accountMenuElements = [
   }
 ];
 
-export { accountMenuElements };
+const dashboardElements = [
+  {
+    _id: 'rules',
+    label: 'Règles',
+    icon: 'rule',
+    description: 'Changez le document PDF des règles du site.',
+    url: '/rf-admin/competition/regles'
+  },
+  {
+    _id: 'cdf',
+    label: 'Coupe de France',
+    icon: 'emoji_events',
+    description: 'Changez le document PDF de la coupe de France.',
+    url: '/rf-admin/competition/coupe-de-france'
+  },
+  {
+    _id: 'ric',
+    label: 'Rencontres inter-clubs',
+    icon: 'multiple_stop',
+    description: 'Changez le document PDF des Rencontres Inter-Clubs.',
+    url: '/rf-admin/competition/ric'
+  },
+  {
+    _id: 'clubs',
+    label: 'Liste des clubs',
+    color: 'secondary',
+    icon: 'groups',
+    description: 'Consultez, modifiez et validez les informations des clubs pour leur affichage public sur le site.',
+    url: '/rf-admin/clubs-et-communautes/liste-des-clubs'
+  },
+  {
+    _id: 'statuts',
+    label: 'Statuts',
+    icon: 'summarize',
+    description: 'Changez le document PDF des statuts de l\'association.',
+    url: '/rf-admin/association/statuts'
+  },
+  {
+    _id: 'account',
+    label: 'Mon compte',
+    color: 'neutralDark',
+    icon: 'tune',
+    description: 'Modifiez vos informations personnelles, changez votre affiliation de club.',
+    url: '/rf-admin/parametres/mon-compte'
+  },
+  {
+    _id: 'support',
+    label: 'Support',
+    color: 'neutralDark',
+    icon: 'support',
+    description: 'Un bug, un comportement inattendu, ou une demande de fonctionnalité ? Venez nous le signaler.',
+    url: '/rf-admin/support'
+  },
+  {
+    _id: 'accounts',
+    label: 'Administrateurs',
+    color: 'neutralDark',
+    icon: 'manage_accounts',
+    description: 'Gérez les comptes des administrateurs du site.',
+    url: '/rf-admin/parametres/administrateurs'
+  },
+
+]
+
+export { accountMenuElements, dashboardElements };

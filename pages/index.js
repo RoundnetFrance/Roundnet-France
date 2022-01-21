@@ -17,15 +17,17 @@ export default function HomePage({ clubLogos }) {
         subtitle="Le site officiel de la fédération française de roundnet"
         image="/images/home-slide.jpg"
         mainButtonText="Découvrir"
-        mainButtonLink="/regles"
-        altButtonText="Participer à un tournoi"
-        altButtonLink="/competition/calendrier"
+        mainButtonLink="#rules-demo"
+        altButtonText="Trouver un club"
+        altButtonLink="/clubs-et-communautes/liste-des-clubs"
       />
 
       <HomeInfoBlock />
       <FourSquareInfo />
 
-      <RulesDemo />
+      <div id="rules-demo">
+        <RulesDemo />
+      </div>
 
       <CTAFooter
         title="Motivé.e ? Envie de jouer ou de participer ?"

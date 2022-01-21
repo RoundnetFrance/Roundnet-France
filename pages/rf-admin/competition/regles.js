@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import useRules from '../../../hooks/useRules';
+import useOfficialDocs from '../../../hooks/use-official-docs';
 
 
 // COMPONENT IMPORTS
@@ -8,13 +8,13 @@ import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 import DataControl from '../../../components/admin/data-control';
-import CreateRuleForm from '../../../components/admin/forms/create-rule-form';
+import CreateOfficialDocForm from '../../../components/admin/forms/create-rule-form';
 import Loader from '../../../components/ui/loader';
 
 export default function RulesAdminPage() {
   // Hooks calls
   const router = useRouter();
-  const { rules, isLoading, isError } = useRules();
+  const { officialDocs, isLoading, isError } = useOfficialDocs('rules');
 
   // Handle redirect if no session
   const { status } = useSession({
@@ -48,8 +48,8 @@ export default function RulesAdminPage() {
         editable: true,
       }
     ],
-    tableData: rules,
-    endpoint: 'rules',
+    tableData: officialDocs,
+    endpoint: 'official-docs',
     loading: isLoading,
     error: isError,
     deletable: true,
@@ -59,7 +59,7 @@ export default function RulesAdminPage() {
     <DashboardWrapper>
       <PageTitle title="Administration du fichier de règles" />
 
-      <DataControl endpoint="rules" createForm={<CreateRuleForm />} />
+      <DataControl endpoint="official-docs" createForm={<CreateOfficialDocForm doctype="rules" />} />
 
       <AdminTable tableConfig={tableConfig} />
 

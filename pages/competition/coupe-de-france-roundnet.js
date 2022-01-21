@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { getDocument } from '../../helpers/db';
 
 // MUI IMPORTS
 import { Container, Typography, Divider } from '@mui/material';
@@ -9,11 +10,12 @@ import PageTitle from '../../components/ui/page-title';
 import Head from '../../components/head';
 import InfoBlock from '../../components/ui/info-block';
 import HeaderWithIcon from '../../components/ui/header-with-icon';
+import DocumentHalfImage from '../../components/ui/document-half-image';
 
 // CONTENT
 import { infoCDF } from '../../contents/competition'
 
-function NationalRankingPage() {
+export default function NationalRankingPage({ document }) {
   return (
     <Fragment>
       <Head
@@ -49,7 +51,12 @@ function NationalRankingPage() {
         />
       </Container>
 
-      <Divider />
+      <DocumentHalfImage
+        title="Le règlement complet de la Coupe de France"
+        description="Pour tout savoir des formats, des points et des différentes spécificités de la coupe de France de roundent, vous pouvez télécharger le document PDF ci-dessous."
+        document={document}
+        image="/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg"
+      />
 
       <Container maxWidth="md" sx={{ my: 4 }}>
         <HeaderWithIcon
@@ -57,9 +64,17 @@ function NationalRankingPage() {
           icon="info"
         />
       </Container>
-
     </Fragment>
   )
 }
 
-export default NationalRankingPage
+export async function getStaticProps() {
+  const CDFDocument = await getDocument('official-docs', { doctype: 'cdf' }, null, { _id: -1 });
+  const document = JSON.parse(JSON.stringify(CDFDocument));
+  return {
+    props: {
+      document,
+    },
+    revalidate: 3600,
+  }
+}

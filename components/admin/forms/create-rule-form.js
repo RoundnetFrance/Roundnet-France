@@ -1,13 +1,15 @@
+import propTypes from 'prop-types';
+
 // COMPONENT IMPORTS
 import FormBuilder from '../../form-builder';
 
-export default function CreateRuleForm() {
+export default function CreateOfficialDocForm({ doctype }) {
   const formConfig = {
-    name: 'Ajouter une version de fichier de règles',
+    name: 'Ajouter une version de fichier',
     fields: [
       {
         id: 'url',
-        label: 'Fichier de règles (format pdf)',
+        label: 'Fichier (format pdf)',
         type: 'file',
         options: {
           required: true,
@@ -28,13 +30,29 @@ export default function CreateRuleForm() {
         id: 'description',
         label: 'Description',
         type: 'longtext'
+      },
+      {
+        id: 'doctype',
+        type: 'text',
+        options: {
+          hidden: true,
+          defaultValue: doctype,
+        }
       }
     ],
-    endpoint: 'rules',
-    submitText: 'Ajouter une règle'
+    endpoint: 'official-docs',
+    submitText: 'Ajouter le fichier'
   }
 
   return (
     <FormBuilder formConfig={formConfig} />
   )
+}
+
+CreateOfficialDocForm.propTypes = {
+  doctype: propTypes.string,
+}
+
+CreateOfficialDocForm.defaultProps = {
+  docType: '',
 }
