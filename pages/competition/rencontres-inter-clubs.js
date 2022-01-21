@@ -67,6 +67,7 @@ export default function TournamentsResultsPage({ document }) {
         document={document}
         title="Le document officiel des recontres inter-clubs"
         description="Le document officiel des rencontres inter-clubs est disponible en PDF pour connaître tous les détails de l'organisation de cette compétition."
+        image="/images/pages/competition/inter-clubs/inter-club-regles.jpg"
       />
 
       <CTAFooter
@@ -91,7 +92,6 @@ export async function getStaticProps() {
 
   const RICDocument = await getDocument('official-docs', { doctype: 'ric' }, null, { _id: -1 });
   const document = JSON.parse(JSON.stringify(RICDocument));
-  console.log(document);
   return {
     props: {
       document,
