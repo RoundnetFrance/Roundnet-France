@@ -28,4 +28,28 @@ const accountMenuElements = [
   }
 ];
 
-export { accountMenuElements };
+const dashboardElements = [
+  {
+    _id: 'rules',
+    label: 'Règles',
+    icon: 'rule',
+    description: 'Changez le document PDF des règles du site.',
+    url: '/rf-admin/competition/regles'
+  },
+  {
+    _id: 'cdf',
+    label: 'Coupe de France',
+    icon: 'emoji_events',
+    description: 'Changez le document PDF de la coupe de France.',
+    url: '/rf-admin/competition/coupe-de-france'
+  },
+  {
+    _id: 'ric',
+    label: 'Rencontres inter-clubs',
+    icon: 'multiple_stop',
+    description: 'Changez le document PDF des Rencontres Inter-Clubs.',
+    url: '/rf-admin/competition/ric'
+  },
+]
+
+export { accountMenuElements, dashboardElements };

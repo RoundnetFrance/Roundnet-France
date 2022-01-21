@@ -8,8 +8,9 @@ import Hero from '../../components/ui/hero';
 import PageTitle from '../../components/ui/page-title';
 import Head from '../../components/head';
 import CreateClubForm from '../../components/forms/create-club-form';
+import Link from '../../components/ui/link';
 
-function CreateClubPage() {
+export default function CreateClubPage() {
   return (
     <Fragment>
 
@@ -27,7 +28,7 @@ function CreateClubPage() {
       <Container maxWidth="md" sx={{ my: 4 }}>
         <PageTitle title="Devenez club officiel affilié à Roundnet France" />
         <Typography variant="body1">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe corrupti amet esse ad culpa suscipit recusandae ut aperiam quibusdam doloremque, optio accusamus temporibus alias illo quae cupiditate libero dolores, perferendis quo dolore? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt dolorem soluta ipsam quas necessitatibus, laboriosam adipisci blanditiis dignissimos recusandae harum quaerat nostrum exercitationem aut nihil a veritatis quisquam minus sint eos ducimus.
+          Si vous souhaitez plus d&apos;informations sur les avantages et les accompagnements que proposent Roundnet France, vous pouvez <Link href="/clubs-et-communautes/adherer-a-roundnet-france">cliquer sur ce lien pour plus d&apos;informations.   </Link>
         </Typography>
       </Container>
 
@@ -36,5 +37,3 @@ function CreateClubPage() {
     </Fragment>
   )
 }
-
-export default CreateClubPage

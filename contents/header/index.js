@@ -83,6 +83,12 @@ const menuElements = [
 // Menu for admin
 const adminElements = [
   {
+    name: 'Dashboard',
+    slug: 'dashboard',
+    icon: 'dashboard',
+    url: '/rf-admin'
+  },
+  {
     name: 'Compétition',
     slug: 'competition',
     icon: 'emoji_events',
