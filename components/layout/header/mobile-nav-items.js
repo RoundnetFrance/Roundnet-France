@@ -11,7 +11,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 // COMPONENT IMPORTS
 import MobileNavCollapse from './mobile-nav-collapse';
 
-export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCollapseElements }) {
+export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCollapseElements, adminLayout }) {
   function keepDrawerOpen() {
     toggleDrawer(true);
   }
@@ -29,7 +29,7 @@ export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCo
           <ListItem onClick={() => { handleCollapseElements(element.slug), keepDrawerOpen() }}>
             <ListItemButton onClick={toggleDrawer}>
               <ListItemIcon>
-                <Icon color="primary" fontSize="medium">{element.icon}</Icon>
+                <Icon color={adminLayout ? 'secondary' : 'primary'} fontSize="medium">{element.icon}</Icon>
               </ListItemIcon>
               <ListItemText>
                 {element.name}
@@ -37,7 +37,7 @@ export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCo
               {expandIcon}
             </ListItemButton>
           </ListItem>
-          <MobileNavCollapse items={element.subElements} elementOpen={elementOpen} toggleDrawer={toggleDrawer} />
+          <MobileNavCollapse items={element.subElements} elementOpen={elementOpen} toggleDrawer={toggleDrawer} adminLayout={adminLayout} />
         </Fragment>
       )
     }
@@ -46,11 +46,11 @@ export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCo
     return (
       <Fragment key={element.name}>
         <Link href={element.url} passHref>
-          <MUILink underline="none" color='primary'>
+          <MUILink underline="none" color={adminLayout ? 'secondary' : 'primary'}>
             <ListItem onClick={() => { handleCollapseElements(element.slug) }}>
               <ListItemButton onClick={toggleDrawer}>
                 <ListItemIcon>
-                  <Icon color="primary" fontSize="medium">{element.icon}</Icon>
+                  <Icon color={adminLayout ? 'secondary' : 'primary'} fontSize="medium">{element.icon}</Icon>
                 </ListItemIcon>
                 <ListItemText>
                   {element.name}

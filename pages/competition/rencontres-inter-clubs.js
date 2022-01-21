@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { getDocument } from '../../helpers/db';
 
 // MUI IMPORTS
 import { Container, Typography, Divider } from '@mui/material';
@@ -11,12 +12,12 @@ import HeaderWithIcon from '../../components/ui/header-with-icon';
 import FeaturedItems from '../../components/ui/featured-items';
 import CTAFooter from '../../components/ui/cta-footer';
 import Head from '../../components/head';
+import DocumentHalfImage from '../../components/ui/document-half-image';
 
 // CONTENT
 import { infoRIC, featuredRIC } from '../../contents/competition/';
 
-function TournamentsResultsPage() {
-
+export default function TournamentsResultsPage({ document }) {
 
   return (
     <Fragment>
@@ -47,7 +48,6 @@ function TournamentsResultsPage() {
           image="/images/pages/competition/inter-clubs/inter-club.jpg"
           description="Les clubs inscrivent une ou plusieurs équipes gratuitement auprès de la fédération. Chaque équipe est composée au maximum de 10 personnes, au minimum de 2 femmes et 4 hommes. Une rencontre est composée de 5 matchs en 2v2 : 1 femmes, 2 hommes et 2 mixtes. L’équipe qui a gagné le plus de matchs remporte la rencontre. Les clubs de la même région se mettent d’accord sur le lieu et la date de la rencontre sans intervention de la fédération. A la fin de la saison, les 2 premières équipes de chaque région sont qualifiées pour la phase finale qui se déroulera au dernier trimestre 2022, et désignera l’équipe championne de France."
         />
-
       </Container>
 
       <Divider />
@@ -62,6 +62,12 @@ function TournamentsResultsPage() {
       </Container>
 
       <Divider />
+
+      <DocumentHalfImage
+        document={document}
+        title="Le document officiel des recontres inter-clubs"
+        description="Le document officiel des rencontres inter-clubs est disponible en PDF pour connaître tous les détails de l'organisation de cette compétition."
+      />
 
       <CTAFooter
         title="Vous souhaitez participer aux rencontres inter-clubs ?"
@@ -81,4 +87,15 @@ function TournamentsResultsPage() {
   )
 }
 
-export default TournamentsResultsPage
+export async function getStaticProps() {
+
+  const RICDocument = await getDocument('official-docs', { doctype: 'ric' }, null, { _id: -1 });
+  const document = JSON.parse(JSON.stringify(RICDocument));
+  console.log(document);
+  return {
+    props: {
+      document,
+    },
+    revalidate: 3600,
+  }
+}

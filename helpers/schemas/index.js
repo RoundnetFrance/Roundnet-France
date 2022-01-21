@@ -32,11 +32,12 @@ export default function getSchema(schemaRef, partials) {
       });
       break;
 
-    case 'official-doc':
+    case 'official-docs':
       schema = Joi.object({
         url: Joi.string().uri().required(),
         version: Joi.string().trim().required(),
         description: Joi.string().trim(),
+        doctype: Joi.string().trim().allow(''),
       });
       break;
 

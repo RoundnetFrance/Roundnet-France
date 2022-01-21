@@ -45,7 +45,7 @@ function MenuDrawer({ menuElements, adminLayout }) {
       >
         <Box>
           <Typography
-            color="primary"
+            color={adminLayout ? 'secondary' : 'primary'}
             variant="h5"
             gutterBottom
             sx={{
@@ -53,7 +53,7 @@ function MenuDrawer({ menuElements, adminLayout }) {
               lineHeight: 1,
             }}
           >
-            Roundnet France
+            {adminLayout ? 'Administration' : 'Roundnet France'}
           </Typography>
           <Divider />
 
@@ -63,6 +63,7 @@ function MenuDrawer({ menuElements, adminLayout }) {
             keepDrawerOpen={keepDrawerOpen}
             handleCollapseElements={handleCollapseElements}
             menuOpen={menuOpen}
+            adminLayout={adminLayout}
           />
 
         </Box>

@@ -4,12 +4,14 @@ import { validateAPI } from "../../../helpers/form";
 import getSchema from '../../../helpers/schemas';
 
 export default async function handler(req, res) {
+  // Get the doctype. Will be used to only fetch docs of that type
+  const { doctype } = req.query;
 
   const session = await getSession({ req })
   // GET method to read rule files
   if (req.method === 'GET') {
     try {
-      const officialDocs = await getDocuments('official-docs', null, null, { _id: -1 });
+      const officialDocs = await getDocuments('official-docs', doctype ? { doctype } : null, null, { _id: -1 });
       return res.status(200).json(officialDocs);
     } catch (error) {
       console.error(error);
@@ -21,13 +23,12 @@ export default async function handler(req, res) {
   if (session) {
     // POST method to create a new rule file (only for admins)
     if (req.method === 'POST') {
-
       const { data } = req.body;
 
       // * Validate the data
       try {
         // Define the POST CLUB schema
-        const schema = getSchema('official-doc');
+        const schema = getSchema('official-docs');
 
         // Actual validation
         validateAPI({ data, schema });
