@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { Box, Container, Stack, Button, Typography } from '@mui/material';
 
 // MUI ICONS
-import EqualizerIcon from '@mui/icons-material/Equalizer';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import InfoIcon from '@mui/icons-material/Info';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, mainButtonLink, altButtonText, altButtonLink, mini }) {
   const styles = {
@@ -68,8 +68,7 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
           >
             {mainButtonText && mainButtonLink && (
               <Link href={mainButtonLink} passHref>
-                <Button sx={{ justifyContent: 'flex-start' }} size="large" variant="contained">
-                  <QueryStatsIcon sx={{ mr: 2 }} />
+                <Button startIcon={<InfoIcon />} size="large" variant="contained">
                   {mainButtonText}
                 </Button>
               </Link>
@@ -78,8 +77,7 @@ function HomeIntro({ image, imagePosition, title, subtitle, mainButtonText, main
 
             {altButtonText && altButtonLink && (
               <Link href={altButtonLink} passHref>
-                <Button sx={{ justifyContent: 'flex-start' }} color="secondary" size="large" variant="contained">
-                  <EqualizerIcon sx={{ mr: 2 }} />
+                <Button startIcon={<ArrowForwardIcon />} color="secondary" size="large" variant="contained">
                   {altButtonText}
                 </Button>
               </Link>
