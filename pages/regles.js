@@ -2,11 +2,10 @@ import { Fragment } from 'react';
 import { getDocument } from '../helpers/db';
 
 // MUI IMPORTS
-import { Container, Typography, Divider, Box, Button } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 
 // COMPONENT IMPORTS
 import Hero from '../components/ui/hero';
-import HalfImage from '../components/ui/half-image';
 import PageTitle from '../components/ui/page-title';
 import Head from '../components/head';
 import CTAFooter from '../components/ui/cta-footer';
@@ -71,7 +70,7 @@ function RulesPage({ rule }) {
 export async function getStaticProps() {
   // Try to fetch latest rule document on DB
   try {
-    const ruleDocument = await getDocument('rules', null, null, { _id: -1 });
+    const ruleDocument = await getDocument('official-docs', { doctype: 'rules' }, null, { _id: -1 });
     const rule = JSON.parse(JSON.stringify(ruleDocument));
     return {
       props: {
