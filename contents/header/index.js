@@ -91,13 +91,17 @@ const adminElements = [
       //   name: 'Calendrier',
       //   url: '/rf-admin/competition/calendrier',
       // },
-      // {
-      //   name: 'Coupe de France',
-      //   url: '/rf-admin/competition/resultats-coupe-de-france',
-      // },
+      {
+        name: 'Coupe de France',
+        url: '/rf-admin/competition/coupe-de-france',
+      },
       {
         name: 'Règles',
         url: '/rf-admin/competition/regles',
+      },
+      {
+        name: 'Rencontres inter-clubs',
+        url: '/rf-admin/competition/ric',
       },
       // {
       //   name: 'Hall Of Fame',
