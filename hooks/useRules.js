@@ -1,9 +1,10 @@
 import fetcher from '../lib/swr-fetcher';
 import useSWR from 'swr';
 
-export default function useClubs() {
+// Function is awaiting docType (string)
+export default function useRules() {
 
-  const { data, error } = useSWR('/api/rules', fetcher)
+  const { data, error } = useSWR(`/api/rules`, fetcher)
 
   return {
     rules: data,

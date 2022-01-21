@@ -10,6 +10,7 @@ import HalfImage from '../components/ui/half-image';
 import PageTitle from '../components/ui/page-title';
 import Head from '../components/head';
 import CTAFooter from '../components/ui/cta-footer';
+import DocumentHalfImage from '../components/ui/document-half-image';
 
 function RulesPage({ rule }) {
   let readableUpdateDate;
@@ -44,56 +45,12 @@ function RulesPage({ rule }) {
         </Typography>
       </Container>
 
-      <HalfImage
-        image='/images/pages/competition/regles/regles-pdf.jpg'
-      >
-
-        <Typography
-          variant="h5"
-          color="white"
-        >
-          <strong>Règles officielles 2021 de Roundnet</strong>
-        </Typography>
-
-        <Box width="50%">
-          <Divider
-            color="white"
-            sx={{
-              mb: 4,
-            }} />
-        </Box>
-
-        <Typography
-          variant="body1"
-          sx={{
-            mb: 2,
-            color: "white",
-          }}>
-          Distance au service, gênes, cas particuliers : pour ceux qui souhaitent être incollables, vous pouvez télécharger les règles officielles de roundnet et valables en tournoi, en cliquant sur le bouton ci-dessous (et en français !).
-        </Typography>
-
-        {rule?.description && (
-          <Typography
-            variant="body1"
-            sx={{
-              color: "white",
-              mb: 4,
-            }}>
-            {rule.description}
-          </Typography>
-        )}
-
-
-        <Button color="secondary" size="large" variant="contained" href={rule?.url || '/docs/regles-2021.pdf'} target="_blank">
-          Télécharger les règles
-        </Button>
-
-        <Typography variant="body2" mt={1} color="white">
-          Version {rule?.version || 'officielle'}
-          <br />
-          Dernière mise à jour : {readableUpdateDate || new Date().toLocaleDateString('fr-FR', { year: 'numeric' })}
-        </Typography>
-      </HalfImage>
+      <DocumentHalfImage
+        document={rule}
+        title="Règles officielles 2021 de Roundnet"
+        description="Distance au service, gênes, cas particuliers : pour ceux qui souhaitent être incollables, vous pouvez télécharger les règles officielles de roundnet et valables en tournoi, en cliquant sur le bouton ci-dessous (et en français !)."
+        buttonText="Télécharger les règles"
+      />
 
       <CTAFooter
         title="Vous vous sentez prêts à en découdre ?"
