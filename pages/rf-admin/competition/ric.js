@@ -2,20 +2,18 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import useOfficialDocs from '../../../hooks/use-official-docs';
 
-// MUI IMPORTS
-import { CircularProgress, Stack } from '@mui/material';
-
 // COMPONENT IMPORTS
 import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 import DataControl from '../../../components/admin/data-control';
-import CreateOfficialDocForm from '../../../components/admin/forms/create-official-doc-form';
+import CreateOfficialDocForm from '../../../components/admin/forms/create-rule-form';
+import Loader from '../../../components/ui/loader';
 
 export default function RulesAdminPage() {
   // Hooks calls
   const router = useRouter();
-  const { officialDocs, isLoading, isError } = useOfficialDocs('statuts');
+  const { officialDocs, isLoading, isError } = useOfficialDocs("ric");
 
   // Handle redirect if no session
   const { status } = useSession({
@@ -27,17 +25,11 @@ export default function RulesAdminPage() {
   })
 
   // If loading, display loading screen
-  if (status === "loading") {
-    return (
-      <Stack sx={{ width: '100%' }} justifyContent="center" alignItems="center">
-        <CircularProgress />
-      </Stack>
-    )
-  }
+  if (status === "loading") return <Loader />
 
   // Define the table config object
   const tableConfig = {
-    name: 'official docs table',
+    name: 'Inter clubs tournament table',
     tableHead: [
       {
         _id: 'url',
@@ -64,9 +56,9 @@ export default function RulesAdminPage() {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Administration des statuts de l'association"></PageTitle>
+      <PageTitle title="Administration du fichier des Rencontres Inter-Clubs" />
 
-      <DataControl endpoint="rules" createForm={<CreateOfficialDocForm />} />
+      <DataControl endpoint="official-docs" createForm={<CreateOfficialDocForm doctype="ric" />} />
 
       <AdminTable tableConfig={tableConfig} />
 
