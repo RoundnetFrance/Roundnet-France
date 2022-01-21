@@ -15,7 +15,7 @@ import CreateOfficialDocForm from '../../../components/admin/forms/create-offici
 export default function RulesAdminPage() {
   // Hooks calls
   const router = useRouter();
-  const { officialDocs, isLoading, isError } = useOfficialDocs();
+  const { officialDocs, isLoading, isError } = useOfficialDocs('statuts');
 
   // Handle redirect if no session
   const { status } = useSession({
