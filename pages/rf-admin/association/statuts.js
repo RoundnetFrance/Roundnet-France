@@ -10,7 +10,7 @@ import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 import DataControl from '../../../components/admin/data-control';
-import CreateOfficialDocForm from '../../../components/admin/forms/create-official-doc-form';
+import CreateOfficialDocForm from '../../../components/admin/forms/create-official-doc';
 
 export default function RulesAdminPage() {
   // Hooks calls
@@ -66,7 +66,7 @@ export default function RulesAdminPage() {
     <DashboardWrapper>
       <PageTitle title="Administration des statuts de l'association"></PageTitle>
 
-      <DataControl endpoint="rules" createForm={<CreateOfficialDocForm />} />
+      <DataControl endpoint="rules" createForm={<CreateOfficialDocForm doctype="statuts" />} />
 
       <AdminTable tableConfig={tableConfig} />
 
