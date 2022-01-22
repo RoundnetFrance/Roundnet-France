@@ -2,12 +2,13 @@ import { fr } from 'date-fns/locale';
 import { Fragment, useState } from 'react';
 
 // MUI IMPORT
-import { TextField, Divider, FormHelperText, Button, Dialog, DialogContent, DialogActions, DialogTitle, Typography, Box, Select, MenuItem, FormControl, InputLabel, Autocomplete } from '@mui/material';
+import { TextField, Divider, FormHelperText, Button, Typography, Box, Select, MenuItem, FormControl, InputLabel, Autocomplete } from '@mui/material';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 
 // COMPONENT IMPORTS
 import PasswordInput from '../ui/password-input';
+import Dialog from '../ui/dialog';
 
 export default function FormField({ type, id, label, required, options, value, handleChange, error }) {
   // Define error as a bool for MUI error prop 
@@ -203,35 +204,34 @@ export default function FormField({ type, id, label, required, options, value, h
           </Box>
 
           {/* Dialog component */}
-          <Dialog open={dialogOpen} onClose={handleFileDialogClose}>
-            <DialogTitle>Uploader</DialogTitle>
-            <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-              <Button
-                variant="contained"
-                component="label"
-                color="primary"
-              >
-                Envoyer un fichier
-                <input
-                  type="file"
-                  name="file"
-                  accept={accept}
-                  hidden
-                  onChange={(event) => handleChange({
-                    target: {
-                      id,
-                      value: event.target.files[0],
-                    },
-                  })}
-                />
-              </Button>
-              <Typography variant="body2" mt={2} pl={2}>{value ? value.name : 'Aucun fichier sélectionné'}</Typography>
+          <Dialog open={dialogOpen}
+            title="Uploader"
+            handleClose={handleFileDialogClose}
+            cancelText="Annuler"
+            confirmButton={<Button variant="contained" onClick={handleFileDialogClose}>Choisir ce fichier</Button>}
+          >
 
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleFileDialogCancel}>Annuler</Button>
-              <Button variant="contained" onClick={handleFileDialogClose}>Choisir ce fichier</Button>
-            </DialogActions>
+            <Button
+              variant="contained"
+              component="label"
+              color="primary"
+            >
+              Envoyer un fichier
+              <input
+                type="file"
+                name="file"
+                accept={accept}
+                hidden
+                onChange={(event) => handleChange({
+                  target: {
+                    id,
+                    value: event.target.files[0],
+                  },
+                })}
+              />
+            </Button>
+            <Typography variant="body2" mt={2} pl={2}>{value ? value.name : 'Aucun fichier sélectionné'}</Typography>
+
           </Dialog>
         </Fragment>
       );
