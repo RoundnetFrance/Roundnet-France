@@ -2,10 +2,13 @@ import { useSWRConfig } from 'swr';
 import { Fragment, useState } from 'react'
 
 // MUI IMPORTS
-import { Button, Stack, Dialog, DialogContent, DialogActions } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 
 // MUI ICONS
 import { Add as AddIcon, Cached as CachedIcon } from '@mui/icons-material';
+
+// COMPONENT IMPORTS
+import Dialog from '../ui/dialog';
 
 export default function DataControl({ endpoint, createForm }) {
 
@@ -39,15 +42,10 @@ export default function DataControl({ endpoint, createForm }) {
       </Stack>
 
       {/* Dialog */}
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-          {createForm}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Fermer</Button>
-          {/* <Button onClick={handleClose}>Créer</Button> */}
-        </DialogActions>
+      <Dialog open={open} handleClose={handleClose}>
+        {createForm}
       </Dialog>
+
     </Fragment>
 
   )

@@ -1,33 +1,35 @@
 import PropTypes from 'prop-types';
 
 // MUI IMPORTS
-import { 
-  Paper, Container, Stack, Typography, Box
-} from '@mui/material';
+import { Paper, Container, Stack, Typography, Box, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 
 function BoxWrapper({ children, title, size, onSubmit, noValidate }) {
+  const theme = useTheme();
+  const smallDevice = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        sx={{
-          // width: '100vw',
-          py: 4,
-        }}
-      >
-        <Container maxWidth={size}>
-          <Typography variant="h6" component="h3" sx={{ mb: 1 }}>
-            {title}/
-          </Typography>
-          <Paper variant="outlined" sx={{ p: 4 }}>
-              <Box component={onSubmit ? 'form' : 'div'} onSubmit={onSubmit} noValidate={noValidate}>
-                <Stack direction="column" spacing={2}>
-                  {children}
-                </Stack>
-              </Box>
-          </Paper>
-        </Container>
-      </Stack>
+    <Stack
+      alignItems="center"
+      justifyContent="center"
+      sx={{
+        py: 4,
+      }}
+    >
+      <Container maxWidth={size} disableGutters={smallDevice}>
+        <Typography variant="h6" component="h3" sx={{ mb: 1 }}>
+          {title}/
+        </Typography>
+        <Paper variant="outlined" sx={{ p: 4 }}>
+          <Box component={onSubmit ? 'form' : 'div'} onSubmit={onSubmit} noValidate={noValidate}>
+            <Stack direction="column" spacing={2}>
+              {children}
+            </Stack>
+          </Box>
+        </Paper>
+      </Container>
+    </Stack>
   );
 }
 
