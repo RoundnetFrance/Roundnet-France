@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 
 // MUI IMPORTS
-import { Paper, Typography, Box, Stack, Divider, Grid, Card, CardContent, CardActions, Button, CardActionArea } from '@mui/material';
+import { Paper, Typography, Box, Stack, Divider, Card, CardContent, CardActions, Button, CardActionArea } from '@mui/material';
 import Masonry from '@mui/lab/Masonry';
 
 // MUI ICONS
@@ -11,10 +11,8 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 // COMPONENT IMPORTS
 import DashboardWrapper from '../../components/layout/admin/dashboard-wrapper';
-import PageTitle from '../../components/ui/page-title';
 import Loader from '../../components/ui/loader';
 import IconWithBackground from '../../components/ui/icon-with-background';
-import Link from '../../components/ui/link';
 
 // CONTENTS
 import { dashboardElements } from '../../contents/admin';

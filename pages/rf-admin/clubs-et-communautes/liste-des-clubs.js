@@ -31,7 +31,6 @@ export default function ClubsAdminPage() {
   // If loading, display loading screen
   if (status === "loading") return <Loader />
 
-
   // Define a table config object. Comments with * are required.
   const tableConfig = {
     // * Name of the table (for reference and aria labels)

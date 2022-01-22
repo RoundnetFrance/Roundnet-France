@@ -66,7 +66,8 @@ function AdminTable({ tableConfig:
     });
   });
 
-  // [If need be] Reorder each item of the tableData array to match the order of keysToDisplay the values in keysToDisplay.
+  // Create the order of the table by creating an object with values from keysToDisplay, having null values (erased later in TableBody)
+  const tableOrder = keysToDisplay.reduce((acc, key) => ({ ...acc, [key]: null }), {});
 
   // If deletable option, add a new '$deletable' element on the tableHead object and on each tableData object.
   if (!loading && deletable && !tableHead.find(item => item._id === '$deletable')) {
@@ -110,6 +111,7 @@ function AdminTable({ tableConfig:
                     arrayValues={arrayValues}
                     setError={setErrorSnackbar}
                     setSuccess={setSuccessSnackbar}
+                    tableOrder={tableOrder}
                   />
                 )
             }
