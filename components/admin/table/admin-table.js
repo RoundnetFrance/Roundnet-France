@@ -66,27 +66,8 @@ function AdminTable({ tableConfig:
     });
   });
 
-  // Rework object order.
-  const objectOrder = {
-    _id: null,
-    image: null,
-    title: null,
-    chip: null,
-    description: null,
-    clubCreated: null,
-    referer: null,
-    email: null,
-    phone: null,
-    players: null,
-    links: null,
-    validated: null,
-    discord: null,
-  }
-
-  tableData = new Map(tableData?.map(item => [item._id, item]));
-
-  console.log(tableData)
-
+  // Create the order of the table by creating an object with values from keysToDisplay, having null values (erased later in TableBody)
+  const tableOrder = keysToDisplay.reduce((acc, key) => ({ ...acc, [key]: null }), {});
 
   // If deletable option, add a new '$deletable' element on the tableHead object and on each tableData object.
   if (!loading && deletable && !tableHead.find(item => item._id === '$deletable')) {
@@ -130,6 +111,7 @@ function AdminTable({ tableConfig:
                     arrayValues={arrayValues}
                     setError={setErrorSnackbar}
                     setSuccess={setSuccessSnackbar}
+                    tableOrder={tableOrder}
                   />
                 )
             }
