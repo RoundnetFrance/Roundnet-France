@@ -1,13 +1,11 @@
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
 import uploadFileTableCell from '../../../helpers/mutaters/upload-file-table-cell';
-// import storage from '../../../lib/init-firebase';
-import { getDownloadURL } from 'firebase/storage';
 import { useSWRConfig } from 'swr';
 import uploadFileToStorage from '../../../helpers/form/upload-file';
 
 // MUI IMPORTS
-import { Box, Avatar, IconButton, TableCell, Stack, Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, LinearProgress, Tooltip } from '@mui/material';
+import { Box, Avatar, IconButton, TableCell, Stack, Button, Typography, LinearProgress, Tooltip } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
@@ -15,6 +13,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 // COMPONENTS IMPORTS
 import Link from '../../../components/ui/link';
+import Dialog from '../../ui/dialog';
 
 function TableCellFile({ value, isEditable, id, element, endpoint, tableData, isImage, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
@@ -125,36 +124,36 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
       </TableCell>
 
       {/* Dialog component */}
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Uploader</DialogTitle>
-        <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-          <Button
-            variant="contained"
-            component="label"
-            color="primary"
-            startIcon={<FileUploadIcon />}
-          >
-            Envoyer un fichier
-            <input
-              type="file"
-              name="file"
-              accept={isImage ? 'image/*' : '*'}
-              hidden
-              onChange={(event) => setFile(event.target.files[0])}
-            />
-          </Button>
-          <Typography variant="body2" mt={2} pl={2}>{file ? file.name : 'Aucun fichier sélectionné'}</Typography>
+      <Dialog
+        title="Uploader"
+        open={open}
+        handleClose={handleClose}
+        cancelText="Annuler"
+        confirmButton={<LoadingButton loading={loading} variant="contained" onClick={handleUpload}>Modifier</LoadingButton>}
+      >
 
-          {loading && <Box sx={{ width: '100%' }} mt={2}>
-            <Typography variant="body2">Upload en cours...</Typography>
-            <LinearProgress variant="determinate" value={uploadingValue} />
-          </Box>}
+        <Button
+          variant="contained"
+          component="label"
+          color="primary"
+          startIcon={<FileUploadIcon />}
+        >
+          Envoyer un fichier
+          <input
+            type="file"
+            name="file"
+            accept={isImage ? 'image/*' : '*'}
+            hidden
+            onChange={(event) => setFile(event.target.files[0])}
+          />
+        </Button>
+        <Typography variant="body2" mt={2} pl={2}>{file ? file.name : 'Aucun fichier sélectionné'}</Typography>
 
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Annuler</Button>
-          <LoadingButton loading={loading} variant="contained" onClick={handleUpload}>Modifier</LoadingButton>
-        </DialogActions>
+        {loading && <Box sx={{ width: '100%' }} mt={2}>
+          <Typography variant="body2">Upload en cours...</Typography>
+          <LinearProgress variant="determinate" value={uploadingValue} />
+        </Box>}
+
       </Dialog>
 
     </Fragment>

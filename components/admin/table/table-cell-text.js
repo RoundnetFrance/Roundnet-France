@@ -4,7 +4,7 @@ import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 import { fr } from 'date-fns/locale';
 
 // MUI IMPORTS
-import { TableCell, Box, Stack, IconButton, Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Tooltip} from '@mui/material';
+import { TableCell, Box, Stack, IconButton, Button, TextField, Tooltip } from '@mui/material';
 import { LoadingButton, DatePicker, LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 
@@ -12,6 +12,9 @@ import DateAdapter from '@mui/lab/AdapterDateFns';
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+
+// COMPONENT IMPORTS
+import Dialog from '../../ui/dialog';
 
 function TableCellText({ value, id, element, isEditable, tableData, endpoint, isDate, setError, setSuccess }) {
   // Get the mutate function from swr
@@ -113,15 +116,14 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
         </TableCell>
 
         {/* Dialog component */}
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Modifier</DialogTitle>
-          <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-            {editableField}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Annuler</Button>
-            <LoadingButton loading={loading} variant="contained" onClick={handleClick}>Modifier</LoadingButton>
-          </DialogActions>
+        <Dialog
+          title="Modifier"
+          open={open}
+          handleClose={handleClose}
+          cancelText="Annuler"
+          confirmButton={<LoadingButton loading={loading} variant="contained" onClick={handleClick}>Modifier</LoadingButton>}
+        >
+          {editableField}
         </Dialog>
 
       </Fragment>
