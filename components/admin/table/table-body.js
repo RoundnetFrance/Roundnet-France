@@ -37,25 +37,27 @@ function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, 
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             {Object.keys(item).map(
-              key => (
-                <TableRow
-                  key={key}
-                  id={item._id}
-                  value={item[key]}
-                  element={key}
-                  keysToDisplay={keysToDisplay}
-                  tableData={tableData}
-                  endpoint={endpoint}
-                  editableFields={editableFields}
-                  imageFields={imageFields}
-                  fileFields={fileFields}
-                  dateFields={dateFields}
-                  arrayFields={arrayFields}
-                  arrayValues={arrayValues}
-                  setError={setError}
-                  setSuccess={setSuccess}
-                />
-              )
+              key => {
+                return (
+                  <TableRow
+                    key={key}
+                    id={item._id}
+                    value={item[key]}
+                    element={key}
+                    keysToDisplay={keysToDisplay}
+                    tableData={tableData}
+                    endpoint={endpoint}
+                    editableFields={editableFields}
+                    imageFields={imageFields}
+                    fileFields={fileFields}
+                    dateFields={dateFields}
+                    arrayFields={arrayFields}
+                    arrayValues={arrayValues}
+                    setError={setError}
+                    setSuccess={setSuccess}
+                  />
+                )
+              }
             )}
           </MUITableRow>
         )

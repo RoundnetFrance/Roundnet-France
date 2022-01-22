@@ -66,7 +66,27 @@ function AdminTable({ tableConfig:
     });
   });
 
-  // [If need be] Reorder each item of the tableData array to match the order of keysToDisplay the values in keysToDisplay.
+  // Rework object order.
+  const objectOrder = {
+    _id: null,
+    image: null,
+    title: null,
+    chip: null,
+    description: null,
+    clubCreated: null,
+    referer: null,
+    email: null,
+    phone: null,
+    players: null,
+    links: null,
+    validated: null,
+    discord: null,
+  }
+
+  tableData = new Map(tableData?.map(item => [item._id, item]));
+
+  console.log(tableData)
+
 
   // If deletable option, add a new '$deletable' element on the tableHead object and on each tableData object.
   if (!loading && deletable && !tableHead.find(item => item._id === '$deletable')) {
