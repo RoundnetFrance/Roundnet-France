@@ -5,7 +5,7 @@ import { Dialog as MUIDialog, DialogContent, DialogActions, DialogTitle, Button,
 import { useTheme } from '@mui/material/styles';
 
 
-export default function Dialog({ children, title, open, handleClose, cancelText, confirmButton, onClickCancel }) {
+export default function Dialog({ children, title, open, handleClose, cancelText, confirmButton, onClickCancel, color }) {
   // Handle fullwidth dialog
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -17,14 +17,17 @@ export default function Dialog({ children, title, open, handleClose, cancelText,
       fullScreen={fullScreen}
     >
 
+      {/* Title */}
       {title && <DialogTitle>{title}</DialogTitle>}
 
+      {/* Content */}
       <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
         {children}
       </DialogContent>
 
+      {/* Button Actions */}
       <DialogActions>
-        <Button onClick={onClickCancel ? onClickCancel : handleClose}>{cancelText}</Button>
+        <Button color={color} onClick={onClickCancel ? onClickCancel : handleClose}>{cancelText}</Button>
         {confirmButton && confirmButton}
       </DialogActions>
 
@@ -40,6 +43,7 @@ Dialog.propTypes = {
   cancelText: propTypes.string,
   confirmButton: propTypes.node,
   onClickCancel: propTypes.func,
+  color: propTypes.string,
 };
 
 Dialog.defaultProps = {
@@ -47,4 +51,5 @@ Dialog.defaultProps = {
   cancelText: 'Fermer',
   confirmButton: null,
   onClickCancel: null,
+  color: 'primary',
 };
