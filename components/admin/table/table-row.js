@@ -126,7 +126,7 @@ function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, edit
 }
 
 TableRow.propTypes = {
-  value: propTypes.any.isRequired,
+  value: propTypes.any,
   element: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
   showId: propTypes.bool,
@@ -136,6 +136,7 @@ TableRow.propTypes = {
 
 TableRow.defaultProps = {
   showId: false,
+  value: null,
 };
 
 export default TableRow

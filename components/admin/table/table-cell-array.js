@@ -3,11 +3,14 @@ import { useSWRConfig } from 'swr';
 import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
 
 // MUI IMPORTS
-import { TableCell, Stack, IconButton, Box, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Typography } from '@mui/material';
+import { TableCell, Stack, IconButton, Box, Tooltip, Button, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
 import EditIcon from '@mui/icons-material/Edit';
+
+// COMPONENT IMPORTS
+import Dialog from '../../ui/dialog';
 
 export default function TableCellArray({ values, id, element, isEditable, arrayValues, endpoint, tableData, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
@@ -95,17 +98,15 @@ export default function TableCellArray({ values, id, element, isEditable, arrayV
       </TableCell>
 
       {/* Dialog component */}
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{isEditable ? "Modifier" : "Elements"}</DialogTitle>
-        <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-          <Stack direction="column" spacing={2} my={2}>
-            {inputs}
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Annuler</Button>
-          <LoadingButton loading={loading} variant="contained" onClick={handleClick}>Modifier</LoadingButton>
-        </DialogActions>
+      <Dialog
+        open={open}
+        handleClose={handleClose}
+        title={isEditable ? "Modifier" : "Elements"} cancelText="Annuler"
+        confirmButton={<LoadingButton loading={loading} variant="contained" onClick={handleClick}>Modifier</LoadingButton>}
+      >
+        <Stack direction="column" spacing={2} my={2}>
+          {inputs}
+        </Stack>
       </Dialog>
 
     </Fragment>
