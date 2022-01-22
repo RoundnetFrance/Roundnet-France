@@ -21,7 +21,6 @@ export default function Dialog({ children, title, open, handleClose, cancelText,
     >
 
       {/* Title */}
-
       <DialogTitle>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <strong>{title}</strong>
@@ -29,13 +28,9 @@ export default function Dialog({ children, title, open, handleClose, cancelText,
             <CloseIcon fontSize="inherit" />
           </IconButton>
         </Stack>
-
-
       </DialogTitle>
 
-
       <Divider />
-
 
       {/* Content */}
       <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
