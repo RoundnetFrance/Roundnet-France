@@ -5,7 +5,7 @@ import { Dialog as MUIDialog, DialogContent, DialogActions, DialogTitle, Button,
 import { useTheme } from '@mui/material/styles';
 
 
-export default function Dialog({ children, title, open, handleClose, cancelText, confirmButton }) {
+export default function Dialog({ children, title, open, handleClose, cancelText, confirmButton, onClickCancel }) {
   // Handle fullwidth dialog
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -24,7 +24,7 @@ export default function Dialog({ children, title, open, handleClose, cancelText,
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleClose}>{cancelText}</Button>
+        <Button onClick={onClickCancel ? onClickCancel : handleClose}>{cancelText}</Button>
         {confirmButton && confirmButton}
       </DialogActions>
 
@@ -39,10 +39,12 @@ Dialog.propTypes = {
   handleClose: propTypes.func.isRequired,
   cancelText: propTypes.string,
   confirmButton: propTypes.node,
+  onClickCancel: propTypes.func,
 };
 
 Dialog.defaultProps = {
   title: null,
   cancelText: 'Fermer',
   confirmButton: null,
+  onClickCancel: null,
 };
