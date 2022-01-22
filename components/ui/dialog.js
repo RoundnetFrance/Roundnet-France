@@ -1,8 +1,11 @@
 import propTypes from 'prop-types';
 
 // MUI IMPORTS
-import { Dialog as MUIDialog, DialogContent, DialogActions, DialogTitle, Button, useMediaQuery } from '@mui/material';
+import { Dialog as MUIDialog, DialogContent, DialogActions, DialogTitle, Button, useMediaQuery, Stack, Divider, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+
+// MUI ICONS
+import CloseIcon from '@mui/icons-material/Close';
 
 
 export default function Dialog({ children, title, open, handleClose, cancelText, confirmButton, color }) {
@@ -18,7 +21,21 @@ export default function Dialog({ children, title, open, handleClose, cancelText,
     >
 
       {/* Title */}
-      {title && <DialogTitle>{title}</DialogTitle>}
+
+      <DialogTitle>
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <strong>{title}</strong>
+          <IconButton aria-label="close dialog" onClick={handleClose}>
+            <CloseIcon fontSize="inherit" />
+          </IconButton>
+        </Stack>
+
+
+      </DialogTitle>
+
+
+      <Divider />
+
 
       {/* Content */}
       <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
@@ -46,7 +63,7 @@ Dialog.propTypes = {
 };
 
 Dialog.defaultProps = {
-  title: null,
+  title: 'Action',
   cancelText: 'Fermer',
   confirmButton: null,
   color: 'primary',
