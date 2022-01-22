@@ -3,11 +3,14 @@ import { Fragment, useState } from 'react';
 import deleteTableData from '../../../helpers/mutaters/delete-table-cell';
 
 // MUI IMPORTS
-import { IconButton, TableCell, Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Alert, Tooltip } from '@mui/material';
+import { IconButton, TableCell, Button, Typography, Alert, Tooltip } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // MUI ICONS
 import DeleteIcon from '@mui/icons-material/Delete';
+
+// COMPONENT IMPORTS
+import Dialog from '../../ui/dialog';
 
 function TableCellDelete({ id, endpoint, tableData, setError, setSuccess }) {
   const { mutate } = useSWRConfig();
@@ -50,16 +53,18 @@ function TableCellDelete({ id, endpoint, tableData, setError, setSuccess }) {
       </TableCell>
 
       {/* Dialog component */}
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Supprimer</DialogTitle>
-        <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
-          <Typography mb={2}>Êtes-vous sûr de vouloir supprimer cet élément ?</Typography>
-          <Alert severity="error">Toute suppression est définitive. Si des fichiers sont liés à la suppression (images, documents), ils seront également supprimés.</Alert>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="error">Annuler</Button>
-          <LoadingButton loading={loading} variant="contained" color="error" onClick={handleDelete}>Supprimer</LoadingButton>
-        </DialogActions>
+      <Dialog
+        title="Supprimer"
+        open={open}
+        handleClose={handleClose}
+        cancelText="Annuler"
+        confirmButton={<LoadingButton loading={loading} variant="contained" color="error" onClick={handleDelete}>Supprimer</LoadingButton>}
+        color="error"
+      >
+
+        <Typography mb={2}>Êtes-vous sûr de vouloir supprimer cet élément ?</Typography>
+        <Alert severity="error">Toute suppression est définitive. Si des fichiers sont liés à la suppression (images, documents), ils seront également supprimés.</Alert>
+
       </Dialog>
     </Fragment>
   );
