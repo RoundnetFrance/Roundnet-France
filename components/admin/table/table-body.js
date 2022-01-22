@@ -27,8 +27,6 @@ function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, 
     )
   }
 
-
-
   return (
     <MUITableBody>
       {tableData?.map(item => {
