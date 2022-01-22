@@ -11,7 +11,6 @@ import TableCellFile from './table-cell-file';
 import TableCellArray from './table-cell-array';
 
 function TableRow({ value, element, id, keysToDisplay, tableData, endpoint, editableFields, imageFields, fileFields, dateFields, arrayFields, arrayValues, setError, setSuccess }) {
-  console.log(element);
   const specialElements = ['$deletable'];
 
   // Check if the element is editable

@@ -9,7 +9,7 @@ import Skeleton from '@mui/material/Skeleton';
 // COMPONENT IMPORTS
 import TableRow from './table-row.js';
 
-function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, editableFields, imageFields, fileFields, arrayFields, arrayValues, dateFields, setError, setSuccess }) {
+function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, editableFields, imageFields, fileFields, arrayFields, arrayValues, dateFields, tableOrder, setError, setSuccess }) {
 
   // Handle loading skeleton animation
   if (loading) {
@@ -27,16 +27,20 @@ function TableBody({ tableData, loading, nbOfElements, keysToDisplay, endpoint, 
     )
   }
 
+
+
   return (
     <MUITableBody>
       {tableData?.map(item => {
+        // Reassign order of keys to display (avoid mismathing columns when key is missing in data object - for example, when a field is not required)
+        const orderedData = Object.assign(tableOrder, item);
 
         return (
           <MUITableRow
             key={item._id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            {Object.keys(item).map(
+            {Object.keys(orderedData).map(
               key => {
                 return (
                   <TableRow
