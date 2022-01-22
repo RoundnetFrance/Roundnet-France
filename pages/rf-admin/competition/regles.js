@@ -8,7 +8,7 @@ import AdminTable from '../../../components/admin/table/admin-table';
 import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
 import PageTitle from '../../../components/ui/page-title';
 import DataControl from '../../../components/admin/data-control';
-import CreateOfficialDocForm from '../../../components/admin/forms/create-rule-form';
+import CreateOfficialDocForm from '../../../components/admin/forms/create-official-doc';
 import Loader from '../../../components/ui/loader';
 
 export default function RulesAdminPage() {
