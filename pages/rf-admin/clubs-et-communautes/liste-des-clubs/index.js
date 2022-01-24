@@ -126,7 +126,7 @@ export default function ClubsAdminPage() {
       <Container maxWidth="lg">
         <PageTitle title="Liste des clubs" />
       </Container>
-      <AdminContent config={adminConfig} />
+      {/* <AdminContent config={adminConfig} /> */}
       <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
   );
