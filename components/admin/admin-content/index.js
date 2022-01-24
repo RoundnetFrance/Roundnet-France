@@ -18,14 +18,22 @@ import {
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 // COMPONENT IMPORTS
-import Loader from "../../../components/ui/loader";
+import AdminCardsLoader from "./admin-cards-loader";
 import Error from "../../../components/ui/error";
 
 export default function AdminContent({ config }) {
-  const { name, folder, data, listProps, dataProps, endpoint, isLoading, isError } =
-    config;
+  const {
+    name,
+    folder,
+    data,
+    listProps,
+    dataProps,
+    endpoint,
+    isLoading,
+    isError,
+  } = config;
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <AdminCardsLoader />;
   if (isError) return <Error />;
 
   return (
@@ -42,7 +50,7 @@ export default function AdminContent({ config }) {
 
         return (
           <Grid key={item._id} item xs={12} md={6} lg={4}>
-            <Card sx={{}}>
+            <Card>
               <Stack direction="column" justifyContent="space-between">
                 {/* Header */}
                 <CardHeader
@@ -74,7 +82,7 @@ export default function AdminContent({ config }) {
                     <Divider orientation="vertical" flexItem />
                     <NextLink href={cardLink} passHref>
                       <Tooltip title="Modifier">
-                        <IconButton color='secondary'>
+                        <IconButton color="secondary">
                           <ArrowForwardIcon />
                         </IconButton>
                       </Tooltip>
