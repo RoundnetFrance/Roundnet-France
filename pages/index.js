@@ -1,13 +1,13 @@
-import { Fragment } from 'react';
-import { getDocuments } from '../helpers/db';
+import { Fragment } from "react";
+import { getDocuments } from "../helpers/db";
 
 // COMPONENT IMPORTS
-import Hero from '../components/ui/hero';
-import HomeInfoBlock from '../components/home/home-info-block';
-import LogoCarousel from '../components/ui/logo-carousel';
-import FourSquareInfo from '../components/home/four-square-info';
-import CTAFooter from '../components/ui/cta-footer';
-import RulesDemo from '../components/home/rules-demo';
+import Hero from "../components/ui/hero";
+import HomeInfoBlock from "../components/home/home-info-block";
+import LogoCarousel from "../components/ui/logo-carousel";
+import FourSquareInfo from "../components/home/four-square-info";
+import CTAFooter from "../components/ui/cta-footer";
+import RulesDemo from "../components/home/rules-demo";
 
 export default function HomePage({ clubLogos }) {
   return (
@@ -33,23 +33,27 @@ export default function HomePage({ clubLogos }) {
         title="Motivé.e ? Envie de jouer ou de participer ?"
         subtitle="Nous sommes là pour vous accompagner !"
         mainLink={{
-          url: '/competition/calendrier',
-          text: 'Je veux jouer'
+          url: "/competition/coupe-de-france-roundnet",
+          text: "Je veux jouer",
         }}
         altLink={{
-          url: '/clubs-et-communautes/adherer-a-roundnet-france',
-          text: 'Je veux adhérer'
+          url: "/clubs-et-communautes/adherer-a-roundnet-france",
+          text: "Je veux adhérer",
         }}
       />
 
       <LogoCarousel logos={clubLogos} />
     </Fragment>
-  )
+  );
 }
 
 export async function getStaticProps() {
-
-  const clubs = await getDocuments('clubs', null, { image: 1, title: 1 }, { chip: 1 });
+  const clubs = await getDocuments(
+    "clubs",
+    { validated: true },
+    { image: 1, title: 1 },
+    { chip: 1 }
+  );
   const clubLogos = clubs.map((club) => ({
     src: club.image,
     alt: club.title,
@@ -57,9 +61,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      clubLogos
+      clubLogos,
     },
-    revalidate: 600
-  }
-
+    revalidate: 600,
+  };
 }
