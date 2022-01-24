@@ -9,7 +9,6 @@ import { Container } from "@mui/material";
 import AdminTable from "../../../../components/admin/table/admin-table";
 import DashboardWrapper from "../../../../components/layout/admin/dashboard-wrapper";
 import PageTitle from "../../../../components/ui/page-title";
-// import Loader from '../../../../components/ui/loader';
 
 import AdminContent from "../../../../components/admin/admin-content";
 
@@ -126,8 +125,8 @@ export default function ClubsAdminPage() {
       <Container maxWidth="lg">
         <PageTitle title="Liste des clubs" />
       </Container>
-      {/* <AdminContent config={adminConfig} /> */}
-      <AdminTable tableConfig={tableConfig} />
+      <AdminContent config={adminConfig} />
+      {/* <AdminTable tableConfig={tableConfig} /> */}
     </DashboardWrapper>
   );
 }

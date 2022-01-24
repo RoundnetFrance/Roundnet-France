@@ -9,14 +9,14 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // Data Config
 const config = {
   title: "Modification de club",
-  dataLayout: [
+  tabs: [
     // GENERAL INFO
     {
       _id: "main",
-      tabName: "Général",
-      tabDescription:
+      name: "Général",
+      description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
-      fields: [
+      layout: [
         {
           _id: "title",
           name: "Club",
@@ -32,44 +32,61 @@ const config = {
           name: "Description",
           editable: true,
         },
+        {
+          _id: "validated",
+          name: "Validé",
+          align: "right",
+          editable: true,
+        },
       ],
     },
     // Contact
     {
-      _id: "referer",
-      name: "Référent",
-      editable: true,
+      _id: "contact",
+      name: "Contact",
+      description:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
+      layout: [
+        {
+          _id: "referer",
+          name: "Référent",
+          editable: true,
+        },
+        {
+          _id: "email",
+          name: "Email",
+        },
+        {
+          _id: "phone",
+          name: "Téléphone",
+        },
+      ],
     },
+    // Extras
     {
-      _id: "email",
-      name: "Email",
-    },
-    {
-      _id: "phone",
-      name: "Téléphone",
-    },
-    {
-      _id: "players",
-      name: "Joueurs",
-    },
-    {
-      _id: "links",
-      name: "Liens",
-      editable: true,
-      array: {
-        key: "source",
-        value: "url",
-      },
-    },
-    {
-      _id: "discord",
-      name: "Discord",
-    },
-    {
-      _id: "validated",
-      name: "Validé",
-      align: "right",
-      editable: true,
+      _id: "extras",
+      name: "Extras",
+      description:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
+      layout: [
+        {
+          _id: "players",
+          name: "Joueurs",
+        },
+        {
+          _id: "links",
+          name: "Liens",
+          editable: true,
+          array: {
+            key: "source",
+            value: "url",
+          },
+        },
+        {
+          _id: "discord",
+          name: "Discord",
+        },
+      ],
     },
   ],
 };
@@ -86,7 +103,7 @@ export default function EditAdminPage() {
   //! If club data is loading
   if (isLoading) return <p>Loading...</p>;
 
-  return <AdminContentSingle config={config} />;
+  return <AdminContentSingle config={config} data={data} />;
 }
 
 // NextJS functions
