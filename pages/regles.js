@@ -1,23 +1,23 @@
-import { Fragment } from 'react';
-import { getDocument } from '../helpers/db';
+import { Fragment } from "react";
+import { getDocument } from "../helpers/db";
 
 // MUI IMPORTS
-import { Container, Typography } from '@mui/material'
+import { Container, Typography } from "@mui/material";
 
 // COMPONENT IMPORTS
-import Hero from '../components/ui/hero';
-import PageTitle from '../components/ui/page-title';
-import Head from '../components/head';
-import CTAFooter from '../components/ui/cta-footer';
-import DocumentHalfImage from '../components/ui/document-half-image';
+import Hero from "../components/ui/hero";
+import PageTitle from "../components/ui/page-title";
+import Head from "../components/head";
+import CTAFooter from "../components/ui/cta-footer";
+import DocumentHalfImage from "../components/ui/document-half-image";
 
 function RulesPage({ rule }) {
   let readableUpdateDate;
   if (rule) {
-    readableUpdateDate = new Date(rule.createdAt).toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
+    readableUpdateDate = new Date(rule.createdAt).toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     });
   }
 
@@ -31,16 +31,21 @@ function RulesPage({ rule }) {
       <Hero
         title="Règles"
         image="/images/hero/regles.jpg"
-        imagePosition='center 80%'
-        mini />
+        imagePosition="center 80%"
+        mini
+      />
 
       <Container maxWidth="md" sx={{ my: { xs: 4, md: 12 } }}>
         <PageTitle title="Jouer au roundnet selon les règles officielles" />
         <Typography variant="body1" mb={2}>
-          La fédération française de roundnet met régulièrement à jour les règles. Les règles ci-dessous sont la référence des compétitions officielles françaises. N’oubliez pas que le fair-play est la première règle de notre sport !
+          La fédération française de roundnet met régulièrement à jour les
+          règles. Les règles ci-dessous sont la référence des compétitions
+          officielles françaises. N’oubliez pas que le fair-play est la première
+          règle de notre sport !
         </Typography>
         <Typography variant="body1">
-          Les règles modifiées dans la dernière version sont surlignées en jaune.
+          Les règles modifiées dans la dernière version sont surlignées en
+          jaune.
         </Typography>
       </Container>
 
@@ -55,38 +60,40 @@ function RulesPage({ rule }) {
         title="Vous vous sentez prêts à en découdre ?"
         subtitle="Passez à la prochaine étape !"
         mainLink={{
-          url: '/clubs-et-communautes/liste-des-clubs',
-          text: 'Inscrivez votre club',
+          url: "/clubs-et-communautes/liste-des-clubs",
+          text: "Inscrivez votre club",
         }}
-        altLink={{
-          url: '/competition/calendrier',
-          text: 'Participez à un tournoi',
-        }}
+        // altLink={{
+        //   url: '/competition/calendrier',
+        //   text: 'Participez à un tournoi',
+        // }}
       />
-    </Fragment >
-  )
+    </Fragment>
+  );
 }
 
 export async function getStaticProps() {
   // Try to fetch latest rule document on DB
   try {
-    const ruleDocument = await getDocument('official-docs', { doctype: 'rules' }, null, { _id: -1 });
+    const ruleDocument = await getDocument(
+      "official-docs",
+      { doctype: "rules" },
+      null,
+      { _id: -1 }
+    );
     const rule = JSON.parse(JSON.stringify(ruleDocument));
     return {
       props: {
         rule,
       },
       revalidate: 3600,
-    }
-  }
-  // Return an error on props to display error message in UI
-  catch (e) {
+    };
+  } catch (e) {
+    // Return an error on props to display error message in UI
     return {
       props: { error: true },
-    }
+    };
   }
 }
 
 export default RulesPage;
-
-

@@ -1,52 +1,51 @@
 // COMPONENT IMPORTS
-import FormBuilder from '../../components/form-builder';
+import FormBuilder from "../../components/form-builder";
 
 function ContactForm() {
-  const descriptionBefore = 'Une question à nous poser, une demande spécifique ? N\'hésitez pas à contacter Roundnet France via ce formulaire.';
+  const descriptionBefore =
+    "Une question à nous poser, une demande spécifique ? N'hésitez pas à contacter Roundnet France via ce formulaire.";
 
   const formConfig = {
-    name: 'Contactez Roundnet France',
+    name: "Formulaire de contact",
     fields: [
       {
-        id: 'name',
-        label: 'Nom & Prénom',
-        type: 'text',
+        id: "name",
+        label: "Nom & Prénom",
+        type: "text",
         options: {
           required: true,
-        }
+        },
       },
       {
-        id: 'email',
-        label: 'Email',
-        type: 'email',
+        id: "email",
+        label: "Email",
+        type: "email",
         options: {
           required: true,
-        }
+        },
       },
       {
-        id: 'subject',
-        label: 'Objet',
-        type: 'text',
+        id: "subject",
+        label: "Objet",
+        type: "text",
         options: {
           required: true,
-        }
+        },
       },
       {
-        id: 'message',
-        label: 'Message',
-        type: 'longtext',
+        id: "message",
+        label: "Message",
+        type: "longtext",
         options: {
           required: true,
-        }
+        },
       },
     ],
-    endpoint: 'send-mail',
+    endpoint: "send-mail",
     descriptionBefore,
   };
 
-  return (
-    <FormBuilder formConfig={formConfig} />
-  )
+  return <FormBuilder formConfig={formConfig} />;
 }
 
-export default ContactForm
+export default ContactForm;
