@@ -46,7 +46,7 @@ export default function AdminContent({ config }) {
             ? item[listProps.subtitle].substring(0, 120) + "..."
             : item[listProps.subtitle];
         const cardImage = item[listProps.image];
-        const cardLink = `/rf-admin/${folder}/${item._id}`;
+        const cardLink = `/rf-admin/edit/${endpoint}/${item._id}`;
 
         return (
           <Grid key={item._id} item xs={12} md={6} lg={4}>

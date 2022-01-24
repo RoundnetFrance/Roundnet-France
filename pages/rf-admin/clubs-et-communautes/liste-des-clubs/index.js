@@ -1,18 +1,17 @@
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import useClubs from '../../../../hooks/useClubs';
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import useClubs from "../../../../hooks/useClubs";
 
 // MUI IMPORTS
-import { Container } from '@mui/material';
+import { Container } from "@mui/material";
 
 // COMPONENT IMPORTS
-// import AdminTable from '../../../../components/admin/table/admin-table';
-import DashboardWrapper from '../../../../components/layout/admin/dashboard-wrapper';
-import PageTitle from '../../../../components/ui/page-title';
+import AdminTable from "../../../../components/admin/table/admin-table";
+import DashboardWrapper from "../../../../components/layout/admin/dashboard-wrapper";
+import PageTitle from "../../../../components/ui/page-title";
 // import Loader from '../../../../components/ui/loader';
 
-import AdminContent from '../../../../components/admin/admin-content';
-
+import AdminContent from "../../../../components/admin/admin-content";
 
 export default function ClubsAdminPage() {
   // Hooks calls
@@ -23,9 +22,9 @@ export default function ClubsAdminPage() {
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
-      return router.push('/rf-admin');
-    }
-  })
+      return router.push("/rf-admin");
+    },
+  });
 
   // Get clubs info
   const { clubs, isLoading, isError } = useClubs();
@@ -36,69 +35,69 @@ export default function ClubsAdminPage() {
   // Define a table config object. Comments with * are required.
   const tableConfig = {
     // * Name of the table (for reference and aria labels)
-    name: 'administrators table',
+    name: "administrators table",
     // Content of columns. Must have :
-    // '_id' key, which is the unique id of the column. It has to match the keys of the data object. 
+    // '_id' key, which is the unique id of the column. It has to match the keys of the data object.
     // 'name' key, which is the name displayed on the column
     // 'align' key, for alignement of name ('right', defaults to 'left' if undefined)
     tableHead: [
       {
-        _id: 'title',
-        name: 'Club',
+        _id: "title",
+        name: "Club",
         editable: true,
       },
       {
-        _id: 'chip',
-        name: 'Ville',
+        _id: "chip",
+        name: "Ville",
         editable: true,
       },
       {
-        _id: 'description',
-        name: 'Description',
+        _id: "description",
+        name: "Description",
         editable: true,
       },
       {
-        _id: 'referer',
-        name: 'Référent',
+        _id: "referer",
+        name: "Référent",
         editable: true,
       },
       {
-        _id: 'email',
-        name: 'Email',
+        _id: "email",
+        name: "Email",
       },
       {
-        _id: 'phone',
-        name: 'Téléphone',
+        _id: "phone",
+        name: "Téléphone",
       },
       {
-        _id: 'players',
-        name: 'Joueurs',
+        _id: "players",
+        name: "Joueurs",
       },
       {
-        _id: 'links',
-        name: 'Liens',
+        _id: "links",
+        name: "Liens",
         editable: true,
         array: {
-          key: 'source',
-          value: 'url',
+          key: "source",
+          value: "url",
         },
       },
       {
-        _id: 'discord',
-        name: 'Discord',
+        _id: "discord",
+        name: "Discord",
       },
       {
-        _id: 'validated',
-        name: 'Validé',
-        align: 'right',
+        _id: "validated",
+        name: "Validé",
+        align: "right",
         editable: true,
       },
     ],
     // * Content of rows. Must be an array of objects
     tableData: clubs,
-    // * API endpoint to fetch data from (without 'api/' nor trailing slash) and to record as SWR mutate key. 
+    // * API endpoint to fetch data from (without 'api/' nor trailing slash) and to record as SWR mutate key.
     // Example : http://localhost:3000/api/users becomes 'users'
-    endpoint: 'clubs/admin',
+    endpoint: "clubs",
     // * Loading state
     loading: isLoading,
     // * Error state
@@ -109,71 +108,71 @@ export default function ClubsAdminPage() {
   };
 
   const adminConfig = {
-    name: 'administrators',
-    folder: 'clubs-et-communautes/liste-des-clubs',
+    name: "administrators",
+    folder: "clubs-et-communautes/liste-des-clubs",
     listProps: {
-      title: 'title',
-      subtitle: 'description',
-      image: 'image',
+      title: "title",
+      subtitle: "description",
+      image: "image",
     },
     dataProps: [
       {
-        _id: 'title',
-        name: 'Club',
+        _id: "title",
+        name: "Club",
         editable: true,
       },
       {
-        _id: 'chip',
-        name: 'Ville',
+        _id: "chip",
+        name: "Ville",
         editable: true,
       },
       {
-        _id: 'description',
-        name: 'Description',
+        _id: "description",
+        name: "Description",
         editable: true,
       },
       {
-        _id: 'referer',
-        name: 'Référent',
+        _id: "referer",
+        name: "Référent",
         editable: true,
       },
       {
-        _id: 'email',
-        name: 'Email',
+        _id: "email",
+        name: "Email",
       },
       {
-        _id: 'phone',
-        name: 'Téléphone',
+        _id: "phone",
+        name: "Téléphone",
       },
       {
-        _id: 'players',
-        name: 'Joueurs',
+        _id: "players",
+        name: "Joueurs",
       },
       {
-        _id: 'links',
-        name: 'Liens',
+        _id: "links",
+        name: "Liens",
         editable: true,
         array: {
-          key: 'source',
-          value: 'url',
+          key: "source",
+          value: "url",
         },
       },
       {
-        _id: 'discord',
-        name: 'Discord',
+        _id: "discord",
+        name: "Discord",
       },
       {
-        _id: 'validated',
-        name: 'Validé',
-        align: 'right',
+        _id: "validated",
+        name: "Validé",
+        align: "right",
         editable: true,
       },
     ],
     data: clubs,
-    endpoint: 'clubs/admin',
+    endpoint: "clubs",
     isLoading: isLoading,
     isError: isError,
-  }
+  };
 
   return (
     <DashboardWrapper>
@@ -181,16 +180,15 @@ export default function ClubsAdminPage() {
         <PageTitle title="Liste des clubs" />
       </Container>
       <AdminContent config={adminConfig} />
-      {/* <AdminTable tableConfig={tableConfig} /> */}
+      <AdminTable tableConfig={tableConfig} />
     </DashboardWrapper>
-  )
+  );
 }
 
 export function getStaticProps() {
   return {
     props: {
       adminLayout: true,
-    }
-  }
+    },
+  };
 }
-
