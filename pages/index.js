@@ -50,7 +50,7 @@ export default function HomePage({ clubLogos }) {
 export async function getStaticProps() {
   const clubs = await getDocuments(
     "clubs",
-    null,
+    { validated: true },
     { image: 1, title: 1 },
     { chip: 1 }
   );
