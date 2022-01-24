@@ -115,59 +115,6 @@ export default function ClubsAdminPage() {
       subtitle: "description",
       image: "image",
     },
-    dataProps: [
-      {
-        _id: "title",
-        name: "Club",
-        editable: true,
-      },
-      {
-        _id: "chip",
-        name: "Ville",
-        editable: true,
-      },
-      {
-        _id: "description",
-        name: "Description",
-        editable: true,
-      },
-      {
-        _id: "referer",
-        name: "Référent",
-        editable: true,
-      },
-      {
-        _id: "email",
-        name: "Email",
-      },
-      {
-        _id: "phone",
-        name: "Téléphone",
-      },
-      {
-        _id: "players",
-        name: "Joueurs",
-      },
-      {
-        _id: "links",
-        name: "Liens",
-        editable: true,
-        array: {
-          key: "source",
-          value: "url",
-        },
-      },
-      {
-        _id: "discord",
-        name: "Discord",
-      },
-      {
-        _id: "validated",
-        name: "Validé",
-        align: "right",
-        editable: true,
-      },
-    ],
     data: clubs,
     endpoint: "clubs",
     isLoading: isLoading,
@@ -176,7 +123,7 @@ export default function ClubsAdminPage() {
 
   return (
     <DashboardWrapper>
-      <Container maxWidth="sm">
+      <Container maxWidth="lg">
         <PageTitle title="Liste des clubs" />
       </Container>
       <AdminContent config={adminConfig} />
