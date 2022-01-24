@@ -1,22 +1,39 @@
-import { Fragment, useState } from 'react';
-import { useSWRConfig } from 'swr';
-import patchTableCell from '../../../helpers/mutaters/patch-table-cell';
-import { fr } from 'date-fns/locale';
+import { Fragment, useState } from "react";
+import { useSWRConfig } from "swr";
+import patchTableCell from "../../../helpers/mutaters/patch-table-cell";
+import { fr } from "date-fns/locale";
 
 // MUI IMPORTS
-import { TableCell, Box, Stack, IconButton, Button, TextField, Tooltip } from '@mui/material';
-import { LoadingButton, DatePicker, LocalizationProvider } from '@mui/lab';
-import DateAdapter from '@mui/lab/AdapterDateFns';
+import {
+  TableCell,
+  Box,
+  Stack,
+  IconButton,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+import { LoadingButton, DatePicker, LocalizationProvider } from "@mui/lab";
+import DateAdapter from "@mui/lab/AdapterDateFns";
 
 // MUI ICONS
-import EditIcon from '@mui/icons-material/Edit';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import EditIcon from "@mui/icons-material/Edit";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 // COMPONENT IMPORTS
-import Dialog from '../../ui/dialog';
+import Dialog from "../../ui/dialog";
 
-function TableCellText({ value, id, element, isEditable, tableData, endpoint, isDate, setError, setSuccess }) {
+function TableCellText({
+  value,
+  id,
+  element,
+  isEditable,
+  tableData,
+  endpoint,
+  isDate,
+  setError,
+  setSuccess,
+}) {
   // Get the mutate function from swr
   const { mutate } = useSWRConfig();
 
@@ -42,15 +59,14 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
   // If value is too long, cut it into ellipsis
   const isLongString = value.length > 60;
   if (isLongString) {
-    value = value.substring(0, 60) + '...';
+    value = value.substring(0, 60) + "...";
   }
 
   // If element is editable, add an edit icon button with onClick event
   if (isEditable) {
-
     let date;
     if (isDate) {
-      date = new Date(value).toLocaleDateString('fr-FR');
+      date = new Date(value).toLocaleDateString("fr-FR");
     }
 
     // Handle change on confirm button click (patch and mutate)
@@ -77,7 +93,7 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
       <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
         <DatePicker
           openTo="month"
-          views={['year', 'month', 'day']}
+          views={["year", "month", "day"]}
           value={controlledDate}
           onChange={(newValue) => {
             setControlledDate(newValue);
@@ -85,7 +101,6 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
           renderInput={(params) => <TextField label="Date" {...params} />}
         />
       </LocalizationProvider>
-
     ) : (
       <TextField
         autoFocus
@@ -99,15 +114,21 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
       />
     );
 
-
     return (
       <Fragment>
         <TableCell>
-          <Stack direction="row" alignItems="center"
-            justifyContent="flex-start" spacing={1}>
-
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-start"
+            spacing={1}
+          >
             <Tooltip title="Modifier">
-              <IconButton aria-label={`${element}-edit`} size="small" onClick={handleClickOpen}>
+              <IconButton
+                aria-label={`${element}-edit`}
+                size="small"
+                onClick={handleClickOpen}
+              >
                 <EditIcon color="primary" fontSize="inherit" />
               </IconButton>
             </Tooltip>
@@ -121,35 +142,54 @@ function TableCellText({ value, id, element, isEditable, tableData, endpoint, is
           open={open}
           handleClose={handleClose}
           cancelText="Annuler"
-          confirmButton={<LoadingButton loading={loading} variant="contained" onClick={handleClick}>Modifier</LoadingButton>}
+          confirmButton={
+            <LoadingButton
+              loading={loading}
+              variant="contained"
+              onClick={handleClick}
+            >
+              Modifier
+            </LoadingButton>
+          }
         >
           {editableField}
         </Dialog>
-
       </Fragment>
-    )
+    );
   }
 
   // Handle click for displaying long strings
   const handleDisplayClick = () => {
-    setOpen(prevState => !prevState);
+    setOpen((prevState) => !prevState);
   };
 
   return (
     <TableCell>
-      {
-        isLongString ? (
-          <Stack direction="row" alignItems="center"
-            justifyContent="flex-start" spacing={1}>
-            <IconButton aria-label={`${element}-see-more`} size="small" onClick={handleDisplayClick}>
-              {open ? <ArrowDropDownIcon color="primary" fontSize="inherit" /> : <ArrowDropUpIcon color="primary" fontSize="inherit" />}
-            </IconButton>
-            <Box>{open ? value : controlledValue}</Box>
-          </Stack>
-        ) : value
-      }
+      {isLongString ? (
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="flex-start"
+          spacing={1}
+        >
+          <IconButton
+            aria-label={`${element}-see-more`}
+            size="small"
+            onClick={handleDisplayClick}
+          >
+            {open ? (
+              <ArrowDropDownIcon color="primary" fontSize="inherit" />
+            ) : (
+              <ArrowDropUpIcon color="primary" fontSize="inherit" />
+            )}
+          </IconButton>
+          <Box>{open ? value : controlledValue}</Box>
+        </Stack>
+      ) : (
+        value
+      )}
     </TableCell>
-  )
+  );
 }
 
-export default TableCellText
+export default TableCellText;

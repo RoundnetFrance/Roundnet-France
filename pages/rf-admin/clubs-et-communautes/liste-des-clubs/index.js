@@ -1,15 +1,17 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import useClubs from '../../../hooks/useClubs';
+import useClubs from '../../../../hooks/useClubs';
 
 // MUI IMPORTS
 import { Container } from '@mui/material';
 
 // COMPONENT IMPORTS
-import AdminTable from '../../../components/admin/table/admin-table';
-import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
-import PageTitle from '../../../components/ui/page-title';
-import Loader from '../../../components/ui/loader';
+// import AdminTable from '../../../../components/admin/table/admin-table';
+import DashboardWrapper from '../../../../components/layout/admin/dashboard-wrapper';
+import PageTitle from '../../../../components/ui/page-title';
+// import Loader from '../../../../components/ui/loader';
+
+import AdminContent from '../../../../components/admin/admin-content';
 
 
 export default function ClubsAdminPage() {
@@ -29,7 +31,7 @@ export default function ClubsAdminPage() {
   const { clubs, isLoading, isError } = useClubs();
 
   // If loading, display loading screen
-  if (status === "loading") return <Loader />
+  // if (status === "loading") return <Loader />
 
   // Define a table config object. Comments with * are required.
   const tableConfig = {
@@ -106,12 +108,80 @@ export default function ClubsAdminPage() {
     deletable: true,
   };
 
+  const adminConfig = {
+    name: 'administrators',
+    folder: 'clubs-et-communautes/liste-des-clubs',
+    listProps: {
+      title: 'title',
+      subtitle: 'description',
+      image: 'image',
+    },
+    dataProps: [
+      {
+        _id: 'title',
+        name: 'Club',
+        editable: true,
+      },
+      {
+        _id: 'chip',
+        name: 'Ville',
+        editable: true,
+      },
+      {
+        _id: 'description',
+        name: 'Description',
+        editable: true,
+      },
+      {
+        _id: 'referer',
+        name: 'Référent',
+        editable: true,
+      },
+      {
+        _id: 'email',
+        name: 'Email',
+      },
+      {
+        _id: 'phone',
+        name: 'Téléphone',
+      },
+      {
+        _id: 'players',
+        name: 'Joueurs',
+      },
+      {
+        _id: 'links',
+        name: 'Liens',
+        editable: true,
+        array: {
+          key: 'source',
+          value: 'url',
+        },
+      },
+      {
+        _id: 'discord',
+        name: 'Discord',
+      },
+      {
+        _id: 'validated',
+        name: 'Validé',
+        align: 'right',
+        editable: true,
+      },
+    ],
+    data: clubs,
+    endpoint: 'clubs/admin',
+    isLoading: isLoading,
+    isError: isError,
+  }
+
   return (
     <DashboardWrapper>
       <Container maxWidth="sm">
         <PageTitle title="Liste des clubs" />
       </Container>
-      <AdminTable tableConfig={tableConfig} />
+      <AdminContent config={adminConfig} />
+      {/* <AdminTable tableConfig={tableConfig} /> */}
     </DashboardWrapper>
   )
 }
