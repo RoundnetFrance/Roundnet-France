@@ -14,28 +14,31 @@ const config = {
     {
       _id: "main",
       name: "Général",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
+      description: "Informations générales du club",
       layout: [
         {
           _id: "title",
           name: "Club",
+          type: "text",
           editable: true,
         },
         {
           _id: "chip",
           name: "Ville",
+          type: "text",
           editable: true,
         },
         {
           _id: "description",
-          name: "Description",
+          name: "Description du club",
+          type: "longtext",
           editable: true,
         },
         {
           _id: "validated",
           name: "Validé",
           align: "right",
+          type: "boolean",
           editable: true,
         },
       ],
@@ -45,20 +48,23 @@ const config = {
       _id: "contact",
       name: "Contact",
       description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
+        "Contact et personnes référentes de l'association ou du club",
       layout: [
         {
           _id: "referer",
           name: "Référent",
+          type: "text",
           editable: true,
         },
         {
           _id: "email",
           name: "Email",
+          type: "text",
         },
         {
           _id: "phone",
           name: "Téléphone",
+          type: "text",
         },
       ],
     },
@@ -66,17 +72,19 @@ const config = {
     {
       _id: "extras",
       name: "Extras",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
+      description: "Informations additionnelles",
       layout: [
         {
           _id: "players",
           name: "Joueurs",
+          type: "text",
+          editable: true,
         },
         {
           _id: "links",
           name: "Liens",
           editable: true,
+          type: "array",
           array: {
             key: "source",
             value: "url",
@@ -85,6 +93,7 @@ const config = {
         {
           _id: "discord",
           name: "Discord",
+          editable: true,
         },
       ],
     },
