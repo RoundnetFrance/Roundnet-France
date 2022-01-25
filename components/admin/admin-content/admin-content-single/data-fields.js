@@ -2,7 +2,6 @@
 import SingleField from "./single-field";
 
 export default function DataFields({ layout, values, handleValuesChange }) {
-  console.log(values);
   // Filter only values that are in layout
   const filteredValues = layout.reduce((acc, field) => {
     if (values[field._id] !== null || values[field._id] !== undefined) {

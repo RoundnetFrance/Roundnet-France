@@ -58,7 +58,7 @@ export default function DataSingleField({
       break;
 
     case "array":
-      input = value.map((element, index) => {
+      input = value.map((element, valueIndex) => {
         console.log();
         return (
           <TextField
@@ -66,8 +66,8 @@ export default function DataSingleField({
             value={element[options.array.value]}
             label={element[options.array.key]}
             onChange={(event) => {
-              const newArray = value.map((item, i) => {
-                if (i === index) {
+              const newArray = value.map((item, itemIndex) => {
+                if (itemIndex === valueIndex) {
                   item[options.array.value] = event.target.value;
                 }
                 return item;

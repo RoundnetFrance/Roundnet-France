@@ -1,5 +1,6 @@
 const clubConfig = {
   title: "Modification de club",
+  endpoint: "clubs",
   tabs: [
     // GENERAL INFO
     {
