@@ -12,6 +12,7 @@ import {
   Button,
   Snackbar,
   Alert,
+  Slide,
 } from "@mui/material";
 
 // COMPONENT IMPORTS
@@ -35,6 +36,23 @@ export default function AdminContentSingle({
   const [values, setValues] = useState(data);
   function handleValuesChange(id, value) {
     setValues((prev) => ({ ...prev, [id]: value }));
+  }
+
+  // Handle snackbar state
+  const [snackbarState, setSnackbarState] = useState({
+    open: false,
+    message: "",
+    severity: "",
+  });
+  function handleSnackbarClose(event, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbarState((prev) => ({
+      ...prev,
+      open: false,
+    }));
   }
 
   // Extract tab names from config data
@@ -61,7 +79,11 @@ export default function AdminContentSingle({
         }
       } catch (error) {
         // If error, set error state and return original data for mutate function
-        // setError(error);
+        setSnackbarState({
+          open: true,
+          message: error.message,
+          severity: "error",
+        });
         console.log("error", error);
         return originalData;
       }
@@ -72,10 +94,11 @@ export default function AdminContentSingle({
 
     // Actual action of mutate via SWR
     mutate(patchData);
-    // setSuccess({
-    //   name: "Success",
-    //   message: "Mise à jour effectuée",
-    // });
+    setSnackbarState({
+      open: true,
+      message: "Vos modifications ont bien été enregistrées",
+      severity: "success",
+    });
   }
 
   return (
@@ -122,27 +145,17 @@ export default function AdminContentSingle({
       {/* Snackbar for error display */}
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={
-          errorSnackbar?.name === "Error" || successSnackbar?.name === "Success"
-        }
+        open={snackbarState.open}
         autoHideDuration={5000}
         onClose={handleSnackbarClose}
         TransitionComponent={Slide}
       >
         <Alert
           onClose={handleSnackbarClose}
-          severity={
-            errorSnackbar?.name.toLowerCase() ||
-            successSnackbar?.name.toLowerCase()
-          }
+          severity={snackbarState.severity || "info"}
           sx={{ width: "100%" }}
         >
-          {errorSnackbar && (
-            <Fragment>
-              <strong>Une erreur est survenue :</strong> <br />
-            </Fragment>
-          )}
-          {errorSnackbar?.message || successSnackbar?.message}
+          {snackbarState.message}
         </Alert>
       </Snackbar>
     </Container>
