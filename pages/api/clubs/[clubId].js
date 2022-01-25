@@ -25,11 +25,15 @@ export default async function handler(req, res) {
 
     // PATCH method to update specific app user
     if (req.method === "PATCH") {
+      // Store req.body into a variable without _id
+      const data = { ...req.body };
+      delete data._id;
+
       try {
         const response = await patchDocument(
           "clubs",
           { _id: ObjectId(clubId) },
-          req.body
+          data
         );
         return res.status(200).json(response);
       } catch (error) {

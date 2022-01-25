@@ -15,13 +15,20 @@ export default function EditAdminPage() {
   const { clubId } = router.query;
 
   // Get club data
-  const { data, error } = useSWR(`/api/clubs/${clubId}`, fetcher);
+  const { data, error, mutate } = useSWR(`/api/clubs/${clubId}`, fetcher);
   const isLoading = !error && !data;
 
   //! If club data is loading
   if (isLoading) return <p>Loading...</p>;
 
-  return <AdminContentSingle config={clubConfig} data={data} />;
+  return (
+    <AdminContentSingle
+      config={clubConfig}
+      data={data}
+      mutate={mutate}
+      documentId={clubId}
+    />
+  );
 }
 
 // NextJS functions
