@@ -19,12 +19,15 @@ import DataFields from "./data-fields";
 export default function AdminContentSingle({ config: { title, tabs }, data }) {
   // Handle tab state
   const [currentTab, setCurrentTab] = useState(0);
-  function handleChange(event, newValue) {
+  function handleTabChange(event, newValue) {
     setCurrentTab(newValue);
   }
 
   // Handle values state
   const [values, setValues] = useState(data);
+  function handleValuesChange(id, value) {
+    setValues((prev) => ({ ...prev, [id]: value }));
+  }
 
   // Extract tab names from config data
   const tabNames = tabs.map((tab) => tab.name);
@@ -35,7 +38,7 @@ export default function AdminContentSingle({ config: { title, tabs }, data }) {
 
       <DataTabs
         currentTab={currentTab}
-        handleChange={handleChange}
+        handleTabChange={handleTabChange}
         tabs={tabNames}
       />
 
@@ -46,9 +49,13 @@ export default function AdminContentSingle({ config: { title, tabs }, data }) {
           subheader={tabs[currentTab].description}
         />
         <Divider />
-        <CardContent sx={{ p: { xs: 1, md: 2, lg: 4 } }}>
+        <CardContent sx={{ p: { xs: 2, md: 2, lg: 4 } }}>
           <Box my={2}>
-            <DataFields layout={tabs[currentTab].layout} values={values} />
+            <DataFields
+              layout={tabs[currentTab].layout}
+              values={values}
+              handleValuesChange={handleValuesChange}
+            />
           </Box>
         </CardContent>
       </Card>

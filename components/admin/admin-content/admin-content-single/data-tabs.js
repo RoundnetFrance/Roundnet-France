@@ -1,11 +1,11 @@
 // MUI IMPORTS
 import { Tabs, Tab } from "@mui/material";
 
-export default function DataTabs({ currentTab, handleChange, tabs }) {
+export default function DataTabs({ currentTab, handleTabChange, tabs }) {
   return (
     <Tabs
       value={currentTab}
-      onChange={handleChange}
+      onChange={handleTabChange}
       variant="scrollable"
       scrollButtons="auto"
       aria-label="Club Admin data tabs"
