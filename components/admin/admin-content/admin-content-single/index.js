@@ -1,5 +1,7 @@
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import propTypes from "prop-types";
+import { useRouter } from "next/router";
+
 // MUI IMPORTS
 import {
   Container,
@@ -9,23 +11,28 @@ import {
   Divider,
   Box,
   Stack,
-  Button,
+  Typography,
   Snackbar,
   Alert,
   Slide,
+  Button,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 // COMPONENT IMPORTS
 import PageTitle from "../../../ui/page-title";
 import DataTabs from "./data-tabs";
 import DataFields from "./data-fields";
+import Dialog from "../../../ui/dialog";
 
 export default function AdminContentSingle({
-  config: { title, tabs, endpoint },
+  config: { title, tabs, endpoint, adminEndpoint },
   data,
   mutate,
   documentId,
 }) {
+  const router = useRouter();
+
   // Handle tab state
   const [currentTab, setCurrentTab] = useState(0);
   function handleTabChange(event, newValue) {
@@ -37,6 +44,9 @@ export default function AdminContentSingle({
   function handleValuesChange(id, value) {
     setValues((prev) => ({ ...prev, [id]: value }));
   }
+
+  // Handle loading state on submit/delete button
+  const [loading, setLoading] = useState(false);
 
   // Handle snackbar state
   const [snackbarState, setSnackbarState] = useState({
@@ -55,12 +65,22 @@ export default function AdminContentSingle({
     }));
   }
 
+  // Handle modal state and open/close functions
+  const [dialogOpen, setDialogOpen] = useState(false);
+  function handleDialogOpen() {
+    setDialogOpen(true);
+  }
+  function handleDialogClose() {
+    setDialogOpen(false);
+  }
+
   // Extract tab names from config data
   const tabNames = tabs.map((tab) => tab.name);
 
   // Patch click button function
   function handleUpdate(event) {
     event.preventDefault();
+    setLoading(true);
     const patchData = async (originalData) => {
       // Fetch API to patch element
       let response;
@@ -84,8 +104,10 @@ export default function AdminContentSingle({
           message: error.message,
           severity: "error",
         });
-        console.log("error", error);
+        console.error("error", error);
         return originalData;
+      } finally {
+        setLoading(false);
       }
 
       // Send back the updated values to SWR /api/${endpoint}/${documentId' key to update local state
@@ -99,6 +121,43 @@ export default function AdminContentSingle({
       message: "Vos modifications ont bien été enregistrées",
       severity: "success",
     });
+  }
+
+  // Delete click button function
+  async function handleDelete(event) {
+    event.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch(`/api/${endpoint}/${documentId}`, {
+        method: "DELETE",
+      });
+
+      // If response is not ok, manually throw an error
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+    } catch (error) {
+      // If error, set error state and return original data for mutate function
+      setSnackbarState({
+        open: true,
+        message: error.message,
+        severity: "error",
+      });
+      return originalData;
+    } finally {
+      setLoading(false);
+    }
+
+    setSnackbarState({
+      open: true,
+      message: "Suppression effectuée. Redirection...",
+      severity: "success",
+    });
+    // Redirect to ${adminEndpoint} after 3 seconds
+    setTimeout(() => {
+      router.push(adminEndpoint);
+    }, 3000);
   }
 
   return (
@@ -119,9 +178,13 @@ export default function AdminContentSingle({
             tabs={tabNames}
           />
         </Box>
-        <Button variant="contained" onClick={handleUpdate}>
+        <LoadingButton
+          variant="contained"
+          onClick={handleUpdate}
+          loading={loading}
+        >
           Enregistrer
-        </Button>
+        </LoadingButton>
       </Stack>
 
       <Card>
@@ -142,6 +205,17 @@ export default function AdminContentSingle({
         </CardContent>
       </Card>
 
+      <Divider sx={{ my: 4 }} />
+
+      <Button
+        variant="contained"
+        color="error"
+        fullWidth
+        onClick={handleDialogOpen}
+      >
+        Supprimer l&apos;élément
+      </Button>
+
       {/* Snackbar for error display */}
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
@@ -158,6 +232,32 @@ export default function AdminContentSingle({
           {snackbarState.message}
         </Alert>
       </Snackbar>
+
+      <Dialog
+        title="Supprimer"
+        open={dialogOpen}
+        handleClose={handleDialogClose}
+        cancelText="Annuler"
+        confirmButton={
+          <LoadingButton
+            loading={loading}
+            variant="contained"
+            color="error"
+            onClick={handleDelete}
+          >
+            Supprimer
+          </LoadingButton>
+        }
+        color="error"
+      >
+        <Typography mb={2}>
+          Êtes-vous sûr de vouloir supprimer cet élément ?
+        </Typography>
+        <Alert severity="error">
+          Toute suppression est définitive. Si des fichiers sont liés à la
+          suppression (images, documents), ils seront également supprimés.
+        </Alert>
+      </Dialog>
     </Container>
   );
 }

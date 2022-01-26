@@ -1,6 +1,7 @@
 const clubConfig = {
   title: "Modification de club",
   endpoint: "clubs",
+  adminEndpoint: "/rf-admin/clubs-et-communautes/liste-des-clubs",
   tabs: [
     // GENERAL INFO
     {
