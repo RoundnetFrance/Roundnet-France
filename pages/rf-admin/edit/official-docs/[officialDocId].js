@@ -40,7 +40,7 @@ export async function getStaticPaths() {
       officialDocId: officialDoc._id,
     },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export function getStaticProps() {
