@@ -1,6 +1,7 @@
 import { useState } from "react";
 import propTypes from "prop-types";
 import { useRouter } from "next/router";
+import handleFormUpload from "../../../../helpers/form/handle-form-upload";
 
 // MUI IMPORTS
 import {
@@ -81,8 +82,38 @@ export default function AdminContentSingle({
   function handleUpdate(event) {
     event.preventDefault();
     setLoading(true);
-    const patchData = async (originalData) => {
-      // Fetch API to patch element
+    async function patchData(originalData) {
+      // Get every type=file in layout for every tab and merge into one array
+      const files = [];
+      tabs.forEach((tab) => {
+        tab.layout.forEach((field) => {
+          if (field.type === "file") {
+            files.push(field);
+          }
+        });
+      });
+
+      let formToSubmit;
+      //* Upload files if any
+      if (files.length > 0) {
+        try {
+          formToSubmit = await handleFormUpload({
+            fields: files,
+            form: values,
+            endpoint,
+          });
+          console.log(formToSubmit);
+        } catch (err) {
+          console.error(err);
+          setSnackbarState({
+            open: true,
+            message: err.message || "Une erreur est survenue lors de l'upload",
+            severity: "error",
+          });
+        }
+      }
+
+      //* Fetch API to patch element
       let response;
       try {
         response = await fetch(`/api/${endpoint}/${documentId}`, {
@@ -90,9 +121,8 @@ export default function AdminContentSingle({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(formToSubmit || values),
         });
-
         // If response is not ok, manually throw an error
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -112,7 +142,7 @@ export default function AdminContentSingle({
 
       // Send back the updated values to SWR /api/${endpoint}/${documentId' key to update local state
       return values;
-    };
+    }
 
     // Actual action of mutate via SWR
     mutate(patchData);
@@ -154,15 +184,23 @@ export default function AdminContentSingle({
       message: "Suppression effectuée. Redirection...",
       severity: "success",
     });
-    // Redirect to ${adminEndpoint} after 3 seconds
+    // Redirect to ${adminEndpoint} after 1.5 seconds
     setTimeout(() => {
       router.push(adminEndpoint);
-    }, 3000);
+    }, 1500);
   }
 
   return (
     <Container maxWidth="md" sx={{ mt: 5, mb: 2 }}>
       <PageTitle title={title} />
+
+      <Alert severity="info" variant="filled" sx={{ my: 4 }}>
+        <Typography variant="body1">
+          Les modifications peuvent mettre jusqu&apos;à 10 minutes pour
+          s&apos;appliquer complètement. Lorsque ce délai est passé, rechargez
+          le cache de la page pour voir les modifications.
+        </Typography>
+      </Alert>
 
       <Stack
         direction={{ xs: "column-reverse", sm: "row" }}

@@ -16,6 +16,18 @@ const clubConfig = {
           editable: true,
         },
         {
+          _id: "image",
+          name: "Logo du club",
+          type: "file",
+          editable: true,
+          options: {
+            required: true,
+            fileConfig: {
+              type: "image",
+            },
+          },
+        },
+        {
           _id: "chip",
           name: "Ville",
           type: "text",
@@ -76,7 +88,7 @@ const clubConfig = {
         {
           _id: "links",
           name: "Liens",
-          editable: false,
+          editable: true,
           type: "array",
           options: {
             array: {
