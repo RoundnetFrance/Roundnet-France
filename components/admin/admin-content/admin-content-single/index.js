@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import propTypes from "prop-types";
 import { useRouter } from "next/router";
 import handleFormUpload from "../../../../helpers/form/handle-form-upload";
@@ -17,6 +17,7 @@ import {
   Alert,
   Slide,
   Button,
+  Skeleton,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
@@ -25,12 +26,14 @@ import PageTitle from "../../../ui/page-title";
 import DataTabs from "./data-tabs";
 import DataFields from "./data-fields";
 import Dialog from "../../../ui/dialog";
+import DataFieldsLoader from "./data-fields-loader";
 
 export default function AdminContentSingle({
   config: { title, tabs, endpoint, adminEndpoint },
   data,
   mutate,
   documentId,
+  isLoading,
 }) {
   const router = useRouter();
 
@@ -42,6 +45,9 @@ export default function AdminContentSingle({
 
   // Handle values state
   const [values, setValues] = useState(data);
+  useEffect(() => {
+    setValues(data);
+  }, [data]);
   function handleValuesChange(id, value) {
     setValues((prev) => ({ ...prev, [id]: value }));
   }
@@ -214,31 +220,50 @@ export default function AdminContentSingle({
             currentTab={currentTab}
             handleTabChange={handleTabChange}
             tabs={tabNames}
+            isLoading={isLoading}
           />
         </Box>
         <LoadingButton
           variant="contained"
           onClick={handleUpdate}
           loading={loading}
+          disabled={isLoading}
+          sx={{ minWidth: "150px" }}
         >
-          Enregistrer
+          {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
         </LoadingButton>
       </Stack>
 
       <Card>
-        <CardHeader
-          title={tabs[currentTab].name}
-          titleTypographyProps={{ mb: 0 }}
-          subheader={tabs[currentTab].description}
-        />
+        {isLoading ? (
+          <Box px={2} py={2}>
+            <Skeleton variant="rectangular" width={140} height={30} />
+            <Skeleton
+              variant="rectangular"
+              width={340}
+              height={20}
+              sx={{ mt: 1 }}
+            />
+          </Box>
+        ) : (
+          <CardHeader
+            title={tabs[currentTab].name}
+            titleTypographyProps={{ mb: 0 }}
+            subheader={tabs[currentTab].description}
+          />
+        )}
         <Divider />
         <CardContent sx={{ p: { xs: 2, md: 2, lg: 4 } }}>
           <Box my={2}>
-            <DataFields
-              layout={tabs[currentTab].layout}
-              values={values}
-              handleValuesChange={handleValuesChange}
-            />
+            {isLoading ? (
+              <DataFieldsLoader />
+            ) : (
+              <DataFields
+                layout={tabs[currentTab].layout}
+                values={values}
+                handleValuesChange={handleValuesChange}
+              />
+            )}
           </Box>
         </CardContent>
       </Card>
@@ -312,4 +337,7 @@ AdminContentSingle.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  documentId: propTypes.string.isRequired,
+  mutate: propTypes.func.isRequired,
+  isLoading: propTypes.bool.isRequired,
 };
