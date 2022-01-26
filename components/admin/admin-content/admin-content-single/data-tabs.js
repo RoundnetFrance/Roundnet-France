@@ -1,7 +1,22 @@
 // MUI IMPORTS
-import { Tabs, Tab } from "@mui/material";
+import { Tabs, Tab, Stack, Skeleton } from "@mui/material";
 
-export default function DataTabs({ currentTab, handleTabChange, tabs }) {
+export default function DataTabs({
+  currentTab,
+  handleTabChange,
+  tabs,
+  isLoading,
+}) {
+  if (isLoading) {
+    return (
+      <Stack direction="row" spacing={2}>
+        <Skeleton width={80} height={40} />
+        <Skeleton width={80} height={40} />
+        <Skeleton width={80} height={40} />
+      </Stack>
+    );
+  }
+
   return (
     <Tabs
       value={currentTab}

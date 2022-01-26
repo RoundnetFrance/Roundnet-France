@@ -18,15 +18,13 @@ export default function EditAdminPage() {
   const { data, error, mutate } = useSWR(`/api/clubs/${clubId}`, fetcher);
   const isLoading = !error && !data;
 
-  //! If club data is loading
-  if (isLoading) return <p>Loading...</p>;
-
   return (
     <AdminContentSingle
       config={clubConfig}
       data={data}
       mutate={mutate}
       documentId={clubId}
+      isLoading={isLoading}
     />
   );
 }
