@@ -1,10 +1,17 @@
 // Send mail through SendGrid function
-const sendMail = async (formData, initialFormState, setSubmitStatus, setForm, setErrors, setLoading) => {
+const sendMail = async (
+  formData,
+  initialFormState,
+  setSubmitStatus,
+  setForm,
+  setErrors,
+  setLoading
+) => {
   try {
-    const response = await fetch('/api/send-mail', {
-      method: 'POST',
+    const response = await fetch("/api/send-mail", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
@@ -23,21 +30,19 @@ const sendMail = async (formData, initialFormState, setSubmitStatus, setForm, se
     });
     setForm(initialFormState);
     setErrors(initialFormState);
-  }
-  // CATCH
-  catch (error) {
+  } catch (error) {
+    // CATCH
     // Console log and set error message for UI
     setSubmitStatus({
       open: true,
       error: true,
-      message: 'Une erreur est survenue lors de l\'envoi du mail. Merci de réessayer',
-    }
-    );
-  }
-  // In any case, set loading to false
-  finally {
+      message:
+        "Une erreur est survenue lors de l'envoi du mail. Merci de réessayer",
+    });
+  } finally {
+    // In any case, set loading to false
     setLoading(false);
   }
-}
+};
 
 export default sendMail;
