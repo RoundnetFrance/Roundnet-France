@@ -27,7 +27,7 @@ export default function ClubsAdminPage() {
   // Get clubs info
   const { clubs, isLoading, isError } = useClubs();
 
-  const adminConfig = {
+  const config = {
     name: "administrators",
     listProps: {
       title: "title",
@@ -45,7 +45,7 @@ export default function ClubsAdminPage() {
       <Container maxWidth="lg">
         <PageTitle title="Liste des clubs" />
       </Container>
-      <AdminContent config={adminConfig} form={<CreateClubForm />} />
+      <AdminContent config={config} form={<CreateClubForm />} />
     </DashboardWrapper>
   );
 }

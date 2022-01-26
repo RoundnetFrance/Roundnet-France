@@ -7,23 +7,26 @@ import fetcher from "../../../../lib/swr-fetcher";
 import AdminContentSingle from "../../../../components/admin/admin-content/admin-content-single";
 
 // CONTENTS
-import adminConfig from "../../../../contents/forms/admins";
+import officialDocsConfig from "../../../../contents/forms/official-docs";
 
 export default function EditAdminPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
-  const { userId } = router.query;
+  const { officialDocId } = router.query;
 
-  // Get club data
-  const { data, error, mutate } = useSWR(`/api/users/${userId}`, fetcher);
+  // Get officialDocs data
+  const { data, error, mutate } = useSWR(
+    `/api/official-docs/${officialDocId}`,
+    fetcher
+  );
   const isLoading = !error && !data;
 
   return (
     <AdminContentSingle
-      config={adminConfig}
+      config={officialDocsConfig}
       data={data}
       mutate={mutate}
-      documentId={userId}
+      documentId={officialDocId}
       isLoading={isLoading}
     />
   );
@@ -31,12 +34,11 @@ export default function EditAdminPage() {
 
 // NextJS functions
 export async function getStaticPaths() {
-  const data = await getDocuments("users");
-  const paths = data.map((user) => ({
+  const data = await getDocuments("official-docs");
+  const paths = data.map((officialDoc) => ({
     params: {
-      userId: user._id,
+      officialDocId: officialDoc._id,
     },
-    fallback: "blocking",
   }));
   return { paths, fallback: false };
 }

@@ -84,7 +84,11 @@ export default function AdminFileField({
             />
           </Avatar>
         ) : (
-          <Link href={value}>Télécharger le fichier</Link>
+          <Typography sx={{ my: { xs: 0, sm: 1 } }}>
+            <Link href={value} target="_blank">
+              Télécharger le fichier
+            </Link>
+          </Typography>
         )}
       </Stack>
 

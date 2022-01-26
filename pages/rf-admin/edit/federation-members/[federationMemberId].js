@@ -7,23 +7,26 @@ import fetcher from "../../../../lib/swr-fetcher";
 import AdminContentSingle from "../../../../components/admin/admin-content/admin-content-single";
 
 // CONTENTS
-import adminConfig from "../../../../contents/forms/admins";
+import federationMemberConfig from "../../../../contents/forms/federation-members";
 
 export default function EditAdminPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
-  const { userId } = router.query;
+  const { federationMemberId } = router.query;
 
-  // Get club data
-  const { data, error, mutate } = useSWR(`/api/users/${userId}`, fetcher);
+  // Get federationMember data
+  const { data, error, mutate } = useSWR(
+    `/api/federation-members/${federationMemberId}`,
+    fetcher
+  );
   const isLoading = !error && !data;
 
   return (
     <AdminContentSingle
-      config={adminConfig}
+      config={federationMemberConfig}
       data={data}
       mutate={mutate}
-      documentId={userId}
+      documentId={federationMemberId}
       isLoading={isLoading}
     />
   );
@@ -31,12 +34,11 @@ export default function EditAdminPage() {
 
 // NextJS functions
 export async function getStaticPaths() {
-  const data = await getDocuments("users");
-  const paths = data.map((user) => ({
+  const data = await getDocuments("federation-members");
+  const paths = data.map((federationMember) => ({
     params: {
-      userId: user._id,
+      federationMemberId: federationMember._id,
     },
-    fallback: "blocking",
   }));
   return { paths, fallback: false };
 }
