@@ -37,7 +37,7 @@ export async function getStaticPaths() {
       clubId: club._id,
     },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export function getStaticProps() {

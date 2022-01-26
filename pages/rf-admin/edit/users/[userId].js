@@ -36,9 +36,8 @@ export async function getStaticPaths() {
     params: {
       userId: user._id,
     },
-    fallback: "blocking",
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export function getStaticProps() {
