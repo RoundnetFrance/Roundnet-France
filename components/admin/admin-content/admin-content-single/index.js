@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import propTypes from "prop-types";
 import { useRouter } from "next/router";
 import handleFormUpload from "../../../../helpers/form/handle-form-upload";
+import { useTheme } from "@mui/material/styles";
 
 // MUI IMPORTS
 import {
@@ -18,6 +19,7 @@ import {
   Slide,
   Button,
   Skeleton,
+  useMediaQuery,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
@@ -36,6 +38,8 @@ export default function AdminContentSingle({
   isLoading,
 }) {
   const router = useRouter();
+  const theme = useTheme();
+  const higherThanSm = useMediaQuery(theme.breakpoints.up("sm"));
 
   // Handle tab state
   const [currentTab, setCurrentTab] = useState(0);
@@ -229,6 +233,7 @@ export default function AdminContentSingle({
           loading={loading}
           disabled={isLoading}
           sx={{ minWidth: "150px" }}
+          fullWidth={!higherThanSm}
         >
           {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
         </LoadingButton>

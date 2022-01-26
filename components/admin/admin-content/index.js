@@ -19,6 +19,7 @@ import {
 
 // MUI ICONS
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import FindInPageIcon from "@mui/icons-material/FindInPage";
 
 // COMPONENT IMPORTS
 import AdminCardsLoader from "./admin-cards-loader";
@@ -58,16 +59,20 @@ export default function AdminContent({ config, form }) {
                   <CardHeader
                     title={cardTitle}
                     avatar={
-                      <Avatar>
-                        <Image
-                          src={cardImage || "/images/misc/placeholder.jpg"}
-                          alt={cardTitle}
-                          title={cardTitle}
-                          height="60px"
-                          width="60px"
-                          objectFit="cover"
-                        />
-                      </Avatar>
+                      cardImage ? (
+                        <Avatar>
+                          <Image
+                            src={cardImage || "/images/misc/placeholder.jpg"}
+                            alt={cardTitle}
+                            title={cardTitle}
+                            height="60px"
+                            width="60px"
+                            objectFit="cover"
+                          />
+                        </Avatar>
+                      ) : (
+                        <FindInPageIcon color="secondary" />
+                      )
                     }
                     titleTypographyProps={{ variant: "h5" }}
                   />
