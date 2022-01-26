@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // MUI IMPORTS
 import {
   TextField,
@@ -14,35 +16,49 @@ import { useTheme } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import AbcIcon from "@mui/icons-material/Abc";
 
+// COMPONENT IMPORTS
+import AdminTextField from "./admin-text-field";
+import AdminFileField from "./admin-file-field";
+
 export default function DataSingleField({
   id,
   value,
   fieldLayout,
   handleValuesChange,
 }) {
+  // Theme breakpoint listener
   const theme = useTheme();
   const higherThanMd = useMediaQuery(theme.breakpoints.up("md"));
 
+  // Handle dialog state
+  const [dialogOpen, setDialogOpen] = useState(false);
+  function handleDialogOpen() {
+    setDialogOpen(true);
+  }
+  function handleDialogClose() {
+    setDialogOpen(false);
+  }
+
   // Get options of field
   const { name: label, type, editable, options } = fieldLayout;
+
+  // Store image
+  const [imageURL] = useState(value);
 
   // Define which content to use
   let content;
   switch (type) {
     case "longtext":
-      content = editable ? (
-        <TextField
+      content = (
+        <AdminTextField
           id={id}
-          variant="standard"
           value={value}
-          onChange={(event) => handleValuesChange(id, event.target.value)}
-          required={options?.required || true}
-          multiline
-          rows={options?.multilineRows || 5}
-          fullWidth
+          handleChange={handleValuesChange}
+          editable={editable}
+          required={options?.required || false}
+          rows={options?.multilineRows}
+          longText
         />
-      ) : (
-        <Typography variant="body1">{value}</Typography>
       );
       break;
 
@@ -220,99 +236,28 @@ export default function DataSingleField({
     //   break;
     // }
 
-    // case "file": {
-    //   // Define which files are accept (HTML/Browser shallow validation only)
-    //   let accept;
-    //   switch (options?.fileConfig?.type) {
-    //     case "image":
-    //       accept = "image/*";
-    //       break;
-
-    //     case "pdf":
-    //       accept = "application/pdf";
-    //       break;
-
-    //     default:
-    //       accept = "*";
-    //       break;
-    //   }
-
-    //   content = (
-    //     <Fragment>
-    //       <Box>
-    //         <Button
-    //           size="large"
-    //           variant="outlined"
-    //           color={booleanError ? "error" : "primary"}
-    //           component="label"
-    //           onClick={handleFileDialogOpen}
-    //           sx={{ mr: 2 }}
-    //         >
-    //           {label} - Upload
-    //         </Button>
-    //         <Typography component="span" variant="body2">
-    //           {value.name || "Aucun fichier séléctionné"}
-    //         </Typography>
-    //         {booleanError && (
-    //           <FormHelperText error={booleanError} id={`${label}-error`}>
-    //             {error}
-    //           </FormHelperText>
-    //         )}
-    //       </Box>
-
-    //       {/* Dialog component */}
-    //       <Dialog
-    //         open={dialogOpen}
-    //         title="Uploader"
-    //         handleClose={handleFileDialogClose}
-    //         cancelText="Annuler"
-    //         confirmButton={
-    //           <Button variant="contained" onClick={handleFileDialogClose}>
-    //             Choisir ce fichier
-    //           </Button>
-    //         }
-    //       >
-    //         <Button variant="contained" component="label" color="primary">
-    //           Envoyer un fichier
-    //           <content
-    //             type="file"
-    //             name="file"
-    //             accept={accept}
-    //             hidden
-    //             onChange={(event) =>
-    //               handleChange({
-    //                 target: {
-    //                   id,
-    //                   value: event.target.files[0],
-    //                 },
-    //               })
-    //             }
-    //           />
-    //         </Button>
-    //         <Typography variant="body2" mt={2} pl={2}>
-    //           {value ? value.name : "Aucun fichier sélectionné"}
-    //         </Typography>
-    //       </Dialog>
-    //     </Fragment>
-    //   );
-    //   break;
-    // }
-
-    default:
-      content = editable ? (
-        <TextField
+    case "file":
+      content = (
+        <AdminFileField
           id={id}
           value={value}
-          onChange={(event) => handleValuesChange(id, event.target.value)}
-          placeholder="Vide"
-          fullWidth
-          variant="standard"
-          margin={higherThanMd ? "normal" : "dense"}
+          image={imageURL}
+          handleChange={handleValuesChange}
+          editable={editable}
+          fileType={options?.fileConfig?.type}
         />
-      ) : (
-        <Typography variant="body1" sx={{ my: 1 }}>
-          {value}
-        </Typography>
+      );
+      break;
+
+    default:
+      content = (
+        <AdminTextField
+          id={id}
+          value={value}
+          handleChange={handleValuesChange}
+          editable={editable}
+          required={options?.required || false}
+        />
       );
       break;
   }
@@ -327,7 +272,7 @@ export default function DataSingleField({
       <Stack
         direction="row"
         alignItems="center"
-        spacing={1}
+        spacing={{ xs: 1, md: 2 }}
         sx={{ width: "180px", maxWidth: "180px", pt: 0.5 }}
       >
         {editable ? (
