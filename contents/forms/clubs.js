@@ -76,7 +76,7 @@ const clubConfig = {
         {
           _id: "links",
           name: "Liens",
-          editable: true,
+          editable: false,
           type: "array",
           options: {
             array: {

@@ -26,11 +26,11 @@ export default function DataSingleField({
   // Get options of field
   const { name: label, type, editable, options } = fieldLayout;
 
-  // Define which input to use
-  let input;
+  // Define which content to use
+  let content;
   switch (type) {
     case "longtext":
-      input = (
+      content = editable ? (
         <TextField
           id={id}
           variant="standard"
@@ -41,11 +41,13 @@ export default function DataSingleField({
           rows={options?.multilineRows || 5}
           fullWidth
         />
+      ) : (
+        <Typography variant="body1">{value}</Typography>
       );
       break;
 
     case "boolean":
-      input = (
+      content = (
         <Switch
           id={id}
           checked={value}
@@ -58,8 +60,34 @@ export default function DataSingleField({
       break;
 
     case "array":
-      input = value?.map((element, valueIndex) => {
-        console.log();
+      if (!value) {
+        content = (
+          <Typography variant="body1" sx={{ my: 1 }}>
+            N/A
+          </Typography>
+        );
+        break;
+      }
+
+      content = value.map((element, valueIndex) => {
+        // Content if array is not editable (only display)
+        if (!editable) {
+          return (
+            <Box
+              key={element[options.array.key]}
+              sx={{ mt: valueIndex === 0 && 1 }}
+            >
+              <Typography variant="body1">
+                <strong>{element[options.array.key]}</strong>
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 1 }}>
+                {element[options.array.value] || "N/A"}
+              </Typography>
+            </Box>
+          );
+        }
+
+        // Editable array content
         return (
           <TextField
             key={element[options.array.key]}
@@ -83,7 +111,7 @@ export default function DataSingleField({
       break;
 
     // case "date":
-    //   input = (
+    //   content = (
     //     <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
     //       <DatePicker
     //         disableFuture={options?.dateConfig?.disableFuture}
@@ -120,7 +148,7 @@ export default function DataSingleField({
     //   break;
 
     // case "autocomplete":
-    //   input = (
+    //   content = (
     //     <Autocomplete
     //       disablePortal
     //       freeSolo
@@ -144,7 +172,7 @@ export default function DataSingleField({
     //   break;
 
     // case "password":
-    //   input = (
+    //   content = (
     //     <PasswordInput
     //       label={label}
     //       value={value}
@@ -159,7 +187,7 @@ export default function DataSingleField({
     //   break;
 
     // case "select": {
-    //   input = (
+    //   content = (
     //     <FormControl error={booleanError} required={options?.required}>
     //       <InputLabel id={id}>{label}</InputLabel>
     //       <Select
@@ -209,7 +237,7 @@ export default function DataSingleField({
     //       break;
     //   }
 
-    //   input = (
+    //   content = (
     //     <Fragment>
     //       <Box>
     //         <Button
@@ -246,7 +274,7 @@ export default function DataSingleField({
     //       >
     //         <Button variant="contained" component="label" color="primary">
     //           Envoyer un fichier
-    //           <input
+    //           <content
     //             type="file"
     //             name="file"
     //             accept={accept}
@@ -271,7 +299,7 @@ export default function DataSingleField({
     // }
 
     default:
-      input = (
+      content = editable ? (
         <TextField
           id={id}
           value={value}
@@ -281,6 +309,10 @@ export default function DataSingleField({
           variant="standard"
           margin={higherThanMd ? "normal" : "dense"}
         />
+      ) : (
+        <Typography variant="body1" sx={{ my: 1 }}>
+          {value}
+        </Typography>
       );
       break;
   }
@@ -308,9 +340,7 @@ export default function DataSingleField({
         </Typography>
       </Stack>
       <Divider orientation="vertical" flexItem />
-      <Box sx={{ width: "100%" }}>
-        {editable ? input : <Typography variant="body1">{value}</Typography>}
-      </Box>
+      <Box sx={{ width: "100%" }}>{content}</Box>
     </Stack>
   );
 }
