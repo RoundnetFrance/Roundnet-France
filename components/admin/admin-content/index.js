@@ -42,7 +42,7 @@ export default function AdminContent({ config }) {
         // Get the card title, subtitle and description from data and listProps
         const cardTitle = item[listProps.title];
         const cardSubtitle =
-          item[listProps.subtitle].length > 60
+          item[listProps.subtitle]?.length > 60
             ? item[listProps.subtitle].substring(0, 120) + "..."
             : item[listProps.subtitle];
         const cardImage = item[listProps.image];
@@ -57,7 +57,7 @@ export default function AdminContent({ config }) {
                   title={cardTitle}
                   avatar={
                     <Image
-                      src={cardImage}
+                      src={cardImage || "/images/misc/placeholder.jpg"}
                       alt={cardTitle}
                       title={cardTitle}
                       height="60px"

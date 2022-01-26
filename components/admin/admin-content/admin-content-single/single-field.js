@@ -58,7 +58,7 @@ export default function DataSingleField({
       break;
 
     case "array":
-      input = value.map((element, valueIndex) => {
+      input = value?.map((element, valueIndex) => {
         console.log();
         return (
           <TextField
