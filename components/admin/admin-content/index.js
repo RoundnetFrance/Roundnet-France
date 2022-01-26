@@ -22,22 +22,13 @@ import AdminCardsLoader from "./admin-cards-loader";
 import Error from "../../../components/ui/error";
 
 export default function AdminContent({ config }) {
-  const {
-    name,
-    folder,
-    data,
-    listProps,
-    dataProps,
-    endpoint,
-    isLoading,
-    isError,
-  } = config;
+  const { data, listProps, endpoint, isLoading, isError } = config;
 
   if (isLoading) return <AdminCardsLoader />;
   if (isError) return <Error />;
 
   return (
-    <Grid spacing={2} container sx={{ alignItems: "center" }}>
+    <Grid spacing={2} container>
       {data.map((item) => {
         // Get the card title, subtitle and description from data and listProps
         const cardTitle = item[listProps.title];
@@ -50,8 +41,12 @@ export default function AdminContent({ config }) {
 
         return (
           <Grid key={item._id} item xs={12} md={6} lg={4}>
-            <Card>
-              <Stack direction="column" justifyContent="space-between">
+            <Card sx={{ height: "100%" }}>
+              <Stack
+                direction="column"
+                justifyContent="space-between"
+                sx={{ height: "100%" }}
+              >
                 {/* Header */}
                 <CardHeader
                   title={cardTitle}
@@ -69,7 +64,7 @@ export default function AdminContent({ config }) {
                 />
                 <Divider />
                 {/* Content */}
-                <CardContent>
+                <CardContent sx={{ flexGrow: 1, display: "flex" }}>
                   <Stack
                     direction="row"
                     spacing={2}
