@@ -8,7 +8,6 @@ import PageTitle from "../components/ui/page-title";
 import CrossingItems from "../components/ui/crossing-items";
 
 export default function PartnersPage({ partners }) {
-  console.log(partners);
   return (
     <Fragment>
       <Container maxWidth="lg" sx={{ py: 4 }}>
