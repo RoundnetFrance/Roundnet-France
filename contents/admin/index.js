@@ -73,7 +73,7 @@ const dashboardElements = [
     icon: "group_work",
     description:
       "Administrez les partenaires de l'association et leurs informations.",
-    url: "/rf-admin/clubs-et-communautes/liste-des-clubs",
+    url: "/rf-admin/association/partenaires",
   },
   {
     _id: "account",
