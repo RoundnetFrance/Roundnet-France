@@ -25,7 +25,6 @@ import FindInPageIcon from "@mui/icons-material/FindInPage";
 import AdminCardsLoader from "./admin-cards-loader";
 import Error from "../../../components/ui/error";
 import DataControl from "../../../components/admin/data-control";
-import IconWithBackground from "../../../components/ui/icon-with-background";
 
 export default function AdminContent({ config, form }) {
   const { data, listProps, endpoint, isLoading, isError } = config;
