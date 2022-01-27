@@ -1,16 +1,18 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import useFederationMembers from "../../../hooks/use-federation-members";
+import usePartners from "../../../hooks/use-partners";
 
 // COMPONENT IMPORTS
 import AdminContent from "../../../components/admin/admin-content";
 import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper";
 import PageTitle from "../../../components/ui/page-title";
-import CreateFederationMemberForm from "../../../components/admin/forms/create-federation-member-form";
+import CreatePartnerForm from "../../../components/admin/forms/create-partner-form";
 
-function ClubsAdminPage() {
+export default function PartnersAdminPage() {
   // Data from API (get members info)
-  const { members, isLoading, isError } = useFederationMembers();
+  const { partners, isLoading, isError } = usePartners();
+
+  console.log(partners);
 
   // Hooks calls
   const router = useRouter();
@@ -31,17 +33,17 @@ function ClubsAdminPage() {
       subtitle: "description",
       image: "image",
     },
-    data: members,
-    endpoint: "federation-members",
+    data: partners,
+    endpoint: "partners",
     isLoading: isLoading,
     isError: isError,
   };
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Liste des membres de la fédération"></PageTitle>
+      <PageTitle title="Liste des partenaires de la fédération"></PageTitle>
 
-      <AdminContent config={config} form={<CreateFederationMemberForm />} />
+      <AdminContent config={config} form={<CreatePartnerForm />} />
     </DashboardWrapper>
   );
 }
@@ -53,5 +55,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-export default ClubsAdminPage;

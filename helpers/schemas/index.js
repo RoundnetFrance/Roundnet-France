@@ -1,30 +1,38 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 export default function getSchema(schemaRef, partials) {
   let schema;
 
   switch (schemaRef) {
-
-    case 'club':
+    case "club":
       schema = Joi.object({
         image: Joi.string().uri().required(),
         title: Joi.string().trim().required(),
         chip: Joi.string().trim().required(),
         description: Joi.string().trim().required(),
-        clubCreated: Joi.date().allow(''),
+        clubCreated: Joi.date().allow(""),
         referer: Joi.string().trim().required(),
-        email: Joi.string().trim().email({ tlds: { allow: false } }).required(),
-        phone: Joi.string().trim().length(10).pattern(/^[0-9]+$/).required(),
-        players: Joi.string().trim().allow(''),
-        links: Joi.array().items(Joi.object({
-          source: Joi.string().trim().required(),
-          url: Joi.string().trim().uri().allow(''),
-        })),
-        discord: Joi.string().trim().allow(''),
+        email: Joi.string()
+          .trim()
+          .email({ tlds: { allow: false } })
+          .required(),
+        phone: Joi.string()
+          .trim()
+          .length(10)
+          .pattern(/^[0-9]+$/)
+          .required(),
+        players: Joi.string().trim().allow(""),
+        links: Joi.array().items(
+          Joi.object({
+            source: Joi.string().trim().required(),
+            url: Joi.string().trim().uri().allow(""),
+          })
+        ),
+        discord: Joi.string().trim().allow(""),
       });
       break;
 
-    case 'rule':
+    case "rule":
       schema = Joi.object({
         url: Joi.string().uri().required(),
         version: Joi.string().trim().required(),
@@ -32,22 +40,31 @@ export default function getSchema(schemaRef, partials) {
       });
       break;
 
-    case 'official-docs':
+    case "official-docs":
       schema = Joi.object({
         url: Joi.string().uri().required(),
         version: Joi.string().trim().required(),
         description: Joi.string().trim(),
-        doctype: Joi.string().trim().allow(''),
+        doctype: Joi.string().trim().allow(""),
       });
       break;
 
-    case 'federation-members':
+    case "federation-members":
       schema = Joi.object({
         title: Joi.string().trim().required(),
         chip: Joi.string().trim().required(),
         image: Joi.string().uri().required(),
         description: Joi.string().trim().required(),
-      })
+      });
+      break;
+
+    case "partners":
+      schema = Joi.object({
+        title: Joi.string().trim().required(),
+        description: Joi.string().trim().required(),
+        image: Joi.string().uri().required(),
+        links: Joi.string().trim().uri().allow(""),
+      });
       break;
 
     default:
