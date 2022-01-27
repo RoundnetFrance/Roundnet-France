@@ -1,77 +1,49 @@
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import useOfficialDocs from '../../../hooks/use-official-docs';
-
-// MUI IMPORTS
-import { CircularProgress, Stack } from '@mui/material';
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import useOfficialDocs from "../../../hooks/use-official-docs";
 
 // COMPONENT IMPORTS
-import AdminTable from '../../../components/admin/table/admin-table';
-import DashboardWrapper from '../../../components/layout/admin/dashboard-wrapper';
-import PageTitle from '../../../components/ui/page-title';
-import DataControl from '../../../components/admin/data-control';
-import CreateOfficialDocForm from '../../../components/admin/forms/create-official-doc';
+import AdminContent from "../../../components/admin/admin-content";
+import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper";
+import PageTitle from "../../../components/ui/page-title";
+import CreateOfficialDocForm from "../../../components/admin/forms/create-official-doc";
 
 export default function RulesAdminPage() {
   // Hooks calls
   const router = useRouter();
-  const { officialDocs, isLoading, isError } = useOfficialDocs('statuts');
+  const { officialDocs, isLoading, isError } = useOfficialDocs("statuts");
 
   // Handle redirect if no session
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
-      return router.push('/rf-admin');
-    }
-  })
+      return router.push("/rf-admin");
+    },
+  });
 
-  // If loading, display loading screen
-  if (status === "loading") {
-    return (
-      <Stack sx={{ width: '100%' }} justifyContent="center" alignItems="center">
-        <CircularProgress />
-      </Stack>
-    )
-  }
-
-  // Define the table config object
-  const tableConfig = {
-    name: 'official docs table',
-    tableHead: [
-      {
-        _id: 'url',
-        name: 'Lien du fichier',
-        file: true,
-      },
-      {
-        _id: 'version',
-        name: 'Version',
-        editable: true,
-      },
-      {
-        _id: 'description',
-        name: 'Description',
-        editable: true,
-      }
-    ],
-    tableData: officialDocs,
-    endpoint: 'official-docs',
-    loading: isLoading,
-    error: isError,
-    deletable: true,
+  const config = {
+    name: "administrators",
+    listProps: {
+      title: "version",
+      subtitle: "description",
+      // image: "image",
+    },
+    data: officialDocs,
+    endpoint: "official-docs",
+    isLoading: isLoading,
+    isError: isError,
   };
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Administration des statuts de l'association"></PageTitle>
-
-      <DataControl endpoint="rules" createForm={<CreateOfficialDocForm doctype="statuts" />} />
-
-      <AdminTable tableConfig={tableConfig} />
-
+      <PageTitle title="Administration du fichier des statuts" />
+      <AdminContent
+        config={config}
+        form={<CreateOfficialDocForm doctype="statuts" />}
+      />
     </DashboardWrapper>
-  )
+  );
 }
 
 export async function getStaticProps() {

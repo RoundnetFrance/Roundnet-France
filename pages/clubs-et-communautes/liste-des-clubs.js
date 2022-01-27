@@ -78,7 +78,9 @@ function ClubListPage({ clubs, error }) {
 export async function getStaticProps() {
   // Try to fetch members on local API
   try {
-    const data = await getDocuments("clubs", { validated: true });
+    const data = await getDocuments("clubs", { validated: true }, null, {
+      chip: 1,
+    });
     return {
       props: {
         clubs: data,

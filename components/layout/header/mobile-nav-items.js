@@ -1,17 +1,31 @@
-import { Fragment } from 'react';
-import Link from 'next/link';
+import { Fragment } from "react";
+import Link from "next/link";
 
 // MUI IMPORTS
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Link as MUILink, Icon } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Link as MUILink,
+  Icon,
+} from "@mui/material";
 
 // MUI ICONS
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 // COMPONENT IMPORTS
-import MobileNavCollapse from './mobile-nav-collapse';
+import MobileNavCollapse from "./mobile-nav-collapse";
 
-export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCollapseElements, adminLayout }) {
+export default function MobileNavItems({
+  items,
+  menuOpen,
+  toggleDrawer,
+  handleCollapseElements,
+  adminLayout,
+}) {
   function keepDrawerOpen() {
     toggleDrawer(true);
   }
@@ -26,35 +40,57 @@ export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCo
 
       return (
         <Fragment key={element.name}>
-          <ListItem onClick={() => { handleCollapseElements(element.slug), keepDrawerOpen() }}>
+          <ListItem
+            onClick={() => {
+              handleCollapseElements(element.slug), keepDrawerOpen();
+            }}
+          >
             <ListItemButton onClick={toggleDrawer}>
               <ListItemIcon>
-                <Icon color={adminLayout ? 'secondary' : 'primary'} fontSize="medium">{element.icon}</Icon>
+                <Icon
+                  color={adminLayout ? "secondary" : "primary"}
+                  fontSize="medium"
+                >
+                  {element.icon}
+                </Icon>
               </ListItemIcon>
-              <ListItemText>
-                {element.name}
-              </ListItemText>
+              <ListItemText>{element.name}</ListItemText>
               {expandIcon}
             </ListItemButton>
           </ListItem>
-          <MobileNavCollapse items={element.subElements} elementOpen={elementOpen} toggleDrawer={toggleDrawer} adminLayout={adminLayout} />
+          <MobileNavCollapse
+            items={element.subElements}
+            elementOpen={elementOpen}
+            toggleDrawer={toggleDrawer}
+            adminLayout={adminLayout}
+          />
         </Fragment>
-      )
+      );
     }
 
     // If element doesn't have subElements, render primary element with link and color
     return (
       <Fragment key={element.name}>
         <Link href={element.url} passHref>
-          <MUILink underline="none" color={adminLayout ? 'secondary' : 'primary'}>
-            <ListItem onClick={() => { handleCollapseElements(element.slug) }}>
+          <MUILink
+            underline="none"
+            color={adminLayout ? "secondary" : "primary"}
+          >
+            <ListItem
+              onClick={() => {
+                handleCollapseElements(element.slug);
+              }}
+            >
               <ListItemButton onClick={toggleDrawer}>
                 <ListItemIcon>
-                  <Icon color={adminLayout ? 'secondary' : 'primary'} fontSize="medium">{element.icon}</Icon>
+                  <Icon
+                    color={adminLayout ? "secondary" : "primary"}
+                    fontSize="medium"
+                  >
+                    {element.icon}
+                  </Icon>
                 </ListItemIcon>
-                <ListItemText>
-                  {element.name}
-                </ListItemText>
+                <ListItemText>{element.name}</ListItemText>
               </ListItemButton>
             </ListItem>
           </MUILink>
@@ -65,8 +101,6 @@ export default function MobileNavItems({ items, menuOpen, toggleDrawer, handleCo
 
   // JSX return
   return (
-    <List sx={{ p: 2, width: { xs: '75vw', sm: '50vw' } }}>
-      {listItems}
-    </List>
+    <List sx={{ p: 2, width: { xs: "75vw", sm: "50vw" } }}>{listItems}</List>
   );
 }
