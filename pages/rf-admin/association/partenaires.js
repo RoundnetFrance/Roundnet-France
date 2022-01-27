@@ -12,8 +12,6 @@ export default function PartnersAdminPage() {
   // Data from API (get members info)
   const { partners, isLoading, isError } = usePartners();
 
-  console.log(partners);
-
   // Hooks calls
   const router = useRouter();
 
