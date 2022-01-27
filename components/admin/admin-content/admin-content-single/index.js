@@ -112,7 +112,6 @@ export default function AdminContentSingle({
             form: values,
             endpoint,
           });
-          console.log(formToSubmit);
         } catch (err) {
           console.error(err);
           setSnackbarState({
