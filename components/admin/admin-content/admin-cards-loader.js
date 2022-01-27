@@ -32,8 +32,8 @@ export default function AdminCardsLoader() {
             >
               <Box sx={{ width: "100%" }}>
                 <Skeleton variant="text" width="100%" />
-                <Skeleton variant="text" width="100%" />
-                <Skeleton variant="text" width="100%" />
+                <Skeleton variant="text" width="87%" />
+                <Skeleton variant="text" width="91%" />
               </Box>
               <Divider flexItem orientation="vertical" />
               <Skeleton variant="circular" width={50} height={40} />

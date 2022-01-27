@@ -9,7 +9,7 @@ import FourSquareInfo from "../components/home/four-square-info";
 import CTAFooter from "../components/ui/cta-footer";
 import RulesDemo from "../components/home/rules-demo";
 
-export default function HomePage({ clubLogos }) {
+export default function HomePage({ clubLogos, partnersLogos }) {
   return (
     <Fragment>
       <Hero
@@ -42,12 +42,14 @@ export default function HomePage({ clubLogos }) {
         }}
       />
 
-      <LogoCarousel logos={clubLogos} />
+      <LogoCarousel title="Ils adhèrent à Roundnet France" logos={clubLogos} />
+      <LogoCarousel title="Nos partenaires" logos={partnersLogos} />
     </Fragment>
   );
 }
 
 export async function getStaticProps() {
+  // Get club logos
   const clubs = await getDocuments(
     "clubs",
     { validated: true },
@@ -59,9 +61,17 @@ export async function getStaticProps() {
     alt: club.title,
   }));
 
+  const partners = await getDocuments("partners", null, { image: 1, title: 1 });
+
+  const partnersLogos = partners.map((partner) => ({
+    src: partner.image,
+    alt: partner.title,
+  }));
+
   return {
     props: {
       clubLogos,
+      partnersLogos,
     },
     revalidate: 600,
   };

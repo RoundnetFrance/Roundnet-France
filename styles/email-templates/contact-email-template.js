@@ -386,5 +386,5 @@ export default function formTemplate(data) {
         </tr>
       </table>
     </body>
-  </html>`
+  </html>`;
 }

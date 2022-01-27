@@ -6,73 +6,8 @@ import fetcher from "../../../../lib/swr-fetcher";
 // COMPONENT IMPORTS
 import AdminContentSingle from "../../../../components/admin/admin-content/admin-content-single";
 
-// Data Config
-const config = {
-  title: "Modification de club",
-  dataLayout: [
-    // GENERAL INFO
-    {
-      _id: "main",
-      tabName: "Général",
-      tabDescription:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus cum ut quae?",
-      fields: [
-        {
-          _id: "title",
-          name: "Club",
-          editable: true,
-        },
-        {
-          _id: "chip",
-          name: "Ville",
-          editable: true,
-        },
-        {
-          _id: "description",
-          name: "Description",
-          editable: true,
-        },
-      ],
-    },
-    // Contact
-    {
-      _id: "referer",
-      name: "Référent",
-      editable: true,
-    },
-    {
-      _id: "email",
-      name: "Email",
-    },
-    {
-      _id: "phone",
-      name: "Téléphone",
-    },
-    {
-      _id: "players",
-      name: "Joueurs",
-    },
-    {
-      _id: "links",
-      name: "Liens",
-      editable: true,
-      array: {
-        key: "source",
-        value: "url",
-      },
-    },
-    {
-      _id: "discord",
-      name: "Discord",
-    },
-    {
-      _id: "validated",
-      name: "Validé",
-      align: "right",
-      editable: true,
-    },
-  ],
-};
+// CONTENTS
+import clubConfig from "../../../../contents/forms/clubs";
 
 export default function EditAdminPage() {
   // Get endpoint and ID from URL
@@ -80,13 +15,18 @@ export default function EditAdminPage() {
   const { clubId } = router.query;
 
   // Get club data
-  const { data, error } = useSWR(`/api/clubs/${clubId}`, fetcher);
+  const { data, error, mutate } = useSWR(`/api/clubs/${clubId}`, fetcher);
   const isLoading = !error && !data;
 
-  //! If club data is loading
-  if (isLoading) return <p>Loading...</p>;
-
-  return <AdminContentSingle config={config} />;
+  return (
+    <AdminContentSingle
+      config={clubConfig}
+      data={data}
+      mutate={mutate}
+      documentId={clubId}
+      isLoading={isLoading}
+    />
+  );
 }
 
 // NextJS functions
@@ -97,7 +37,7 @@ export async function getStaticPaths() {
       clubId: club._id,
     },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 export function getStaticProps() {

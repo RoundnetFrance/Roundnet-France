@@ -1,8 +1,7 @@
-import { Container, Paper, Typography, Link } from '@mui/material';
+import { Container, Paper, Typography, Link } from "@mui/material";
 
 // COMPONENT IMPORTS
-import Head from '../components/head';
-
+import Head from "../components/head";
 
 export default function LinksPage() {
   return (
@@ -13,12 +12,17 @@ export default function LinksPage() {
           Images
         </Typography>
         <Typography variant="body1">
-          Les images d&apos;illustration sont fournies par <Link href="https://www.corentinbureau.com/" target="_blank">Corentin Bureau</Link>.
+          Les images d&apos;illustration sont fournies par{" "}
+          <Link href="https://www.corentinbureau.com/" target="_blank">
+            Corentin Bureau
+          </Link>
+          .
         </Typography>
         <Typography variant="body1">
-          Les logos des clubs, associations et fédérations présentées appartiennent à leur club respectif.
+          Les logos des clubs, associations et fédérations présentées
+          appartiennent à leur club respectif.
         </Typography>
       </Paper>
     </Container>
-  )
+  );
 }

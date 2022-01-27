@@ -75,7 +75,10 @@ function JoinRoundnetFrancePage({ clubLogos }) {
       <Divider />
 
       <Box mt={6}>
-        <LogoCarousel logos={clubLogos} />
+        <LogoCarousel
+          title="Ils adhèrent à Roundnet France"
+          logos={clubLogos}
+        />
       </Box>
 
       <CTAFooter
