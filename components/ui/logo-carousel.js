@@ -1,15 +1,22 @@
-import Slider from 'react-slick';
-import Image from 'next/image';
+import Slider from "react-slick";
+import Image from "next/image";
 
 // MUI IMPORTS
-import { Container, Box, Typography, Stack } from '@mui/material';
+import { Container, Box, Typography, Stack } from "@mui/material";
 
-function LogoCarousel({ logos }) {
-  if (!logos) return null
+function LogoCarousel({ title, logos }) {
+  if (!logos) return null;
 
   const logosSlider = logos.map((logo) => (
-    <Box key={logo.alt} sx={{ textAlign: "center", position: 'relative' }}>
-      <Image src={logo.src} alt={logo.alt} width="150px" height="150px" title={logo.alt} objectFit='cover' />
+    <Box key={logo.alt} sx={{ textAlign: "center", position: "relative" }}>
+      <Image
+        src={logo.src}
+        alt={logo.alt}
+        width="150px"
+        height="150px"
+        title={logo.alt}
+        objectFit="cover"
+      />
     </Box>
   ));
 
@@ -24,7 +31,9 @@ function LogoCarousel({ logos }) {
       }}
     >
       <Stack mb={2} sx={{ textAlign: "center" }}>
-        <Typography align="center" variant="h5" component="h2"> Ils adhèrent à Roundnet France </Typography>
+        <Typography align="center" variant="h4" component="h2">
+          {title}
+        </Typography>
       </Stack>
       <Slider
         dots

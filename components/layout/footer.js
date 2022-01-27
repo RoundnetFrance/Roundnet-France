@@ -1,19 +1,24 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 // MUI IMPORTS
-import { Box, Stack, Container, Typography } from '@mui/material';
+import { Box, Stack, Container, Typography } from "@mui/material";
 
 // COMPONENT IMPORTS
-import Link from '../../components/ui/link';
+import Link from "../../components/ui/link";
 
 // CONTENTS
-import { rawLogos } from '../../contents/footer/index.js';
+import { rawLogos } from "../../contents/footer/index.js";
 
 function Footer() {
   return (
     <Box bgcolor="primary.dark" py={4}>
       <Container maxWidth="lg">
-        <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between">
+        <Stack
+          spacing={2}
+          direction={{ xs: "column", sm: "row" }}
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          justifyContent="space-between"
+        >
           {/* Footer left */}
           <Box>
             {/* Footer title */}
@@ -26,11 +31,21 @@ function Footer() {
 
             {/* Footer links */}
             <Typography variant="body2" color="white">
-              <Link href="/qui-sommes-nous/contact" color="#fff">Contact</Link>
-              {' | '}
-              <Link href="/mentions-legales" color="#fff">Mentions légales</Link>
-              {' | '}
-              <Link href="/liens" color="#fff">Liens</Link>
+              <Link href="/qui-sommes-nous/contact" color="#fff">
+                Contact
+              </Link>
+              {" | "}
+              <Link href="/mentions-legales" color="#fff">
+                Mentions légales
+              </Link>
+              {" | "}
+              <Link href="/liens" color="#fff">
+                Liens
+              </Link>
+              {" | "}
+              <Link href="/partenaires" color="#fff">
+                Partenaires
+              </Link>
             </Typography>
           </Box>
 

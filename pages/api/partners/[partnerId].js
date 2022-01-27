@@ -15,10 +15,7 @@ export default async function handler(req, res) {
     // GET method to read specific app partner
     if (req.method === "GET") {
       try {
-        const partner = await getDocument("partners", ObjectId(partnerId), {
-          password: 0,
-          image: 0,
-        });
+        const partner = await getDocument("partners", ObjectId(partnerId));
         return res.status(200).json(partner);
       } catch (error) {
         console.error(error);
