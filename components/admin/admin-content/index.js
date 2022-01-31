@@ -25,13 +25,15 @@ import FindInPageIcon from "@mui/icons-material/FindInPage";
 import AdminCardsLoader from "./admin-cards-loader";
 import Error from "../../../components/ui/error";
 import DataControl from "../../../components/admin/data-control";
-import IconWithBackground from "../../../components/ui/icon-with-background";
 
 export default function AdminContent({ config, form }) {
   const { data, listProps, endpoint, isLoading, isError } = config;
 
   if (isLoading) return <AdminCardsLoader />;
   if (isError) return <Error />;
+
+  // If data needs validation, to avoid unnecessary "waiting for validation" where no validation has to be done
+  const hasValidation = listProps.toCheck !== undefined;
 
   return (
     <Fragment>
@@ -48,6 +50,8 @@ export default function AdminContent({ config, form }) {
               : item[listProps.subtitle];
           const cardImage = item[listProps.image];
           const cardLink = `/rf-admin/edit/${endpoint}/${item._id}`;
+          const cardValidated = item[listProps.toCheck];
+
           return (
             <Grid key={item._id} item xs={12} sm={6} lg={4}>
               <Card sx={{ height: "100%" }}>
@@ -59,6 +63,20 @@ export default function AdminContent({ config, form }) {
                   {/* Header */}
                   <CardHeader
                     title={cardTitle}
+                    subheader={
+                      !hasValidation
+                        ? ""
+                        : cardValidated
+                        ? "Validé"
+                        : "En attente de validation"
+                    }
+                    subheaderTypographyProps={{
+                      color: !hasValidation
+                        ? "initial"
+                        : cardValidated
+                        ? "primary"
+                        : "error",
+                    }}
                     avatar={
                       cardImage ? (
                         <Avatar>
@@ -75,7 +93,14 @@ export default function AdminContent({ config, form }) {
                         <FindInPageIcon color="secondary" />
                       )
                     }
-                    titleTypographyProps={{ variant: "h5" }}
+                    titleTypographyProps={{
+                      variant: "h5",
+                      color: !hasValidation
+                        ? "initial"
+                        : cardValidated
+                        ? "initial"
+                        : "error",
+                    }}
                   />
                   <Divider />
                   {/* Content */}

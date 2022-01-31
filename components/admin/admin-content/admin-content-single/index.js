@@ -29,6 +29,7 @@ import DataTabs from "./data-tabs";
 import DataFields from "./data-fields";
 import Dialog from "../../../ui/dialog";
 import DataFieldsLoader from "./data-fields-loader";
+import Error from "../../../ui/error";
 
 export default function AdminContentSingle({
   config: { title, tabs, endpoint, adminEndpoint },
@@ -84,6 +85,15 @@ export default function AdminContentSingle({
   function handleDialogClose() {
     setDialogOpen(false);
   }
+
+  // Check if data is empty
+  if (data && Object.keys(data).length === 0)
+    return (
+      <Error
+        message="Aucun document ne possède cet identifiant."
+        returnLink="/rf-admin/clubs-et-communautes/liste-des-clubs"
+      />
+    );
 
   // Extract tab names from config data
   const tabNames = tabs.map((tab) => tab.name);
