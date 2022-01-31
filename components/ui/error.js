@@ -1,21 +1,23 @@
-import propTypes from 'prop-types';
+import propTypes from "prop-types";
 
-import Alert from '@mui/material/Alert';
+import { Alert } from "@mui/material";
 
-function Error({ message }) {
+function Error({ message, returnLink }) {
   return (
     <Alert severity="error" sx={{ my: 2 }}>
       {message}
     </Alert>
-  )
+  );
 }
 
 Error.propTypes = {
   message: propTypes.string,
-}
+  returnLink: propTypes.string,
+};
 
 Error.defaultProps = {
-  message: "Une erreur est survenue."
-}
+  message: "Une erreur est survenue.",
+  returnLink: null,
+};
 
-export default Error
+export default Error;
