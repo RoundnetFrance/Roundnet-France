@@ -10,6 +10,7 @@ import {
   ListItemText,
   Link as MUILink,
   Icon,
+  Divider,
 } from "@mui/material";
 
 // MUI ICONS
@@ -71,6 +72,7 @@ export default function MobileNavItems({
     // If element doesn't have subElements, render primary element with link and color
     return (
       <Fragment key={element.name}>
+        {element.dividerTop && <Divider variant="middle" sx={{ mt: 4 }} />}
         <Link href={element.url} passHref>
           <MUILink
             underline="none"
@@ -95,6 +97,7 @@ export default function MobileNavItems({
             </ListItem>
           </MUILink>
         </Link>
+        {element.dividerBottom && <Divider variant="middle" sx={{ mb: 4 }} />}
       </Fragment>
     );
   });
