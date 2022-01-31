@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
-import { getUser } from '../../../helpers/db/users';
-import { getDocument } from '../../../helpers/db';
-import { compare } from 'bcryptjs';
+import { getUser } from "../../../helpers/db/users";
+import { getDocument } from "../../../helpers/db";
+import { compare } from "bcryptjs";
 
 // Providers
 import GoogleProvider from "next-auth/providers/google";
@@ -21,8 +21,12 @@ export default NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "jean@roundnetfrance.fr" },
-        password: { label: "Password", type: "password" }
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "jean@roundnetfrance.fr",
+        },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         const { email } = credentials;
@@ -31,35 +35,37 @@ export default NextAuth({
         let user;
         try {
           // user = await getUser({ email });
-          user = await getDocument('users', { email });
+          user = await getDocument("users", { email });
         } catch (error) {
-          throw new Error('Connexion à la base de données impossible');
+          throw new Error("Connexion à la base de données impossible");
         }
 
         if (user) {
-          const checkPassword = await compare(credentials.password, user.password);
+          const checkPassword = await compare(
+            credentials.password,
+            user.password
+          );
           //Incorrect password - send response
           if (!checkPassword) {
             return null;
           }
           // Any object returned will be saved in `user` property of the JWT
           if (!user.authorized) {
-            throw new Error('Connexion impossible');
+            throw new Error("Connexion impossible");
           }
-          return user
+          return user;
         } else {
           // If you return null or false then the credentials will be rejected
-          return null
+          return null;
           // You can also Reject this callback with an Error or with a URL:
           // throw new Error("error message") // Redirect to error page
           // throw "/path/to/redirect"        // Redirect to a URL
         }
-      }
+      },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-
     }),
     // FacebookProvider({
     //   clientId: process.env.FACEBOOK_CLIENT_ID,
@@ -71,7 +77,7 @@ export default NextAuth({
     // Called when a user is successfully authenticated
     async signIn({ account, user }) {
       // Everything is already authenticated, so we just need to sign in
-      if (account.provider === 'credentials') {
+      if (account.provider === "credentials") {
         return true;
       }
 
@@ -79,11 +85,13 @@ export default NextAuth({
       const userToLog = await getUser({ email: user.email });
 
       if (!userToLog) {
-        return '/rf-admin/signup-oauth?email=' + user.email + '&name=' + user.name;
+        return (
+          "/rf-admin/signup-oauth?email=" + user.email + "&name=" + user.name
+        );
       }
 
       if (!userToLog.authorized) {
-        return '/rf-admin/error?error=Connexion impossible.';
+        return "/rf-admin/error?error=Connexion impossible.";
       }
 
       return true;
@@ -91,12 +99,12 @@ export default NextAuth({
   },
   // Custom pages
   pages: {
-    error: '/rf-admin/error',
+    error: "/rf-admin/error",
   },
   // A bit of theming
   theme: {
-    colorScheme: 'light',
-    brandColor: '#f50057',
-    logo: '/images/logos/roundnet-france.jpg'
-  }
-})
+    colorScheme: "light",
+    brandColor: "#f50057",
+    logo: "/images/logos/roundnet-france.jpg",
+  },
+});

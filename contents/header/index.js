@@ -87,6 +87,7 @@ const adminElements = [
     slug: "dashboard",
     icon: "dashboard",
     url: "/rf-admin",
+    dividerBottom: true,
   },
   {
     name: "Compétition",
@@ -159,6 +160,13 @@ const adminElements = [
         url: "/rf-admin/parametres/administrateurs",
       },
     ],
+  },
+  {
+    name: "Retourner au site",
+    slug: "site",
+    icon: "website",
+    url: "/",
+    dividerTop: true,
   },
 ];
 
