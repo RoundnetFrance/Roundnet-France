@@ -33,6 +33,7 @@ export default function ClubsAdminPage() {
       title: "title",
       subtitle: "description",
       image: "image",
+      toCheck: "validated",
     },
     data: clubs,
     endpoint: "clubs",

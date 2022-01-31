@@ -65,11 +65,13 @@ const clubConfig = {
           _id: "email",
           name: "Email",
           type: "text",
+          editable: true,
         },
         {
           _id: "phone",
           name: "Téléphone",
           type: "text",
+          editable: true,
         },
       ],
     },
