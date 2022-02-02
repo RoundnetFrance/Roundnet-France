@@ -41,7 +41,7 @@ export default function AdminContent({ config, form }) {
 
       {/* Grid items */}
       <Grid spacing={2} container>
-        {data.map((item) => {
+        {data?.map((item) => {
           // Get the card title, subtitle and description from data and listProps
           const cardTitle = item[listProps.title];
           const cardSubtitle =

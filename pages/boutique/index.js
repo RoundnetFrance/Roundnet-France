@@ -5,7 +5,6 @@ import { Container } from "@mui/material";
 
 // COMPONENT IMPORTS
 import Hero from "../../components/ui/hero";
-import CTAFooter from "../../components/ui/cta-footer";
 import Head from "../../components/head";
 import CrossingItems from "../../components/ui/crossing-items";
 
@@ -16,7 +15,7 @@ function ShopPage() {
   return (
     <Fragment>
       <Head
-        title="Boutique - Roundnet Francce"
+        title="Boutique - Roundnet France"
         description="Grâce à notre partenariat avec l'équipementier Spikeball, achetez vos sets et vos goodies en ligne via la fédération Roundnet France."
       />
 
