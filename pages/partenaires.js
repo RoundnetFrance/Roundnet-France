@@ -27,5 +27,6 @@ export async function getStaticProps() {
     props: {
       partners,
     },
+    revalidate: 600,
   };
 }
