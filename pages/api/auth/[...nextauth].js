@@ -5,7 +5,6 @@ import { compare } from "bcryptjs";
 
 // Providers
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
