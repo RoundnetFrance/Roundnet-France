@@ -28,13 +28,13 @@ export default function Events({ events }) {
 
   return (
     <Stack direction={{ xs: "column", md: "row" }} gap={4}>
+      <EventsTimeline events={controlledEvents} />
+      <Divider orientation="vertical" flexItem />
       <EventsSidebar
         pastEvents={pastEventsFiltered}
         setEvents={setControlledEvents}
         events={futureEvents}
       />
-      <Divider orientation="vertical" flexItem />
-      <EventsTimeline events={controlledEvents} />
     </Stack>
   );
 }
