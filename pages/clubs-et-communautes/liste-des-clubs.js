@@ -13,7 +13,7 @@ import CTAFooter from "../../components/ui/cta-footer";
 import Error from "../../components/ui/error";
 import Head from "../../components/head";
 
-function ClubListPage({ clubs, error }) {
+export default function ClubListPage({ clubs, error }) {
   return (
     <Fragment>
       <Head
@@ -97,5 +97,3 @@ export async function getStaticProps() {
     };
   }
 }
-
-export default ClubListPage;

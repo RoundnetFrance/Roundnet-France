@@ -56,6 +56,7 @@ export default function CreateEventForm() {
         options: {
           required: true,
           multilineRows: 6,
+          dividerBottom: true,
         },
       },
       {
@@ -65,6 +66,14 @@ export default function CreateEventForm() {
         options: {
           required: true,
           helperText: "Nombre maximum autorisé",
+        },
+      },
+      {
+        id: "price",
+        label: "Prix",
+        type: "text",
+        options: {
+          helperText: "Par équipe",
         },
       },
       {

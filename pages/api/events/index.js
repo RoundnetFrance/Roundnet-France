@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       let events;
       // For public access
       if (!session) {
-        events = await getDocuments("events", { validated: true });
+        events = await getDocuments("events");
       }
       // For admin access
       else {
