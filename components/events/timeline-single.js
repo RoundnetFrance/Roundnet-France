@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { getEventFormat, getEventType } from "../../helpers/events";
+import {
+  getEventFormat,
+  getEventType,
+  getEventField,
+} from "../../helpers/events";
 
 // MUI IMPORTS
 import { Stack, Typography, Box, Paper } from "@mui/material";
@@ -18,14 +22,21 @@ export default function TimelineSingle({ event }) {
     : "";
 
   // Check if event.type is a major french tournament (applies to some event details color)
-  const isFrenchMajorEvent =
-    event.type === "cdf" ||
-    event.type === "ric" ||
-    event.type === "worlds" ||
-    event.type === "euro";
+  const isFrenchMajorEvent = event.type === "cdf" || event.type === "ric";
 
   return (
-    <Stack direction={{ xs: "column", md: "row" }} gap={2} sx={{ my: 2 }}>
+    <Stack
+      direction={{ xs: "column", md: "row" }}
+      gap={2}
+      sx={{
+        p: 2,
+        "&:hover": {
+          backgroundColor: "primary.lightest",
+        },
+        borderRadius: 2,
+        transition: "all 0.2s ease-in-out",
+      }}
+    >
       {/* LEFT PANEL */}
       <Stack
         direction="column"
@@ -55,6 +66,9 @@ export default function TimelineSingle({ event }) {
         </Typography>
         <Typography variant="body2" color="text.disabled">
           {event.participants} participants
+        </Typography>
+        <Typography variant="body2" color="text.disabled">
+          {getEventField(event.field)}
         </Typography>
       </Stack>
 

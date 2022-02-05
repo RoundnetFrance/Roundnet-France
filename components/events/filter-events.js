@@ -1,10 +1,15 @@
 // MUI IMPORTS
-import { Box } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 
 // COMPONENT IMPORTS
 import FilterSingle from "./filter-single";
 
 export default function FilterEvents({ events, setEvents }) {
+  // Handle reset of events filter
+  function handleReset() {
+    setEvents(events);
+  }
+
   return (
     <Box>
       {/* Terrain */}
@@ -41,6 +46,10 @@ export default function FilterEvents({ events, setEvents }) {
         setEvents={setEvents}
         type="type"
       />
+
+      <Button onClick={handleReset} sx={{ mt: 2 }}>
+        Réinitialiser
+      </Button>
     </Box>
   );
 }
