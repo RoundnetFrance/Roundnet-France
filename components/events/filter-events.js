@@ -32,6 +32,15 @@ export default function FilterEvents({ events, setEvents }) {
         setEvents={setEvents}
         type="category"
       />
+
+      {/* Type */}
+      <FilterSingle
+        title="Evénement"
+        fields={["open", "cdf", "ric", "worlds", "europe"]}
+        events={events}
+        setEvents={setEvents}
+        type="type"
+      />
     </Box>
   );
 }
