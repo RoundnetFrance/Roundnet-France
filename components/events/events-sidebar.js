@@ -11,7 +11,7 @@ export default function EventsSidebar({ pastEvents, events, setEvents }) {
   ));
 
   return (
-    <Stack direction="column" gap={4} sx={{ width: "25%" }}>
+    <Stack direction="column" gap={4} sx={{ width: { xs: "100%", md: "25%" } }}>
       <Box>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
           Filtrer

@@ -8,10 +8,33 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import TimelineSingle from "./timeline-single";
 
 export default function EventsTimeline({ events }) {
-  const timeline = events.map((event) => (
-    <Collapse in appear key={event._id} timeout={500} unmountOnExit>
-      <TimelineSingle event={event} />
-    </Collapse>
+  // For each event.date in events, extract the year from the date and create a new array with the events that have the same year
+  const eventsByYear = events.reduce((acc, event) => {
+    const year = event.date.split("-")[0];
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(event);
+    return acc;
+  }, {});
+
+  const timeline = Object.keys(eventsByYear).map((year) => (
+    <Box key={year} sx={{ mb: 6 }}>
+      <Stack direction="row" alignItems="center" gap={1} sx={{ mb: 4 }}>
+        <EventNoteIcon color="primary" fontSize="large" />
+        <Typography variant="h4">
+          <strong>{year}</strong>
+        </Typography>
+      </Stack>
+
+      {eventsByYear[year].map((event) => (
+        <Stack direction="column" gap={4} key={event._id}>
+          <Collapse in={true}>
+            <TimelineSingle event={event} />
+          </Collapse>
+        </Stack>
+      ))}
+    </Box>
   ));
 
   return (
@@ -19,15 +42,7 @@ export default function EventsTimeline({ events }) {
       <Typography variant="h4" sx={{ mb: 6 }}>
         Tournois &amp; événements à venir
       </Typography>
-      <Stack direction="row" alignItems="center" gap={1} sx={{ mb: 4 }}>
-        <EventNoteIcon color="primary" fontSize="large" />
-        <Typography variant="h4">
-          <strong>2022</strong>
-        </Typography>
-      </Stack>
-      <Stack direction="column" gap={4}>
-        {timeline}
-      </Stack>
+      {timeline}
     </Box>
   );
 }

@@ -25,11 +25,16 @@ export default function TimelineSingle({ event }) {
     event.type === "euro";
 
   return (
-    <Stack direction="row" gap={2}>
+    <Stack direction={{ xs: "column", md: "row" }} gap={2} sx={{ my: 2 }}>
       {/* LEFT PANEL */}
       <Stack
         direction="column"
-        sx={{ width: "15%", pr: 1, borderRight: 0, borderColor: "#315bcd" }}
+        sx={{
+          width: { xs: "100%", md: "15%" },
+          pr: 1,
+          borderRight: 0,
+          borderColor: "#315bcd",
+        }}
       >
         <Typography
           variant="h6"
@@ -57,10 +62,10 @@ export default function TimelineSingle({ event }) {
       <Stack
         direction="row"
         justifyContent="space-between"
-        sx={{ width: "85%" }}
+        sx={{ width: { xs: "100%", md: "85%" } }}
       >
         {/* IMAGE & MAIN DETAILS */}
-        <Stack direction="row" gap={2}>
+        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
           <Link href="/event/slug">
             <Paper
               sx={{
