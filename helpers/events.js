@@ -39,8 +39,8 @@ export function getEventCategory(category) {
   }
 }
 
-export function getEventType(type) {
-  switch (type) {
+export function getEventType(event) {
+  switch (event) {
     case "cdf":
       return "Coupe de France";
     case "ric":
