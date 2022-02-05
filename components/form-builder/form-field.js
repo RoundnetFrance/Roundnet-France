@@ -110,7 +110,11 @@ export default function FormField({
             }}
             renderInput={(params) => (
               <Fragment>
-                <TextField label="Date" {...params} />
+                <TextField
+                  label="Date"
+                  {...params}
+                  required={options?.required}
+                />
                 <FormHelperText
                   error={booleanError}
                   id={`${label}-error`}
