@@ -1,7 +1,7 @@
-import propTypes from 'prop-types';
+import propTypes from "prop-types";
 
 // MUI IMPORTS
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Divider, Typography } from "@mui/material";
 
 function PageTitle({ title }) {
   return (
@@ -11,11 +11,11 @@ function PageTitle({ title }) {
       </Typography>
       <Divider sx={{ pb: 2 }} />
     </Box>
-  )
+  );
 }
 
 PageTitle.propTypes = {
   title: propTypes.string.isRequired,
-}
+};
 
-export default PageTitle
+export default PageTitle;
