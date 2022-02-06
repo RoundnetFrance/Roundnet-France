@@ -27,7 +27,22 @@ export default async function handler(req, res) {
 
   // POST method to create a new event
   if (req.method === "POST") {
-    const { data } = req.body;
+    let data;
+    try {
+      data = req.body.data;
+      console.log(req.body);
+
+      // Create the slug from data.title and replace spaces with dashes, lowercase, max 3 0 chars), remove special characters and remove unnecessary dashes at the end
+      data.slug = data.title
+        .replace(/\s+/g, "-")
+        .toLowerCase()
+        .slice(0, 30)
+        .replace(/[^a-z0-9-]/g, "")
+        .replace(/-+$/, "");
+    } catch (err) {
+      console.error(err);
+      return res.status(400).json({ message: "Bad request" });
+    }
 
     // * Validate the data
     try {
