@@ -30,9 +30,7 @@ export default function TimelineSingle({ event }) {
       gap={2}
       sx={{
         p: 2,
-        "&:hover": {
-          backgroundColor: "primary.lightest",
-        },
+        backgroundColor: isFrenchMajorEvent ? "primary.lightest" : "neutral",
         borderRadius: 2,
         transition: "all 0.2s ease-in-out",
       }}
@@ -101,16 +99,26 @@ export default function TimelineSingle({ event }) {
 
           {/* TEXT DETAIL */}
           <Box>
-            <Typography variant="body2" color="primary">
+            <Typography
+              variant="body2"
+              color={isFrenchMajorEvent ? "primary" : "initial"}
+            >
               {event.city}
             </Typography>
             <Stack direction="row" gap={1} alignItems="center" sx={{ mb: 1 }}>
               <Typography
                 variant="h6"
-                color="primary"
+                color={isFrenchMajorEvent ? "primary" : "initial"}
                 sx={{ fontWeight: "bold" }}
               >
-                <Link href="/event/slug">{event.title}</Link>
+                <Link
+                  href="/event/slug"
+                  color={
+                    isFrenchMajorEvent ? "primary" : "neutral.contrastText"
+                  }
+                >
+                  {event.title}
+                </Link>
               </Typography>
               {isFrenchMajorEvent && <VerifiedIcon color="primary" />}
             </Stack>
@@ -120,7 +128,11 @@ export default function TimelineSingle({ event }) {
           </Box>
           <Box alignSelf="center">
             <Link href="/event/slug">
-              <IconWithBackground icon="arrow_forward" size={25} />
+              <IconWithBackground
+                icon="arrow_forward"
+                size={25}
+                color={isFrenchMajorEvent ? "primary" : "neutralDark"}
+              />
             </Link>
           </Box>
         </Stack>

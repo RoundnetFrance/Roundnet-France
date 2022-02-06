@@ -6,7 +6,7 @@ export function getEventField(field) {
       return "Herbe";
     case "sand":
       return "Sable";
-    case "outdoor":
+    case "turf":
       return "Synthétique";
     case "urban":
       return "Urban";
