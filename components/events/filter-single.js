@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
 import {
   getEventType,
   getEventCategory,
@@ -25,53 +23,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function FilterSingle({
   title,
-  fields,
-  events,
-  setEvents,
+  filters,
+  setFilters,
   type,
+  handleCheckAll,
+  handleUncheckAll,
 }) {
-  // Turn fields into an object with true to each field key
-  const initialState = fields.reduce((acc, field) => {
-    acc[field] = true;
-    return acc;
-  }, {});
-
-  const [fieldFilters, setFieldFilters] = useState(initialState);
-
-  // Handle controlled checkbox
-  function handleFormatChange(e) {
-    setFieldFilters({
-      ...fieldFilters,
-      [e.target.name]: !fieldFilters[e.target.name],
-    });
-  }
-
-  // Handle check all / uncheck all buttons
-  function handleCheckAll() {
-    setFieldFilters(initialState);
-  }
-
-  function handleUncheckAll() {
-    setFieldFilters(
-      fields.reduce((acc, field) => {
-        acc[field] = false;
-        return acc;
-      }, {})
-    );
-  }
-
-  // Handle controlled events filter
-  useEffect(() => {
-    const filteredEvents = events.filter((event) => {
-      if (fieldFilters[event[type]]) {
-        return true;
-      }
-      return false;
-    });
-
-    setEvents(filteredEvents);
-  }, [fieldFilters]);
-
   // Get litteral label from specified type. If type is not supported, simply return the field as is.
   let getLabel;
   switch (type) {
@@ -97,19 +54,21 @@ export default function FilterSingle({
   }
 
   // Return as many field checkboxes as needed
-  const fieldsCheckboxes = fields.map((field) => {
+  const fieldsCheckboxes = Object.keys(filters).map((value) => {
     return (
       <FormControlLabel
-        key={field}
+        key={value}
         control={
           <Checkbox
-            name={field}
-            checked={fieldFilters[field]}
+            name={value}
+            checked={filters[value]}
             size="small"
-            onClick={handleFormatChange}
+            onClick={(event) => {
+              setFilters(event, type);
+            }}
           />
         }
-        label={getLabel(field)}
+        label={getLabel(value)}
       />
     );
   });
@@ -128,7 +87,7 @@ export default function FilterSingle({
       <AccordionDetails>
         <FormGroup>{fieldsCheckboxes}</FormGroup>
         <Box mt={1}>
-          <ButtonBase onClick={handleCheckAll}>
+          <ButtonBase onClick={() => handleCheckAll(type, true)}>
             <Typography variant="caption" color="initial">
               Tout cocher
             </Typography>
@@ -136,7 +95,7 @@ export default function FilterSingle({
           <Typography variant="caption" color="initial">
             /
           </Typography>{" "}
-          <ButtonBase onClick={handleUncheckAll}>
+          <ButtonBase onClick={() => handleCheckAll(type, false)}>
             <Typography variant="caption" color="initial">
               Tout décocher
             </Typography>
