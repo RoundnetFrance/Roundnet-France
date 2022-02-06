@@ -78,7 +78,7 @@ export default function TimelineSingle({ event }) {
       >
         {/* IMAGE & MAIN DETAILS */}
         <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
-          <Link href={`/events/${event.slug}`}>
+          <Link href={`/calendrier/${event.slug}`}>
             <Paper
               sx={{
                 position: "relative",
@@ -114,7 +114,7 @@ export default function TimelineSingle({ event }) {
                 sx={{ fontWeight: "bold" }}
               >
                 <Link
-                  href={`/events/${event.slug}`}
+                  href={`/calendrier/${event.slug}`}
                   color={
                     isFrenchMajorEvent ? "primary" : "neutral.contrastText"
                   }
@@ -129,7 +129,7 @@ export default function TimelineSingle({ event }) {
             </Typography>
           </Box>
           <Box alignSelf="center">
-            <Link href={`/events/${event.slug}`}>
+            <Link href={`/calendrier/${event.slug}`}>
               <IconWithBackground
                 icon="arrow_forward"
                 size={25}
