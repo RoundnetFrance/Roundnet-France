@@ -51,8 +51,8 @@ export default function EventSingle({ event }) {
       <Hero half />
 
       {/* PAPER CONTENT */}
-      <Container maxWidth="sm">
-        <Paper sx={{ position: "relative", top: -100, borderRadius: 4 }}>
+      <Container maxWidth="md">
+        <Paper sx={{ position: "relative", top: "-25vh", borderRadius: 4 }}>
           <Box sx={{ p: 2 }}>
             {/* Title */}
             <Typography
