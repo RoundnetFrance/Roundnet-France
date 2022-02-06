@@ -35,6 +35,7 @@ export default function getSchema(schemaRef, partials) {
     case "event":
       schema = Joi.object({
         image: Joi.string().uri().allow(""),
+        slug: Joi.string().trim().required(),
         title: Joi.string().trim().required(),
         city: Joi.string().trim().required(),
         date: Joi.date().allow(""),

@@ -4,6 +4,7 @@ import FormBuilder from "../form-builder";
 export default function CreateEventForm() {
   const formConfig = {
     name: "Détails de l'événement",
+    endpoint: "events",
     fields: [
       {
         id: "image",
@@ -96,7 +97,7 @@ export default function CreateEventForm() {
               label: "Sable",
             },
             {
-              value: "outdoor",
+              value: "turf",
               label: "Synthétique",
             },
             {
@@ -193,7 +194,6 @@ export default function CreateEventForm() {
         },
       },
     ],
-    endpoint: "events",
   };
 
   return <FormBuilder formConfig={formConfig} />;

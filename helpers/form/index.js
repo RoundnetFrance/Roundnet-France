@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 // * Helper functions
 // Add a custom throw error
@@ -19,7 +19,7 @@ function matchFormWithApiSchema({ formFields, apiSchema }) {
     const expectedValue = matchingValueForApi[key];
 
     // If value of key is a string, simple process
-    if (typeof expectedValue === 'string') {
+    if (typeof expectedValue === "string") {
       matchingValueForApi[key] = formFields[expectedValue];
     }
     // Else, has to build an array of elements
@@ -42,10 +42,9 @@ function matchFormWithApiSchema({ formFields, apiSchema }) {
     }
   }
 
-  // Return 
+  // Return
   return matchingValueForApi;
 }
-
 
 // * Build a dynamic schema for Joi based on the fields definition in formConfig (or any array of objects that matches that structure)
 function schemaConstructor(fields) {
@@ -55,29 +54,31 @@ function schemaConstructor(fields) {
 
     // Define the global type via switch
     switch (type) {
-      case 'email':
+      case "email":
         schemaKeys[id] = Joi.string().email({ tlds: { allow: false } });
         break;
 
-      case 'file': {
+      case "file": {
         schemaKeys[id] = Joi.object();
         break;
       }
 
-      case 'date':
+      case "date":
         schemaKeys[id] = Joi.date();
         break;
 
-      case 'password':
+      case "password":
         schemaKeys[id] = Joi.string().min(6);
         break;
 
-      case 'url':
+      case "url":
         schemaKeys[id] = Joi.string().trim().uri();
         break;
 
-      case 'phone':
-        schemaKeys[id] = Joi.string().length(10).pattern(/^[0-9]+$/);
+      case "phone":
+        schemaKeys[id] = Joi.string()
+          .length(10)
+          .pattern(/^[0-9]+$/);
         break;
 
       // Defaults to a regular string (text/longtext/select)
@@ -87,15 +88,14 @@ function schemaConstructor(fields) {
 
     // If passwordConfirm, passwordConfirm must match password
     if (options?.passwordConfirm) {
-      schemaKeys[id] = Joi.any().valid(Joi.ref('password'));
+      schemaKeys[id] = Joi.any().valid(Joi.ref("password"));
     }
 
     // If required, add the required property to the schema. Else, allow empty string, as it is the default value for all inputs
     if (options?.required) {
       schemaKeys[id] = schemaKeys[id].required();
-    }
-    else {
-      schemaKeys[id] = schemaKeys[id].allow('');
+    } else {
+      schemaKeys[id] = schemaKeys[id].allow("");
     }
   });
 
@@ -108,26 +108,23 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
   const schema = schemaConstructor(fields);
 
   // Validate the form
-  const { error, value } = schema.validate(
-    form,
-    {
-      abortEarly: false,
-      errors: {
-        label: false,
-      },
-      messages: {
-        'any.required': 'Ce champ est requis',
-        'string.empty': 'Ce champ est requis',
-        'string.email': 'Ce champ doit être une adresse email valide',
-        'string.min': 'Ce champ doit contenir au moins 6 caractères',
-        'string.uri': 'Ce champ doit être une URL valide',
-        'date.base': 'Ce champ doit être une date valide',
-        'object.base': 'Ce champ doit être un fichier valide',
-        'any.only': 'Les mots de passe ne correspondent pas',
-        '*': 'Ce champ est invalide',
-      },
-    }
-  );
+  const { error, value } = schema.validate(form, {
+    abortEarly: false,
+    errors: {
+      label: false,
+    },
+    messages: {
+      "any.required": "Ce champ est requis",
+      "string.empty": "Ce champ est requis",
+      "string.email": "Ce champ doit être une adresse email valide",
+      "string.min": "Ce champ doit contenir au moins 6 caractères",
+      "string.uri": "Ce champ doit être une URL valide",
+      "date.base": "Ce champ doit être une date valide",
+      "object.base": "Ce champ doit être un fichier valide",
+      "any.only": "Les mots de passe ne correspondent pas",
+      "*": "Ce champ est invalide",
+    },
+  });
 
   if (error) {
     // If error, return an custom InvalidForm throw with an adapted details object (key: message). Uses initialFormErrors to populate errors.
@@ -137,7 +134,10 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
     });
 
     // Throw the custom error (see InvalidForm class)
-    throw new InvalidForm({ message: 'Le formulaire comporte des erreurs.', details });
+    throw new InvalidForm({
+      message: "Le formulaire comporte des erreurs.",
+      details,
+    });
   }
 
   // If no apiSchema is provided, it means that original form fields are already adapted to API Schema. Return the raw form values.
@@ -153,19 +153,17 @@ export function validateForm({ form, fields, initialFormErrors, apiSchema }) {
     });
     return apiValue;
   } catch (error) {
-    throw new Error('Une erreur est survenue au moment de la traduction des données du formulaire vers le serveur.');
+    throw new Error(
+      "Une erreur est survenue au moment de la traduction des données du formulaire vers le serveur."
+    );
   }
-
 }
-
 
 // * Handles form validation for the server/API. Requires a definite schema and values that should be validated against it. Uses Joi to validate the values against the schema. If error, returns an custom InvalidForm throw. If valid, return fields. Can alter fields to match an API schema if apiSchema is provided.
 export function validateAPI({ data, schema }) {
-
   if (!data) {
-    throw new Error('Aucune donnée reçue.');
+    throw new Error("Aucune donnée reçue.");
   }
-
 
   // Validate the data
   const { error, value } = schema.validate(data, {
@@ -176,21 +174,16 @@ export function validateAPI({ data, schema }) {
     // Get all keys where there is an error
     const listOfErrorKeys = error.details.map(({ path }) => path);
     // Stringify the list of keys
-    const errorKeysString = listOfErrorKeys.join(', ');
+    const errorKeysString = listOfErrorKeys.join(", ");
     // Throw explicit error
-    throw new Error('These keys are invalid :' + errorKeysString);
+    throw new Error("These keys are invalid :" + errorKeysString);
   }
 
   return value;
 }
 
-
 // * Handle form submission. Requires the endpoint and definitive values.
-export async function submitForm({
-  endpoint,
-  values,
-}) {
-
+export async function submitForm({ endpoint, values }) {
   // Get rid of empty values
   const data = Object.entries(values).reduce((acc, [key, value]) => {
     if (value) {
@@ -204,9 +197,9 @@ export async function submitForm({
 
   // Fetch the endpoint.
   const response = await fetch(`/api/${endpoint}`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ data }),
   });
