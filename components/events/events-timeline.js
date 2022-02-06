@@ -29,7 +29,7 @@ export default function EventsTimeline({ events }) {
 
       {eventsByYear[year].map((event) => (
         <Stack direction="column" gap={4} key={event._id}>
-          <Collapse in={true}>
+          <Collapse in appear>
             <TimelineSingle event={event} />
           </Collapse>
         </Stack>
