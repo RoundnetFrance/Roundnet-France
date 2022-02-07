@@ -2,6 +2,7 @@ import { getDocuments, insertDocument } from "../../../helpers/db";
 import { validateAPI } from "../../../helpers/form";
 import getSchema from "../../../helpers/schemas";
 import { getSession } from "next-auth/react";
+import createSlug from "../../../helpers/slug-creator";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -31,13 +32,14 @@ export default async function handler(req, res) {
     try {
       data = req.body.data;
 
-      // Create the slug from data.title and replace spaces with dashes, lowercase, max 3 0 chars), remove special characters and remove unnecessary dashes at the end
-      data.slug = data.title
-        .replace(/\s+/g, "-")
-        .toLowerCase()
-        .slice(0, 30)
-        .replace(/[^a-z0-9-]/g, "")
-        .replace(/-+$/, "");
+      // Create slug from title
+      data.slug = createSlug(data.title);
+
+      // Check if slug is unique. If not, add a number to the end of the slug
+      const existingSlug = await getDocuments("events", { slug: data.slug });
+      if (existingSlug.length > 0) {
+        data.slug = `${data.slug}-${existingSlug.length + 1}`;
+      }
 
       // Add createdAt field
       data.createdAt = new Date();
