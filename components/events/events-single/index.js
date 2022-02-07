@@ -116,7 +116,7 @@ export default function EventSingleDetails({ event }) {
         <Typography variant="h6" color="initial" sx={{ mb: 1 }}>
           A propos de l&apos;événement
         </Typography>
-        <Typography variant="body1" color="text.disabled">
+        <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
           {event.description}
         </Typography>
       </Box>
@@ -125,9 +125,7 @@ export default function EventSingleDetails({ event }) {
         <Typography variant="h6" color="initial" sx={{ mb: 1 }}>
           Hôte
         </Typography>
-        <Typography variant="body1" color="text.disabled">
-          {event.organization}
-        </Typography>
+        <Typography variant="body1">{event.organization}</Typography>
       </Box>
       {/* Register */}
       <Box sx={{ p: 2, pb: 6 }}>
