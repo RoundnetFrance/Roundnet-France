@@ -51,6 +51,7 @@ export default function TimelineSingle({ event, withYear }) {
       {/* LEFT PANEL */}
       <Stack
         direction={{ xs: "row", md: "column" }}
+        alignItems={{ xs: "center", md: "flex-start" }}
         gap={{ xs: 2, md: 0 }}
         sx={{
           width: { xs: "100%", md: "25%" },

@@ -49,7 +49,9 @@ export default function getSchema(schemaRef, partials) {
         category: Joi.string().trim().required(),
         type: Joi.string().trim().required(),
         inscriptionUrl: Joi.string().trim().uri().required(),
+        beginnerFriendly: Joi.boolean().required(),
         price: Joi.string().trim().allow(""),
+        createdAt: Joi.date().required(),
       });
       break;
 

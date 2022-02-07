@@ -173,17 +173,24 @@ export default function DataSingleField({
   }
 
   return (
+    // Full row for boolean switches/checkboxes
     <Stack
-      direction={{ xs: "column", md: "row" }}
-      spacing={{ xs: 0, md: 4 }}
-      alignItems="flex-start"
+      direction={{ xs: type === "boolean" ? "row" : "column", md: "row" }}
+      spacing={{ xs: type === "boolean" ? 3 : 0, md: 4 }}
+      alignItems={type === "boolean" ? "center" : "flex-start"}
       my={2}
     >
       <Stack
         direction="row"
         alignItems="center"
         spacing={{ xs: 1, md: 2 }}
-        sx={{ width: { xs: "100%", md: "230px" }, pt: 0.5 }}
+        sx={{
+          width: {
+            xs: type === "boolean" ? "fit-content" : "100%",
+            md: "230px",
+          },
+          pt: 0.5,
+        }}
       >
         {editable ? (
           <EditIcon color="primary" fontSize="small" />

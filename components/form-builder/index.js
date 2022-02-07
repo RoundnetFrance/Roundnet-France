@@ -1,6 +1,7 @@
 import { useState, Fragment, useEffect, useMemo } from "react";
 import { validateForm, submitForm } from "../../helpers/form";
 import handleFormUpload from "../../helpers/form/handle-form-upload";
+import { getInitialState } from "../../helpers/form";
 
 // MUI IMPORTS
 import { Typography, Divider, Snackbar, Alert, Slide } from "@mui/material";
@@ -32,41 +33,12 @@ import FormField from "./form-field";
 //   * descriptionAfter: description shown after the form. Can be a string or a component
 
 // Function to get InitialState. Will be called as a Memo to prevent unnecessary re-renders
-function getInitialState(fields, getInitialErrors = false) {
-  // Returns an object with form ids and void values (empty strings for inputs, false for error handling)
-  return fields.reduce((acc, curr) => {
-    // Only case where we want to set the value to (not) void is the default value for a select or a checkbox for getInitialState
-    if (!getInitialErrors && curr.type === "select") {
-      const optionDefault = curr.options?.selectValues.find(
-        (option) => option.default
-      );
-      const defaultValue = optionDefault?.value || "";
-      return {
-        ...acc,
-        [curr.id]: defaultValue,
-      };
-    }
-
-    let value = "";
-    // Populate specific values
-    if (!getInitialErrors && curr.options?.defaultValue) {
-      value = curr.options?.defaultValue || "";
-    }
-
-    // Returns false for errors, empty string for inputs
-    return {
-      ...acc,
-      [curr.id]: getInitialErrors ? false : value,
-    };
-  }, {});
-}
 
 export default function FormBuilder({ formConfig }) {
   // Get form Config values
   const {
     name,
     fields,
-    slug,
     descriptionBefore,
     descriptionAfter,
     endpoint,
@@ -87,6 +59,7 @@ export default function FormBuilder({ formConfig }) {
       [id]: value,
     }));
   };
+
   // Handle errors
   const [errors, setErrors] = useState(initialFormErrors);
   // Handle loading

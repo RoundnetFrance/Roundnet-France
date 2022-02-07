@@ -81,6 +81,10 @@ function schemaConstructor(fields) {
           .pattern(/^[0-9]+$/);
         break;
 
+      case "boolean":
+        schemaKeys[id] = Joi.boolean();
+        break;
+
       // Defaults to a regular string (text/longtext/select)
       default:
         schemaKeys[id] = Joi.string().trim();
@@ -100,6 +104,45 @@ function schemaConstructor(fields) {
   });
 
   return Joi.object().keys(schemaKeys);
+}
+
+// * Handle formBuilder initialState builder
+export function getInitialState(fields, getInitialErrors = false) {
+  // Returns an object with form ids and void values (empty strings for inputs, false for error handling)
+  return fields.reduce((acc, curr) => {
+    // Only case where we want to set the value to (not) void is the default value for a select for getInitialState
+    if (!getInitialErrors && curr.type === "select") {
+      const optionDefault = curr.options?.selectValues.find(
+        (option) => option.default
+      );
+      const defaultValue =
+        optionDefault?.value || curr.type === "boolean" ? false : "";
+      return {
+        ...acc,
+        [curr.id]: defaultValue,
+      };
+    }
+
+    // In case of boolean
+    if (curr.type === "boolean") {
+      return {
+        ...acc,
+        [curr.id]: curr.options?.defaultChecked || false,
+      };
+    }
+
+    let value = "";
+    // Populate specific values
+    if (!getInitialErrors && curr.options?.defaultValue) {
+      value = curr.options?.defaultValue || "";
+    }
+
+    // Returns false for errors, empty string for inputs
+    return {
+      ...acc,
+      [curr.id]: getInitialErrors ? false : value,
+    };
+  }, {});
 }
 
 // * Handle form validation. Requires raw form values and fields definition from formConfig. Uses schemaConstructor() to generate the schema and validates it with Joi against the form values. If error, returns an custom InvalidForm throw. If valid, return fields. Can alter fields to match an API schema if apiSchema is provided.
@@ -186,7 +229,7 @@ export function validateAPI({ data, schema }) {
 export async function submitForm({ endpoint, values }) {
   // Get rid of empty values
   const data = Object.entries(values).reduce((acc, [key, value]) => {
-    if (value) {
+    if (value !== undefined && value !== "") {
       return {
         ...acc,
         [key]: value,
