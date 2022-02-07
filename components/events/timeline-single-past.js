@@ -18,7 +18,7 @@ export default function TimelineSinglePast({ event }) {
         color="primary"
         sx={{ fontWeight: "bold", mb: 0 }}
       >
-        <Link href="/event/slug">{event.title}</Link>
+        <Link href={`/calendrier/${event.slug}`}>{event.title}</Link>
       </Typography>
       <Typography variant="body1" color="text.disabled" sx={{ mb: 1 }}>
         {trimmedDescription}

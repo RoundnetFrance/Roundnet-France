@@ -30,6 +30,7 @@ import DataFields from "./data-fields";
 import Dialog from "../../../ui/dialog";
 import DataFieldsLoader from "./data-fields-loader";
 import Error from "../../../ui/error";
+import Link from "../../../ui/link";
 
 export default function AdminContentSingle({
   config: { title, tabs, endpoint, adminEndpoint },
@@ -213,7 +214,18 @@ export default function AdminContentSingle({
     <Container maxWidth="md" sx={{ mt: 5, mb: 2 }}>
       <PageTitle title={title} />
 
-      <Alert severity="info" variant="filled" sx={{ my: 4 }}>
+      {/* Back buttons */}
+      <Stack direction="row" gap={2}>
+        <Link href={adminEndpoint} color="secondary" isButton>
+          Retour
+        </Link>
+        <Link href="/rf-admin/dashboard" color="secondary" isButton>
+          Dashboard
+        </Link>
+      </Stack>
+
+      {/* Revalidate info */}
+      <Alert severity="info" variant="filled" sx={{ my: 2 }}>
         <Typography variant="body1">
           Les modifications peuvent mettre jusqu&apos;à 10 minutes pour
           s&apos;appliquer complètement. Lorsque ce délai est passé, rechargez
@@ -221,6 +233,9 @@ export default function AdminContentSingle({
         </Typography>
       </Alert>
 
+      <Divider sx={{ mb: 2 }} />
+
+      {/* Main data */}
       <Stack
         direction={{ xs: "column-reverse", sm: "row" }}
         justifyContent="space-between"
@@ -310,6 +325,7 @@ export default function AdminContentSingle({
         </Alert>
       </Snackbar>
 
+      {/* Dialog */}
       <Dialog
         title="Supprimer"
         open={dialogOpen}

@@ -37,6 +37,8 @@ export default function AdminFileField({
     setDialogOpen(false);
   }
 
+  console.log(image);
+
   // Handle HTML validation of file type
   let accept;
   switch (fileType) {
@@ -73,7 +75,7 @@ export default function AdminFileField({
             </IconButton>
           </Tooltip>
         )}
-        {fileType === "image" ? (
+        {fileType === "image" && (
           <Avatar sx={{ width: 60, height: 60 }}>
             <Image
               src={image || "/images/misc/placeholder.jpg"}
@@ -83,13 +85,12 @@ export default function AdminFileField({
               alt={label}
             />
           </Avatar>
-        ) : (
-          <Typography sx={{ my: { xs: 0, sm: 1 } }}>
-            <Link href={value} target="_blank">
-              Télécharger le fichier
-            </Link>
-          </Typography>
         )}
+        <Typography sx={{ my: { xs: 0, sm: 1 } }}>
+          <Link href={fileType === "image" ? image : value} target="_blank">
+            Télécharger le fichier
+          </Link>
+        </Typography>
       </Stack>
 
       {/* Dialog component */}
