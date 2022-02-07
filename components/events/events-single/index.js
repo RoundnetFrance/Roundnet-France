@@ -14,6 +14,7 @@ import {
   Stack,
   Chip,
   Button,
+  Link,
 } from "@mui/material";
 
 // MUI ICONS
@@ -55,7 +56,7 @@ export default function EventSingleDetails({ event }) {
         >
           {event.title}
         </Typography>
-        {/* Details */}
+        {/* City */}
         <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 0.5 }}>
           <PinDropIcon color="disabled" fontSize="small" />
           <Typography
@@ -66,6 +67,7 @@ export default function EventSingleDetails({ event }) {
             {event.city}
           </Typography>
         </Stack>
+        {/* Address (optional) */}
         {event.address && (
           <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 0.5 }}>
             <MyLocationIcon color="disabled" fontSize="small" />
@@ -74,10 +76,17 @@ export default function EventSingleDetails({ event }) {
               color="text.disabled"
               sx={{ fontWeight: "bold" }}
             >
-              {event.address}
+              <Link
+                href={`https://www.google.com/maps/search/${event.address} ${event.city}`}
+                color="text.disabled"
+                target="_blank"
+              >
+                {event.address}
+              </Link>
             </Typography>
           </Stack>
         )}
+        {/* Date */}
         <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 2 }}>
           <EventIcon color="disabled" fontSize="small" />
           <Typography
