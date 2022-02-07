@@ -209,6 +209,12 @@ const eventConfig = {
             ],
           },
         },
+        {
+          _id: "beginnerFriendly",
+          name: "Ouvert aux débutants",
+          type: "boolean",
+          editable: true,
+        },
       ],
     },
   ],

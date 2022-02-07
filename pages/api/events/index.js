@@ -49,6 +49,7 @@ export default async function handler(req, res) {
     // * Validate the data
     try {
       const schema = getSchema("event");
+      console.log(data);
       // Actual validation
       validateAPI({ data, schema });
     } catch (error) {
