@@ -5,6 +5,7 @@ import {
   getEventType,
   getEventField,
 } from "../../helpers/events";
+import { useState } from "react";
 
 // MUI IMPORTS
 import { Stack, Typography, Box, Paper } from "@mui/material";
@@ -17,6 +18,9 @@ import IconWithBackground from "../ui/icon-with-background";
 import Link from "../ui/link";
 
 export default function TimelineSingle({ event, withYear }) {
+  // Handle image state in case of error
+  const [imageSrc, setImageSrc] = useState(event.image);
+
   // Get event.description and truncate it to a maximum of 160 characters (without breaking words) and add a "..." at the end
   const truncatedDescription = event.description
     ? event.description.substring(0, 160) + "..."
@@ -109,10 +113,11 @@ export default function TimelineSingle({ event, withYear }) {
               }}
             >
               <Image
-                src={event.image || "/images/misc/placeholder.jpg"}
+                src={imageSrc || "/images/misc/placeholder.jpg"}
                 alt={event.title}
                 layout="fill"
                 objectFit="cover"
+                onError={() => setImageSrc("/images/misc/placeholder.jpg")}
               />
             </Paper>
           </Link>
