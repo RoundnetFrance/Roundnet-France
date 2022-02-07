@@ -38,6 +38,9 @@ export default async function handler(req, res) {
         .slice(0, 30)
         .replace(/[^a-z0-9-]/g, "")
         .replace(/-+$/, "");
+
+      // Add createdAt field
+      data.createdAt = new Date();
     } catch (err) {
       console.error(err);
       return res.status(400).json({ message: "Bad request" });

@@ -12,7 +12,7 @@ export default function TimelineSinglePast({ event }) {
       : event.description;
 
   return (
-    <Box sx={{ mb: 4 }}>
+    <Box sx={{ mb: 2 }}>
       <Typography
         variant="body1"
         color="primary"
@@ -20,9 +20,9 @@ export default function TimelineSinglePast({ event }) {
       >
         <Link href={`/calendrier/${event.slug}`}>{event.title}</Link>
       </Typography>
-      <Typography variant="body1" color="text.disabled" sx={{ mb: 1 }}>
+      {/* <Typography variant="body1" color="text.disabled" sx={{ mb: 1 }}>
         {trimmedDescription}
-      </Typography>
+      </Typography> */}
       <Typography variant="body1" color="text.disabled" sx={{ mb: 2 }}>
         {new Date(event.date).toLocaleDateString("fr-FR", {
           day: "numeric",
