@@ -54,9 +54,9 @@ export function getEventType(event) {
   }
 }
 
-export function getEventBeginner(beginnerFriendly) {
-  switch (beginnerFriendly) {
-    case true:
+export function getEventLevel(level) {
+  switch (level) {
+    case "beginnerFriendly":
       return "Ouvert aux débutants";
     default:
       return null;

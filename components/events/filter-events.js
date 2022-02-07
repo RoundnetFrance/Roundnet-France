@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // MUI IMPORTS
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 // COMPONENT IMPORTS
 import FilterSingle from "./filter-single";
@@ -33,6 +33,9 @@ const fieldsInitialState = {
     worlds: true,
     europe: true,
   },
+  level: {
+    beginnerFriendly: true,
+  },
 };
 
 export default function FilterEvents({ events, setEvents }) {
@@ -56,7 +59,8 @@ export default function FilterEvents({ events, setEvents }) {
         fieldFilters.field[event.field] &&
         fieldFilters.format[event.format] &&
         fieldFilters.category[event.category] &&
-        fieldFilters.type[event.type]
+        fieldFilters.type[event.type] &&
+        event.beginnerFriendly === fieldFilters.level.beginnerFriendly
       ) {
         return true;
       }
@@ -120,6 +124,15 @@ export default function FilterEvents({ events, setEvents }) {
         setFilters={handleFormatChange}
         handleCheckAll={handleCheckAll}
         type="type"
+      />
+
+      {/* Type */}
+      <FilterSingle
+        title="Niveau"
+        filters={fieldFilters.level}
+        setFilters={handleFormatChange}
+        handleCheckAll={handleCheckAll}
+        type="level"
       />
 
       <Button onClick={handleReset} sx={{ mt: 2 }}>
