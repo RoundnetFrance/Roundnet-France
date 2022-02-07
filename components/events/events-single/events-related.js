@@ -13,7 +13,7 @@ export default function EventRelated({ nextEvents }) {
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: "bold", mb: 4 }}>
-        Autres Tournois
+        Prochains Tournois
       </Typography>
       {nextEventsList}
 

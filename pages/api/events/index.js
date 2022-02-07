@@ -11,11 +11,11 @@ export default async function handler(req, res) {
       let events;
       // For public access
       if (!session) {
-        events = await getDocuments("events");
+        events = await getDocuments("events", null, null, { date: 1 });
       }
       // For admin access
       else {
-        events = await getDocuments("events");
+        events = await getDocuments("events", null, null, { date: 1 });
       }
       return res.status(200).json(events);
     } catch (error) {

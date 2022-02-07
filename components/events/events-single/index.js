@@ -22,6 +22,7 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 import EventIcon from "@mui/icons-material/Event";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 export default function EventSingleDetails({ event }) {
   // Handle chips of event details
@@ -31,20 +32,22 @@ export default function EventSingleDetails({ event }) {
     getEventFormat(event.format),
     getEventCategory(event.category),
   ];
-
   if (event.price) chips.push(`${event.price} €`);
-
   const chipsList = chips.map((chip) => (
     <Chip key={chip} label={chip} color="primary" variant="filled" />
   ));
 
+  // Determine if event is past
+  const isPastEvent = new Date(event.date) < new Date();
+
   return (
     <Paper
+      elevation={8}
       sx={{
         borderRadius: 4,
         backgroundColor: "rgba(255,255,255,0.9)",
         backdropFilter: "blur(12px)",
-        mb: 4,
+        mb: 8,
       }}
     >
       <Box sx={{ p: 2 }}>
@@ -142,12 +145,13 @@ export default function EventSingleDetails({ event }) {
           S&apos;inscrire à l&apos;événement
         </Typography>
         <Button
-          startIcon={<ExitToAppIcon />}
+          startIcon={isPastEvent ? <DoneAllIcon /> : <ExitToAppIcon />}
           href={event.inscriptionUrl}
           variant="contained"
           target="_blank"
+          disabled={isPastEvent}
         >
-          S&apos;inscrire en ligne
+          {isPastEvent ? "Evenement terminé" : "S'inscrire en ligne"}
         </Button>
       </Box>
     </Paper>

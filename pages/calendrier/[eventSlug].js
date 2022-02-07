@@ -28,6 +28,7 @@ export default function EventSingle({ event, nextEvents }) {
         sx={{
           position: "relative",
           top: "-25vh",
+          mb: "-20vh",
         }}
       >
         <EventSingleDetails event={event} />
@@ -57,7 +58,7 @@ export async function getStaticProps({ params }) {
   const nextEvents = await getDocuments(
     "events",
     {
-      date: { $gt: event.date },
+      date: { $gt: new Date().toISOString() },
     },
     {
       date: 1,

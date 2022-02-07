@@ -32,20 +32,11 @@ export default function DataSingleField({
   const theme = useTheme();
   const higherThanMd = useMediaQuery(theme.breakpoints.up("md"));
 
-  // Handle dialog state
-  const [dialogOpen, setDialogOpen] = useState(false);
-  function handleDialogOpen() {
-    setDialogOpen(true);
-  }
-  function handleDialogClose() {
-    setDialogOpen(false);
-  }
-
   // Get options of field
   const { name: label, type, editable, options } = fieldLayout;
 
   // Store image
-  const [imageURL] = useState(value);
+  const [imageUrl, setImageUrl] = useState(value);
 
   // Define which content to use
   let content;
@@ -154,51 +145,14 @@ export default function DataSingleField({
       );
       break;
 
-    // case "autocomplete":
-    //   content = (
-    //     <Autocomplete
-    //       disablePortal
-    //       freeSolo
-    //       selectOnFocus
-    //       clearOnBlur
-    //       handleHomeEndKeys
-    //       id={id}
-    //       value={value}
-    //       onChange={(event, newValue) => {
-    //         handleChange({
-    //           target: {
-    //             id,
-    //             value: newValue,
-    //           },
-    //         });
-    //       }}
-    //       options={options?.selectValues}
-    //       renderInput={(params) => <TextField {...params} label={label} />}
-    //     />
-    //   );
-    //   break;
-
-    // case "password":
-    //   content = (
-    //     <PasswordInput
-    //       label={label}
-    //       value={value}
-    //       name={id}
-    //       handleChange={handleChange}
-    //       error={booleanError}
-    //       helperText={error}
-    //       confirm={options?.passwordConfirm}
-    //       required={options?.required}
-    //     />
-    //   );
-    //   break;
-
     case "file":
+      console.log(value, imageUrl);
       content = (
         <AdminFileField
           id={id}
           value={value}
-          image={imageURL}
+          image={imageUrl}
+          setImage={setImageUrl}
           handleChange={handleValuesChange}
           editable={editable}
           fileType={options?.fileConfig?.type}
