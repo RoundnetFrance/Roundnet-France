@@ -1,13 +1,19 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 // MUI IMPORTS
-import { Paper, Container, Stack, Typography, Box, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-
+import {
+  Paper,
+  Container,
+  Stack,
+  Typography,
+  Box,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 function BoxWrapper({ children, title, size, onSubmit, noValidate }) {
   const theme = useTheme();
-  const smallDevice = useMediaQuery(theme.breakpoints.down('sm'));
+  const smallDevice = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Stack
@@ -18,11 +24,19 @@ function BoxWrapper({ children, title, size, onSubmit, noValidate }) {
       }}
     >
       <Container maxWidth={size} disableGutters={smallDevice}>
-        <Typography variant="h6" component="h3" sx={{ mb: 1 }}>
+        <Typography
+          variant="h6"
+          component="h3"
+          sx={{ mb: 1, px: smallDevice ? 2 : 0 }}
+        >
           {title}/
         </Typography>
         <Paper variant="outlined" sx={{ p: 4 }}>
-          <Box component={onSubmit ? 'form' : 'div'} onSubmit={onSubmit} noValidate={noValidate}>
+          <Box
+            component={onSubmit ? "form" : "div"}
+            onSubmit={onSubmit}
+            noValidate={noValidate}
+          >
             <Stack direction="column" spacing={2}>
               {children}
             </Stack>
@@ -42,7 +56,7 @@ BoxWrapper.propTypes = {
 };
 
 BoxWrapper.defaultProps = {
-  size: 'md',
+  size: "md",
   onSubmit: null,
   noValidate: false,
 };

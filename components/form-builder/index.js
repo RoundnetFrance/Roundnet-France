@@ -108,6 +108,18 @@ export default function FormBuilder({ formConfig }) {
     error: false,
   });
 
+  // Get all the options.optional.isParent fields and put them into object with true value with reduce. Use to control parent checkboxes in FormField
+  const parentFields = useMemo(() => {
+    const parentFields = {};
+    fields.forEach((field) => {
+      if (field.options?.optional?.isParent) {
+        parentFields[field.id] = false;
+      }
+    });
+    return parentFields;
+  }, [fields]);
+  const [parentCheckboxes, setParentCheckboxes] = useState(parentFields);
+
   // Handle close of snackbar
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -216,6 +228,8 @@ export default function FormBuilder({ formConfig }) {
           value={form[field.id]}
           error={errors && errors[field.id]}
           handleChange={handleChange}
+          parentCheckboxes={parentCheckboxes}
+          setParentCheckboxes={setParentCheckboxes}
         />
       ))}
 
