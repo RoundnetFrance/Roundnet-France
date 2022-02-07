@@ -146,7 +146,6 @@ export default function DataSingleField({
       break;
 
     case "file":
-      console.log(value, imageUrl);
       content = (
         <AdminFileField
           id={id}

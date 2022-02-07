@@ -58,6 +58,8 @@ export default function AdminContentSingle({
     setValues((prev) => ({ ...prev, [id]: value }));
   }
 
+  console.log(values);
+
   // Handle loading state on submit/delete button
   const [loading, setLoading] = useState(false);
 
