@@ -52,7 +52,6 @@ export async function getStaticProps() {
     },
     { date: 1 }
   );
-  console.log(events);
   return {
     props: {
       events,

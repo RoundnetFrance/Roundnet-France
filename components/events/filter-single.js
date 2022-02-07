@@ -3,6 +3,7 @@ import {
   getEventCategory,
   getEventFormat,
   getEventField,
+  getEventLevel,
 } from "../../helpers/events";
 
 // MUI IMPORTS
@@ -27,7 +28,6 @@ export default function FilterSingle({
   setFilters,
   type,
   handleCheckAll,
-  handleUncheckAll,
 }) {
   // Get litteral label from specified type. If type is not supported, simply return the field as is.
   let getLabel;
@@ -48,6 +48,10 @@ export default function FilterSingle({
       getLabel = getEventType;
       break;
 
+    case "level":
+      getLabel = getEventLevel;
+      break;
+
     default:
       getLabel = (field) => field;
       break;
@@ -55,6 +59,7 @@ export default function FilterSingle({
 
   // Return as many field checkboxes as needed
   const fieldsCheckboxes = Object.keys(filters).map((value) => {
+    console.log(value);
     return (
       <FormControlLabel
         key={value}

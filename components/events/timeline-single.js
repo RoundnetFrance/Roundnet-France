@@ -4,7 +4,6 @@ import {
   getEventFormat,
   getEventType,
   getEventField,
-  getEventBeginner,
   getEventCategory,
 } from "../../helpers/events";
 import { useState } from "react";
@@ -127,7 +126,7 @@ export default function TimelineSingle({ event, withYear }) {
             <RowCenteredStack>
               <FavoriteIcon fontSize="small" color="disabled" />
               <Typography variant="body2" color="text.disabled">
-                {getEventBeginner(event.beginnerFriendly)}
+                Ouvert aux débutants
               </Typography>
             </RowCenteredStack>
           )}
