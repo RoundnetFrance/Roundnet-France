@@ -211,6 +211,14 @@ export default function CreateEventForm() {
         },
       },
       {
+        id: "beginnerFriendly",
+        label: "Ouvert aux débutants",
+        type: "boolean",
+        options: {
+          required: true,
+        },
+      },
+      {
         id: "inscriptionUrl",
         label: "Lien d'inscription",
         type: "url",

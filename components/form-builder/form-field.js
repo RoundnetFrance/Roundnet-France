@@ -17,6 +17,7 @@ import {
   FormGroup,
   Checkbox,
   FormControlLabel,
+  Switch,
 } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
@@ -122,6 +123,30 @@ export default function FormField({
           multiline
           rows={options?.multilineRows || 4}
         />
+      );
+      break;
+
+    case "boolean":
+      input = (
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                id={id}
+                checked={value}
+                onChange={() => {
+                  handleChange({
+                    target: {
+                      id,
+                      value: !value,
+                    },
+                  });
+                }}
+              />
+            }
+            label={label}
+          />
+        </FormGroup>
       );
       break;
 
