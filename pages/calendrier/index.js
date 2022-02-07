@@ -31,7 +31,24 @@ export default function HomePage({ events }) {
 }
 
 export async function getStaticProps() {
-  const events = await getDocuments("events", null, null, { date: 1 });
+  const events = await getDocuments(
+    "events",
+    null,
+    {
+      date: 1,
+      description: 1,
+      title: 1,
+      slug: 1,
+      type: 1,
+      format: 1,
+      participants: 1,
+      field: 1,
+      image: 1,
+      city: 1,
+      category: 1,
+    },
+    { date: 1 }
+  );
   return {
     props: {
       events,

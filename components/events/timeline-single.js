@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 import Image from "next/image";
 import {
   getEventFormat,
@@ -15,7 +16,7 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import IconWithBackground from "../ui/icon-with-background";
 import Link from "../ui/link";
 
-export default function TimelineSingle({ event }) {
+export default function TimelineSingle({ event, withYear }) {
   // Get event.description and truncate it to a maximum of 160 characters (without breaking words) and add a "..." at the end
   const truncatedDescription = event.description
     ? event.description.substring(0, 160) + "..."
@@ -30,6 +31,7 @@ export default function TimelineSingle({ event }) {
       gap={2}
       sx={{
         p: 2,
+        my: 1,
         backgroundColor: isFrenchMajorEvent ? "primary.lightest" : "neutral",
         borderRadius: 2,
         transition: "all 0.2s ease-in-out",
@@ -53,6 +55,7 @@ export default function TimelineSingle({ event }) {
           {new Date(event.date).toLocaleDateString("fr-FR", {
             day: "numeric",
             month: "short",
+            year: withYear ? "numeric" : undefined,
           })}
         </Typography>
         <Typography
@@ -142,3 +145,12 @@ export default function TimelineSingle({ event }) {
     </Stack>
   );
 }
+
+TimelineSingle.propTypes = {
+  event: propTypes.object.isRequired,
+  withYear: propTypes.bool,
+};
+
+TimelineSingle.defaultProps = {
+  withYear: false,
+};

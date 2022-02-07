@@ -30,7 +30,6 @@ export default async function handler(req, res) {
     let data;
     try {
       data = req.body.data;
-      console.log(req.body);
 
       // Create the slug from data.title and replace spaces with dashes, lowercase, max 3 0 chars), remove special characters and remove unnecessary dashes at the end
       data.slug = data.title
