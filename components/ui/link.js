@@ -1,6 +1,7 @@
 import propTypes from "prop-types";
 import NextLink from "next/link";
-import MUILink from "@mui/material/Link";
+
+import { Link as MUILink } from "@mui/material";
 
 export default function Link({ href, children, color, underline }) {
   // If href begins with http, return only MUI link with _blank target
