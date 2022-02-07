@@ -20,6 +20,7 @@ import AbcIcon from "@mui/icons-material/Abc";
 import AdminTextField from "./admin-text-field";
 import AdminFileField from "./admin-file-field";
 import AdminSelectField from "./admin-select-field";
+import AdminDateField from "./admin-date-field";
 
 export default function DataSingleField({
   id,
@@ -140,42 +141,18 @@ export default function DataSingleField({
       });
       break;
 
-    // case "date":
-    //   content = (
-    //     <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
-    //       <DatePicker
-    //         disableFuture={options?.dateConfig?.disableFuture}
-    //         clearable={options?.dateConfig?.clearable}
-    //         error={booleanError}
-    //         id={id}
-    //         label={label}
-    //         openTo={options?.dateConfig?.openTo || "month"}
-    //         views={options?.dateConfig?.views || ["year", "month", "day"]}
-    //         value={value || null}
-    //         onChange={(newValue) => {
-    //           handleChange({
-    //             target: {
-    //               id,
-    //               value: newValue,
-    //             },
-    //           });
-    //         }}
-    //         renderInput={(params) => (
-    //           <Fragment>
-    //             <TextField label="Date" {...params} />
-    //             <FormHelperText
-    //               error={booleanError}
-    //               id={`${label}-error`}
-    //               sx={{ position: "relative", bottom: 10 }}
-    //             >
-    //               {error}
-    //             </FormHelperText>
-    //           </Fragment>
-    //         )}
-    //       />
-    //     </LocalizationProvider>
-    //   );
-    //   break;
+    case "date":
+      content = (
+        <AdminDateField
+          id={id}
+          value={value}
+          handleChange={handleValuesChange}
+          editable={editable}
+          required={options?.required || false}
+          dateConfig={options?.dateConfig}
+        />
+      );
+      break;
 
     // case "autocomplete":
     //   content = (
@@ -253,7 +230,7 @@ export default function DataSingleField({
         direction="row"
         alignItems="center"
         spacing={{ xs: 1, md: 2 }}
-        sx={{ width: "180px", maxWidth: "180px", pt: 0.5 }}
+        sx={{ width: { xs: "100%", md: "230px" }, pt: 0.5 }}
       >
         {editable ? (
           <EditIcon color="primary" fontSize="small" />
