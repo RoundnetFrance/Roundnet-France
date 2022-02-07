@@ -45,21 +45,14 @@ export async function getStaticProps() {
     "events",
     null,
     {
-      date: 1,
-      dateEnd: 1,
-      description: 1,
-      title: 1,
-      slug: 1,
-      type: 1,
-      format: 1,
-      participants: 1,
-      field: 1,
-      image: 1,
-      city: 1,
-      category: 1,
+      price: 0,
+      inscriptionUrl: 0,
+      address: 0,
+      organization: 0,
     },
     { date: 1 }
   );
+  console.log(events);
   return {
     props: {
       events,

@@ -4,6 +4,8 @@ import {
   getEventFormat,
   getEventType,
   getEventField,
+  getEventBeginner,
+  getEventCategory,
 } from "../../helpers/events";
 import { useState } from "react";
 
@@ -12,10 +14,15 @@ import { Stack, Typography, Box, Paper } from "@mui/material";
 
 // MUI ICONS
 import VerifiedIcon from "@mui/icons-material/Verified";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import GrassIcon from "@mui/icons-material/Grass";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
 
 // COMPONENT IMPORTS
 import IconWithBackground from "../ui/icon-with-background";
 import Link from "../ui/link";
+import RowCenteredStack from "../ui/row-centered-stack";
 
 export default function TimelineSingle({ event, withYear }) {
   // Handle image state in case of error
@@ -45,12 +52,13 @@ export default function TimelineSingle({ event, withYear }) {
       <Stack
         direction="column"
         sx={{
-          width: { xs: "100%", md: "15%" },
+          width: { xs: "100%", md: "25%" },
           pr: 1,
           borderRight: 0,
           borderColor: "#315bcd",
         }}
       >
+        {/* Date */}
         <Typography
           variant="h6"
           color={isFrenchMajorEvent ? "primary" : "initial"}
@@ -62,6 +70,7 @@ export default function TimelineSingle({ event, withYear }) {
             year: withYear ? "numeric" : undefined,
           })}
         </Typography>
+        {/* Date End (optional) */}
         {event.dateEnd && (
           <Typography
             variant="h6"
@@ -77,19 +86,44 @@ export default function TimelineSingle({ event, withYear }) {
                 })}
           </Typography>
         )}
+        {/* Type */}
         <Typography
           variant="body2"
           color={isFrenchMajorEvent ? "primary" : "text.disabled"}
-          sx={{ fontWeight: "bold" }}
+          sx={{ fontWeight: "bold", mb: 1 }}
         >
-          {getEventType(event.type)} / {getEventFormat(event.format)}
+          {getEventType(event.type)}
         </Typography>
-        <Typography variant="body2" color="text.disabled">
-          {event.participants} participants
-        </Typography>
-        <Typography variant="body2" color="text.disabled">
-          {getEventField(event.field)}
-        </Typography>
+        {/* Format / Catégorie */}
+        <RowCenteredStack>
+          <FactCheckIcon fontSize="small" color="disabled" />
+          <Typography variant="body2" color="text.disabled">
+            {getEventFormat(event.format)} / {getEventCategory(event.category)}
+          </Typography>
+        </RowCenteredStack>
+        {/* Participants */}
+        <RowCenteredStack>
+          <PeopleAltIcon fontSize="small" color="disabled" />
+          <Typography variant="body2" color="text.disabled">
+            {event.participants} participants
+          </Typography>
+        </RowCenteredStack>
+        {/* Field */}
+        <RowCenteredStack>
+          <GrassIcon fontSize="small" color="disabled" />
+          <Typography variant="body2" color="text.disabled">
+            {getEventField(event.field)}
+          </Typography>
+        </RowCenteredStack>
+        {/* Beginner */}
+        {event.beginnerFriendly && (
+          <RowCenteredStack>
+            <FavoriteIcon fontSize="small" color="disabled" />
+            <Typography variant="body2" color="text.disabled">
+              {getEventBeginner(event.beginnerFriendly)}
+            </Typography>
+          </RowCenteredStack>
+        )}
       </Stack>
 
       {/* MAIN PANEL */}
@@ -104,9 +138,9 @@ export default function TimelineSingle({ event, withYear }) {
             <Paper
               sx={{
                 position: "relative",
-                minWidth: "150px",
-                height: "150px",
-                maxHeight: "150px",
+                minWidth: "180px",
+                height: "180px",
+                maxHeight: "180px",
                 borderLeft: `4px solid #${
                   isFrenchMajorEvent ? "315bcd" : "333"
                 }`,

@@ -53,3 +53,12 @@ export function getEventType(event) {
       return "Championnats d'Europe";
   }
 }
+
+export function getEventBeginner(beginnerFriendly) {
+  switch (beginnerFriendly) {
+    case true:
+      return "Ouvert aux débutants";
+    default:
+      return null;
+  }
+}

@@ -20,6 +20,12 @@ export default function EventsSidebar({ pastEvents, events, setEvents }) {
       </Box>
       <Box>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
+          Derniers ajouts
+        </Typography>
+        {pastTimeline}
+      </Box>
+      <Box>
+        <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
           Evenements passés
         </Typography>
         {pastTimeline}
