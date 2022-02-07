@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 
 // MUI IMPORTS
-import { Stack, Typography, Box, Paper } from "@mui/material";
+import { Stack, Typography, Box, Paper, Divider } from "@mui/material";
 
 // MUI ICONS
 import VerifiedIcon from "@mui/icons-material/Verified";
@@ -50,7 +50,8 @@ export default function TimelineSingle({ event, withYear }) {
     >
       {/* LEFT PANEL */}
       <Stack
-        direction="column"
+        direction={{ xs: "row", md: "column" }}
+        gap={{ xs: 2, md: 0 }}
         sx={{
           width: { xs: "100%", md: "25%" },
           pr: 1,
@@ -58,72 +59,78 @@ export default function TimelineSingle({ event, withYear }) {
           borderColor: "#315bcd",
         }}
       >
-        {/* Date */}
-        <Typography
-          variant="h6"
-          color={isFrenchMajorEvent ? "primary" : "initial"}
-          sx={{ fontWeight: "bold" }}
-        >
-          {new Date(event.date).toLocaleDateString("fr-FR", {
-            day: "numeric",
-            month: "short",
-            year: withYear ? "numeric" : undefined,
-          })}
-        </Typography>
-        {/* Date End (optional) */}
-        {event.dateEnd && (
+        <Box>
+          {/* Date */}
           <Typography
             variant="h6"
             color={isFrenchMajorEvent ? "primary" : "initial"}
             sx={{ fontWeight: "bold" }}
           >
-            {event.dateEnd &&
-              " - " +
-                new Date(event.dateEnd).toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "short",
-                  year: withYear ? "numeric" : undefined,
-                })}
+            {new Date(event.date).toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "short",
+              year: withYear ? "numeric" : undefined,
+            })}
           </Typography>
-        )}
-        {/* Type */}
-        <Typography
-          variant="body2"
-          color={isFrenchMajorEvent ? "primary" : "text.disabled"}
-          sx={{ fontWeight: "bold", mb: 1 }}
-        >
-          {getEventType(event.type)}
-        </Typography>
-        {/* Format / Catégorie */}
-        <RowCenteredStack>
-          <FactCheckIcon fontSize="small" color="disabled" />
-          <Typography variant="body2" color="text.disabled">
-            {getEventFormat(event.format)} / {getEventCategory(event.category)}
+          {/* Date End (optional) */}
+          {event.dateEnd && (
+            <Typography
+              variant="h6"
+              color={isFrenchMajorEvent ? "primary" : "initial"}
+              sx={{ fontWeight: "bold" }}
+            >
+              {event.dateEnd &&
+                " - " +
+                  new Date(event.dateEnd).toLocaleDateString("fr-FR", {
+                    day: "numeric",
+                    month: "short",
+                    year: withYear ? "numeric" : undefined,
+                  })}
+            </Typography>
+          )}
+          {/* Type */}
+          <Typography
+            variant="body2"
+            color={isFrenchMajorEvent ? "primary" : "initial"}
+            sx={{ fontWeight: "bold", mb: 1 }}
+          >
+            {getEventType(event.type)}
           </Typography>
-        </RowCenteredStack>
-        {/* Participants */}
-        <RowCenteredStack>
-          <PeopleAltIcon fontSize="small" color="disabled" />
-          <Typography variant="body2" color="text.disabled">
-            {event.participants} participants
-          </Typography>
-        </RowCenteredStack>
-        {/* Field */}
-        <RowCenteredStack>
-          <GrassIcon fontSize="small" color="disabled" />
-          <Typography variant="body2" color="text.disabled">
-            {getEventField(event.field)}
-          </Typography>
-        </RowCenteredStack>
-        {/* Beginner */}
-        {event.beginnerFriendly && (
+        </Box>
+        <Divider orientation="vertical" flexItem />
+        <Box>
+          {/* Format / Catégorie */}
           <RowCenteredStack>
-            <FavoriteIcon fontSize="small" color="disabled" />
+            <FactCheckIcon fontSize="small" color="disabled" />
             <Typography variant="body2" color="text.disabled">
-              {getEventBeginner(event.beginnerFriendly)}
+              {getEventFormat(event.format)} /{" "}
+              {getEventCategory(event.category)}
             </Typography>
           </RowCenteredStack>
-        )}
+          {/* Participants */}
+          <RowCenteredStack>
+            <PeopleAltIcon fontSize="small" color="disabled" />
+            <Typography variant="body2" color="text.disabled">
+              {event.participants} participants
+            </Typography>
+          </RowCenteredStack>
+          {/* Field */}
+          <RowCenteredStack>
+            <GrassIcon fontSize="small" color="disabled" />
+            <Typography variant="body2" color="text.disabled">
+              {getEventField(event.field)}
+            </Typography>
+          </RowCenteredStack>
+          {/* Beginner */}
+          {event.beginnerFriendly && (
+            <RowCenteredStack>
+              <FavoriteIcon fontSize="small" color="disabled" />
+              <Typography variant="body2" color="text.disabled">
+                {getEventBeginner(event.beginnerFriendly)}
+              </Typography>
+            </RowCenteredStack>
+          )}
+        </Box>
       </Stack>
 
       {/* MAIN PANEL */}
