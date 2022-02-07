@@ -20,6 +20,7 @@ import {
 import PinDropIcon from "@mui/icons-material/PinDrop";
 import EventIcon from "@mui/icons-material/Event";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
 
 export default function EventSingleDetails({ event }) {
   // Handle chips of event details
@@ -65,6 +66,18 @@ export default function EventSingleDetails({ event }) {
             {event.city}
           </Typography>
         </Stack>
+        {event.address && (
+          <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 0.5 }}>
+            <MyLocationIcon color="disabled" fontSize="small" />
+            <Typography
+              variant="body1"
+              color="text.disabled"
+              sx={{ fontWeight: "bold" }}
+            >
+              {event.address}
+            </Typography>
+          </Stack>
+        )}
         <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 2 }}>
           <EventIcon color="disabled" fontSize="small" />
           <Typography
@@ -72,11 +85,19 @@ export default function EventSingleDetails({ event }) {
             color="text.disabled"
             sx={{ fontWeight: "bold" }}
           >
+            {event.dateEnd ? "Du" : "Le"}{" "}
             {new Date(event.date).toLocaleDateString("fr-FR", {
               day: "numeric",
               month: "long",
               year: "numeric",
             }) || "TBD"}
+            {event.dateEnd &&
+              " au " +
+                new Date(event.dateEnd).toLocaleDateString("fr-FR", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
           </Typography>
         </Stack>
         {/* Chip list */}

@@ -46,6 +46,7 @@ export async function getStaticProps() {
     null,
     {
       date: 1,
+      dateEnd: 1,
       description: 1,
       title: 1,
       slug: 1,

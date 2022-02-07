@@ -58,6 +58,21 @@ export default function TimelineSingle({ event, withYear }) {
             year: withYear ? "numeric" : undefined,
           })}
         </Typography>
+        {event.dateEnd && (
+          <Typography
+            variant="h6"
+            color={isFrenchMajorEvent ? "primary" : "initial"}
+            sx={{ fontWeight: "bold" }}
+          >
+            {event.dateEnd &&
+              " - " +
+                new Date(event.dateEnd).toLocaleDateString("fr-FR", {
+                  day: "numeric",
+                  month: "short",
+                  year: withYear ? "numeric" : undefined,
+                })}
+          </Typography>
+        )}
         <Typography
           variant="body2"
           color={isFrenchMajorEvent ? "primary" : "text.disabled"}
