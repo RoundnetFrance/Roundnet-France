@@ -91,7 +91,7 @@ export default function CreateEventForm() {
         type: "text",
         options: {
           required: true,
-          helperText: "Nombre maximum autorisé",
+          helperText: "Nombre maximum d'équipes autorisées",
         },
       },
       {

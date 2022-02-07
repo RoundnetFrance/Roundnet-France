@@ -1,17 +1,17 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import useClubs from "../../../../hooks/use-clubs";
+import useEvents from "../../../hooks/use-events";
 
 // MUI IMPORTS
 import { Container } from "@mui/material";
 
 // COMPONENT IMPORTS
-import DashboardWrapper from "../../../../components/layout/admin/dashboard-wrapper";
-import PageTitle from "../../../../components/ui/page-title";
-import AdminContent from "../../../../components/admin/admin-content";
-import CreateClubForm from "../../../../components/forms/create-club-form";
+import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper";
+import PageTitle from "../../../components/ui/page-title";
+import AdminContent from "../../../components/admin/admin-content";
+import CreateEventForm from "../../../components/forms/create-event-form";
 
-export default function ClubsAdminPage() {
+export default function EventsAdminPage() {
   // Hooks calls
   const router = useRouter();
 
@@ -24,8 +24,8 @@ export default function ClubsAdminPage() {
     },
   });
 
-  // Get clubs info
-  const { clubs, isLoading, isError } = useClubs();
+  // Get events info
+  const { events, isLoading, isError } = useEvents();
 
   const config = {
     name: "administrators",
@@ -35,8 +35,8 @@ export default function ClubsAdminPage() {
       image: "image",
       toCheck: "validated",
     },
-    data: clubs,
-    endpoint: "clubs",
+    data: events,
+    endpoint: "events",
     isLoading: isLoading,
     isError: isError,
   };
@@ -44,9 +44,9 @@ export default function ClubsAdminPage() {
   return (
     <DashboardWrapper>
       <Container maxWidth="lg">
-        <PageTitle title="Liste des clubs" />
+        <PageTitle title="Liste des tournois et événements" />
       </Container>
-      <AdminContent config={config} form={<CreateClubForm />} />
+      <AdminContent config={config} form={<CreateEventForm />} />
     </DashboardWrapper>
   );
 }

@@ -19,6 +19,7 @@ import AbcIcon from "@mui/icons-material/Abc";
 // COMPONENT IMPORTS
 import AdminTextField from "./admin-text-field";
 import AdminFileField from "./admin-file-field";
+import AdminSelectField from "./admin-select-field";
 
 export default function DataSingleField({
   id,
@@ -58,6 +59,19 @@ export default function DataSingleField({
           required={options?.required || false}
           rows={options?.multilineRows}
           longText
+        />
+      );
+      break;
+
+    case "select":
+      content = (
+        <AdminSelectField
+          id={id}
+          value={value}
+          handleChange={handleValuesChange}
+          editable={editable}
+          required={options?.required || false}
+          selectValues={options?.selectValues}
         />
       );
       break;
@@ -201,40 +215,6 @@ export default function DataSingleField({
     //     />
     //   );
     //   break;
-
-    // case "select": {
-    //   content = (
-    //     <FormControl error={booleanError} required={options?.required}>
-    //       <InputLabel id={id}>{label}</InputLabel>
-    //       <Select
-    //         labelId={id}
-    //         label={label}
-    //         id={id}
-    //         value={value}
-    //         onChange={(event) => {
-    //           handleChange({
-    //             target: {
-    //               id,
-    //               value: event.target.value,
-    //             },
-    //           });
-    //         }}
-    //       >
-    //         {options?.selectValues.map((item) => (
-    //           <MenuItem key={item.value} value={item.value}>
-    //             {item.label}
-    //           </MenuItem>
-    //         ))}
-    //       </Select>
-    //       {booleanError && (
-    //         <FormHelperText error={booleanError} id={`${label}-error`}>
-    //           {error}
-    //         </FormHelperText>
-    //       )}
-    //     </FormControl>
-    //   );
-    //   break;
-    // }
 
     case "file":
       content = (
