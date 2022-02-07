@@ -14,6 +14,9 @@ import {
   FormControl,
   InputLabel,
   Autocomplete,
+  FormGroup,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
@@ -26,11 +29,12 @@ export default function FormField({
   type,
   id,
   label,
-  required,
   options,
   value,
   handleChange,
   error,
+  parentCheckboxes,
+  setParentCheckboxes,
 }) {
   // Define error as a bool for MUI error prop
   const booleanError = error === false ? false : true;
@@ -65,11 +69,44 @@ export default function FormField({
     );
   }
 
+  // If input as an optional.parentText, return a checkbox
+  let optional;
+  if (options?.optional?.parentText) {
+    optional = (
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              value={parentCheckboxes[id]}
+              onChange={() => {
+                setParentCheckboxes((prevCheckboxes) => ({
+                  ...prevCheckboxes,
+                  [id]: !prevCheckboxes[id],
+                }));
+              }}
+            />
+          }
+          label={options?.optional?.parentText}
+        />
+      </FormGroup>
+    );
+  }
+
   // If there's a dividerBottom option, add a MUI Divider.
   const dividerBottom = options?.dividerBottom ? <Divider /> : null;
 
-  // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
+  // Define input.
   let input;
+
+  // If input is a optional.child and its options.parent checkbox is not checked, return null
+  if (
+    options?.optional?.isChild &&
+    !parentCheckboxes[options?.optional?.parent]
+  ) {
+    return null;
+  }
+
+  // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   switch (type) {
     case "longtext":
       input = (
@@ -299,6 +336,7 @@ export default function FormField({
   return (
     <Fragment>
       {input}
+      {optional}
       {dividerBottom}
     </Fragment>
   );

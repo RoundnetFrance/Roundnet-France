@@ -10,10 +10,10 @@ const menuElements = [
         name: "Règles Officielles",
         url: "/regles",
       },
-      // {
-      //   name: 'Calendrier',
-      //   url: '/competition/calendrier',
-      // },
+      {
+        name: "Calendrier",
+        url: "/calendrier",
+      },
       {
         name: "Coupe de France",
         url: "/competition/coupe-de-france-roundnet",

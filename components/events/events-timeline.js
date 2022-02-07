@@ -39,9 +39,18 @@ export default function EventsTimeline({ events }) {
 
   return (
     <Box sx={{ width: { xs: "100%", md: "75%" } }}>
-      <Typography variant="h4" sx={{ mb: 6 }}>
-        Tournois &amp; événements à venir
-      </Typography>
+      <Box mb={6}>
+        <Typography variant="h4" sx={{ mb: 1 }}>
+          Tournois &amp; événements à venir
+        </Typography>
+        <Typography variant="body1" color="initial">
+          Retrouvez tous les tournois et compétitions officielles et non
+          officielles de roundnet en France. Les événements{" "}
+          <span color="primary">en bleu</span> concernent les compétitions
+          officielles de la fédération (tour stops, championnats de France,
+          rencontres inter-clubs).
+        </Typography>
+      </Box>
       {timeline}
     </Box>
   );

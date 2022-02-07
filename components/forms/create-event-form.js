@@ -33,6 +33,11 @@ export default function CreateEventForm() {
         },
       },
       {
+        id: "address",
+        label: "Adresse",
+        type: "text",
+      },
+      {
         id: "date",
         label: "Date",
         type: "date",
@@ -42,6 +47,26 @@ export default function CreateEventForm() {
             clearable: true,
             openTo: "month",
             views: ["year", "month", "day"],
+          },
+          optional: {
+            isParent: true,
+            parentText: "Tournoi sur plusieurs jours",
+          },
+        },
+      },
+      {
+        id: "dateEnd",
+        label: "Date de fin",
+        type: "date",
+        options: {
+          dateConfig: {
+            clearable: true,
+            openTo: "month",
+            views: ["year", "month", "day"],
+          },
+          optional: {
+            isChild: true,
+            parent: "date",
           },
         },
       },
