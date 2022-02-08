@@ -28,13 +28,15 @@ export default async function handler(req, res) {
       // Store req.body into a variable without _id
       const data = { ...req.body };
       delete data._id;
+      console.log(data);
 
       try {
-        const response = await patchDocument(
-          "events",
-          { _id: ObjectId(eventId) },
-          data
-        );
+        // const response = await patchDocument(
+        //   "events",
+        //   { _id: ObjectId(eventId) },
+        //   data
+        // );
+        let response = "Hello";
         return res.status(200).json(response);
       } catch (error) {
         console.error(error);

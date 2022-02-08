@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // MUI IMPORTS
 import { Stack, Box, Typography, Collapse } from "@mui/material";
 
@@ -6,6 +8,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 
 // COMPONENT IMPORTS
 import TimelineSingle from "./timeline-single";
+import RowCenteredStack from "../ui/row-centered-stack";
 
 export default function EventsTimeline({ events }) {
   // For each event.date in events, extract the year from the date and create a new array with the events that have the same year
@@ -45,13 +48,27 @@ export default function EventsTimeline({ events }) {
         </Typography>
         <Typography variant="body1" color="initial">
           Retrouvez tous les tournois et compétitions officielles et non
-          officielles de roundnet en France. Les événements{" "}
-          <span color="primary">en bleu</span> concernent les compétitions
-          officielles de la fédération (tour stops, championnats de France,
-          rencontres inter-clubs).
+          officielles de roundnet en France.{" "}
         </Typography>
+        <RowCenteredStack sx={{ mb: 4, mt: 2, ml: 1 }}>
+          <Image
+            src="/images/logos/roundnet-france-tp.png"
+            width={50}
+            height={50}
+            alt="Roundnet France Official Tournament"
+            title="Roundnet France Official Tournament"
+          />
+          <Typography
+            variant="body1"
+            color="primary"
+            sx={{ fontWeight: "bold" }}
+          >
+            Les compétitions officielles de la fédération nationale <br />
+            sont en bleu et ornées de notre logo !
+          </Typography>
+        </RowCenteredStack>
+        {timeline}
       </Box>
-      {timeline}
     </Box>
   );
 }

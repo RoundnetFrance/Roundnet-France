@@ -35,7 +35,12 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
 
   // Upload files
   for (const { id, file } of filesToUpload) {
-    // Upload and get the download url
+    // If file is a string, it's a URL, meaning it's already uploaded. Don't touch it.
+    if (typeof file === "string") {
+      return;
+    }
+
+    // Else, it's a file. Upload and get the download url
     const url = await uploadFileToStorage({
       file,
       endpoint,

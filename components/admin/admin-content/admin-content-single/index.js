@@ -58,8 +58,6 @@ export default function AdminContentSingle({
     setValues((prev) => ({ ...prev, [id]: value }));
   }
 
-  console.log(values);
-
   // Handle loading state on submit/delete button
   const [loading, setLoading] = useState(false);
 
@@ -101,7 +99,7 @@ export default function AdminContentSingle({
   // Extract tab names from config data
   const tabNames = tabs.map((tab) => tab.name);
 
-  // Patch click button function
+  // *** PATCH click button function
   function handleUpdate(event) {
     event.preventDefault();
     setLoading(true);

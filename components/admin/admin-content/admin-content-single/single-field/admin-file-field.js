@@ -35,6 +35,7 @@ export default function AdminFileField({
   }
   function handleDialogClose() {
     setDialogOpen(false);
+    handleChange(id, image);
   }
 
   // Handle HTML validation of file type
