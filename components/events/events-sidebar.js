@@ -5,8 +5,17 @@ import { Box, Typography, Stack } from "@mui/material";
 import FilterEvents from "./filter-events";
 import TimelineSinglePast from "./timeline-single-past";
 
-export default function EventsSidebar({ pastEvents, events, setEvents }) {
+export default function EventsSidebar({
+  pastEvents,
+  events,
+  setEvents,
+  newEvents,
+}) {
   const pastTimeline = pastEvents.map((event) => (
+    <TimelineSinglePast key={event._id} event={event} />
+  ));
+
+  const newlyAddedTimeline = newEvents.map((event) => (
     <TimelineSinglePast key={event._id} event={event} />
   ));
 
@@ -22,7 +31,7 @@ export default function EventsSidebar({ pastEvents, events, setEvents }) {
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
           Derniers ajouts
         </Typography>
-        {pastTimeline}
+        {newlyAddedTimeline}
       </Box>
       <Box>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
