@@ -35,6 +35,9 @@ export default function AdminFileField({
   }
   function handleDialogClose() {
     setDialogOpen(false);
+  }
+  function handleDialogCancel() {
+    setDialogOpen(false);
     handleChange(id, image);
   }
 
@@ -100,7 +103,7 @@ export default function AdminFileField({
       <Dialog
         open={dialogOpen}
         title="Uploader"
-        handleClose={handleDialogClose}
+        handleClose={handleDialogCancel}
         cancelText="Annuler"
         confirmButton={
           <Button variant="contained" onClick={handleDialogClose}>

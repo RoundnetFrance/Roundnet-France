@@ -20,7 +20,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
-export default function EventSingle({ event }) {
+export default function EventSingleDetails({ event }) {
   // Handle chips of event details
   const chips = [
     { label: getEventLabel(event.field), icon: "grass" },
@@ -35,7 +35,7 @@ export default function EventSingle({ event }) {
     chips.push({ label: "Ouvert aux débutants", icon: "favorite" });
   const chipsList = chips.map((chip) => (
     <Chip
-      key={chip}
+      key={chip.label}
       label={chip.label}
       icon={<Icon>{chip.icon}</Icon>}
       color="primary"
