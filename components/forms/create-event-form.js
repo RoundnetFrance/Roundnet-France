@@ -24,6 +24,7 @@ export default function CreateEventForm({ isAdmin }) {
         type: "text",
         options: {
           required: true,
+          helperText: "Max. 80 caractères",
         },
       },
       {
@@ -195,7 +196,7 @@ export default function CreateEventForm({ isAdmin }) {
             },
             {
               label: "Tour Stop",
-              value: "tour-stop",
+              value: "tourStop",
               hide: !isAdmin,
             },
             {

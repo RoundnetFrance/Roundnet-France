@@ -36,7 +36,7 @@ export default function getSchema(schemaRef, partials) {
       schema = Joi.object({
         image: Joi.string().uri().allow(""),
         slug: Joi.string().trim().required(),
-        title: Joi.string().trim().required(),
+        title: Joi.string().trim().max(80).required(),
         city: Joi.string().trim().required(),
         address: Joi.string().trim().allow(""),
         date: Joi.date().required(),

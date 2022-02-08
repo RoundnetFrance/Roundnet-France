@@ -2,9 +2,9 @@
 import { Box, Typography } from "@mui/material";
 
 // COMPONENT IMPORTS
-import Link from "../../components/ui/link";
+import Link from "../ui/link";
 
-export default function TimelineSinglePast({ event }) {
+export default function TimelineSingleMini({ event }) {
   // Trim the description to a maximum of 80 characters and add an ellipsis if it's longer
   const trimmedDescription =
     event.description.length > 80

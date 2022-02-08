@@ -109,6 +109,8 @@ export default function getEventLabel(label) {
       return "Ouvert aux débutants";
     case "noBeginner":
       return "Confirmés";
+    case "tourStop":
+      return "Tour Stop";
     default:
       return label;
   }
