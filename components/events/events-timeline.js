@@ -55,6 +55,7 @@ export default function EventsTimeline({ events }) {
             src="/images/logos/roundnet-france-tp.png"
             width={50}
             height={50}
+            layout="fixed"
             alt="Roundnet France Official Tournament"
             title="Roundnet France Official Tournament"
           />
