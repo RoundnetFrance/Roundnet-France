@@ -31,12 +31,11 @@ export default async function handler(req, res) {
       console.log(data);
 
       try {
-        // const response = await patchDocument(
-        //   "events",
-        //   { _id: ObjectId(eventId) },
-        //   data
-        // );
-        let response = "Hello";
+        const response = await patchDocument(
+          "events",
+          { _id: ObjectId(eventId) },
+          data
+        );
         return res.status(200).json(response);
       } catch (error) {
         console.error(error);

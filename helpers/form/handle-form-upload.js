@@ -1,6 +1,11 @@
 import uploadFileToStorage from "./upload-file";
 
-export default async function handleFormUpload({ fields, form, endpoint }) {
+export default async function handleFormUpload({
+  fields,
+  form,
+  endpoint,
+  allowImageCreation,
+}) {
   const updatedForm = { ...form };
 
   // * Upload files to storage
@@ -19,6 +24,7 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
       return field._id;
     });
 
+  //! Old Check to keep
   const filesToUpload = [];
   for (const fileField of fileFields) {
     if (updatedForm[fileField]) {
@@ -29,9 +35,13 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
     }
   }
 
+  console.log(filesToUpload);
+
   if (filesToUpload.length === 0) {
     return updatedForm;
   }
+
+  console.log(updatedForm);
 
   // Upload files
   for (const { id, file } of filesToUpload) {

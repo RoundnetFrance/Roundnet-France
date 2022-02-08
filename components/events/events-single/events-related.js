@@ -7,7 +7,7 @@ import Link from "../../../components/ui/link";
 
 export default function EventRelated({ nextEvents }) {
   const nextEventsList = nextEvents.map((event) => (
-    <TimelineSingle key={event.id} event={event} withYear />
+    <TimelineSingle key={event._id} event={event} withYear />
   ));
 
   return (

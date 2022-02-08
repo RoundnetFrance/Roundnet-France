@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import propTypes from "prop-types";
+import { useState } from "react";
 
 // MUI IMPORTS
 import { Box, Container, Stack, Button, Typography } from "@mui/material";
@@ -32,6 +33,9 @@ function HomeIntro({
     },
   };
 
+  // Handle image error
+  const [imageUrl, setImageUrl] = useState(image);
+
   return (
     <Box
       style={styles.container}
@@ -43,13 +47,13 @@ function HomeIntro({
       }}
     >
       <Image
-        src={image}
+        src={imageUrl}
         alt={title}
         layout="fill"
         objectFit="cover"
         objectPosition={imagePosition}
         priority={true}
-        placeholder="shimmer"
+        onError={() => setImageUrl("/images/misc/placeholder.jpg")}
       />
 
       <Container sx={{ height: "100%" }}>
