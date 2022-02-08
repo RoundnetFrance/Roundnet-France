@@ -249,7 +249,6 @@ export default function FormField({
             }}
           >
             {options?.selectValues.map((item) => {
-              console.log(item.value, item.hide);
               // Hide if needed
               if (item.hide) return null;
               // Else, return option

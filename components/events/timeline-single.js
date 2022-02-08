@@ -5,9 +5,9 @@ import { useState } from "react";
 
 // MUI IMPORTS
 import { Stack, Typography, Box, Paper, Divider } from "@mui/material";
+import { useTheme } from "@mui/styles";
 
 // MUI ICONS
-import VerifiedIcon from "@mui/icons-material/Verified";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GrassIcon from "@mui/icons-material/Grass";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -19,6 +19,9 @@ import Link from "../ui/link";
 import RowCenteredStack from "../ui/row-centered-stack";
 
 export default function TimelineSingle({ event, withYear }) {
+  // Get theme from MUI
+  const theme = useTheme();
+
   // Handle image state in case of error
   const [imageSrc, setImageSrc] = useState(event.image);
 
@@ -52,7 +55,7 @@ export default function TimelineSingle({ event, withYear }) {
           width: { xs: "100%", md: "25%" },
           pr: 1,
           borderRight: 0,
-          borderColor: "#315bcd",
+          borderColor: theme.palette.primary.main,
         }}
       >
         <Box>
@@ -150,8 +153,10 @@ export default function TimelineSingle({ event, withYear }) {
                   minWidth: "180px",
                   height: "180px",
                   maxHeight: "180px",
-                  borderLeft: `4px solid #${
-                    isFrenchMajorEvent ? "315bcd" : "333"
+                  borderLeft: `4px solid ${
+                    isFrenchMajorEvent
+                      ? theme.palette.primary.main
+                      : theme.palette.neutralDark.main
                   }`,
                 }}
               >
