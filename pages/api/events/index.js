@@ -29,6 +29,7 @@ export default async function handler(req, res) {
   // POST method to create a new event
   if (req.method === "POST") {
     let data;
+    // * Transform data (slug, createdAt, type)
     try {
       data = req.body.data;
 
@@ -43,6 +44,11 @@ export default async function handler(req, res) {
 
       // Add createdAt field
       data.createdAt = new Date();
+
+      // If user is not an admin and manages to create a Coupe de France / Tour Stop event, defaults to "open"
+      if (!session && (data.type === "cdf" || data.type === "tour-stop")) {
+        data.type = "open";
+      }
     } catch (err) {
       console.error(err);
       return res.status(400).json({ message: "Bad request" });
@@ -51,7 +57,6 @@ export default async function handler(req, res) {
     // * Validate the data
     try {
       const schema = getSchema("event");
-      console.log(data);
       // Actual validation
       validateAPI({ data, schema });
     } catch (error) {

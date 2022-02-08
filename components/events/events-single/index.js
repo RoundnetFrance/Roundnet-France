@@ -1,9 +1,4 @@
-import {
-  getEventFormat,
-  getEventType,
-  getEventField,
-  getEventCategory,
-} from "../../../helpers/events";
+import getEventLabel from "../../../helpers/events";
 
 // MUI IMPORTS
 import {
@@ -15,6 +10,7 @@ import {
   Chip,
   Button,
   Link,
+  Icon,
 } from "@mui/material";
 
 // MUI ICONS
@@ -24,17 +20,27 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
-export default function EventSingleDetails({ event }) {
+export default function EventSingle({ event }) {
   // Handle chips of event details
   const chips = [
-    getEventField(event.field),
-    getEventType(event.type),
-    getEventFormat(event.format),
-    getEventCategory(event.category),
+    { label: getEventLabel(event.field), icon: "grass" },
+    { label: getEventLabel(event.type), icon: "emoji_events" },
+    { label: getEventLabel(event.format), icon: "group_work" },
+    { label: getEventLabel(event.category), icon: "fact_check" },
+    { label: `${event.participants} équipes max`, icon: "people_alt" },
   ];
-  if (event.price) chips.push(`${event.price} €`);
+  if (event.price)
+    chips.push({ label: `${event.price} € par équipe`, icon: "euro" });
+  if (event.beginnerFriendly)
+    chips.push({ label: "Ouvert aux débutants", icon: "favorite" });
   const chipsList = chips.map((chip) => (
-    <Chip key={chip} label={chip} color="primary" variant="filled" />
+    <Chip
+      key={chip}
+      label={chip.label}
+      icon={<Icon>{chip.icon}</Icon>}
+      color="primary"
+      variant="filled"
+    />
   ));
 
   // Determine if event is past
@@ -115,9 +121,9 @@ export default function EventSingleDetails({ event }) {
         {/* Chip list */}
         <Stack
           direction="row"
-          gap={0.5}
+          gap={1}
           alignItems="center"
-          sx={{ flexWrap: "wrap" }}
+          sx={{ flexWrap: "wrap", width: { xs: "100%", md: "60%" } }}
         >
           {chipsList}
         </Stack>

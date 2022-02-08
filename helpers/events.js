@@ -43,6 +43,8 @@ export function getEventType(event) {
   switch (event) {
     case "cdf":
       return "Coupe de France";
+    case "tour-stop":
+      return "Tour Stop";
     case "ric":
       return "Rencontres Inter-Club";
     case "open":
