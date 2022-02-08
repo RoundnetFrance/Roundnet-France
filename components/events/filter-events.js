@@ -30,8 +30,9 @@ const fieldsInitialState = {
     open: true,
     cdf: true,
     ric: true,
-    worlds: true,
-    europe: true,
+    // worlds: true,
+    // europe: true,
+    tourStop: true,
   },
   level: {
     beginnerFriendly: true,

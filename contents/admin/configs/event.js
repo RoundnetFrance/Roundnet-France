@@ -192,7 +192,7 @@ const eventConfig = {
               },
               {
                 label: "Tour Stop",
-                value: "tour-stop",
+                value: "tourStop",
               },
               {
                 label: "Rencontres Inter-Clubs",

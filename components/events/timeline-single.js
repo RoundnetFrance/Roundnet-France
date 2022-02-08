@@ -1,11 +1,6 @@
 import propTypes from "prop-types";
 import Image from "next/image";
-import {
-  getEventFormat,
-  getEventType,
-  getEventField,
-  getEventCategory,
-} from "../../helpers/events";
+import getEventLabel from "../../helpers/events";
 import { useState } from "react";
 
 // MUI IMPORTS
@@ -33,7 +28,8 @@ export default function TimelineSingle({ event, withYear }) {
     : "";
 
   // Check if event.type is a major french tournament (applies to some event details color)
-  const isFrenchMajorEvent = event.type === "cdf" || event.type === "ric";
+  const isFrenchMajorEvent =
+    event.type === "cdf" || event.type === "ric" || event.type === "tourStop";
 
   return (
     <Stack
@@ -94,7 +90,7 @@ export default function TimelineSingle({ event, withYear }) {
             color={isFrenchMajorEvent ? "primary" : "initial"}
             sx={{ fontWeight: "bold", mb: 1 }}
           >
-            {getEventType(event.type)}
+            {getEventLabel(event.type)}
           </Typography>
         </Box>
         <Divider orientation="vertical" flexItem />
@@ -103,8 +99,7 @@ export default function TimelineSingle({ event, withYear }) {
           <RowCenteredStack>
             <FactCheckIcon fontSize="small" color="disabled" />
             <Typography variant="body2" color="text.disabled">
-              {getEventFormat(event.format)} /{" "}
-              {getEventCategory(event.category)}
+              {getEventLabel(event.format)} / {getEventLabel(event.category)}
             </Typography>
           </RowCenteredStack>
           {/* Participants */}
@@ -118,7 +113,7 @@ export default function TimelineSingle({ event, withYear }) {
           <RowCenteredStack>
             <GrassIcon fontSize="small" color="disabled" />
             <Typography variant="body2" color="text.disabled">
-              {getEventField(event.field)}
+              {getEventLabel(event.field)}
             </Typography>
           </RowCenteredStack>
           {/* Beginner */}
@@ -135,63 +130,83 @@ export default function TimelineSingle({ event, withYear }) {
 
       {/* MAIN PANEL */}
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
         sx={{ width: { xs: "100%", md: "85%" } }}
       >
         {/* IMAGE & MAIN DETAILS */}
-        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
-          <Link href={`/calendrier/${event.slug}`}>
-            <Paper
-              sx={{
-                position: "relative",
-                minWidth: "180px",
-                height: "180px",
-                maxHeight: "180px",
-                borderLeft: `4px solid #${
-                  isFrenchMajorEvent ? "315bcd" : "333"
-                }`,
-              }}
-            >
-              <Image
-                src={imageSrc || "/images/misc/placeholder.jpg"}
-                alt={event.title}
-                layout="fill"
-                objectFit="cover"
-                onError={() => setImageSrc("/images/misc/placeholder.jpg")}
-              />
-            </Paper>
-          </Link>
-
-          {/* TEXT DETAIL */}
-          <Box>
-            <Typography
-              variant="body2"
-              color={isFrenchMajorEvent ? "primary" : "initial"}
-            >
-              {event.city}
-            </Typography>
-            <Stack direction="row" gap={1} alignItems="center" sx={{ mb: 1 }}>
-              <Typography
-                variant="h6"
-                color={isFrenchMajorEvent ? "primary" : "initial"}
-                sx={{ fontWeight: "bold" }}
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          gap={2}
+          justifyContent="space-between"
+          sx={{ width: "100%" }}
+        >
+          {/* IMAGE & MAIN DETAILS WITHOUT LINK ARROW */}
+          <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
+            <Link href={`/calendrier/${event.slug}`}>
+              <Paper
+                sx={{
+                  position: "relative",
+                  minWidth: "180px",
+                  height: "180px",
+                  maxHeight: "180px",
+                  borderLeft: `4px solid #${
+                    isFrenchMajorEvent ? "315bcd" : "333"
+                  }`,
+                }}
               >
-                <Link
-                  href={`/calendrier/${event.slug}`}
-                  color={
-                    isFrenchMajorEvent ? "primary" : "neutral.contrastText"
-                  }
-                >
-                  {event.title}
-                </Link>
+                <Image
+                  src={imageSrc || "/images/misc/placeholder.jpg"}
+                  alt={event.title}
+                  layout="fill"
+                  objectFit="cover"
+                  onError={() => setImageSrc("/images/misc/placeholder.jpg")}
+                />
+              </Paper>
+            </Link>
+            {/* TEXT DETAIL */}
+            <Box>
+              <Stack direction="row" gap={1} alignItems="center" sx={{ mb: 1 }}>
+                <Box>
+                  <Typography
+                    variant="body2"
+                    color={isFrenchMajorEvent ? "primary" : "initial"}
+                  >
+                    {event.city}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color={isFrenchMajorEvent ? "primary" : "initial"}
+                    sx={{ fontWeight: "bold" }}
+                  >
+                    <Link
+                      href={`/calendrier/${event.slug}`}
+                      color={
+                        isFrenchMajorEvent ? "primary" : "neutral.contrastText"
+                      }
+                    >
+                      {event.title}
+                    </Link>
+                  </Typography>
+                </Box>
+                {/* Verified Icon */}
+                {isFrenchMajorEvent && (
+                  <Box minWidth={50}>
+                    <Image
+                      src="/images/logos/roundnet-france-tp.png"
+                      width={50}
+                      height={50}
+                      alt="Roundnet France Official Tournament"
+                      title="Roundnet France Official Tournament"
+                    />
+                  </Box>
+                )}
+              </Stack>
+              <Typography variant="body1" color="text.disabled" gutterBottom>
+                {truncatedDescription}
               </Typography>
-              {isFrenchMajorEvent && <VerifiedIcon color="primary" />}
-            </Stack>
-            <Typography variant="body1" color="text.disabled" gutterBottom>
-              {truncatedDescription}
-            </Typography>
-          </Box>
+            </Box>
+          </Stack>
           <Box alignSelf="center">
             <Link href={`/calendrier/${event.slug}`}>
               <IconWithBackground

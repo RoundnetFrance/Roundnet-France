@@ -3,7 +3,7 @@ import { Box, Typography, Stack } from "@mui/material";
 
 // COMPONENT IMPORTS
 import FilterEvents from "./filter-events";
-import TimelineSinglePast from "./timeline-single-past";
+import TimelineSingleMini from "./timeline-single-mini";
 
 export default function EventsSidebar({
   pastEvents,
@@ -12,11 +12,11 @@ export default function EventsSidebar({
   newEvents,
 }) {
   const pastTimeline = pastEvents.map((event) => (
-    <TimelineSinglePast key={event._id} event={event} />
+    <TimelineSingleMini key={event._id} event={event} />
   ));
 
   const newlyAddedTimeline = newEvents.map((event) => (
-    <TimelineSinglePast key={event._id} event={event} />
+    <TimelineSingleMini key={event._id} event={event} />
   ));
 
   return (
