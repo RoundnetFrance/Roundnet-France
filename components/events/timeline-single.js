@@ -201,6 +201,7 @@ export default function TimelineSingle({ event, withYear }) {
                       src="/images/logos/roundnet-france-tp.png"
                       width={50}
                       height={50}
+                      layout="fixed"
                       alt="Roundnet France Official Tournament"
                       title="Roundnet France Official Tournament"
                     />
