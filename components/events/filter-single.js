@@ -1,10 +1,4 @@
-import {
-  getEventType,
-  getEventCategory,
-  getEventFormat,
-  getEventField,
-  getEventLevel,
-} from "../../helpers/events";
+import getEventLabel from "../../helpers/events";
 
 // MUI IMPORTS
 import {
@@ -17,6 +11,8 @@ import {
   AccordionDetails,
   ButtonBase,
   Box,
+  RadioGroup,
+  Radio,
 } from "@mui/material";
 
 // MUI ICONS
@@ -28,54 +24,28 @@ export default function FilterSingle({
   setFilters,
   type,
   handleCheckAll,
+  form,
 }) {
-  // Get litteral label from specified type. If type is not supported, simply return the field as is.
-  let getLabel;
-  switch (type) {
-    case "format":
-      getLabel = getEventFormat;
-      break;
-
-    case "field":
-      getLabel = getEventField;
-      break;
-
-    case "category":
-      getLabel = getEventCategory;
-      break;
-
-    case "type":
-      getLabel = getEventType;
-      break;
-
-    case "level":
-      getLabel = getEventLevel;
-      break;
-
-    default:
-      getLabel = (field) => field;
-      break;
-  }
-
-  // Return as many field checkboxes as needed
+  // Return as many fields as needed
   const fieldsCheckboxes = Object.keys(filters).map((value) => {
-    console.log(value);
-    return (
-      <FormControlLabel
-        key={value}
-        control={
-          <Checkbox
-            name={value}
-            checked={filters[value]}
-            size="small"
-            onClick={(event) => {
-              setFilters(event, type);
-            }}
-          />
-        }
-        label={getLabel(value)}
-      />
-    );
+    if (form === "checkbox") {
+      return (
+        <FormControlLabel
+          key={value}
+          control={
+            <Checkbox
+              name={value}
+              checked={filters[value]}
+              size="small"
+              onClick={(event) => {
+                setFilters(event, type);
+              }}
+            />
+          }
+          label={getEventLabel(value)}
+        />
+      );
+    }
   });
 
   return (
@@ -89,8 +59,12 @@ export default function FilterSingle({
           {title}
         </Typography>
       </AccordionSummary>
+      {/* CONTENT */}
       <AccordionDetails>
+        {/* Fields */}
         <FormGroup>{fieldsCheckboxes}</FormGroup>
+
+        {/* Helpers */}
         <Box mt={1}>
           <ButtonBase onClick={() => handleCheckAll(type, true)}>
             <Typography variant="caption" color="initial">

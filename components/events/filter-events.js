@@ -35,6 +35,7 @@ const fieldsInitialState = {
   },
   level: {
     beginnerFriendly: true,
+    noBeginner: true,
   },
 };
 
@@ -59,10 +60,21 @@ export default function FilterEvents({ events, setEvents }) {
         fieldFilters.field[event.field] &&
         fieldFilters.format[event.format] &&
         fieldFilters.category[event.category] &&
-        fieldFilters.type[event.type] &&
-        event.beginnerFriendly === fieldFilters.level.beginnerFriendly
+        fieldFilters.type[event.type]
       ) {
-        return true;
+        // Handle level filter (true/false to beginnerFriendly in db)
+        if (
+          fieldFilters.level.beginnerFriendly &&
+          fieldFilters.level.noBeginner
+        ) {
+          return true;
+        }
+        if (fieldFilters.level.beginnerFriendly) {
+          return event.beginnerFriendly === true;
+        }
+        if (fieldFilters.level.noBeginner) {
+          return !event.beginnerFriendly;
+        }
       }
     });
 
@@ -98,6 +110,7 @@ export default function FilterEvents({ events, setEvents }) {
         setFilters={handleFormatChange}
         handleCheckAll={handleCheckAll}
         type="field"
+        form="checkbox"
       />
       {/* Format */}
       <FilterSingle
@@ -106,6 +119,7 @@ export default function FilterEvents({ events, setEvents }) {
         setFilters={handleFormatChange}
         handleCheckAll={handleCheckAll}
         type="format"
+        form="checkbox"
       />
 
       {/* Catégorie */}
@@ -115,6 +129,7 @@ export default function FilterEvents({ events, setEvents }) {
         setFilters={handleFormatChange}
         handleCheckAll={handleCheckAll}
         type="category"
+        form="checkbox"
       />
 
       {/* Type */}
@@ -124,6 +139,7 @@ export default function FilterEvents({ events, setEvents }) {
         setFilters={handleFormatChange}
         handleCheckAll={handleCheckAll}
         type="type"
+        form="checkbox"
       />
 
       {/* Type */}
@@ -133,6 +149,7 @@ export default function FilterEvents({ events, setEvents }) {
         setFilters={handleFormatChange}
         handleCheckAll={handleCheckAll}
         type="level"
+        form="checkbox"
       />
 
       <Button onClick={handleReset} sx={{ mt: 2 }}>

@@ -8,12 +8,21 @@ import EventsSidebar from "./events-sidebar";
 import EventsTimeline from "./events-timeline";
 
 export default function Events({ events }) {
-  // Get only the events that are in the future
-  const futureEvents = events.filter((event) => {
-    const eventDate = new Date(event.date);
-    const today = new Date();
-    return eventDate > today;
-  });
+  // Get only the events that are in the future and sort them by event.date
+  const futureEvents = events
+    .filter((event) => {
+      const eventDate = new Date(event.date);
+      const today = new Date();
+      return eventDate > today;
+    })
+    .sort((a, b) => {
+      const aDate = new Date(a.date);
+      const bDate = new Date(b.date);
+      return aDate - bDate;
+    });
+
+  // Get the 3 lastly added events (invert events order)
+  const lastAddedEvents = events.reverse().slice(0, 3);
 
   // Get only the events that are in the past
   const pastEvents = events.filter((event) => {
@@ -31,9 +40,10 @@ export default function Events({ events }) {
       <EventsTimeline events={controlledEvents} />
       <Divider orientation="vertical" flexItem />
       <EventsSidebar
-        pastEvents={pastEventsFiltered}
-        setEvents={setControlledEvents}
         events={futureEvents}
+        setEvents={setControlledEvents}
+        pastEvents={pastEventsFiltered}
+        newEvents={lastAddedEvents}
       />
     </Stack>
   );
