@@ -1,7 +1,9 @@
+import propTypes from "prop-types";
+
 // COMPONENT IMPORTS
 import FormBuilder from "../form-builder";
 
-export default function CreateEventForm() {
+export default function CreateEventForm({ isAdmin }) {
   const formConfig = {
     name: "Détails de l'événement",
     endpoint: "events",
@@ -194,6 +196,7 @@ export default function CreateEventForm() {
             {
               label: "Tour Stop",
               value: "tour-stop",
+              hide: !isAdmin,
             },
             {
               label: "Rencontres Inter-Clubs",
@@ -202,6 +205,7 @@ export default function CreateEventForm() {
             {
               label: "Coupe de France",
               value: "cdf",
+              hide: !isAdmin,
             },
             {
               label: "Autres",
@@ -231,3 +235,11 @@ export default function CreateEventForm() {
 
   return <FormBuilder formConfig={formConfig} />;
 }
+
+CreateEventForm.propTypes = {
+  isAdmin: propTypes.bool,
+};
+
+CreateEventForm.defaultProps = {
+  isAdmin: false,
+};

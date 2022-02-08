@@ -248,11 +248,17 @@ export default function FormField({
               });
             }}
           >
-            {options?.selectValues.map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.label}
-              </MenuItem>
-            ))}
+            {options?.selectValues.map((item) => {
+              console.log(item.value, item.hide);
+              // Hide if needed
+              if (item.hide) return null;
+              // Else, return option
+              return (
+                <MenuItem key={item.value} value={item.value}>
+                  {item.label}
+                </MenuItem>
+              );
+            })}
           </Select>
           {booleanError && (
             <FormHelperText error={booleanError} id={`${label}-error`}>
