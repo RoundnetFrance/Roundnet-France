@@ -1,11 +1,6 @@
 import uploadFileToStorage from "./upload-file";
 
-export default async function handleFormUpload({
-  fields,
-  form,
-  endpoint,
-  allowImageCreation,
-}) {
+export default async function handleFormUpload({ fields, form, endpoint }) {
   const updatedForm = { ...form };
 
   // * Upload files to storage
@@ -35,13 +30,9 @@ export default async function handleFormUpload({
     }
   }
 
-  console.log(filesToUpload);
-
   if (filesToUpload.length === 0) {
     return updatedForm;
   }
-
-  console.log(updatedForm);
 
   // Upload files
   for (const { id, file } of filesToUpload) {
@@ -54,6 +45,7 @@ export default async function handleFormUpload({
     const url = await uploadFileToStorage({
       file,
       endpoint,
+      allowOverwrite: true,
     });
     // Update the form with the download url
     updatedForm[id] = url;
