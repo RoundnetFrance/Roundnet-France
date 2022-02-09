@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // MUI IMPORTS
 import {
@@ -35,8 +35,13 @@ export default function DataSingleField({
   // Get options of field
   const { name: label, type, editable, options } = fieldLayout;
 
-  // Store image
+  // Store image and change it only if value is string (is URI to Firebase Storage)
   const [imageUrl, setImageUrl] = useState(value);
+  useEffect(() => {
+    if (typeof value === "string") {
+      setImageUrl(value);
+    }
+  }, [value]);
 
   // Define which content to use
   let content;
