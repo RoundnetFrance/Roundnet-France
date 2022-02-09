@@ -6,7 +6,6 @@ export default function resizeImage({ file, width, height, type }) {
   return new Promise(function (resolve, reject) {
     let allow = ["jpg", "gif", "bmp", "png", "jpeg", "svg"];
     try {
-      console.log(file.type);
       if (
         file.name &&
         file.name.split(".").reverse()[0] &&
