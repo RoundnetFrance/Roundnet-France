@@ -226,7 +226,7 @@ export function validateAPI({ data, schema }) {
 }
 
 // * Handle form submission. Requires the endpoint and definitive values.
-export async function submitForm({ endpoint, values }) {
+export async function submitForm({ endpoint, values, sendNotification }) {
   // Get rid of empty values
   const data = Object.entries(values).reduce((acc, [key, value]) => {
     if (value !== undefined && value !== "") {
@@ -246,5 +246,48 @@ export async function submitForm({ endpoint, values }) {
     },
     body: JSON.stringify({ data }),
   });
+
+  // If sendNotification is true, send a notification to the user
+  if (sendNotification) {
+    try {
+      const response = await fetch("/api/send-mail/club-notification", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "Roundnet France - Notification",
+          subject: `[CLUB] Notification - ${data.title} est en attente de validation`,
+          message: `<p>Bonjour,</p>
+          <p>Le nouveau club <strong>${data.title}</strong> est en attente de validation.</p>
+          <p>Sa description :</p>
+          <p><i>${data.description}</i></p>
+          <p>Informations supplémentaires :</p>
+          <ul>
+            <li>Référent : ${data.referer}</li>
+            <li>Email : ${data.email}</li>
+            <li>Téléphone : ${data.phone}</li>
+            </ul>
+            <p>
+            <strong>
+              Vous pouvez le valider en passant par l'administration du site : <a href="https://www.roundnetfrance.fr/rf-admin">Administration</a>
+            </strong>
+            </p>`,
+          email: "roundnetfrance@gmail.com",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      console.log("Notification sent");
+      // Catch doesn't actually kill the process, but informs in case of malfunction
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Return response
   return response;
 }
