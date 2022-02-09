@@ -1,27 +1,30 @@
-import propTypes from 'prop-types';
+import propTypes from "prop-types";
 
 // MUI IMPORTS
-import { Typography, Divider, Box, Button } from '@mui/material'
+import { Typography, Divider, Box, Button } from "@mui/material";
 
 // COMPONENT IMPORTS
-import HalfImage from './half-image';
+import HalfImage from "./half-image";
 
-export default function DocumentHalfImage({ image, title, description, document, buttonText }) {
-  const readableUpdateDate = new Date(document.createdAt).toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+export default function DocumentHalfImage({
+  image,
+  title,
+  description,
+  document,
+  buttonText,
+}) {
+  const readableUpdateDate = new Date(document.createdAt).toLocaleDateString(
+    "fr-FR",
+    {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
+  );
 
   return (
-    <HalfImage
-      image={image}
-    >
-
-      <Typography
-        variant="h5"
-        color="white"
-      >
+    <HalfImage image={image}>
+      <Typography variant="h5" color="white">
         <strong>{title}</strong>
       </Typography>
 
@@ -30,7 +33,8 @@ export default function DocumentHalfImage({ image, title, description, document,
           color="white"
           sx={{
             mb: 4,
-          }} />
+          }}
+        />
       </Box>
 
       {description && (
@@ -39,7 +43,8 @@ export default function DocumentHalfImage({ image, title, description, document,
           sx={{
             mb: 2,
             color: "white",
-          }}>
+          }}
+        >
           {description}
         </Typography>
       )}
@@ -50,20 +55,28 @@ export default function DocumentHalfImage({ image, title, description, document,
           sx={{
             color: "white",
             mb: 4,
-          }}>
+          }}
+        >
           {document.description}
         </Typography>
       )}
 
-
-      <Button color="secondary" size="large" variant="contained" href={document.url} target="_blank">
+      <Button
+        color="secondary"
+        size="large"
+        variant="contained"
+        href={document.url}
+        target="_blank"
+      >
         {buttonText}
       </Button>
 
       <Typography variant="body2" mt={1} color="white">
-        Version {document.version}
+        Version : {document.version}
         <br />
-        Dernière mise à jour : {readableUpdateDate || new Date().toLocaleDateString('fr-FR', { year: 'numeric' })}
+        Dernière mise à jour :{" "}
+        {readableUpdateDate ||
+          new Date().toLocaleDateString("fr-FR", { year: "numeric" })}
       </Typography>
     </HalfImage>
   );
@@ -78,7 +91,7 @@ DocumentHalfImage.propTypes = {
 };
 
 DocumentHalfImage.defaultProps = {
-  image: '/images/pages/competition/regles/regles-pdf.jpg',
+  image: "/images/pages/competition/regles/regles-pdf.jpg",
   description: null,
-  buttonText: 'Télécharger le fichier',
+  buttonText: "Télécharger le fichier",
 };
