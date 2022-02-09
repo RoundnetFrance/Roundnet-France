@@ -5,6 +5,8 @@ import {
   patchDocument,
   deleteDocument,
 } from "../../../helpers/db";
+import storage from "../../../lib/init-firebase";
+import { ref, deleteObject } from "firebase/storage";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -45,6 +47,19 @@ export default async function handler(req, res) {
 
     // DEL method to delete specific app user
     if (req.method === "DELETE") {
+      // Delete from storage
+      let fileRef;
+      try {
+        const document = await getDocument("events", ObjectId(eventId), {
+          image: 1,
+          _id: 0,
+        });
+        fileRef = ref(storage, document.image);
+        await deleteObject(fileRef);
+      } catch (error) {
+        console.error(error);
+      }
+
       try {
         const response = await deleteDocument("events", {
           _id: ObjectId(eventId),
