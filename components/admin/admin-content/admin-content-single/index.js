@@ -33,7 +33,7 @@ import Error from "../../../ui/error";
 import Link from "../../../ui/link";
 
 export default function AdminContentSingle({
-  config: { title, tabs, endpoint, adminEndpoint },
+  config: { title, tabs, endpoint, adminEndpoint, frontEndpoint },
   data,
   mutate,
   documentId,
@@ -253,16 +253,31 @@ export default function AdminContentSingle({
             isLoading={isLoading}
           />
         </Box>
-        <LoadingButton
-          variant="contained"
-          onClick={handleUpdate}
-          loading={loading}
-          disabled={isLoading}
-          sx={{ minWidth: "150px" }}
-          fullWidth={!higherThanSm}
-        >
-          {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
-        </LoadingButton>
+        <Box>
+          {/* Display "View" link of document if frontEndpoint is given */}
+          {frontEndpoint && (
+            <Link
+              href={`/${frontEndpoint}/${values?.slug}`}
+              sx={{ mr: 1 }}
+              buttonIcon="visibility"
+              buttonVariant="text"
+              target="_blank"
+              isButton
+            >
+              Voir
+            </Link>
+          )}
+          <LoadingButton
+            variant="contained"
+            onClick={handleUpdate}
+            loading={loading}
+            disabled={isLoading}
+            sx={{ minWidth: "150px" }}
+            fullWidth={!higherThanSm}
+          >
+            {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
+          </LoadingButton>
+        </Box>
       </Stack>
 
       <Card>

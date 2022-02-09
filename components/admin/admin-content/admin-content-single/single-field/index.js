@@ -160,7 +160,6 @@ export default function DataSingleField({
           handleChange={handleValuesChange}
           editable={editable}
           fileType={options?.fileConfig?.type}
-          setImage={setImageUrl}
         />
       );
       break;

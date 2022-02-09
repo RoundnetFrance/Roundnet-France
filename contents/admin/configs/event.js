@@ -2,6 +2,7 @@ const eventConfig = {
   title: "Modification d'événement",
   endpoint: "events",
   adminEndpoint: "/rf-admin/clubs-et-communautes/calendrier",
+  frontEndpoint: "calendrier",
   tabs: [
     // GENERAL INFO
     {
