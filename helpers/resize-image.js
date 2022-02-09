@@ -1,6 +1,8 @@
 //  https://github.com/ibnYusrat/image-file-resize/blob/master/index.js
 
 export default function resizeImage({ file, width, height, type }) {
+  console.log("in resizeImage", width, height);
+
   return new Promise(function (resolve, reject) {
     let allow = ["jpg", "gif", "bmp", "png", "jpeg", "svg"];
     try {

@@ -24,6 +24,7 @@ const eventConfig = {
             required: true,
             fileConfig: {
               type: "image",
+              maxImageWidth: 1800,
             },
           },
         },
