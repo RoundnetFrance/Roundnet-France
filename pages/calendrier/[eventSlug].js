@@ -27,7 +27,7 @@ export default function EventSingle({ event, nextEvents }) {
         maxWidth="md"
         sx={{
           position: "relative",
-          top: "-25vh",
+          top: "-35vh",
           mb: "-20vh",
         }}
       >
