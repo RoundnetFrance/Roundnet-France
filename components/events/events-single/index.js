@@ -48,7 +48,7 @@ export default function EventSingleDetails({ event }) {
 
   return (
     <Paper
-      elevation={8}
+      elevation={4}
       sx={{
         borderRadius: 4,
         backgroundColor: "rgba(255,255,255,0.9)",
