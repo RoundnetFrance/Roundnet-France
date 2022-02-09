@@ -100,7 +100,7 @@ export default function AdminContentSingle({
   const tabNames = tabs.map((tab) => tab.name);
 
   // *** PATCH click button function
-  function handleUpdate(event) {
+  async function handleUpdate(event) {
     event.preventDefault();
     setLoading(true);
     async function patchData(originalData) {
@@ -148,6 +148,12 @@ export default function AdminContentSingle({
         if (!response.ok) {
           throw new Error(response.statusText);
         }
+
+        setSnackbarState({
+          open: true,
+          message: "Vos modifications ont bien été enregistrées",
+          severity: "success",
+        });
       } catch (error) {
         // If error, set error state and return original data for mutate function
         setSnackbarState({
@@ -167,11 +173,6 @@ export default function AdminContentSingle({
 
     // Actual action of mutate via SWR
     mutate(patchData);
-    setSnackbarState({
-      open: true,
-      message: "Vos modifications ont bien été enregistrées",
-      severity: "success",
-    });
   }
 
   // Delete click button function
