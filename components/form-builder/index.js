@@ -150,9 +150,11 @@ export default function FormBuilder({ formConfig }) {
       });
 
       // Submit the form (with the validated form return by the function above).
+      // If "sendNotification" is true, send a mail notification to the admin
       const response = await submitForm({
         values: formToSubmit,
         endpoint,
+        sendNotification: true,
       });
       const data = await response.json();
 
