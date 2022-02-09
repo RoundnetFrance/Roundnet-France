@@ -171,7 +171,25 @@ export default function TimelineSingle({ event, withYear }) {
             </Link>
             {/* TEXT DETAIL */}
             <Box>
-              <Stack direction="row" gap={1} alignItems="center" sx={{ mb: 1 }}>
+              <Stack
+                direction="row"
+                gap={1}
+                alignItems="flex-start"
+                sx={{ mb: 1 }}
+              >
+                {/* Verified Icon */}
+                {isFrenchMajorEvent && (
+                  <Box minWidth={50}>
+                    <Image
+                      src="/images/logos/roundnet-france-tp.png"
+                      width={50}
+                      height={50}
+                      layout="fixed"
+                      alt="Roundnet France Official Tournament"
+                      title="Roundnet France Official Tournament"
+                    />
+                  </Box>
+                )}
                 <Box>
                   <Typography
                     variant="body2"
@@ -194,19 +212,6 @@ export default function TimelineSingle({ event, withYear }) {
                     </Link>
                   </Typography>
                 </Box>
-                {/* Verified Icon */}
-                {isFrenchMajorEvent && (
-                  <Box minWidth={50}>
-                    <Image
-                      src="/images/logos/roundnet-france-tp.png"
-                      width={50}
-                      height={50}
-                      layout="fixed"
-                      alt="Roundnet France Official Tournament"
-                      title="Roundnet France Official Tournament"
-                    />
-                  </Box>
-                )}
               </Stack>
               <Typography variant="body1" color="text.disabled" gutterBottom>
                 {truncatedDescription}
