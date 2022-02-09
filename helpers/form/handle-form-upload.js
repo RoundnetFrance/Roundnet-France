@@ -1,6 +1,11 @@
 import uploadFileToStorage from "./upload-file";
 
-export default async function handleFormUpload({ fields, form, endpoint }) {
+export default async function handleFormUpload({
+  fields,
+  form,
+  endpoint,
+  allowOverwrite = false,
+}) {
   const updatedForm = { ...form };
 
   console.log(fields);
@@ -26,12 +31,13 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
   for (const fileField of fileFields) {
     if (updatedForm[fileField]) {
       // Find maxWidth and maxHeight of the image. Fields ids can be "id" or "_id"
-      const maxWidth = fields.find((field) => {
+      const field = fields.find((field) => {
         if (field.id) return field.id === fileField;
         return field._id === fileField;
-      })?.options?.fileConfig?.imageMaxWidth;
-      const maxHeight = fields.find((field) => field.id === fileField)?.options
-        ?.fileConfig?.imageMaxHeight;
+      });
+
+      const maxWidth = field?.options?.fileConfig?.imageMaxWidth;
+      const maxHeight = field?.options?.fileConfig?.imageMaxHeight;
       console.log("in handleFormUpload", maxWidth, maxHeight);
 
       filesToUpload.push({
@@ -60,6 +66,7 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
       endpoint,
       width: maxWidth,
       height: maxHeight,
+      allowOverwrite,
     });
     // Update the form with the download url
     updatedForm[id] = url;
