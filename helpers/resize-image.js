@@ -6,6 +6,7 @@ export default function resizeImage({ file, width, height, type }) {
   return new Promise(function (resolve, reject) {
     let allow = ["jpg", "gif", "bmp", "png", "jpeg", "svg"];
     try {
+      console.log(file.type);
       if (
         file.name &&
         file.name.split(".").reverse()[0] &&
@@ -64,7 +65,7 @@ export default function resizeImage({ file, width, height, type }) {
                 });
                 resolve(file);
               },
-              "image/jpeg",
+              file.type,
               1
             );
           }),

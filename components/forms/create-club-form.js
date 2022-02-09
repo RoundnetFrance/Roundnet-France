@@ -27,6 +27,7 @@ function CreateClubForm() {
           required: true,
           fileConfig: {
             type: "image",
+            imageMaxWidth: 600,
           },
         },
       },
