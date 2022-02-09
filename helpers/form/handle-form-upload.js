@@ -19,13 +19,23 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
       return field._id;
     });
 
-  //! Old Check to keep
+  // Get all files to upload (and their limit, if need be)
   const filesToUpload = [];
   for (const fileField of fileFields) {
     if (updatedForm[fileField]) {
+      // Find maxWidth and maxHeight of the image. Fields ids can be "id" or "_id"
+      const maxWidth = fields.find(
+        (field) => field.id === fileField || field._id === fileField
+      )?.options?.fileConfig?.maxImageWidth;
+      const maxHeight = fields.find((field) => field.id === fileField)?.options
+        ?.fileConfig?.maxImageWidth;
+      console.log("in handleFormUpload", maxWidth, maxHeight);
+
       filesToUpload.push({
         id: fileField,
         file: updatedForm[fileField],
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
       });
     }
   }
@@ -35,7 +45,7 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
   }
 
   // Upload files
-  for (const { id, file } of filesToUpload) {
+  for (const { id, file, maxHeight, maxWidth } of filesToUpload) {
     // If file is a string, it's a URL, meaning it's already uploaded. Don't touch it.
     if (typeof file === "string") {
       return;
@@ -46,6 +56,8 @@ export default async function handleFormUpload({ fields, form, endpoint }) {
       file,
       endpoint,
       allowOverwrite: true,
+      width: maxWidth,
+      height: maxHeight,
     });
     // Update the form with the download url
     updatedForm[id] = url;

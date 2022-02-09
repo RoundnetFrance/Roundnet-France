@@ -8,24 +8,24 @@ export default async function uploadFileToStorage({
   handleStateChange = () => {},
   allowOverwrite = false,
   width = 1800,
+  height,
 }) {
   // // handleStateChange in optional, make it void if not provided
   // if (!handleStateChange) {
   //   handleStateChange = () => {};
   // }
 
-  // Check if file is an image
-  const isImage = file.type.startsWith("image/");
+  // Check if file is an image  (type with? to avoid errors on file = URL)
+  const isImage = file.type?.startsWith("image/");
 
   // Resize image to maxWidth of 1800px
   if (isImage) {
     file = await resizeImage({
       file,
       width,
+      height,
     });
   }
-
-  console.log(file);
 
   // Create a Promise to return upload and return url
   return new Promise((resolve, reject) => {
