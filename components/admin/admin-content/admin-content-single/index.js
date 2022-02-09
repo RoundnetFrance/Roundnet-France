@@ -122,6 +122,7 @@ export default function AdminContentSingle({
             fields: files,
             form: values,
             endpoint,
+            allowOverwrite: true,
           });
         } catch (err) {
           console.error(err);

@@ -41,7 +41,7 @@ function HomeIntro({
       style={styles.container}
       sx={{
         bgcolor: "primary.main",
-        height: mini ? "20vh" : half ? "45vh" : "70vh",
+        height: mini ? "20vh" : half ? "60vh" : "70vh",
         width: "100%",
         position: "relative",
       }}

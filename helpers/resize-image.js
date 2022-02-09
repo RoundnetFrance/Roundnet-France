@@ -34,15 +34,15 @@ export default function resizeImage({ file, width, height, type }) {
             // Calculate new dimensions
             const elem = document.createElement("canvas");
 
-            // If original dimensions are smaller than the new dimensions, do nothing
+            // If original dimensions are smaller than the max dimensions, do nothing
             if (originalWidth <= imgWidth || originalHeight <= imgHeight) {
-              console.log("smaller than new dimensions");
+              console.log("smaller than max dimensions");
               elem.width = originalWidth;
               elem.height = originalHeight;
             }
-            // If original dimensions are bigger than the new dimensions, calculate the new dimensions
+            // If original dimensions are bigger than the max dimensions, calculate the max dimensions
             else {
-              console.log("bigger than new dimensions");
+              console.log("bigger than max dimensions");
               // Set propotional image size
               if (imgWidth !== "auto" && imgHeight !== "auto") {
                 elem.width = imgWidth;
