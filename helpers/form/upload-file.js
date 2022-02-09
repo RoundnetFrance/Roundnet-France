@@ -6,7 +6,7 @@ export default async function uploadFileToStorage({
   file,
   endpoint,
   handleStateChange = () => {},
-  allowOverwrite = false,
+  allowOverwrite,
   width = 1800,
   height,
 }) {
