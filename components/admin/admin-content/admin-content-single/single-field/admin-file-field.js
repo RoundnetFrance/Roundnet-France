@@ -23,6 +23,7 @@ export default function AdminFileField({
   id,
   value,
   image,
+  setImage,
   editable,
   handleChange,
   fileType,
@@ -86,6 +87,7 @@ export default function AdminFileField({
               height={60}
               objectFit="cover"
               alt={label}
+              onError={() => setImage("/images/misc/placeholder.jpg")}
             />
           </Avatar>
         )}
