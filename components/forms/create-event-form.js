@@ -15,6 +15,7 @@ export default function CreateEventForm({ isAdmin }) {
         options: {
           fileConfig: {
             type: "image",
+            imageMaxWidth: 1800,
           },
         },
       },
