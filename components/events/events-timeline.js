@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 // MUI IMPORTS
-import { Stack, Box, Typography, Collapse } from "@mui/material";
+import { Stack, Box, Typography, Collapse, Divider } from "@mui/material";
 
 // MUI ICONS
 import EventNoteIcon from "@mui/icons-material/EventNote";
@@ -34,6 +34,7 @@ export default function EventsTimeline({ events }) {
         <Stack direction="column" gap={4} key={event._id}>
           <Collapse in appear>
             <TimelineSingle event={event} />
+            <Divider />
           </Collapse>
         </Stack>
       ))}
