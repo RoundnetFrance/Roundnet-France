@@ -52,7 +52,7 @@ export default function TimelineSingle({ event, withYear }) {
         alignItems={{ xs: "center", md: "flex-start" }}
         gap={{ xs: 2, md: 0 }}
         sx={{
-          width: { xs: "100%", md: "25%" },
+          minWidth: { xs: "100%", sm: "20%", md: "25%" },
           pr: 1,
           borderRight: 0,
           borderColor: theme.palette.primary.main,
