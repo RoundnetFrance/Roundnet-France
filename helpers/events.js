@@ -22,6 +22,8 @@ export default function getEventLabel(label) {
       return "Masculin";
     case "female":
       return "Féminin";
+    case "free":
+      return "Libre";
     case "cdf":
       return "Coupe de France";
     case "ric":
