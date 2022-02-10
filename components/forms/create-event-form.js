@@ -6,6 +6,7 @@ import FormBuilder from "../form-builder";
 export default function CreateEventForm({ isAdmin }) {
   const formConfig = {
     name: "Détails de l'événement",
+    sendNotification: "event",
     endpoint: "events",
     fields: [
       {
