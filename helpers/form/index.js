@@ -59,6 +59,10 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().email({ tlds: { allow: false } });
         break;
 
+      case "number":
+        schemaKeys[id] = Joi.number();
+        break;
+
       case "file": {
         schemaKeys[id] = Joi.object();
         break;

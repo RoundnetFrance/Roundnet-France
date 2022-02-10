@@ -43,14 +43,14 @@ export default function getSchema(schemaRef, partials) {
         dateEnd: Joi.date().allow(""),
         organization: Joi.string().trim().allow(""),
         description: Joi.string().trim().required(),
-        participants: Joi.string().trim().required(),
+        participants: Joi.number().required(),
         field: Joi.string().trim().required(),
         format: Joi.string().trim().required(),
         category: Joi.string().trim().required(),
         type: Joi.string().trim().required(),
         inscriptionUrl: Joi.string().trim().uri().required(),
         beginnerFriendly: Joi.boolean().required(),
-        price: Joi.string().trim().allow(""),
+        price: Joi.number().allow(""),
         createdAt: Joi.date().required(),
       });
       break;
