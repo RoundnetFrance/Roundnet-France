@@ -20,6 +20,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
+// COMPONENT IMPORTS
+import ChipList from "../../ui/chip-list";
+
 export default function EventSingleDetails({ event }) {
   // Handle chips of event details
   const chips = [
@@ -29,19 +32,12 @@ export default function EventSingleDetails({ event }) {
     { label: getEventLabel(event.category), icon: "fact_check" },
     { label: `${event.participants} équipes max`, icon: "people_alt" },
   ];
+
+  // Optional chips
   if (event.price)
     chips.push({ label: `${event.price} € par équipe`, icon: "euro" });
   if (event.beginnerFriendly)
     chips.push({ label: "Ouvert aux débutants", icon: "favorite" });
-  const chipsList = chips.map((chip) => (
-    <Chip
-      key={chip.label}
-      label={chip.label}
-      icon={<Icon>{chip.icon}</Icon>}
-      color="primary"
-      variant="filled"
-    />
-  ));
 
   // Determine if event is past
   const isPastEvent = new Date(event.date) < new Date();
@@ -125,7 +121,7 @@ export default function EventSingleDetails({ event }) {
           alignItems="center"
           sx={{ flexWrap: "wrap", width: { xs: "100%", md: "60%" } }}
         >
-          {chipsList}
+          <ChipList chips={chips} />
         </Stack>
       </Box>
       <Divider sx={{ my: 4 }} />
