@@ -54,6 +54,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const event = await getDocument("events", { slug: params.eventSlug });
 
+  // If not event, return 404
+  if (!event) {
+    return {
+      notFound: true,
+    };
+  }
+
   // Get the next three events by date (from the current event)
   const nextEvents = await getDocuments(
     "events",
