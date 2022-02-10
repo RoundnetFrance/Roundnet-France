@@ -28,7 +28,7 @@ export default function EventsSidebar({
         </Typography>
         <Typography variant="body2" sx={{ mb: 1 }}>
           Votre événement est prêt et n&apos;a plus besoin que d&apos;un coup de
-          pouce ? Publiez le sur le site de la fédération !
+          pouce ? <strong>Publiez le sur le site de la fédération !</strong>
         </Typography>
         <Link href="/calendrier/ajouter" buttonIcon="add" isButton>
           Ajouter un tournoi

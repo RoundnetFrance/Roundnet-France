@@ -71,7 +71,15 @@ export default function EventsTimeline({ events }) {
             sont en bleu et ornées de notre logo !
           </Typography>
         </RowCenteredStack>
-        {timeline}
+        {/* If no events, display error message. */}
+        {events.length ? (
+          timeline
+        ) : (
+          <Typography variant="body1" color="initial" fontWeight="bold">
+            Faute ! On dirait qu&apos;aucun événement ne répond à vos critères.
+            Essayez peut-être d&apos;autres filtres ?
+          </Typography>
+        )}
       </Box>
     </Box>
   );
