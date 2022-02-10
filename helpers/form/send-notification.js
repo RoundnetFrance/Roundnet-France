@@ -1,3 +1,4 @@
+import { date } from "joi";
 import getEventLabel from "../events";
 
 export default function sendNotification({ type, data }) {
@@ -33,18 +34,23 @@ export default function sendNotification({ type, data }) {
             data.title
           }</strong> est en attente de validation.</p>
           <p>Sa description :</p>
-          <p><strong>Date: ${new Date(data.date).toLocaleDateString("fr-FR", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}</strong></p>
-                <p><strong>Date: ${date.city}</strong></p>
+          <p><strong>Date: ${
+            data.date &&
+            data.date.toLocaleDateString("fr-FR", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }</strong></p>
+          <p><strong>Ville : ${data.city}</strong></p>
           <p><i>${data.description}</i></p>
           <p>Informations supplémentaires :</p>
           <ul>
             <li>Participants : ${data.participants}</li>
-            <li>Prix : ${data.price} € par équipe</li>
+            ${
+              data.price ? "<li>Prix : " + data.price + "€ par équipe</li>" : ""
+            }
             <li>Terrain : ${getEventLabel(data.field)}</li>
             <li>Format : ${getEventLabel(data.format)}</li>
             <li>Catégorie : ${getEventLabel(data.category)}</li>

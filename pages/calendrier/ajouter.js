@@ -40,10 +40,10 @@ export default function CreateEventPage() {
         <Alert severity="warning" sx={{ fontWeight: "bold" }}>
           <AlertTitle sx={{ fontWeight: "bold" }}>Attention !</AlertTitle>
           Lorsque vous validez votre tournoi, vous ne pourrez plus le modifier
-          par la suite. Soyez bien sûrs des informations que vous entrez ! Dans
-          le cas où certaines informations vous sont encore inconnues (prix,
-          date exacte...), préférez remplir ce formulaire une fois votre
-          événement et ses détails fixés.
+          par la suite. Essayez d&apos;avoir un maximum d&apos;informations
+          avant de le remplir ! Si vous souhaitez modifier ou compléter votre
+          événement à posteriori, vous pouvez contacter la fédération via le
+          formulaire de contact.
         </Alert>
       </Container>
 

@@ -26,9 +26,13 @@ export default function resizeImage({ file, width, height, type }) {
           const img = new Image();
           img.src = event.target.result;
           (img.onload = (props) => {
-            // Get original dimensions
-            const originalWidth = props.path[0].width;
-            const originalHeight = props.path[0].height;
+            // Get original dimensions.
+            // Path is not supported the same by Chrome and Firefox. Props.path = Chrome, props.composedPath() = Firefox
+            const path =
+              props.path || (props.composedPath && props.composedPath());
+
+            const originalWidth = path[0].width;
+            const originalHeight = path[0].height;
 
             // Calculate new dimensions
             const elem = document.createElement("canvas");
