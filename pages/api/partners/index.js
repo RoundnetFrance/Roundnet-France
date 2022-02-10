@@ -18,10 +18,10 @@ export default async function handler(req, res) {
     }
   }
 
-  // Protected by session
-  if (session) {
-    // POST method to create a new rule file (only for admins)
-    if (req.method === "POST") {
+  // POST method to create a new rule file (only for admins)
+  if (req.method === "POST") {
+    // Protected by session
+    if (session) {
       const { data } = req.body;
 
       // * Validate the data
@@ -51,11 +51,11 @@ export default async function handler(req, res) {
         });
       }
     }
-  }
 
-  return res
-    .status(401)
-    .json({ error: "You must be authorized to create a rule file" });
+    return res
+      .status(401)
+      .json({ error: "You must be authorized to perform this action." });
+  }
 
   // If method is not supported
   return res.status(405).json({ error: "Method not allowed" });

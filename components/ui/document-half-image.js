@@ -43,6 +43,7 @@ export default function DocumentHalfImage({
           sx={{
             mb: 2,
             color: "white",
+            whiteSpace: "pre-line",
           }}
         >
           {description}
@@ -55,6 +56,7 @@ export default function DocumentHalfImage({
           sx={{
             color: "white",
             mb: 4,
+            whiteSpace: "pre-line",
           }}
         >
           {document.description}
