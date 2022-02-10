@@ -1,5 +1,5 @@
 // MUI IMPORTS
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, Divider } from "@mui/material";
 
 // COMPONENT IMPORTS
 import TimelineSingle from "../../../components/events/timeline-single";
@@ -7,7 +7,10 @@ import Link from "../../../components/ui/link";
 
 export default function EventRelated({ nextEvents }) {
   const nextEventsList = nextEvents.map((event) => (
-    <TimelineSingle key={event._id} event={event} withYear />
+    <Box key={event._id}>
+      <TimelineSingle event={event} withYear />
+      <Divider />
+    </Box>
   ));
 
   return (
