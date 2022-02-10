@@ -77,23 +77,22 @@ export default function ClubListPage({ clubs, error }) {
 
 export async function getStaticProps() {
   // Try to fetch members on local API
+  let data;
+  let error = false;
   try {
-    const data = await getDocuments("clubs", { validated: true }, null, {
+    data = await getDocuments("clubs", { validated: true }, null, {
       chip: 1,
     });
-    return {
-      props: {
-        clubs: data,
-      },
-      revalidate: 600,
-    };
-  } catch (e) {
-    // Return an error on props to display error message in UI
-    return {
-      props: {
-        error: true,
-        errorDetails: e.message || "Une erreur est survenue",
-      },
-    };
+  } catch (error) {
+    error = error;
   }
+
+  return {
+    props: {
+      clubs: data,
+      error,
+      errorDetails: error.message || "Une erreur est survenue",
+    },
+    revalidate: 600,
+  };
 }
