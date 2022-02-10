@@ -167,6 +167,10 @@ const eventConfig = {
           options: {
             selectValues: [
               {
+                label: "Libre",
+                value: "free",
+              },
+              {
                 label: "Mixte",
                 value: "mixed",
               },

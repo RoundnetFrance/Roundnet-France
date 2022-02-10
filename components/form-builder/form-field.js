@@ -356,7 +356,8 @@ export default function FormField({
           value={value}
           inputProps={{
             inputMode: "numeric",
-            pattern: "[0-9]*",
+            // pattern: "[0-9]*",
+            type: "number",
           }}
           onChange={handleChange}
           error={booleanError}

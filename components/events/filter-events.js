@@ -22,6 +22,7 @@ const fieldsInitialState = {
     other: true,
   },
   category: {
+    free: true,
     mixed: true,
     male: true,
     female: true,

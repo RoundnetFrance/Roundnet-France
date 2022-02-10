@@ -171,6 +171,10 @@ export default function CreateEventForm({ isAdmin }) {
           required: true,
           selectValues: [
             {
+              label: "Libre",
+              value: "free",
+            },
+            {
               label: "Mixte",
               value: "mixed",
             },
