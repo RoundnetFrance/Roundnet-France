@@ -239,7 +239,7 @@ export default function AdminContentSingle({
 
       {/* Main data */}
       <Stack
-        direction={{ xs: "column-reverse", sm: "row" }}
+        direction={{ xs: "column-reverse", md: "row" }}
         justifyContent="space-between"
         alignItems={{ xs: "flex-start", sm: "center" }}
         sx={{ mb: { xs: 2, sm: 4 } }}
@@ -253,12 +253,12 @@ export default function AdminContentSingle({
             isLoading={isLoading}
           />
         </Box>
-        <Box>
+        <Stack direction="row" gap={1}>
           {/* Display "View" link of document if frontEndpoint is given */}
           {frontEndpoint && (
             <Link
               href={`/${frontEndpoint}/${values?.slug}`}
-              sx={{ mr: 1 }}
+              sx={{ mr: 1, px: { xs: 4, sm: 2 } }}
               buttonIcon="visibility"
               buttonVariant="outlined"
               target="_blank"
@@ -278,7 +278,7 @@ export default function AdminContentSingle({
           >
             {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
           </LoadingButton>
-        </Box>
+        </Stack>
       </Stack>
 
       <Card>
