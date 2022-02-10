@@ -20,11 +20,15 @@ export default async function uploadFileToStorage({
 
   // Resize image to maxWidth of 1800px
   if (isImage) {
-    file = await resizeImage({
-      file,
-      width,
-      height,
-    });
+    try {
+      file = await resizeImage({
+        file,
+        width,
+        height,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // Create a Promise to return upload and return url

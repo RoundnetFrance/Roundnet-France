@@ -8,8 +8,6 @@ export default async function handleFormUpload({
 }) {
   const updatedForm = { ...form };
 
-  console.log(fields);
-
   // * Upload files to storage
   // Check if input fields are in fields. Else, return
   if (!fields.some((field) => field.type === "file")) {
