@@ -1,12 +1,12 @@
 import propTypes from "prop-types";
 
 // MUI IMPORTS
-import { Chip, Icon } from "@mui/material";
+import { Chip, Icon, Stack } from "@mui/material";
 
-export default function ChipList({ chips }) {
-  return chips.map((chip) => (
+export default function ChipList({ chips, sx }) {
+  const list = chips.map((chip) => (
     <Chip
-      key={chip.label}
+      key={chip.value}
       label={chip.label}
       icon={chip.icon && <Icon>{chip.icon}</Icon>}
       color="primary"
@@ -14,6 +14,17 @@ export default function ChipList({ chips }) {
       sx={{ px: 1 }}
     />
   ));
+
+  return (
+    <Stack
+      direction="row"
+      gap={1}
+      alignItems="center"
+      sx={{ ...sx, flexWrap: "wrap", width: { xs: "100%", md: "60%" } }}
+    >
+      {list}{" "}
+    </Stack>
+  );
 }
 
 ChipList.propTypes = {
@@ -23,4 +34,9 @@ ChipList.propTypes = {
       icon: propTypes.string,
     })
   ).isRequired,
+  sx: propTypes.object,
+};
+
+ChipList.defaultProps = {
+  sx: {},
 };

@@ -37,7 +37,7 @@ export default function TimelineSingle({ event, withYear }) {
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}
-      gap={{ xs: 2, md: 0 }}
+      gap={{ xs: 2, md: 1 }}
       sx={{
         p: 2,
         my: 1,
