@@ -129,6 +129,7 @@ function CreateClubForm() {
       },
     ],
     endpoint: "clubs",
+    sendNotification: "club",
     apiSchema: {
       image: "image",
       title: "organization",

@@ -42,6 +42,7 @@ export default function FormBuilder({ formConfig }) {
     descriptionBefore,
     descriptionAfter,
     endpoint,
+    sendNotification,
     apiSchema,
     submitText,
   } = formConfig;
@@ -154,7 +155,7 @@ export default function FormBuilder({ formConfig }) {
       const response = await submitForm({
         values: formToSubmit,
         endpoint,
-        sendNotification: true,
+        sendNotification,
       });
       const data = await response.json();
 
