@@ -51,15 +51,17 @@ export default function EventsTimeline({ events }) {
           Retrouvez tous les tournois et compétitions officielles et non
           officielles de roundnet en France.{" "}
         </Typography>
-        <RowCenteredStack sx={{ mb: 4, mt: 2, ml: 1 }}>
-          <Image
-            src="/images/logos/roundnet-france-tp.png"
-            width={50}
-            height={50}
-            layout="fixed"
-            alt="Roundnet France Official Tournament"
-            title="Roundnet France Official Tournament"
-          />
+        <RowCenteredStack sx={{ mb: 4, mt: 2, ml: 1 }} colBelow="xs">
+          <Box minWidth={50}>
+            <Image
+              src="/images/logos/roundnet-france-tp.png"
+              width={50}
+              height={50}
+              layout="fixed"
+              alt="Roundnet France Official Tournament"
+              title="Roundnet France Official Tournament"
+            />
+          </Box>
           <Typography
             variant="body1"
             color="primary"
