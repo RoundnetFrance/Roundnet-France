@@ -260,11 +260,12 @@ export default function AdminContentSingle({
               href={`/${frontEndpoint}/${values?.slug}`}
               sx={{ mr: 1 }}
               buttonIcon="visibility"
-              buttonVariant="text"
+              buttonVariant="outlined"
               target="_blank"
+              disabled={isLoading}
               isButton
             >
-              Voir
+              {isLoading ? <Skeleton width={40} /> : "Voir"}
             </Link>
           )}
           <LoadingButton
