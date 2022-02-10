@@ -2,9 +2,14 @@ import propTypes from "prop-types";
 
 import { Stack } from "@mui/material";
 
-export default function RowCenteredStack({ children, sx }) {
+export default function RowCenteredStack({ children, colBelow, sx }) {
   return (
-    <Stack direction="row" gap={1} alignItems="center" sx={sx}>
+    <Stack
+      direction={colBelow ? { xs: "column", [colBelow]: "row" } : "row"}
+      gap={1}
+      alignItems="center"
+      sx={sx}
+    >
       {children}
     </Stack>
   );
@@ -13,8 +18,10 @@ export default function RowCenteredStack({ children, sx }) {
 RowCenteredStack.propTypes = {
   children: propTypes.node.isRequired,
   sx: propTypes.object,
+  colBelow: propTypes.string,
 };
 
 RowCenteredStack.defaultProps = {
   sx: {},
+  colBelow: null,
 };

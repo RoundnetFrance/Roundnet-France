@@ -66,6 +66,7 @@ export async function getStaticProps({ params }) {
     "events",
     {
       date: { $gt: new Date().toISOString() },
+      validated: true,
     },
     {
       price: 0,
