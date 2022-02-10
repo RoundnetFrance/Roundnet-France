@@ -12,7 +12,9 @@ export default async function handler(req, res) {
       let events;
       // For public access
       if (!session) {
-        events = await getDocuments("events", null, null, { date: 1 });
+        events = await getDocuments("events", { validated: true }, null, {
+          date: 1,
+        });
       }
       // For admin access
       else {

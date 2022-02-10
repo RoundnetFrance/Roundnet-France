@@ -12,6 +12,7 @@ export default function Link({
   isButton,
   buttonIcon,
   buttonVariant,
+  disabled,
   sx,
 }) {
   // If href begins with http, return only MUI link with _blank target
@@ -41,6 +42,7 @@ export default function Link({
           sx={sx}
           startIcon={buttonIcon && <Icon>{buttonIcon}</Icon>}
           target={target}
+          disabled={disabled}
         >
           {children}
         </Button>
@@ -66,6 +68,7 @@ Link.propTypes = {
   buttonIcon: propTypes.string,
   buttonVariant: propTypes.string,
   target: propTypes.string,
+  disabled: propTypes.bool,
   sx: propTypes.object,
 };
 
@@ -76,5 +79,6 @@ Link.defaultProps = {
   buttonIcon: null,
   buttonVariant: "contained",
   target: "_self",
+  disabled: false,
   sx: {},
 };

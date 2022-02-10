@@ -37,7 +37,7 @@ export default function TimelineSingle({ event, withYear }) {
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}
-      gap={2}
+      gap={{ xs: 2, md: 0 }}
       sx={{
         p: 2,
         my: 1,
@@ -52,8 +52,8 @@ export default function TimelineSingle({ event, withYear }) {
         alignItems={{ xs: "center", md: "flex-start" }}
         gap={{ xs: 2, md: 0 }}
         sx={{
-          minWidth: { xs: "100%", sm: "20%", md: "25%" },
-          pr: 1,
+          minWidth: { xs: "100%", sm: "15%", md: "20%" },
+          maxWidth: { xs: "100%", sm: "15%", md: "20%" },
           borderRight: 0,
           borderColor: theme.palette.primary.main,
         }}
