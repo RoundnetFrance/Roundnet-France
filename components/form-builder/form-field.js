@@ -347,6 +347,25 @@ export default function FormField({
       break;
     }
 
+    case "number":
+      input = (
+        <TextField
+          id={id}
+          label={label}
+          variant="outlined"
+          value={value}
+          inputProps={{
+            inputMode: "numeric",
+            pattern: "[0-9]*",
+          }}
+          onChange={handleChange}
+          error={booleanError}
+          helperText={error || options?.helperText}
+          required={options?.required}
+        />
+      );
+      break;
+
     default:
       input = (
         <TextField

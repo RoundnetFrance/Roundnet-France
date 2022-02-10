@@ -93,18 +93,18 @@ export default function CreateEventForm({ isAdmin }) {
       {
         id: "participants",
         label: "Participants",
-        type: "text",
+        type: "number",
         options: {
           required: true,
-          helperText: "Nombre maximum d'équipes autorisées",
+          helperText: "Nombre maximum d'équipes autorisées (nombre uniquement)",
         },
       },
       {
         id: "price",
         label: "Prix",
-        type: "text",
+        type: "number",
         options: {
-          helperText: "Par équipe",
+          helperText: "Par équipe (nombre uniquement)",
         },
       },
       {
