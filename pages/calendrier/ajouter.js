@@ -8,6 +8,7 @@ import Hero from "../../components/ui/hero";
 import PageTitle from "../../components/ui/page-title";
 import Head from "../../components/head";
 import CreateEventForm from "../../components/forms/create-event-form";
+import Link from "../../components/ui/link";
 
 export default function CreateEventPage() {
   return (
@@ -42,8 +43,8 @@ export default function CreateEventPage() {
           Lorsque vous validez votre tournoi, vous ne pourrez plus le modifier
           par la suite. Essayez d&apos;avoir un maximum d&apos;informations
           avant de le remplir ! Si vous souhaitez modifier ou compléter votre
-          événement à posteriori, vous pouvez contacter la fédération via le
-          formulaire de contact.
+          événement à posteriori, vous pouvez contacter la fédération via le{" "}
+          <Link href="/qui-sommes-nous/contact">formulaire de contact</Link>.
         </Alert>
       </Container>
 
