@@ -302,6 +302,9 @@ export default function FormField({
             <Typography component="span" variant="body2">
               {value.name || "Aucun fichier séléctionné"}
             </Typography>
+            {options?.helperText && (
+              <FormHelperText>{options?.helperText}</FormHelperText>
+            )}
             {booleanError && (
               <FormHelperText error={booleanError} id={`${label}-error`}>
                 {error}

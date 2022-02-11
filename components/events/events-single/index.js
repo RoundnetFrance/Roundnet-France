@@ -1,4 +1,5 @@
 import getEventLabel from "../../../helpers/events";
+import Image from "next/image";
 
 // MUI IMPORTS
 import {
@@ -44,77 +45,102 @@ export default function EventSingleDetails({ event }) {
 
   return (
     <Paper
-      elevation={4}
+      elevation={2}
       sx={{
-        borderRadius: 4,
+        borderRadius: 2,
         backgroundColor: "rgba(255,255,255,0.9)",
         backdropFilter: "blur(12px)",
         mb: 8,
       }}
     >
-      <Box sx={{ p: { xs: 2, md: 4 } }}>
-        {/* Title */}
-        <Typography
-          variant="h4"
-          color="primary"
-          sx={{ fontWeight: "bold", my: 2 }}
-        >
-          {event.title}
-        </Typography>
-        {/* City */}
-        <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 0.5 }}>
-          <PinDropIcon color="disabled" fontSize="mdall" />
-          <Typography
-            variant="body1"
-            color="text.disabled"
-            sx={{ fontWeight: "bold" }}
-          >
-            {event.city}
+      <Stack
+        direction={{ xs: "column-reverse", sm: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ p: { xs: 2, md: 4 } }}
+        gap={2}
+      >
+        <Box width={{ xs: "100%", md: "60%" }}>
+          {/* Title */}
+          <Typography variant="h4" color="primary" sx={{ fontWeight: "bold" }}>
+            {event.title}
           </Typography>
-        </Stack>
-        {/* Address (optional) */}
-        {event.address && (
+          {/* City */}
           <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 0.5 }}>
-            <MyLocationIcon color="disabled" fontSize="mdall" />
+            <PinDropIcon color="disabled" fontSize="mdall" />
             <Typography
               variant="body1"
               color="text.disabled"
               sx={{ fontWeight: "bold" }}
             >
-              <Link
-                href={`https://www.google.com/maps/search/${event.address} ${event.city}`}
-                color="text.disabled"
-                target="_blank"
-              >
-                {event.address}
-              </Link>
+              {event.city}
             </Typography>
           </Stack>
-        )}
-        {/* Date */}
-        <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 2 }}>
-          <EventIcon color="disabled" fontSize="mdall" />
-          <Typography
-            variant="body1"
-            color="text.disabled"
-            sx={{ fontWeight: "bold" }}
-          >
-            {event.dateEnd ? "Du" : "Le"}{" "}
-            {new Date(event.date).toLocaleDateString("fr-FR", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            }) || "TBD"}
-            {event.dateEnd &&
-              " au " +
-                new Date(event.dateEnd).toLocaleDateString("fr-FR", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-          </Typography>
-        </Stack>
-      </Box>
+          {/* Address (optional) */}
+          {event.address && (
+            <Stack
+              direction="row"
+              gap={0.5}
+              alignItems="center"
+              sx={{ mb: 0.5 }}
+            >
+              <MyLocationIcon color="disabled" fontSize="mdall" />
+              <Typography
+                variant="body1"
+                color="text.disabled"
+                sx={{ fontWeight: "bold" }}
+              >
+                <Link
+                  href={`https://www.google.com/maps/search/${event.address} ${event.city}`}
+                  color="text.disabled"
+                  target="_blank"
+                >
+                  {event.address}
+                </Link>
+              </Typography>
+            </Stack>
+          )}
+          {/* Date */}
+          <Stack direction="row" gap={0.5} alignItems="center" sx={{ mb: 2 }}>
+            <EventIcon color="disabled" fontSize="mdall" />
+            <Typography
+              variant="body1"
+              color="text.disabled"
+              sx={{ fontWeight: "bold" }}
+            >
+              {event.dateEnd ? "Du" : "Le"}{" "}
+              {new Date(event.date).toLocaleDateString("fr-FR", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }) || "TBD"}
+              {event.dateEnd &&
+                " au " +
+                  new Date(event.dateEnd).toLocaleDateString("fr-FR", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+            </Typography>
+          </Stack>
+        </Box>
+        <Paper
+          sx={{
+            position: "relative",
+            height: { xs: "300px", sm: "200px" },
+            minWidth: { xs: "100%", sm: "200px" },
+            maxWidth: { xs: "100%", sm: "200px" },
+          }}
+        >
+          <Image
+            src={event.image || "/images/pages/event-single/placeholder.jpg"}
+            alt={event.title}
+            title={event.title}
+            objectFit="cover"
+            layout="fill"
+          />
+        </Paper>
+      </Stack>
 
       {/* Divider */}
       <Divider />

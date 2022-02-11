@@ -17,15 +17,26 @@ const eventConfig = {
           editable: true,
         },
         {
+          _id: "banner",
+          name: "Bannière",
+          type: "file",
+          editable: true,
+          options: {
+            fileConfig: {
+              type: "image",
+              imageMaxWidth: 1800,
+            },
+          },
+        },
+        {
           _id: "image",
           name: "Image",
           type: "file",
           editable: true,
           options: {
-            required: true,
             fileConfig: {
               type: "image",
-              imageMaxWidth: 1800,
+              imageMaxWidth: 600,
             },
           },
         },
