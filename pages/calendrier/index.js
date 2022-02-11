@@ -55,10 +55,10 @@ export default function EventsPage({
 }
 
 export async function getStaticProps() {
-  let lastAddedEvents = [];
-  let futureEvents = [];
-  let pastEvents = [];
-  let error = false;
+  let lastAddedEvents;
+  let futureEvents;
+  let pastEvents;
+  let error;
 
   try {
     const events = await getDocuments(
@@ -99,10 +99,10 @@ export async function getStaticProps() {
 
   return {
     props: {
-      futureEvents,
-      pastEvents,
-      lastAddedEvents,
-      error,
+      futureEvents: futureEvents || null,
+      pastEvents: pastEvents || null,
+      lastAddedEvents: lastAddedEvents || null,
+      error: error || null,
     },
     revalidate: 600,
   };
