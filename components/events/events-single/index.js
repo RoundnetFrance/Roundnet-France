@@ -1,4 +1,5 @@
 import getEventLabel from "../../../helpers/events";
+import { useState } from "react";
 import Image from "next/image";
 
 // MUI IMPORTS
@@ -11,6 +12,7 @@ import {
   Button,
   Link,
   Icon,
+  Modal,
 } from "@mui/material";
 
 // MUI ICONS
@@ -25,6 +27,15 @@ import ChipList from "../../ui/chip-list";
 import RowCenteredStack from "../../ui/row-centered-stack";
 
 export default function EventSingleDetails({ event }) {
+  // Handle image modal state
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  function handleModalOpen() {
+    setImageModalOpen(true);
+  }
+  function handleModalClose() {
+    setImageModalOpen(false);
+  }
+
   // Handle chips of event details
   const chips = [
     { label: getEventLabel(event.field), icon: "grass" },
@@ -126,11 +137,13 @@ export default function EventSingleDetails({ event }) {
         </Box>
         <Paper
           sx={{
+            cursor: "pointer",
             position: "relative",
             height: { xs: "300px", sm: "200px" },
             minWidth: { xs: "100%", sm: "200px" },
             maxWidth: { xs: "100%", sm: "200px" },
           }}
+          onClick={handleModalOpen}
         >
           <Image
             src={event.image || "/images/pages/event-single/placeholder.jpg"}
@@ -237,6 +250,35 @@ export default function EventSingleDetails({ event }) {
           )}
         </Box>
       </Stack>
+
+      {/* Image Modal */}
+      <Modal
+        open={imageModalOpen}
+        onClose={handleModalClose}
+        aria-labelledby="modal-image-title"
+        aria-describedby="modal-image-description"
+      >
+        <Paper
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+          }}
+        >
+          <Box width="600px" height="600px" position="relative">
+            <Image
+              src={event.image || "/images/pages/event-single/placeholder.jpg"}
+              alt={event.title}
+              title={event.title}
+              objectFit="cover"
+              layout="fill"
+            />
+          </Box>
+        </Paper>
+      </Modal>
     </Paper>
   );
 }
