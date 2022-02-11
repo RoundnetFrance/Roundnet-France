@@ -13,11 +13,12 @@ import CrossingItems from "../../components/ui/crossing-items";
 import CTAFooter from "../../components/ui/cta-footer";
 import LogoCarousel from "../../components/ui/logo-carousel";
 import Head from "../../components/head";
+import Error from "../../components/ui/error";
 
 // CONTENT
 import { whyJoinUs, clubKit } from "../../contents/clubs-communautes";
 
-function JoinRoundnetFrancePage({ clubLogos }) {
+export default function JoinRoundnetFrancePage({ clubLogos, error }) {
   return (
     <Fragment>
       <Head
@@ -75,10 +76,14 @@ function JoinRoundnetFrancePage({ clubLogos }) {
       <Divider />
 
       <Box mt={6}>
-        <LogoCarousel
-          title="Ils adhèrent à Roundnet France"
-          logos={clubLogos}
-        />
+        {error ? (
+          <Error message={error} />
+        ) : (
+          <LogoCarousel
+            title="Ils adhèrent à Roundnet France"
+            logos={clubLogos}
+          />
+        )}
       </Box>
 
       <CTAFooter
@@ -94,23 +99,28 @@ function JoinRoundnetFrancePage({ clubLogos }) {
 }
 
 export async function getStaticProps() {
-  const clubs = await getDocuments(
-    "clubs",
-    { validated: true },
-    { image: 1, title: 1 },
-    { chip: 1 }
-  );
-  const clubLogos = clubs.map((club) => ({
-    src: club.image,
-    alt: club.title,
-  }));
+  let error;
+  let clubLogos;
+  try {
+    const clubs = await getDocuments(
+      "clubs",
+      { validated: true },
+      { image: 1, title: 1 },
+      { chip: 1 }
+    );
+    clubLogos = clubs.map((club) => ({
+      src: club.image,
+      alt: club.title,
+    }));
+  } catch (err) {
+    error = err.message;
+  }
 
   return {
     props: {
-      clubLogos,
+      clubLogos: clubLogos || null,
+      error: error || null,
     },
     revalidate: 600,
   };
 }
-
-export default JoinRoundnetFrancePage;
