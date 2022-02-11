@@ -7,32 +7,7 @@ import { Stack, Divider } from "@mui/material";
 import EventsSidebar from "./events-sidebar";
 import EventsTimeline from "./events-timeline";
 
-export default function Events({ events }) {
-  // Get only the events that are in the future and sort them by event.date
-  const futureEvents = events
-    .filter((event) => {
-      const eventDate = new Date(event.date);
-      const today = new Date();
-      return eventDate > today;
-    })
-    .sort((a, b) => {
-      const aDate = new Date(a.date);
-      const bDate = new Date(b.date);
-      return aDate - bDate;
-    });
-
-  // Get the 3 lastly added events (invert events order)
-  const lastAddedEvents = events.reverse().slice(0, 3);
-
-  // Get only the events that are in the past
-  const pastEvents = events.filter((event) => {
-    const eventDate = new Date(event.date);
-    const today = new Date();
-    return eventDate < today;
-  });
-  // Filter the past events to only show the last 5, in reverse chronological order
-  const pastEventsFiltered = pastEvents.slice(0, 5).reverse();
-
+export default function Events({ lastAddedEvents, futureEvents, pastEvents }) {
   const [controlledEvents, setControlledEvents] = useState(futureEvents);
 
   return (
@@ -42,7 +17,7 @@ export default function Events({ events }) {
       <EventsSidebar
         events={futureEvents}
         setEvents={setControlledEvents}
-        pastEvents={pastEventsFiltered}
+        pastEvents={pastEvents}
         newEvents={lastAddedEvents}
       />
     </Stack>

@@ -9,8 +9,14 @@ import Head from "../../components/head";
 import Hero from "../../components/ui/hero";
 import Events from "../../components/events";
 import CTAFooter from "../../components/ui/cta-footer";
+import Error from "../../components/ui/error";
 
-export default function HomePage({ events }) {
+export default function EventsPage({
+  error,
+  lastAddedEvents,
+  futureEvents,
+  pastEvents,
+}) {
   return (
     <Fragment>
       <Head
@@ -25,7 +31,15 @@ export default function HomePage({ events }) {
         mini
       />
       <Container maxWidth="lg" sx={{ my: 8 }}>
-        <Events events={events} />
+        {error ? (
+          <Error error={error} />
+        ) : (
+          <Events
+            lastAddedEvents={lastAddedEvents}
+            futureEvents={futureEvents}
+            pastEvents={pastEvents}
+          />
+        )}
       </Container>
 
       <CTAFooter
@@ -41,19 +55,59 @@ export default function HomePage({ events }) {
 }
 
 export async function getStaticProps() {
-  const events = await getDocuments(
-    "events",
-    { validated: true },
-    {
-      price: 0,
-      inscriptionUrl: 0,
-      address: 0,
-      organization: 0,
-    }
-  );
+  let lastAddedEvents = [];
+  let futureEvents = [];
+  let pastEvents = [];
+  let error = false;
+
+  try {
+    const events = await getDocuments(
+      "events",
+      { validated: true },
+      {
+        price: 0,
+        inscriptionUrl: 0,
+        address: 0,
+        organization: 0,
+      }
+    );
+
+    // [MAIN TIMELINE] Get only the events that are in the future and sort them by event.date
+    futureEvents = events
+      .filter((event) => {
+        const eventDate = new Date(event.date);
+        const today = new Date();
+        return eventDate > today;
+      })
+      .sort((a, b) => {
+        const aDate = new Date(a.date);
+        const bDate = new Date(b.date);
+        return aDate - bDate;
+      });
+
+    // [PAST EVENTS SIDE] Get only the 5 last events that are in the past, in reverse chronological order
+    pastEvents = events
+      .filter((event) => {
+        const eventDate = new Date(event.date);
+        const today = new Date();
+        return eventDate < today;
+      })
+      .slice(0, 5)
+      .reverse();
+
+    // [LASTLY ADDED EVENTS SIDE] Get only the three newer events set in the future
+    lastAddedEvents = futureEvents.reverse().slice(0, 3);
+  } catch (err) {
+    console.log(err);
+    error = err.message;
+  }
+
   return {
     props: {
-      events,
+      futureEvents,
+      pastEvents,
+      lastAddedEvents,
+      error,
     },
     revalidate: 600,
   };

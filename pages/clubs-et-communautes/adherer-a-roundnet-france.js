@@ -17,7 +17,7 @@ import Head from "../../components/head";
 // CONTENT
 import { whyJoinUs, clubKit } from "../../contents/clubs-communautes";
 
-function JoinRoundnetFrancePage({ clubLogos }) {
+export default function JoinRoundnetFrancePage({ clubLogos }) {
   return (
     <Fragment>
       <Head
@@ -112,5 +112,3 @@ export async function getStaticProps() {
     revalidate: 600,
   };
 }
-
-export default JoinRoundnetFrancePage;
