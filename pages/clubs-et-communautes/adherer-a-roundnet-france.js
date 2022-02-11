@@ -101,6 +101,7 @@ export default function JoinRoundnetFrancePage({ clubLogos, error }) {
 export async function getStaticProps() {
   let error;
   let clubLogos;
+
   try {
     const clubs = await getDocuments(
       "clubs",
