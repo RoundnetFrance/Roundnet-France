@@ -10,9 +10,9 @@ export default function DataTabs({
   if (isLoading) {
     return (
       <Stack direction="row" spacing={2}>
-        <Skeleton width={80} height={40} />
-        <Skeleton width={80} height={40} />
-        <Skeleton width={80} height={40} />
+        <Skeleton width={80} height={50} />
+        <Skeleton width={80} height={50} />
+        <Skeleton width={80} height={50} />
       </Stack>
     );
   }

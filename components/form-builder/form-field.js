@@ -14,6 +14,10 @@ import {
   FormControl,
   InputLabel,
   Autocomplete,
+  FormGroup,
+  Checkbox,
+  FormControlLabel,
+  Switch,
 } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
@@ -26,11 +30,12 @@ export default function FormField({
   type,
   id,
   label,
-  required,
   options,
   value,
   handleChange,
   error,
+  parentCheckboxes,
+  setParentCheckboxes,
 }) {
   // Define error as a bool for MUI error prop
   const booleanError = error === false ? false : true;
@@ -65,11 +70,44 @@ export default function FormField({
     );
   }
 
+  // If input as an optional.parentText, return a checkbox
+  let optional;
+  if (options?.optional?.parentText) {
+    optional = (
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              value={parentCheckboxes[id]}
+              onChange={() => {
+                setParentCheckboxes((prevCheckboxes) => ({
+                  ...prevCheckboxes,
+                  [id]: !prevCheckboxes[id],
+                }));
+              }}
+            />
+          }
+          label={options?.optional?.parentText}
+        />
+      </FormGroup>
+    );
+  }
+
   // If there's a dividerBottom option, add a MUI Divider.
   const dividerBottom = options?.dividerBottom ? <Divider /> : null;
 
-  // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
+  // Define input.
   let input;
+
+  // If input is a optional.child and its options.parent checkbox is not checked, return null
+  if (
+    options?.optional?.isChild &&
+    !parentCheckboxes[options?.optional?.parent]
+  ) {
+    return null;
+  }
+
+  // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   switch (type) {
     case "longtext":
       input = (
@@ -85,6 +123,30 @@ export default function FormField({
           multiline
           rows={options?.multilineRows || 4}
         />
+      );
+      break;
+
+    case "boolean":
+      input = (
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                id={id}
+                checked={value}
+                onChange={() => {
+                  handleChange({
+                    target: {
+                      id,
+                      value: !value,
+                    },
+                  });
+                }}
+              />
+            }
+            label={label}
+          />
+        </FormGroup>
       );
       break;
 
@@ -110,7 +172,11 @@ export default function FormField({
             }}
             renderInput={(params) => (
               <Fragment>
-                <TextField label="Date" {...params} />
+                <TextField
+                  label="Date"
+                  {...params}
+                  required={options?.required}
+                />
                 <FormHelperText
                   error={booleanError}
                   id={`${label}-error`}
@@ -182,11 +248,16 @@ export default function FormField({
               });
             }}
           >
-            {options?.selectValues.map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.label}
-              </MenuItem>
-            ))}
+            {options?.selectValues.map((item) => {
+              // Hide if needed
+              if (item.hide) return null;
+              // Else, return option
+              return (
+                <MenuItem key={item.value} value={item.value}>
+                  {item.label}
+                </MenuItem>
+              );
+            })}
           </Select>
           {booleanError && (
             <FormHelperText error={booleanError} id={`${label}-error`}>
@@ -231,6 +302,9 @@ export default function FormField({
             <Typography component="span" variant="body2">
               {value.name || "Aucun fichier séléctionné"}
             </Typography>
+            {options?.helperText && (
+              <FormHelperText>{options?.helperText}</FormHelperText>
+            )}
             {booleanError && (
               <FormHelperText error={booleanError} id={`${label}-error`}>
                 {error}
@@ -276,6 +350,26 @@ export default function FormField({
       break;
     }
 
+    case "number":
+      input = (
+        <TextField
+          id={id}
+          label={label}
+          variant="outlined"
+          value={value}
+          inputProps={{
+            inputMode: "numeric",
+            // pattern: "[0-9]*",
+            type: "number",
+          }}
+          onChange={handleChange}
+          error={booleanError}
+          helperText={error || options?.helperText}
+          required={options?.required}
+        />
+      );
+      break;
+
     default:
       input = (
         <TextField
@@ -295,6 +389,7 @@ export default function FormField({
   return (
     <Fragment>
       {input}
+      {optional}
       {dividerBottom}
     </Fragment>
   );

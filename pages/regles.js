@@ -63,10 +63,6 @@ function RulesPage({ rule }) {
           url: "/clubs-et-communautes/liste-des-clubs",
           text: "Inscrivez votre club",
         }}
-        // altLink={{
-        //   url: '/competition/calendrier',
-        //   text: 'Participez à un tournoi',
-        // }}
       />
     </Fragment>
   );

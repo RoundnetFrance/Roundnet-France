@@ -13,6 +13,7 @@ const federationMembersConfig = {
           _id: "url",
           name: "Fichier",
           type: "file",
+          editable: true,
           options: {
             fileConfig: {
               type: "pdf",

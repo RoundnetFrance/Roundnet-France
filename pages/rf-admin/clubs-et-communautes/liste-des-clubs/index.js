@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import useClubs from "../../../../hooks/useClubs";
+import useClubs from "../../../../hooks/use-clubs";
 
 // MUI IMPORTS
 import { Container } from "@mui/material";

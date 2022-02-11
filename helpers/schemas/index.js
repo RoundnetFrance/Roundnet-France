@@ -32,6 +32,30 @@ export default function getSchema(schemaRef, partials) {
       });
       break;
 
+    case "event":
+      schema = Joi.object({
+        image: Joi.string().uri().allow(""),
+        banner: Joi.string().uri().allow(""),
+        slug: Joi.string().trim().required(),
+        title: Joi.string().trim().max(80).required(),
+        city: Joi.string().trim().required(),
+        address: Joi.string().trim().allow(""),
+        date: Joi.date().required(),
+        dateEnd: Joi.date().allow(""),
+        organization: Joi.string().trim().allow(""),
+        description: Joi.string().trim().required(),
+        participants: Joi.number().required(),
+        field: Joi.string().trim().required(),
+        format: Joi.string().trim().required(),
+        category: Joi.string().trim().required(),
+        type: Joi.string().trim().required(),
+        inscriptionUrl: Joi.string().trim().uri().required(),
+        beginnerFriendly: Joi.boolean().required(),
+        price: Joi.number().allow(""),
+        createdAt: Joi.date().required(),
+      });
+      break;
+
     case "rule":
       schema = Joi.object({
         url: Joi.string().uri().required(),

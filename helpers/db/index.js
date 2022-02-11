@@ -2,7 +2,7 @@
 import clientPromise from "../../lib/mongodb";
 
 // Get all documents from a mongoDB collection
-export function getDocuments(collection, params, fields, sort) {
+export function getDocuments(collection, params, fields, sort, limit) {
   return new Promise(async (resolve, reject) => {
     try {
       const client = await clientPromise;
@@ -12,6 +12,7 @@ export function getDocuments(collection, params, fields, sort) {
         .find(params)
         .project(fields)
         .sort(sort)
+        .limit(limit || 0)
         .toArray();
       // Clean the _id field  from the documents
       const data = JSON.parse(JSON.stringify(documents));

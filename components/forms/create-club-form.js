@@ -27,6 +27,7 @@ function CreateClubForm() {
           required: true,
           fileConfig: {
             type: "image",
+            imageMaxWidth: 600,
           },
         },
       },
@@ -128,6 +129,7 @@ function CreateClubForm() {
       },
     ],
     endpoint: "clubs",
+    sendNotification: "club",
     apiSchema: {
       image: "image",
       title: "organization",
