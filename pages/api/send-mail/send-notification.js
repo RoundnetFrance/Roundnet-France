@@ -13,8 +13,8 @@ export default async function handler(req, res) {
 
     // Create email object
     const msg = {
-      to: "robin.souriau@gmail.com",
-      from: "robin.souriau@gmail.com",
+      to: "roundnetfrance@gmail.com",
+      from: "roundnetfrance@gmail.com",
       subject: data.subject,
       name: "Roundnet France",
       html,
