@@ -5,6 +5,8 @@ import emailTeplate from "../../../styles/email-templates/contact-email-template
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function handler(req, res) {
+  console.log(process.env.NOTIFICATION_MAIL_ADDRESS);
+
   if (req.method === "POST") {
     const { data } = req.body;
 
@@ -13,8 +15,8 @@ export default async function handler(req, res) {
 
     // Create email object
     const msg = {
-      to: "roundnetfrance@gmail.com",
-      from: "roundnetfrance@gmail.com",
+      to: process.env.NOTIFICATION_MAIL_ADDRESS,
+      from: process.env.NOTIFICATION_MAIL_ADDRESS,
       subject: `Contact via le site - ${data.subject}`,
       name: data.name,
       html,
