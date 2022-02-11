@@ -55,7 +55,7 @@ export default function ClubListPage({ clubs, error }) {
       <Container maxWidth="sm" sx={{ my: 4 }}>
         <HeaderWithIcon icon="people" title="Liste des clubs" />
         {error ? (
-          <Error />
+          <Error message={error} />
         ) : (
           <CrossingItems items={clubs} roundedItems roundedEverywhere />
         )}
@@ -76,22 +76,21 @@ export default function ClubListPage({ clubs, error }) {
 }
 
 export async function getStaticProps() {
-  // Try to fetch members on local API
-  let data;
-  let error = false;
+  let clubs;
+  let error;
+
   try {
-    data = await getDocuments("clubs", { validated: true }, null, {
+    clubs = await getDocuments("clubs", { validated: true }, null, {
       chip: 1,
     });
-  } catch (error) {
-    error = error;
+  } catch (err) {
+    error = err.message;
   }
 
   return {
     props: {
-      clubs: data,
-      error,
-      errorDetails: error.message || "Une erreur est survenue",
+      clubs: clubs || null,
+      error: error || null,
     },
     revalidate: 600,
   };
