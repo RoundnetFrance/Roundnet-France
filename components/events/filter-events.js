@@ -34,6 +34,7 @@ const fieldsInitialState = {
     // worlds: true,
     // europe: true,
     tourStop: true,
+    other: true,
   },
   level: {
     beginnerFriendly: true,

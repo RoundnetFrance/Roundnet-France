@@ -58,18 +58,20 @@ function HomeIntro({
 
       <Container sx={{ height: "100%" }}>
         <Stack justifyContent="center" minHeight="100%" spacing={1}>
-          <Typography
-            style={styles.title}
-            pt={4}
-            variant="h4"
-            component="h2"
-            color="primary.contrastText"
-            lineHeight={{ xs: "1.1em", sm: "1.25em", md: "1.5em" }}
-            letterSpacing="0.03em"
-          >
-            {title} <br />
-            {subtitle} <br />
-          </Typography>
+          {title && (
+            <Typography
+              style={styles.title}
+              pt={4}
+              variant="h4"
+              component="h2"
+              color="primary.contrastText"
+              lineHeight={{ xs: "1.1em", sm: "1.25em", md: "1.5em" }}
+              letterSpacing="0.03em"
+            >
+              {title} <br />
+              {subtitle} <br />
+            </Typography>
+          )}
           <Stack
             width="fit-content"
             direction={{ xs: "column", sm: "row" }}

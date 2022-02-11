@@ -12,7 +12,7 @@ import {
   Button,
   Link,
   Icon,
-  Modal,
+  Dialog,
 } from "@mui/material";
 
 // MUI ICONS
@@ -252,33 +252,23 @@ export default function EventSingleDetails({ event }) {
       </Stack>
 
       {/* Image Modal */}
-      <Modal
+      <Dialog
         open={imageModalOpen}
         onClose={handleModalClose}
         aria-labelledby="modal-image-title"
         aria-describedby="modal-image-description"
       >
-        <Paper
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-          }}
-        >
-          <Box width="600px" height="600px" position="relative">
-            <Image
-              src={event.image || "/images/pages/event-single/placeholder.jpg"}
-              alt={event.title}
-              title={event.title}
-              objectFit="cover"
-              layout="fill"
-            />
-          </Box>
+        <Paper>
+          <Image
+            src={event.image || "/images/pages/event-single/placeholder.jpg"}
+            alt={event.title}
+            title={event.title}
+            width="600px"
+            height="600px"
+            objectFit="cover"
+          />
         </Paper>
-      </Modal>
+      </Dialog>
     </Paper>
   );
 }
