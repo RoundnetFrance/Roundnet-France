@@ -39,7 +39,7 @@ export default function EventSingle({ event, nextEvents }) {
 }
 
 export async function getStaticPaths() {
-  const events = await getDocuments("events");
+  const events = await getDocuments("events", { validated: true });
   const paths = events.map((event) => ({
     params: {
       eventSlug: event.slug,
