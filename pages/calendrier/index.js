@@ -69,21 +69,16 @@ export async function getStaticProps() {
         inscriptionUrl: 0,
         address: 0,
         organization: 0,
-      }
+      },
+      { date: -1 }
     );
 
     // [MAIN TIMELINE] Get only the events that are in the future and sort them by event.date
-    futureEvents = events
-      .filter((event) => {
-        const eventDate = new Date(event.date);
-        const today = new Date();
-        return eventDate > today;
-      })
-      .sort((a, b) => {
-        const aDate = new Date(a.date);
-        const bDate = new Date(b.date);
-        return aDate - bDate;
-      });
+    futureEvents = events.filter((event) => {
+      const eventDate = new Date(event.date);
+      const today = new Date();
+      return eventDate > today;
+    });
 
     // [PAST EVENTS SIDE] Get only the 5 last events that are in the past, in reverse chronological order
     pastEvents = events
