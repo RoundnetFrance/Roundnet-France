@@ -37,7 +37,7 @@ export default function RulesAdminPage() {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Administration du fichier des rencontres inter-clubs" />
+      <PageTitle title="Administration du fichier de la Coupe de France" />
       <AdminContent
         config={config}
         form={<CreateOfficialDocForm doctype="cdf" />}

@@ -30,6 +30,14 @@ const accountMenuElements = [
 
 const dashboardElements = [
   {
+    _id: "events",
+    label: "Tournois & Events",
+    color: "secondary",
+    icon: "edit_calendar",
+    description: "Validez et modifiez les tournois futurs et passés.",
+    url: "/rf-admin/clubs-et-communautes/calendrier",
+  },
+  {
     _id: "rules",
     label: "Règles",
     icon: "rule",
@@ -95,7 +103,7 @@ const dashboardElements = [
   },
   {
     _id: "accounts",
-    label: "Administrateurs",
+    label: "Admins",
     color: "neutralDark",
     icon: "manage_accounts",
     description: "Gérez les comptes des administrateurs du site.",

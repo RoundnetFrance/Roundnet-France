@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // MUI IMPORTS
 import {
@@ -19,6 +19,8 @@ import AbcIcon from "@mui/icons-material/Abc";
 // COMPONENT IMPORTS
 import AdminTextField from "./admin-text-field";
 import AdminFileField from "./admin-file-field";
+import AdminSelectField from "./admin-select-field";
+import AdminDateField from "./admin-date-field";
 
 export default function DataSingleField({
   id,
@@ -30,20 +32,16 @@ export default function DataSingleField({
   const theme = useTheme();
   const higherThanMd = useMediaQuery(theme.breakpoints.up("md"));
 
-  // Handle dialog state
-  const [dialogOpen, setDialogOpen] = useState(false);
-  function handleDialogOpen() {
-    setDialogOpen(true);
-  }
-  function handleDialogClose() {
-    setDialogOpen(false);
-  }
-
   // Get options of field
   const { name: label, type, editable, options } = fieldLayout;
 
-  // Store image
-  const [imageURL] = useState(value);
+  // Store image and change it only if value is string (is URI to Firebase Storage)
+  const [imageUrl, setImageUrl] = useState(value);
+  useEffect(() => {
+    if (typeof value === "string") {
+      setImageUrl(value);
+    }
+  }, [value]);
 
   // Define which content to use
   let content;
@@ -58,6 +56,19 @@ export default function DataSingleField({
           required={options?.required || false}
           rows={options?.multilineRows}
           longText
+        />
+      );
+      break;
+
+    case "select":
+      content = (
+        <AdminSelectField
+          id={id}
+          value={value}
+          handleChange={handleValuesChange}
+          editable={editable}
+          required={options?.required || false}
+          selectValues={options?.selectValues}
         />
       );
       break;
@@ -126,122 +137,26 @@ export default function DataSingleField({
       });
       break;
 
-    // case "date":
-    //   content = (
-    //     <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
-    //       <DatePicker
-    //         disableFuture={options?.dateConfig?.disableFuture}
-    //         clearable={options?.dateConfig?.clearable}
-    //         error={booleanError}
-    //         id={id}
-    //         label={label}
-    //         openTo={options?.dateConfig?.openTo || "month"}
-    //         views={options?.dateConfig?.views || ["year", "month", "day"]}
-    //         value={value || null}
-    //         onChange={(newValue) => {
-    //           handleChange({
-    //             target: {
-    //               id,
-    //               value: newValue,
-    //             },
-    //           });
-    //         }}
-    //         renderInput={(params) => (
-    //           <Fragment>
-    //             <TextField label="Date" {...params} />
-    //             <FormHelperText
-    //               error={booleanError}
-    //               id={`${label}-error`}
-    //               sx={{ position: "relative", bottom: 10 }}
-    //             >
-    //               {error}
-    //             </FormHelperText>
-    //           </Fragment>
-    //         )}
-    //       />
-    //     </LocalizationProvider>
-    //   );
-    //   break;
-
-    // case "autocomplete":
-    //   content = (
-    //     <Autocomplete
-    //       disablePortal
-    //       freeSolo
-    //       selectOnFocus
-    //       clearOnBlur
-    //       handleHomeEndKeys
-    //       id={id}
-    //       value={value}
-    //       onChange={(event, newValue) => {
-    //         handleChange({
-    //           target: {
-    //             id,
-    //             value: newValue,
-    //           },
-    //         });
-    //       }}
-    //       options={options?.selectValues}
-    //       renderInput={(params) => <TextField {...params} label={label} />}
-    //     />
-    //   );
-    //   break;
-
-    // case "password":
-    //   content = (
-    //     <PasswordInput
-    //       label={label}
-    //       value={value}
-    //       name={id}
-    //       handleChange={handleChange}
-    //       error={booleanError}
-    //       helperText={error}
-    //       confirm={options?.passwordConfirm}
-    //       required={options?.required}
-    //     />
-    //   );
-    //   break;
-
-    // case "select": {
-    //   content = (
-    //     <FormControl error={booleanError} required={options?.required}>
-    //       <InputLabel id={id}>{label}</InputLabel>
-    //       <Select
-    //         labelId={id}
-    //         label={label}
-    //         id={id}
-    //         value={value}
-    //         onChange={(event) => {
-    //           handleChange({
-    //             target: {
-    //               id,
-    //               value: event.target.value,
-    //             },
-    //           });
-    //         }}
-    //       >
-    //         {options?.selectValues.map((item) => (
-    //           <MenuItem key={item.value} value={item.value}>
-    //             {item.label}
-    //           </MenuItem>
-    //         ))}
-    //       </Select>
-    //       {booleanError && (
-    //         <FormHelperText error={booleanError} id={`${label}-error`}>
-    //           {error}
-    //         </FormHelperText>
-    //       )}
-    //     </FormControl>
-    //   );
-    //   break;
-    // }
+    case "date":
+      content = (
+        <AdminDateField
+          id={id}
+          value={value}
+          handleChange={handleValuesChange}
+          editable={editable}
+          required={options?.required || false}
+          dateConfig={options?.dateConfig}
+        />
+      );
+      break;
 
     case "file":
       content = (
         <AdminFileField
           id={id}
           value={value}
-          image={imageURL}
+          image={imageUrl}
+          setImage={setImageUrl}
           handleChange={handleValuesChange}
           editable={editable}
           fileType={options?.fileConfig?.type}
@@ -263,17 +178,24 @@ export default function DataSingleField({
   }
 
   return (
+    // Full row for boolean switches/checkboxes
     <Stack
-      direction={{ xs: "column", md: "row" }}
-      spacing={{ xs: 0, md: 4 }}
-      alignItems="flex-start"
+      direction={{ xs: type === "boolean" ? "row" : "column", md: "row" }}
+      spacing={{ xs: type === "boolean" ? 3 : 0, md: 4 }}
+      alignItems={type === "boolean" ? "center" : "flex-start"}
       my={2}
     >
       <Stack
         direction="row"
         alignItems="center"
         spacing={{ xs: 1, md: 2 }}
-        sx={{ width: "180px", maxWidth: "180px", pt: 0.5 }}
+        sx={{
+          width: {
+            xs: type === "boolean" ? "fit-content" : "100%",
+            md: "230px",
+          },
+          pt: 0.5,
+        }}
       >
         {editable ? (
           <EditIcon color="primary" fontSize="small" />

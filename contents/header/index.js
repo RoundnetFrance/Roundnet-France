@@ -10,10 +10,10 @@ const menuElements = [
         name: "Règles Officielles",
         url: "/regles",
       },
-      // {
-      //   name: 'Calendrier',
-      //   url: '/competition/calendrier',
-      // },
+      {
+        name: "Calendrier",
+        url: "/calendrier",
+      },
       {
         name: "Coupe de France",
         url: "/competition/coupe-de-france-roundnet",
@@ -94,18 +94,16 @@ const adminElements = [
     slug: "competition",
     icon: "emoji_events",
     subElements: [
-      // {
-      //   name: 'Calendrier',
-      //   url: '/rf-admin/competition/calendrier',
-      // },
-      {
-        name: "Coupe de France",
-        url: "/rf-admin/competition/coupe-de-france",
-      },
       {
         name: "Règles",
         url: "/rf-admin/competition/regles",
       },
+
+      {
+        name: "Coupe de France",
+        url: "/rf-admin/competition/coupe-de-france",
+      },
+
       {
         name: "Rencontres inter-clubs",
         url: "/rf-admin/competition/ric",
@@ -124,6 +122,10 @@ const adminElements = [
       {
         name: "Liste des clubs",
         url: "/rf-admin/clubs-et-communautes/liste-des-clubs",
+      },
+      {
+        name: "Calendrier",
+        url: "/rf-admin/clubs-et-communautes/calendrier",
       },
     ],
   },

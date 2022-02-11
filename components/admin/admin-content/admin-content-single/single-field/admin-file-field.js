@@ -23,6 +23,7 @@ export default function AdminFileField({
   id,
   value,
   image,
+  setImage,
   editable,
   handleChange,
   fileType,
@@ -35,6 +36,10 @@ export default function AdminFileField({
   }
   function handleDialogClose() {
     setDialogOpen(false);
+  }
+  function handleDialogCancel() {
+    setDialogOpen(false);
+    handleChange(id, image);
   }
 
   // Handle HTML validation of file type
@@ -73,7 +78,8 @@ export default function AdminFileField({
             </IconButton>
           </Tooltip>
         )}
-        {fileType === "image" ? (
+        {/* Image Avatar (conditional) */}
+        {fileType === "image" && (
           <Avatar sx={{ width: 60, height: 60 }}>
             <Image
               src={image || "/images/misc/placeholder.jpg"}
@@ -81,11 +87,14 @@ export default function AdminFileField({
               height={60}
               objectFit="cover"
               alt={label}
+              onError={() => setImage("/images/misc/placeholder.jpg")}
             />
           </Avatar>
-        ) : (
+        )}
+        {/* Display download link if image or value is defined */}
+        {(image || value) && (
           <Typography sx={{ my: { xs: 0, sm: 1 } }}>
-            <Link href={value} target="_blank">
+            <Link href={fileType === "image" ? image : value} target="_blank">
               Télécharger le fichier
             </Link>
           </Typography>
@@ -96,7 +105,7 @@ export default function AdminFileField({
       <Dialog
         open={dialogOpen}
         title="Uploader"
-        handleClose={handleDialogClose}
+        handleClose={handleDialogCancel}
         cancelText="Annuler"
         confirmButton={
           <Button variant="contained" onClick={handleDialogClose}>

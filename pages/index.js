@@ -73,6 +73,6 @@ export async function getStaticProps() {
       clubLogos,
       partnersLogos,
     },
-    revalidate: 600,
+    revalidate: 3600,
   };
 }

@@ -373,7 +373,6 @@ export default function formTemplate(data) {
                   <tr>
                     <td class="content-block">
                       <span class="apple-link">Envoyé via Roundnet France</span>
-                      <br><a href="http://roundnetfrance.fr/qui-sommes-nous/contact">Formulaire de contact</a>
                     </td>
                   </tr>
                 </table>

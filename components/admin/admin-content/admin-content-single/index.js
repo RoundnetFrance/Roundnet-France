@@ -30,9 +30,10 @@ import DataFields from "./data-fields";
 import Dialog from "../../../ui/dialog";
 import DataFieldsLoader from "./data-fields-loader";
 import Error from "../../../ui/error";
+import Link from "../../../ui/link";
 
 export default function AdminContentSingle({
-  config: { title, tabs, endpoint, adminEndpoint },
+  config: { title, tabs, endpoint, adminEndpoint, frontEndpoint },
   data,
   mutate,
   documentId,
@@ -98,8 +99,8 @@ export default function AdminContentSingle({
   // Extract tab names from config data
   const tabNames = tabs.map((tab) => tab.name);
 
-  // Patch click button function
-  function handleUpdate(event) {
+  // *** PATCH click button function
+  async function handleUpdate(event) {
     event.preventDefault();
     setLoading(true);
     async function patchData(originalData) {
@@ -121,6 +122,7 @@ export default function AdminContentSingle({
             fields: files,
             form: values,
             endpoint,
+            allowOverwrite: true,
           });
         } catch (err) {
           console.error(err);
@@ -146,6 +148,12 @@ export default function AdminContentSingle({
         if (!response.ok) {
           throw new Error(response.statusText);
         }
+
+        setSnackbarState({
+          open: true,
+          message: "Vos modifications ont bien été enregistrées",
+          severity: "success",
+        });
       } catch (error) {
         // If error, set error state and return original data for mutate function
         setSnackbarState({
@@ -165,11 +173,6 @@ export default function AdminContentSingle({
 
     // Actual action of mutate via SWR
     mutate(patchData);
-    setSnackbarState({
-      open: true,
-      message: "Vos modifications ont bien été enregistrées",
-      severity: "success",
-    });
   }
 
   // Delete click button function
@@ -213,7 +216,18 @@ export default function AdminContentSingle({
     <Container maxWidth="md" sx={{ mt: 5, mb: 2 }}>
       <PageTitle title={title} />
 
-      <Alert severity="info" variant="filled" sx={{ my: 4 }}>
+      {/* Back buttons */}
+      <Stack direction="row" gap={2}>
+        <Link href={adminEndpoint} color="secondary" isButton>
+          Retour
+        </Link>
+        <Link href="/rf-admin/dashboard" color="secondary" isButton>
+          Dashboard
+        </Link>
+      </Stack>
+
+      {/* Revalidate info */}
+      <Alert severity="info" variant="filled" sx={{ my: 2 }}>
         <Typography variant="body1">
           Les modifications peuvent mettre jusqu&apos;à 10 minutes pour
           s&apos;appliquer complètement. Lorsque ce délai est passé, rechargez
@@ -221,8 +235,11 @@ export default function AdminContentSingle({
         </Typography>
       </Alert>
 
+      <Divider sx={{ mb: 2 }} />
+
+      {/* Main data */}
       <Stack
-        direction={{ xs: "column-reverse", sm: "row" }}
+        direction={{ xs: "column-reverse", md: "row" }}
         justifyContent="space-between"
         alignItems={{ xs: "flex-start", sm: "center" }}
         sx={{ mb: { xs: 2, sm: 4 } }}
@@ -236,16 +253,32 @@ export default function AdminContentSingle({
             isLoading={isLoading}
           />
         </Box>
-        <LoadingButton
-          variant="contained"
-          onClick={handleUpdate}
-          loading={loading}
-          disabled={isLoading}
-          sx={{ minWidth: "150px" }}
-          fullWidth={!higherThanSm}
-        >
-          {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
-        </LoadingButton>
+        <Stack direction="row" gap={1}>
+          {/* Display "View" link of document if frontEndpoint is given */}
+          {frontEndpoint && (
+            <Link
+              href={`/${frontEndpoint}/${values?.slug}`}
+              sx={{ mr: 1, px: { xs: 4, sm: 2 } }}
+              buttonIcon="visibility"
+              buttonVariant="outlined"
+              target="_blank"
+              disabled={isLoading}
+              isButton
+            >
+              {isLoading ? <Skeleton width={40} /> : "Voir"}
+            </Link>
+          )}
+          <LoadingButton
+            variant="contained"
+            onClick={handleUpdate}
+            loading={loading}
+            disabled={isLoading}
+            sx={{ minWidth: "150px" }}
+            fullWidth={!higherThanSm}
+          >
+            {isLoading ? <Skeleton sx={{ width: "100%" }} /> : "Enregistrer"}
+          </LoadingButton>
+        </Stack>
       </Stack>
 
       <Card>
@@ -310,6 +343,7 @@ export default function AdminContentSingle({
         </Alert>
       </Snackbar>
 
+      {/* Dialog */}
       <Dialog
         title="Supprimer"
         open={dialogOpen}
