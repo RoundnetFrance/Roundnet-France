@@ -10,13 +10,26 @@ export default function CreateEventForm({ isAdmin }) {
     endpoint: "events",
     fields: [
       {
+        id: "banner",
+        label: "Bannière",
+        type: "file",
+        options: {
+          helperText: "Minimum 1500px de largeur",
+          fileConfig: {
+            type: "image",
+            imageMaxWidth: 1800,
+          },
+        },
+      },
+      {
         id: "image",
         label: "Image de l'événement",
         type: "file",
         options: {
+          helperText: "Minimum 300px de largeur, format carré de préférence",
           fileConfig: {
             type: "image",
-            imageMaxWidth: 1800,
+            imageMaxWidth: 600,
           },
         },
       },

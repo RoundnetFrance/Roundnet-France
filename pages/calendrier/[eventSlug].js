@@ -20,7 +20,7 @@ export default function EventSingle({ event, nextEvents }) {
       />
 
       {/* BODY IMAGE */}
-      <Hero image={event.image} half />
+      <Hero image={event.banner} half />
 
       {/* PAPER CONTENT */}
       <Container
