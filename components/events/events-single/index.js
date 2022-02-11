@@ -179,7 +179,7 @@ export default function EventSingleDetails({ event }) {
 
         {/* DETAILS & REGISTER & HOST */}
 
-        <Box sx={{ mt: 4 }}>
+        <Box sx={{ my: 4 }}>
           {/* Chip list */}
           <Box sx={{ mb: 2 }}>
             <RowCenteredStack sx={{ mb: 2 }}>
