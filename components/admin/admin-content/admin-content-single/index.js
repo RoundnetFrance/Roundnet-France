@@ -3,6 +3,7 @@ import propTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useTheme } from "@mui/material/styles";
 import patchAdmin from "../../../../helpers/form/patch-admin";
+import deleteAdmin from "../../../../helpers/form/delete-admin";
 
 // MUI IMPORTS
 import {
@@ -136,38 +137,24 @@ export default function AdminContentSingle({
   // Delete click button function
   async function handleDelete(event) {
     event.preventDefault();
-    setLoading(true);
-
     try {
-      const response = await fetch(`/api/${endpoint}/${documentId}`, {
-        method: "DELETE",
+      await deleteAdmin({
+        setLoading,
+        setSnackbarState,
+        endpoint,
+        documentId,
+        adminEndpoint,
+        router,
       });
-
-      // If response is not ok, manually throw an error
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-    } catch (error) {
-      // If error, set error state and return original data for mutate function
+    } catch (err) {
       setSnackbarState({
         open: true,
-        message: error.message,
+        message: err.message || "Une erreur est survenue",
         severity: "error",
       });
-      return originalData;
     } finally {
       setLoading(false);
     }
-
-    setSnackbarState({
-      open: true,
-      message: "Suppression effectuée. Redirection...",
-      severity: "success",
-    });
-    // Redirect to ${adminEndpoint} after 1.5 seconds
-    setTimeout(() => {
-      router.push(adminEndpoint);
-    }, 1500);
   }
 
   return (
