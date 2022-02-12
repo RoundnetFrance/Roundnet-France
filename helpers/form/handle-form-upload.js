@@ -4,6 +4,7 @@ export default async function handleFormUpload({
   fields,
   form,
   endpoint,
+  contentToSlug,
   allowOverwrite = false,
 }) {
   const updatedForm = { ...form };
@@ -36,7 +37,6 @@ export default async function handleFormUpload({
 
       const maxWidth = field?.options?.fileConfig?.imageMaxWidth;
       const maxHeight = field?.options?.fileConfig?.imageMaxHeight;
-      console.log("in handleFormUpload", maxWidth, maxHeight);
 
       filesToUpload.push({
         id: fileField,
@@ -62,6 +62,8 @@ export default async function handleFormUpload({
     const url = await uploadFileToStorage({
       file,
       endpoint,
+      contentToSlug,
+      fieldId: id,
       width: maxWidth,
       height: maxHeight,
       allowOverwrite,
