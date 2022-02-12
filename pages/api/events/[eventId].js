@@ -30,7 +30,6 @@ export default async function handler(req, res) {
       // Store req.body into a variable without _id
       const data = { ...req.body };
       delete data._id;
-      console.log(data);
 
       try {
         const response = await patchDocument(

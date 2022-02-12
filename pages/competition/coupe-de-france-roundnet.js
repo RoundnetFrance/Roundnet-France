@@ -33,7 +33,7 @@ export default function NationalRankingPage({ document }) {
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
           Le tournoi de la Coupe de France de Roundnet est le plus grand tournoi
           qui se déroule sur le territoire français. Avec 4 dates, des centaines
-          de joueuses et de joueurs parmi le gratin de l&apos;héxagone,
+          de joueuses et de joueurs parmi le gratin de l&apos;hexagone,
           c&apos;est l&apos;événement à ne surtout pas manquer de la saison !
         </Typography>
       </Container>
