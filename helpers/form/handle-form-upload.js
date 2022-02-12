@@ -51,25 +51,23 @@ export default async function handleFormUpload({
     return updatedForm;
   }
 
-  // Upload files
   for (const { id, file, maxHeight, maxWidth } of filesToUpload) {
     // If file is a string, it's a URL, meaning it's already uploaded. Don't touch it.
-    if (typeof file === "string") {
-      return;
-    }
+    if (typeof file !== "string") {
+      // Else, it's a file. Upload and get the download url
+      const url = await uploadFileToStorage({
+        file,
+        endpoint,
+        contentToSlug,
+        fieldId: id,
+        width: maxWidth,
+        height: maxHeight,
+        allowOverwrite,
+      });
 
-    // Else, it's a file. Upload and get the download url
-    const url = await uploadFileToStorage({
-      file,
-      endpoint,
-      contentToSlug,
-      fieldId: id,
-      width: maxWidth,
-      height: maxHeight,
-      allowOverwrite,
-    });
-    // Update the form with the download url
-    updatedForm[id] = url;
+      // Update the form with the download url
+      updatedForm[id] = url;
+    }
   }
 
   return updatedForm;

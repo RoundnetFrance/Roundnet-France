@@ -1,28 +1,44 @@
-import propTypes from 'prop-types';
+import propTypes from "prop-types";
 
 // MUI IMPORTS
-import { Dialog as MUIDialog, DialogContent, DialogActions, DialogTitle, Button, useMediaQuery, Stack, Divider, IconButton } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import {
+  Dialog as MUIDialog,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
+  Button,
+  useMediaQuery,
+  Stack,
+  Divider,
+  IconButton,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // MUI ICONS
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
-
-export default function Dialog({ children, title, open, handleClose, cancelText, confirmButton, color }) {
+export default function Dialog({
+  children,
+  title,
+  open,
+  handleClose,
+  cancelText,
+  confirmButton,
+  color,
+}) {
   // Handle fullwidth dialog
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <MUIDialog
-      open={open}
-      onClose={handleClose}
-      fullScreen={fullScreen}
-    >
-
+    <MUIDialog open={open} onClose={handleClose} fullScreen={fullScreen}>
       {/* Title */}
       <DialogTitle>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <strong>{title}</strong>
           <IconButton aria-label="close dialog" onClick={handleClose}>
             <CloseIcon fontSize="inherit" />
@@ -33,16 +49,19 @@ export default function Dialog({ children, title, open, handleClose, cancelText,
       <Divider />
 
       {/* Content */}
-      <DialogContent sx={{ minWidth: { xs: '70vw', sm: '400px', md: '500px' } }}>
+      <DialogContent
+        sx={{ minWidth: { xs: "70vw", sm: "400px", md: "500px" } }}
+      >
         {children}
       </DialogContent>
 
       {/* Button Actions */}
       <DialogActions>
-        <Button color={color} onClick={handleClose}>{cancelText}</Button>
+        <Button color={color} onClick={handleClose}>
+          {cancelText}
+        </Button>
         {confirmButton && confirmButton}
       </DialogActions>
-
     </MUIDialog>
   );
 }
@@ -58,8 +77,8 @@ Dialog.propTypes = {
 };
 
 Dialog.defaultProps = {
-  title: 'Action',
-  cancelText: 'Fermer',
+  title: "Action",
+  cancelText: "Fermer",
   confirmButton: null,
-  color: 'primary',
+  color: "primary",
 };

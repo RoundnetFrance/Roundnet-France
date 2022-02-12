@@ -272,7 +272,6 @@ export async function submitForm({ endpoint, values, sendNotification }) {
         ),
       });
 
-      console.log("Notification sent");
       // Catch doesn't actually kill the process, but informs in case of malfunction
     } catch (error) {
       console.log(error);

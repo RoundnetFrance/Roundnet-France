@@ -31,7 +31,6 @@ export default async function handler(req, res) {
   // POST method to create a new event
   if (req.method === "POST") {
     let data;
-    console.log(data);
     // * Transform data (slug, createdAt, type)
     try {
       data = req.body.data;
@@ -80,7 +79,6 @@ export default async function handler(req, res) {
 
       // Add a validated:false property to the data
       data.validated = false;
-      console.log("last :", data);
 
       await insertDocument("events", data);
 

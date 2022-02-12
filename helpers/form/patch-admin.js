@@ -12,46 +12,34 @@ export default async function patchAdmin({
 }) {
   setLoading(true);
 
+  // Get every type=file in layout for every tab and merge into one array
+  const files = [];
+  tabs.forEach((tab) => {
+    tab.layout.forEach((field) => {
+      if (field.type === "file") {
+        files.push(field);
+      }
+    });
+  });
+
+  //* Upload files if any
+  const formToSubmit = await handleFormUpload({
+    fields: files,
+    contentToSlug: values[contentToSlug || "title"],
+    form: values,
+    endpoint,
+  });
+
   // Actual SWR FUNCTION
   async function patchData(originalData) {
-    // Get every type=file in layout for every tab and merge into one array
-    const files = [];
-    tabs.forEach((tab) => {
-      tab.layout.forEach((field) => {
-        if (field.type === "file") {
-          files.push(field);
-        }
-      });
-    });
-
-    let formToSubmit;
-    //* Upload files if any
-    if (files.length > 0) {
-      try {
-        formToSubmit = await handleFormUpload({
-          fields: files,
-          contentToSlug: values[contentToSlug || "title"],
-          form: values,
-          endpoint,
-        });
-      } catch (err) {
-        console.error(err);
-        setSnackbarState({
-          open: true,
-          message: err.message || "Une erreur est survenue lors de l'upload",
-          severity: "error",
-        });
-      }
-    }
-
-    //* Fetch API to patch element
     try {
+      // * Make API CALL
       const response = await fetch(`/api/${endpoint}/${documentId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formToSubmit || values),
+        body: JSON.stringify(formToSubmit),
       });
       // If response is not ok, manually throw an error
       if (!response.ok) {
@@ -66,14 +54,13 @@ export default async function patchAdmin({
 
       // Send back the updated values to SWR /api/${endpoint}/${documentId) key to update local state
       return values;
-    } catch (error) {
-      // If error, set error state and return original data for mutate function
+    } catch (err) {
+      console.error(err);
       setSnackbarState({
         open: true,
-        message: error.message,
+        message: err.message || "Une erreur est survenue.",
         severity: "error",
       });
-      console.error("error", error);
       return originalData;
     } finally {
       setLoading(false);
@@ -81,5 +68,5 @@ export default async function patchAdmin({
   }
 
   // Actual action of mutate via SWR
-  mutate(patchData);
+  await mutate(patchData);
 }
