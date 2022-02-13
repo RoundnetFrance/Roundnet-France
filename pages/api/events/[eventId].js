@@ -30,7 +30,6 @@ export default async function handler(req, res) {
       // Store req.body into a variable without _id
       const data = { ...req.body };
       delete data._id;
-      console.log(data);
 
       try {
         const response = await patchDocument(
@@ -52,9 +51,12 @@ export default async function handler(req, res) {
       try {
         const document = await getDocument("events", ObjectId(eventId), {
           image: 1,
+          banner: 1,
           _id: 0,
         });
         fileRef = ref(storage, document.image);
+        await deleteObject(fileRef);
+        fileRef = ref(storage, document.banner);
         await deleteObject(fileRef);
       } catch (error) {
         console.error(error);

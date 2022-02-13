@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { getDocument } from "../../helpers/db";
 
 // MUI IMPORTS
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Button, Stack } from "@mui/material";
 
 // COMPONENTS IMPORTS
 import Hero from "../../components/ui/hero";
@@ -33,7 +33,7 @@ export default function NationalRankingPage({ document }) {
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
           Le tournoi de la Coupe de France de Roundnet est le plus grand tournoi
           qui se déroule sur le territoire français. Avec 4 dates, des centaines
-          de joueuses et de joueurs parmi le gratin de l&apos;héxagone,
+          de joueuses et de joueurs parmi le gratin de l&apos;hexagone,
           c&apos;est l&apos;événement à ne surtout pas manquer de la saison !
         </Typography>
       </Container>
@@ -59,11 +59,22 @@ export default function NationalRankingPage({ document }) {
         image="/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg"
       />
 
-      <Container maxWidth="md" sx={{ my: 4 }}>
+      <Container maxWidth="md" sx={{ my: 6 }}>
         <HeaderWithIcon
           title="Cette année, la coupe de France servira à la qualification des équipes qui représenteront la France lors des Worlds (septembre 2022 en Belgique)."
           icon="info"
         />
+        <Stack direction="row" justifyContent="center" sx={{ mt: 4 }}>
+          <Button
+            size="large"
+            variant="contained"
+            sx={{ width: "fit-content" }}
+            href="https://www.helloasso.com/associations/roundnet-france/evenements/inscription-equipe-coupe-de-france"
+            target="_blank"
+          >
+            Inscription Coupe de France
+          </Button>
+        </Stack>
       </Container>
     </Fragment>
   );

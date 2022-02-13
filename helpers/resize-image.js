@@ -1,8 +1,6 @@
 //  https://github.com/ibnYusrat/image-file-resize/blob/master/index.js
 
 export default function resizeImage({ file, width, height, type }) {
-  console.log("in resizeImage", width, height);
-
   return new Promise(function (resolve, reject) {
     let allow = ["jpg", "gif", "bmp", "png", "jpeg", "svg"];
     try {
@@ -39,13 +37,11 @@ export default function resizeImage({ file, width, height, type }) {
 
             // If original dimensions are smaller than the max dimensions, do nothing
             if (originalWidth <= imgWidth || originalHeight <= imgHeight) {
-              console.log("smaller than max dimensions");
               elem.width = originalWidth;
               elem.height = originalHeight;
             }
             // If original dimensions are bigger than the max dimensions, calculate the max dimensions
             else {
-              console.log("bigger than max dimensions");
               // Set propotional image size
               if (imgWidth !== "auto" && imgHeight !== "auto") {
                 elem.width = imgWidth;
@@ -76,7 +72,6 @@ export default function resizeImage({ file, width, height, type }) {
         };
       } else reject("File not supported!");
     } catch (error) {
-      console.log("Error while image resize: ", error);
       reject(error);
     }
   });

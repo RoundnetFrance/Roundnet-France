@@ -192,12 +192,8 @@ export default function CreateEventForm({ isAdmin }) {
               value: "mixed",
             },
             {
-              label: "Masculin",
-              value: "male",
-            },
-            {
-              label: "Féminin",
-              value: "female",
+              label: "Non-Mixte",
+              value: "non-mixed",
             },
           ],
         },

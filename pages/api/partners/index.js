@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         await insertDocument("partners", data);
         return res
           .status(201)
-          .json({ message: "Le fichier de règle a bien été enregistré." });
+          .json({ message: "Le partenaire a bien été ajouté." });
       } catch (error) {
         console.error("ERROR 500, partners", error.message);
         return res.status(500).json({

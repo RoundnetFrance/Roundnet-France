@@ -5,7 +5,6 @@ import emailTeplate from "../../../styles/email-templates/contact-email-template
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function handler(req, res) {
-  console.log(process.env.NOTIFICATION_MAIL_ADDRESS);
   if (req.method === "POST") {
     const data = req.body;
 
