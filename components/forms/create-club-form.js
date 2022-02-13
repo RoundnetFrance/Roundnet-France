@@ -6,7 +6,6 @@ import FormBuilder from "../../components/form-builder";
 
 function CreateClubForm() {
   const formConfig = useMemo(() => getClubFormConfig(), []);
-  console.log("formConfig", formConfig);
   return <FormBuilder formConfig={formConfig} />;
 }
 

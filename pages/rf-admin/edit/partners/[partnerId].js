@@ -7,7 +7,7 @@ import fetcher from "../../../../lib/swr-fetcher";
 import AdminContentSingle from "../../../../components/admin/admin-content/admin-content-single";
 
 // CONTENTS
-import partnerConfig from "../../../../contents/forms/partners";
+import partnerConfig from "../../../../contents/admin/configs/partner";
 
 export default function EditAdminPage() {
   // Get endpoint and ID from URL
