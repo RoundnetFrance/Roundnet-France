@@ -1,24 +1,21 @@
 import storage from "../../lib/init-firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import resizeImage from "../../helpers/resize-image";
+import createSlug from "../slug-creator";
 
 export default async function uploadFileToStorage({
   file,
   endpoint,
+  contentToSlug,
+  fieldId,
   handleStateChange = () => {},
-  allowOverwrite,
   width = 1800,
   height,
 }) {
-  // // handleStateChange in optional, make it void if not provided
-  // if (!handleStateChange) {
-  //   handleStateChange = () => {};
-  // }
-
   // Check if file is an image  (type with? to avoid errors on file = URL)
   const isImage = file.type?.startsWith("image/");
 
-  // Resize image to maxWidth of 1800px
+  // Resize image to maxWidth of specified imageMaxWidth (defaults to 1800px)
   if (isImage) {
     try {
       file = await resizeImage({
@@ -28,15 +25,23 @@ export default async function uploadFileToStorage({
       });
     } catch (err) {
       console.log(err);
+      throw new Error(
+        "Une erreur est survenue lors du traitement de l'image. Veuillez essayer avec une autre image ou un autre navigateur."
+      );
     }
   }
 
   // Create a Promise to return upload and return url
   return new Promise((resolve, reject) => {
     // Prepare storage ref and upload task
-    const randomID = Math.random().toString(36).substring(2, 7);
+    const fileId = contentToSlug
+      ? createSlug(contentToSlug)
+      : Math.random().toString(36).substring(2, 7);
 
-    const filename = allowOverwrite ? file.name : `${randomID}-${file.name}`;
+    // Get current year and month under the format YY-MM
+    const fileSlug = `${fileId}-${fieldId}-${file.name}`;
+
+    const filename = fileSlug;
     const storageRef = ref(storage, `${endpoint}/${filename}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 

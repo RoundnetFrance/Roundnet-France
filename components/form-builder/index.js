@@ -45,6 +45,7 @@ export default function FormBuilder({ formConfig }) {
     sendNotification,
     apiSchema,
     submitText,
+    contentToSlug,
   } = formConfig;
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
@@ -146,6 +147,7 @@ export default function FormBuilder({ formConfig }) {
       // Upload files to storage if any (and they're not empty)
       const formToSubmit = await handleFormUpload({
         fields,
+        contentToSlug: validatedForm[contentToSlug || "title"],
         form: validatedForm,
         endpoint,
       });

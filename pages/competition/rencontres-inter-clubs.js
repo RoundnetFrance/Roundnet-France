@@ -1,24 +1,23 @@
-import { Fragment } from 'react';
-import { getDocument } from '../../helpers/db';
+import { Fragment } from "react";
+import { getDocument } from "../../helpers/db";
 
 // MUI IMPORTS
-import { Container, Typography, Divider } from '@mui/material';
+import { Container, Typography, Divider } from "@mui/material";
 
 // COMPONENTS IMPORTS
-import Hero from '../../components/ui/hero';
-import PageTitle from '../../components/ui/page-title';
-import InfoBlock from '../../components/ui/info-block';
-import HeaderWithIcon from '../../components/ui/header-with-icon';
-import FeaturedItems from '../../components/ui/featured-items';
-import CTAFooter from '../../components/ui/cta-footer';
-import Head from '../../components/head';
-import DocumentHalfImage from '../../components/ui/document-half-image';
+import Hero from "../../components/ui/hero";
+import PageTitle from "../../components/ui/page-title";
+import InfoBlock from "../../components/ui/info-block";
+import HeaderWithIcon from "../../components/ui/header-with-icon";
+import FeaturedItems from "../../components/ui/featured-items";
+import CTAFooter from "../../components/ui/cta-footer";
+import Head from "../../components/head";
+import DocumentHalfImage from "../../components/ui/document-half-image";
 
 // CONTENT
-import { infoRIC, featuredRIC } from '../../contents/competition/';
+import { infoRIC, featuredRIC } from "../../contents/competition/";
 
 export default function TournamentsResultsPage({ document }) {
-
   return (
     <Fragment>
       <Head
@@ -29,15 +28,16 @@ export default function TournamentsResultsPage({ document }) {
       <Hero
         title="Rencontres inter-clubs"
         image="/images/hero/results.jpg"
-        imagePosition='center 80%'
+        imagePosition="center 80%"
         mini
       />
-
 
       <Container maxWidth="md" sx={{ my: 4 }}>
         <PageTitle title="Le rendez-vous compétitif des clubs français" />
         <Typography variant="body1">
-          Les rencontres inter-clubs représentent l&apos;initiative de Roundnet France de se faire rencontrer les différents viviers de joueurs nationaux.
+          Les rencontres inter-clubs représentent l&apos;initiative de Roundnet
+          France de se faire rencontrer les différents viviers de joueurs
+          nationaux.
         </Typography>
 
         <InfoBlock
@@ -53,10 +53,7 @@ export default function TournamentsResultsPage({ document }) {
       <Divider />
 
       <Container maxWidth="lg" sx={{ my: 4 }}>
-        <HeaderWithIcon
-          title="Les avantages du format"
-          icon="help_center"
-        />
+        <HeaderWithIcon title="Les avantages du format" icon="help_center" />
 
         <FeaturedItems items={featuredRIC} />
       </Container>
@@ -74,28 +71,38 @@ export default function TournamentsResultsPage({ document }) {
         title="Vous souhaitez participer aux rencontres inter-clubs ?"
         subtitle="Inscrivez votre club ou crééz votre équipe !"
         mainLink={{
-          url: 'https://docs.google.com/forms/d/e/1FAIpQLSfWm8xlQtrY-RoK2B-eB-gRN384btFC1IY2G0K2Wu9THa9xDQ/viewform',
-          text: 'Inscrivez votre club',
+          url: "https://docs.google.com/forms/d/e/1FAIpQLSfWm8xlQtrY-RoK2B-eB-gRN384btFC1IY2G0K2Wu9THa9xDQ/viewform",
+          text: "Inscrivez votre club",
         }}
         altLink={{
-          url: '/clubs-et-communautes/adherer-a-roundnet-france',
-          text: 'Adhérer à la Fédération',
+          url: "/clubs-et-communautes/adherer-a-roundnet-france",
+          text: "Adhérer à la Fédération",
         }}
       />
-
     </Fragment>
-
-  )
+  );
 }
 
 export async function getStaticProps() {
+  let error;
+  let document;
 
-  const RICDocument = await getDocument('official-docs', { doctype: 'ric' }, null, { _id: -1 });
-  const document = JSON.parse(JSON.stringify(RICDocument));
+  try {
+    const RICDocument = await getDocument(
+      "official-docs",
+      { doctype: "ric" },
+      null,
+      { _id: -1 }
+    );
+    document = JSON.parse(JSON.stringify(RICDocument));
+  } catch (err) {
+    error = err.message;
+  }
   return {
     props: {
-      document,
+      document: document || null,
+      error: error || null,
     },
     revalidate: 3600,
-  }
+  };
 }

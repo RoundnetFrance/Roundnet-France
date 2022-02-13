@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import propTypes from "prop-types";
 import { useRouter } from "next/router";
-import handleFormUpload from "../../../../helpers/form/handle-form-upload";
 import { useTheme } from "@mui/material/styles";
+import patchAdmin from "../../../../helpers/form/patch-admin";
+import deleteAdmin from "../../../../helpers/form/delete-admin";
 
 // MUI IMPORTS
 import {
@@ -33,7 +34,14 @@ import Error from "../../../ui/error";
 import Link from "../../../ui/link";
 
 export default function AdminContentSingle({
-  config: { title, tabs, endpoint, adminEndpoint, frontEndpoint },
+  config: {
+    title,
+    tabs,
+    endpoint,
+    adminEndpoint,
+    frontEndpoint,
+    contentToSlug,
+  },
   data,
   mutate,
   documentId,
@@ -102,114 +110,51 @@ export default function AdminContentSingle({
   // *** PATCH click button function
   async function handleUpdate(event) {
     event.preventDefault();
-    setLoading(true);
-    async function patchData(originalData) {
-      // Get every type=file in layout for every tab and merge into one array
-      const files = [];
-      tabs.forEach((tab) => {
-        tab.layout.forEach((field) => {
-          if (field.type === "file") {
-            files.push(field);
-          }
-        });
+
+    // Patch (SWR, fetch, revalidate)
+    try {
+      await patchAdmin({
+        setLoading,
+        setSnackbarState,
+        tabs,
+        mutate,
+        contentToSlug,
+        values,
+        endpoint,
+        documentId,
       });
-
-      let formToSubmit;
-      //* Upload files if any
-      if (files.length > 0) {
-        try {
-          formToSubmit = await handleFormUpload({
-            fields: files,
-            form: values,
-            endpoint,
-            allowOverwrite: true,
-          });
-        } catch (err) {
-          console.error(err);
-          setSnackbarState({
-            open: true,
-            message: err.message || "Une erreur est survenue lors de l'upload",
-            severity: "error",
-          });
-        }
-      }
-
-      //* Fetch API to patch element
-      let response;
-      try {
-        response = await fetch(`/api/${endpoint}/${documentId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formToSubmit || values),
-        });
-        // If response is not ok, manually throw an error
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
-        setSnackbarState({
-          open: true,
-          message: "Vos modifications ont bien été enregistrées",
-          severity: "success",
-        });
-      } catch (error) {
-        // If error, set error state and return original data for mutate function
-        setSnackbarState({
-          open: true,
-          message: error.message,
-          severity: "error",
-        });
-        console.error("error", error);
-        return originalData;
-      } finally {
-        setLoading(false);
-      }
-
-      // Send back the updated values to SWR /api/${endpoint}/${documentId' key to update local state
-      return values;
+    } catch (err) {
+      setSnackbarState({
+        open: true,
+        message: err.message || "Une erreur est survenue",
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
     }
-
-    // Actual action of mutate via SWR
-    mutate(patchData);
   }
 
   // Delete click button function
   async function handleDelete(event) {
     event.preventDefault();
-    setLoading(true);
-
     try {
-      const response = await fetch(`/api/${endpoint}/${documentId}`, {
-        method: "DELETE",
+      await deleteAdmin({
+        setLoading,
+        setSnackbarState,
+        endpoint,
+        documentId,
+        adminEndpoint,
+        router,
       });
-
-      // If response is not ok, manually throw an error
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-    } catch (error) {
-      // If error, set error state and return original data for mutate function
+    } catch (err) {
       setSnackbarState({
         open: true,
-        message: error.message,
+        message: err.message || "Une erreur est survenue",
         severity: "error",
       });
-      return originalData;
     } finally {
       setLoading(false);
     }
-
-    setSnackbarState({
-      open: true,
-      message: "Suppression effectuée. Redirection...",
-      severity: "success",
-    });
-    // Redirect to ${adminEndpoint} after 1.5 seconds
-    setTimeout(() => {
-      router.push(adminEndpoint);
-    }, 1500);
   }
 
   return (

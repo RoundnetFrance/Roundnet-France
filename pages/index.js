@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import { getDocuments } from "../helpers/db";
 
+// MUI IMPORTS
+import { Container } from "@mui/material";
+
 // COMPONENT IMPORTS
 import Hero from "../components/ui/hero";
 import HomeInfoBlock from "../components/home/home-info-block";
@@ -8,8 +11,14 @@ import LogoCarousel from "../components/ui/logo-carousel";
 import FourSquareInfo from "../components/home/four-square-info";
 import CTAFooter from "../components/ui/cta-footer";
 import RulesDemo from "../components/home/rules-demo";
+import Error from "../components/ui/error";
 
-export default function HomePage({ clubLogos, partnersLogos }) {
+export default function HomePage({
+  clubLogos,
+  partnersLogos,
+  errorLogos,
+  errorPartnersLogos,
+}) {
   return (
     <Fragment>
       <Hero
@@ -42,36 +51,69 @@ export default function HomePage({ clubLogos, partnersLogos }) {
         }}
       />
 
-      <LogoCarousel title="Ils adhèrent à Roundnet France" logos={clubLogos} />
-      <LogoCarousel title="Nos partenaires" logos={partnersLogos} />
+      {errorLogos ? (
+        <Container maxWidth="sm">
+          <Error message="Une erreur est survenue lors de la récupération des logos des clubs" />
+        </Container>
+      ) : (
+        <LogoCarousel
+          title="Ils adhèrent à Roundnet France"
+          logos={clubLogos}
+        />
+      )}
+
+      {errorPartnersLogos ? (
+        <Container maxWidth="sm">
+          <Error message="Une erreur est survenue lors de la récupération des logos des partenaires" />
+        </Container>
+      ) : (
+        <LogoCarousel title="Nos partenaires" logos={partnersLogos} />
+      )}
     </Fragment>
   );
 }
 
 export async function getStaticProps() {
+  let errorLogos;
+  let clubLogos;
+  let errorPartnersLogos;
+  let partnersLogos;
+
   // Get club logos
-  const clubs = await getDocuments(
-    "clubs",
-    { validated: true },
-    { image: 1, title: 1 },
-    { chip: 1 }
-  );
-  const clubLogos = clubs.map((club) => ({
-    src: club.image,
-    alt: club.title,
-  }));
+  try {
+    const clubs = await getDocuments(
+      "clubs",
+      { validated: true },
+      { image: 1, title: 1 },
+      { chip: 1 }
+    );
+    clubLogos = clubs.map((club) => ({
+      src: club.image,
+      alt: club.title,
+    }));
+  } catch (err) {
+    errorLogos = err.message;
+  }
 
-  const partners = await getDocuments("partners", null, { image: 1, title: 1 });
-
-  const partnersLogos = partners.map((partner) => ({
-    src: partner.image,
-    alt: partner.title,
-  }));
+  try {
+    const partners = await getDocuments("partners", null, {
+      image: 1,
+      title: 1,
+    });
+    partnersLogos = partners.map((partner) => ({
+      src: partner.image,
+      alt: partner.title,
+    }));
+  } catch (err) {
+    errorPartnersLogos = err.message;
+  }
 
   return {
     props: {
-      clubLogos,
-      partnersLogos,
+      clubLogos: clubLogos || null,
+      partnersLogos: partnersLogos || null,
+      errorLogos: errorLogos || null,
+      errorPartnersLogos: errorPartnersLogos || null,
     },
     revalidate: 3600,
   };
