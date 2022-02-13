@@ -1,4 +1,4 @@
-export default function createFormEventConfig(isAdmin) {
+export default function getEventFormConfig(isAdmin) {
   return {
     name: "Détails de l'événement",
     sendNotification: "event",
