@@ -1,6 +1,7 @@
 import Image from "next/image";
 import NextLink from "next/link";
 import { Fragment, useState, useEffect } from "react";
+import { useSWRConfig } from "swr";
 
 // MUI IMPORTS
 import {
@@ -28,6 +29,9 @@ import Error from "../../../components/ui/error";
 import DataControl from "../../../components/admin/data-control";
 
 export default function AdminContent({ config, form }) {
+  const { ...rest } = useSWRConfig();
+  console.log(rest);
+
   const { data, listProps, endpoint, isLoading, isError } = config;
 
   // Handle filtered data + side effect from SWR
