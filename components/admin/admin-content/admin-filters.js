@@ -27,7 +27,8 @@ export default function AdminFilters({ data, setData }) {
 
   useEffect(() => {
     const filteredData = data?.filter((item) => {
-      const itemTitle = item.title.toLowerCase();
+      // Filter by title or name
+      const itemTitle = item.title?.toLowerCase() || item.name?.toLowerCase();
       const searchValueLowerCase = searchValue.toLowerCase();
       return itemTitle.includes(searchValueLowerCase);
     });
