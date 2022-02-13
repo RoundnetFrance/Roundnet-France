@@ -49,7 +49,10 @@ export default function FormBuilder({ formConfig }) {
   } = formConfig;
 
   // Create an object from formFields where each id is an empty string (or false if initial error object)
-  const initialFormState = useMemo(() => getInitialState(fields), [fields]);
+  const initialFormState = useMemo(() => {
+    console.log("plop");
+    return getInitialState(fields);
+  }, [fields]);
   const initialFormErrors = getInitialState(fields, true);
 
   // Handle state and state change onChange

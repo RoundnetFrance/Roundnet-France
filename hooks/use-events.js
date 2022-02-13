@@ -2,9 +2,7 @@ import fetcher from "../lib/swr-fetcher";
 import useSWR from "swr";
 
 export default function useEvents() {
-  const { data, error, ...rest } = useSWR("/api/events", fetcher, {
-    revalidateOnFocus: false,
-  });
+  const { data, error } = useSWR("/api/events", fetcher, {});
 
   return {
     events: data,
