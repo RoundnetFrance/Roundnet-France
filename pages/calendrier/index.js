@@ -70,7 +70,7 @@ export async function getStaticProps() {
         address: 0,
         organization: 0,
       },
-      { date: -1 }
+      { date: 1 }
     );
 
     // [MAIN TIMELINE] Get only the events that are in the future and sort them by event.date
@@ -91,7 +91,7 @@ export async function getStaticProps() {
       .reverse();
 
     // [LASTLY ADDED EVENTS SIDE] Get only the three newer events set in the future
-    lastAddedEvents = futureEvents.reverse().slice(0, 3);
+    lastAddedEvents = [...futureEvents].reverse().slice(0, 3);
   } catch (err) {
     console.log(err);
     error = err.message;

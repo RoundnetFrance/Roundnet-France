@@ -45,6 +45,7 @@ export default function EventsAdminPage() {
     <DashboardWrapper>
       <Container maxWidth="lg">
         <PageTitle title="Liste des tournois et événements" />
+        <CreateEventForm />
       </Container>
       <AdminContent config={config} form={<CreateEventForm isAdmin />} />
     </DashboardWrapper>
