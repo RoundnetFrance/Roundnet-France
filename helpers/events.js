@@ -22,6 +22,8 @@ export default function getEventLabel(label) {
       return "Masculin";
     case "female":
       return "Féminin";
+    case "nonMixed":
+      return "Non-Mixte";
     case "free":
       return "Libre";
     case "cdf":
