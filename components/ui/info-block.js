@@ -129,7 +129,7 @@ function InfoBlock({
           },
           maxWidth: {
             xs: roundedEverywhere ? "260px" : "80%",
-            md: roundedEverywhere ? "260px" : "260px",
+            md: roundedEverywhere ? "260px" : "50%",
           },
           height: roundedEverywhere
             ? height / 1.25
