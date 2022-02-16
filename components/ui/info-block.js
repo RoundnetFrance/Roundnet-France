@@ -120,12 +120,16 @@ function InfoBlock({
         elevation={3}
         sx={{
           minWidth: {
-            xs: roundedEverywhere ? "210px" : "300px",
-            md: roundedEverywhere ? "210px" : "260px",
+            xs: roundedEverywhere ? "260px" : "300px",
+            md: roundedEverywhere ? "260px" : "260px",
           },
           width: {
-            xs: roundedEverywhere ? "210px" : "80%",
-            md: roundedEverywhere ? "210px" : "50%",
+            xs: roundedEverywhere ? "260px" : "80%",
+            md: roundedEverywhere ? "260px" : "50%",
+          },
+          maxWidth: {
+            xs: roundedEverywhere ? "260px" : "80%",
+            md: roundedEverywhere ? "260px" : "260px",
           },
           height: roundedEverywhere
             ? height / 1.25
