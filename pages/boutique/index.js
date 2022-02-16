@@ -9,7 +9,7 @@ import Head from "../../components/head";
 import CrossingItems from "../../components/ui/crossing-items";
 
 // CONTENTS
-import { urbanPartnership } from "../../contents/boutique/";
+import { shopContent } from "../../contents/boutique/";
 
 function ShopPage() {
   return (
@@ -27,7 +27,7 @@ function ShopPage() {
       />
 
       <Container maxWidth="md" sx={{ my: 8 }}>
-        <CrossingItems height={450} items={urbanPartnership} />
+        <CrossingItems height={450} items={shopContent} />
       </Container>
     </Fragment>
   );
