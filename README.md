@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Roundnet France Official Website
 
-## Getting Started
+This is the official website of the **Roundnet France Federation**. Officially created in 2021, Roundnet France is an official association aiming at promoting roundnet in France. It organizes events, ranking and overall management of the roundnet community. It also is the bridge between French roundnet communities and european/international roundnet associations.
 
-First, run the development server:
+Roundnet France is a proud partner of [Spikeball](https://spikeball.com/), the world leader for roundnet products and services.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+If you witness a bug or want to submit a new feature, please make an issue on [GitHub](https://github.com/Niborwood/Roundnet-France/issues).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The Stack
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+The Roundnet France website is built with:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **React/NextJS** with MUI library components for the front-end
+- **MongoDB** for the database
+- **Vercel** for the hosting
+- **Next-auth** for the authentication
+- **Joi** for the validation
+- **SWR** for client-side data fetching
+- **Firebase Storage** for image and file storage
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## API
 
-## Learn More
+We designed and built the Roundnet France website to offer to anyone interested an API to access our data. Our goal is to share data with other roundnete communities and to make it easy to use.
 
-To learn more about Next.js, take a look at the following resources:
+Data is displayed in a [JSON](https://en.wikipedia.org/wiki/JSON) format.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Here's a list of available endpoints:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Clubs : <https://www.roundnetfrance.fr/api/clubs>
+- Events : <https://www.roundnetfrance.fr/api/events>
+- Federation Members : <https://www.roundnetfrance.fr/api/federation-members>
 
-## Deploy on Vercel
+For more information, please read the following paragraphs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Inqueries
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+As a federation, we decided to let the base code for the [Roundnet France website](https://www.roundnetfrance.fr/) open-source, so that everyone can contribute to the project. Feel free to fork it and submit new features to us !
+
+This website was created and is mainly maintained by [Robin Souriau](https://github.com/Niborwood). You can send him an email at [robin.souriau@gmail.com](mailto:robin.souriau@gmail.com).
