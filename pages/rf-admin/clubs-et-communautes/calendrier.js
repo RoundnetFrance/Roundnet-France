@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import useEvents from "../../../hooks/use-events";
 
 // MUI IMPORTS
@@ -12,18 +10,6 @@ import AdminContent from "../../../components/admin/admin-content";
 import CreateEventForm from "../../../components/forms/create-event-form";
 
 export default function EventsAdminPage() {
-  // Hooks calls
-  const router = useRouter();
-
-  // Handle redirect if no session
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/rf-admin");
-    },
-  });
-
   // Get events info
   const { events, isLoading, isError } = useEvents();
 
@@ -50,6 +36,10 @@ export default function EventsAdminPage() {
     </DashboardWrapper>
   );
 }
+
+EventsAdminPage.auth = {
+  role: "superadmin",
+};
 
 export function getStaticProps() {
   return {

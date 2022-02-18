@@ -9,7 +9,7 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // CONTENTS
 import eventConfig from "../../../../contents/admin/configs/event";
 
-export default function EditAdminPage() {
+export default function EditSingleEventPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
   const { eventId } = router.query;
@@ -28,6 +28,10 @@ export default function EditAdminPage() {
     />
   );
 }
+
+EditSingleEventPage.auth = {
+  role: "superadmin",
+};
 
 // NextJS functions
 export async function getStaticPaths() {

@@ -9,7 +9,7 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // CONTENTS
 import officialDocsConfig from "../../../../contents/forms/official-docs";
 
-export default function EditAdminPage() {
+export default function EditSingleDocPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
   const { officialDocId } = router.query;
@@ -31,6 +31,10 @@ export default function EditAdminPage() {
     />
   );
 }
+
+EditSingleDocPage.auth = {
+  role: "superadmin",
+};
 
 // NextJS functions
 export async function getStaticPaths() {

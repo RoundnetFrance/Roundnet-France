@@ -9,7 +9,7 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // CONTENTS
 import clubConfig from "../../../../contents/forms/clubs";
 
-export default function EditAdminPage() {
+export default function EditSingleClubPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
   const { clubId } = router.query;
@@ -28,6 +28,10 @@ export default function EditAdminPage() {
     />
   );
 }
+
+EditSingleClubPage.auth = {
+  role: "superadmin",
+};
 
 // NextJS functions
 export async function getStaticPaths() {
