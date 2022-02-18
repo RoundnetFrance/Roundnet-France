@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import useOfficialDocs from "../../../hooks/use-official-docs";
 
 // COMPONENT IMPORTS
@@ -10,24 +8,13 @@ import CreateOfficialDocForm from "../../../components/admin/forms/create-offici
 
 export default function RulesAdminPage() {
   // Hooks calls
-  const router = useRouter();
   const { officialDocs, isLoading, isError } = useOfficialDocs("rules");
-
-  // Handle redirect if no session
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/rf-admin");
-    },
-  });
 
   const config = {
     name: "administrators",
     listProps: {
       title: "version",
       subtitle: "description",
-      // image: "image",
     },
     data: officialDocs,
     endpoint: "official-docs",
@@ -45,6 +32,10 @@ export default function RulesAdminPage() {
     </DashboardWrapper>
   );
 }
+
+RulesAdminPage.auth = {
+  role: "superadmin",
+};
 
 export async function getStaticProps() {
   return {

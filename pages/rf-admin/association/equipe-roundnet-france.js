@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import useFederationMembers from "../../../hooks/use-federation-members";
 
 // COMPONENT IMPORTS
@@ -8,21 +6,9 @@ import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper
 import PageTitle from "../../../components/ui/page-title";
 import CreateFederationMemberForm from "../../../components/admin/forms/create-federation-member-form";
 
-function ClubsAdminPage() {
+export default function FederationMembersAdminPage() {
   // Data from API (get members info)
   const { members, isLoading, isError } = useFederationMembers();
-
-  // Hooks calls
-  const router = useRouter();
-
-  // Handle redirect if no session
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/rf-admin");
-    },
-  });
 
   const config = {
     name: "federation members administrators",
@@ -46,6 +32,10 @@ function ClubsAdminPage() {
   );
 }
 
+FederationMembersAdminPage.auth = {
+  role: "superadmin",
+};
+
 export async function getStaticProps() {
   return {
     props: {
@@ -53,5 +43,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-export default ClubsAdminPage;
