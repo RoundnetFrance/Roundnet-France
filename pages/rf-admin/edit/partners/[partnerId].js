@@ -9,7 +9,7 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // CONTENTS
 import partnerConfig from "../../../../contents/admin/configs/partner";
 
-export default function EditAdminPage() {
+export default function EditSinglePartnerPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
   const { partnerId } = router.query;
@@ -28,6 +28,10 @@ export default function EditAdminPage() {
     />
   );
 }
+
+EditSinglePartnerPage.auth = {
+  role: "superadmin",
+};
 
 // NextJS functions
 export async function getStaticPaths() {

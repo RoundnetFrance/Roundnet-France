@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import useClubs from "../../../../hooks/use-clubs";
 
 // MUI IMPORTS
@@ -12,18 +10,6 @@ import AdminContent from "../../../../components/admin/admin-content";
 import CreateClubForm from "../../../../components/forms/create-club-form";
 
 export default function ClubsAdminPage() {
-  // Hooks calls
-  const router = useRouter();
-
-  // Handle redirect if no session
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/rf-admin");
-    },
-  });
-
   // Get clubs info
   const { clubs, isLoading, isError } = useClubs();
 
@@ -50,6 +36,10 @@ export default function ClubsAdminPage() {
     </DashboardWrapper>
   );
 }
+
+ClubsAdminPage.auth = {
+  role: "superadmin",
+};
 
 export function getStaticProps() {
   return {
