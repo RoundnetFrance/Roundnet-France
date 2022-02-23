@@ -10,6 +10,9 @@ import rfMuiTheme from "../styles/rf-mui-theme";
 // Import Provider from next/auth client to share session
 import { SessionProvider } from "next-auth/react";
 
+// COMPONENT IMPORT
+import Auth from "../components/admin/auth";
+
 // Render app
 function MyApp({ Component, pageProps }) {
   return (
@@ -23,7 +26,13 @@ function MyApp({ Component, pageProps }) {
               content="Site officiel de la fédération française de roundnet"
             />
           </Head>
-          <Component {...pageProps} />
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
         </Layout>
       </ThemeProvider>
     </SessionProvider>

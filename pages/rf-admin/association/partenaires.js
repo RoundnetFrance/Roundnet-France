@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import usePartners from "../../../hooks/use-partners";
 
 // COMPONENT IMPORTS
@@ -11,18 +9,6 @@ import CreatePartnerForm from "../../../components/admin/forms/create-partner-fo
 export default function PartnersAdminPage() {
   // Data from API (get members info)
   const { partners, isLoading, isError } = usePartners();
-
-  // Hooks calls
-  const router = useRouter();
-
-  // Handle redirect if no session
-  const { status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/rf-admin");
-    },
-  });
 
   const config = {
     name: "federation members administrators",
@@ -45,6 +31,10 @@ export default function PartnersAdminPage() {
     </DashboardWrapper>
   );
 }
+
+PartnersAdminPage.auth = {
+  role: "superadmin",
+};
 
 export async function getStaticProps() {
   return {

@@ -1,5 +1,4 @@
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import NextLink from "next/link";
 
 // MUI IMPORTS
@@ -12,7 +11,6 @@ import {
   Card,
   CardContent,
   CardActions,
-  Button,
   CardActionArea,
 } from "@mui/material";
 import Masonry from "@mui/lab/Masonry";
@@ -22,28 +20,13 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 // COMPONENT IMPORTS
 import DashboardWrapper from "../../components/layout/admin/dashboard-wrapper";
-import Loader from "../../components/ui/loader";
 import IconWithBackground from "../../components/ui/icon-with-background";
 
 // CONTENTS
 import { dashboardElements } from "../../contents/admin";
 
 export default function DashboardPage() {
-  // Hooks calls
-  const router = useRouter();
-
-  // Handle redirect if no session
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/rf-admin");
-    },
-  });
-
-  // If loading, display loading screen
-  if (status === "loading") return <Loader />;
-
+  const { data: session } = useSession();
   return (
     <DashboardWrapper>
       <Box my={4}>
@@ -136,6 +119,10 @@ export default function DashboardPage() {
     </DashboardWrapper>
   );
 }
+
+DashboardPage.auth = {
+  role: "superadmin",
+};
 
 export function getStaticProps() {
   return {
