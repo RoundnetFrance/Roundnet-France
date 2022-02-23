@@ -8,7 +8,7 @@ import {
   Stack,
   Box,
   Typography,
-  MUILink,
+  Link as MUILink,
   Dialog,
   Paper,
   Icon,
