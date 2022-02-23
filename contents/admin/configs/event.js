@@ -62,6 +62,12 @@ const eventConfig = {
               "Ce slug sera utilisé pour générer l'URL de l'événement. Attention : le changer entraîne une erreur 404 sur l'ancienne URL.",
           },
         },
+        {
+          _id: "inscriptionUrl",
+          name: "Lien d'inscription",
+          type: "text",
+          editable: true,
+        },
       ],
     },
     // Lieu & Date
