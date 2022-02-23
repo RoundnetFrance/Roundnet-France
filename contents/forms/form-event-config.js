@@ -9,7 +9,7 @@ export default function getEventFormConfig(isAdmin) {
         label: "Bannière",
         type: "file",
         options: {
-          helperText: "Minimum 1500px de largeur",
+          helperText: "1500~1800px de largeur, format bannière 16/9, paysage",
           fileConfig: {
             type: "image",
             imageMaxWidth: 1800,
@@ -21,7 +21,7 @@ export default function getEventFormConfig(isAdmin) {
         label: "Image de l'événement",
         type: "file",
         options: {
-          helperText: "Minimum 300px de largeur, format carré de préférence",
+          helperText: "300~800px de largeur, format carré",
           fileConfig: {
             type: "image",
             imageMaxWidth: 600,
