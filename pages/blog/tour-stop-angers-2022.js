@@ -13,7 +13,7 @@ export default function TourStopAngersPage() {
   return (
     <Fragment>
       <Head
-        title="Tour des France des meilleurs équipes de Roundnet !"
+        title="Tour de France des meilleures équipes de Roundnet !"
         description="Qui pour représenter la France aux premiers championnats du monde ?"
       />
 
@@ -28,7 +28,7 @@ export default function TourStopAngersPage() {
 
         {/* TITLE */}
         <Typography variant="h4" component="h1">
-          Tour des France des meilleurs équipes de Roundnet !
+          Tour de France des meilleures équipes de Roundnet !
         </Typography>
         <Typography variant="h5" component="h2">
           Qui pour représenter la France aux premiers championnats du monde ?
@@ -124,8 +124,8 @@ export default function TourStopAngersPage() {
           Aïe aïe aïe la paire est enfin formée et ça risque de piquer.{" "}
           <i>"Ils sont servico-dépendants, si ça rentre, t'es dans la merde"</i>
           . Très belle synthèse d'un observateur avisé. Mais est-ce tout à fait
-          juste ? "La défense n’aurait plus de secret pour cette équipe" selon
-          Lou, notamment suite à la collaboration de Clément (un{" "}
+          juste ? <i>"La défense n’aurait plus de secret pour cette équipe"</i>{" "}
+          selon Lou, notamment suite à la collaboration de Clément (un{" "}
           <i>"gaucher fourbe"</i>
           selon certains) avec le célèbre défenseur Buddy Hammon. Louis saura-t-
           il tenir la comparaison ? Très certainement car le vice champion de
@@ -173,11 +173,11 @@ export default function TourStopAngersPage() {
           Une autre équipe dont la performance aux derniers championnats de
           France fut une (mauvaise) surprise. Vainqueurs du premier tournoi
           français de l'année à Angers, Charles et Benoît représentent la
-          "meilleure chance parisienne" selon Anaïs. Seule condition pour faire
-          partie des 5 : que leurs{" "}
+          <i>"meilleure chance parisienne"</i> selon Anaïs. Seule condition pour
+          faire partie des 5 : que leurs{" "}
           <i>"services toujours plus précis et techniques"</i>
-          passent et que leur mental ne trépasse pas ! "De Benoît Paire à Roger
-          Federer" il n'y a qu'un (grand) pas.
+          passent et que leur mental ne trépasse pas !{" "}
+          <i>"De Benoît Paire à Roger Federer"</i> il n'y a qu'un (grand) pas.
         </Typography>
 
         <Typography variant="h5" component="h2">
@@ -196,11 +196,13 @@ export default function TourStopAngersPage() {
           </i>
           .<i>"Ils sont partout"</i> note une autre commentatrice anonyme
           courageuse. Autre remarque anonyme de qualité que je me dois de
-          rapporter sans omettre une virgule : "Quand ils ont fait tomber les
-          Jouve ils m'ont fait peur, puis on les a défoncé deux fois donc j'ai
-          moins peur". Bref tout le monde est d'accord pour dire que cette
-          équipe n'est plus une surprise et devrait représenter la France aux
-          worlds.
+          rapporter sans omettre une virgule :{" "}
+          <i>
+            "Quand ils ont fait tomber les Jouve ils m'ont fait peur, puis on
+            les a défoncé deux fois donc j'ai moins peur"
+          </i>
+          . Bref tout le monde est d'accord pour dire que cette équipe n'est
+          plus une surprise et devrait représenter la France aux worlds.
         </Typography>
 
         <Box mb={4}>
