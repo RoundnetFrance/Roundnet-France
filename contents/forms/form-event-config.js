@@ -179,7 +179,7 @@ export default function getEventFormConfig(isAdmin) {
           required: true,
           selectValues: [
             {
-              label: "Libre",
+              label: "Mixte & Non-Mixte",
               value: "free",
             },
             {
