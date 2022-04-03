@@ -84,13 +84,21 @@ export async function getStaticProps() {
     const clubs = await getDocuments(
       "clubs",
       { validated: true },
-      { image: 1, title: 1 },
+      { image: 1, title: 1, links: 1 },
       { chip: 1 }
     );
-    clubLogos = clubs.map((club) => ({
-      src: club.image,
-      alt: club.title,
-    }));
+    clubLogos = clubs.map((club) => {
+      let link;
+      if (club.links.length > 0) {
+        link = club.links[0].url || club.links[1].url || club.links[2].url;
+      }
+
+      return {
+        src: club.image,
+        alt: club.title,
+        link: link,
+      };
+    });
   } catch (err) {
     errorLogos = err.message;
   }
@@ -99,10 +107,12 @@ export async function getStaticProps() {
     const partners = await getDocuments("partners", null, {
       image: 1,
       title: 1,
+      links: 1,
     });
     partnersLogos = partners.map((partner) => ({
       src: partner.image,
       alt: partner.title,
+      link: partner.links,
     }));
   } catch (err) {
     errorPartnersLogos = err.message;
