@@ -25,6 +25,8 @@ export default function getEventLabel(label) {
     case "nonMixed":
       return "Non-Mixte";
     case "free":
+      return "Libre";
+    case "mixed-non-mixed":
       return "Mixte & Non-Mixte";
     case "cdf":
       return "Coupe de France";
