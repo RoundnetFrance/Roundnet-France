@@ -23,10 +23,11 @@ const fieldsInitialState = {
   },
   category: {
     free: true,
+    "mixed-non-mixed": true,
     mixed: true,
     nonMixed: true,
-    male: true,
-    female: true,
+    // male: true,
+    // female: true,
   },
   type: {
     open: true,
