@@ -9,7 +9,6 @@ import Link from "../ui/link";
 
 function LogoCarousel({ title, logos }) {
   if (!logos) return null;
-  console.log(logos);
 
   const logosSlider = logos.map((logo) => {
     // Generating the image
@@ -33,6 +32,7 @@ function LogoCarousel({ title, logos }) {
   });
 
   const numberOfLogos = logos.length;
+  const logosOnMultipleSlides = numberOfLogos > 5;
 
   // RETURN
   return (
@@ -49,11 +49,11 @@ function LogoCarousel({ title, logos }) {
       </Stack>
       <Slider
         dots
-        arrows={false}
+        arrows={logosOnMultipleSlides}
         autoplay
-        infinite={false}
+        infinite={true}
         speed={800}
-        slidesToShow={numberOfLogos}
+        slidesToShow={logosOnMultipleSlides ? 5 : numberOfLogos}
       >
         {logosSlider}
       </Slider>
