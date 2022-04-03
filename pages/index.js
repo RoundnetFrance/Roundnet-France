@@ -163,11 +163,6 @@ export async function getStaticProps() {
       { date: 1 },
       3
     );
-    partnersLogos = partners.map((partner) => ({
-      src: partner.image,
-      alt: partner.title,
-      link: partner.links,
-    }));
   } catch (err) {
     errorPartnersLogos = err.message;
   }
