@@ -63,7 +63,7 @@ export default function TimelineSingle({ event, withYear }) {
           <Typography
             variant="h6"
             color={isFrenchMajorEvent ? "primary" : "initial"}
-            sx={{ fontWeight: "bold" }}
+            sx={{ fontWeight: "bold", lineHeight: "1.2" }}
           >
             {new Date(event.date).toLocaleDateString("fr-FR", {
               day: "numeric",
@@ -76,7 +76,7 @@ export default function TimelineSingle({ event, withYear }) {
             <Typography
               variant="h6"
               color={isFrenchMajorEvent ? "primary" : "initial"}
-              sx={{ fontWeight: "bold" }}
+              sx={{ fontWeight: "bold", lineHeight: "1.2" }}
             >
               {event.dateEnd &&
                 " - " +
