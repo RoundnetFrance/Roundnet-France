@@ -4,11 +4,15 @@ import Image from "next/image";
 // MUI IMPORTS
 import { Container, Box, Typography, Stack } from "@mui/material";
 
+// COMPONENT IMPORTS
+import Link from "../ui/link";
+
 function LogoCarousel({ title, logos }) {
   if (!logos) return null;
 
-  const logosSlider = logos.map((logo) => (
-    <Box key={logo.alt} sx={{ textAlign: "center", position: "relative" }}>
+  const logosSlider = logos.map((logo) => {
+    // Generating the image
+    const image = (
       <Image
         src={logo.src}
         alt={logo.alt}
@@ -17,10 +21,18 @@ function LogoCarousel({ title, logos }) {
         title={logo.alt}
         objectFit="cover"
       />
-    </Box>
-  ));
+    );
+
+    // Return with link condition
+    return (
+      <Box key={logo.alt} sx={{ textAlign: "center", position: "relative" }}>
+        {logo.link ? <Link href={logo.link}>{image}</Link> : image}
+      </Box>
+    );
+  });
 
   const numberOfLogos = logos.length;
+  const logosOnMultipleSlides = numberOfLogos > 5;
 
   // RETURN
   return (
@@ -37,11 +49,11 @@ function LogoCarousel({ title, logos }) {
       </Stack>
       <Slider
         dots
-        arrows={false}
+        arrows={logosOnMultipleSlides}
         autoplay
-        infinite={false}
+        infinite={true}
         speed={800}
-        slidesToShow={numberOfLogos}
+        slidesToShow={logosOnMultipleSlides ? 5 : numberOfLogos}
       >
         {logosSlider}
       </Slider>

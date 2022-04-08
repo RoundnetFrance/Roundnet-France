@@ -1,4 +1,5 @@
 import Image from "next/image";
+import propTypes from "prop-types";
 
 // MUI IMPORTS
 import { Stack, Box, Typography, Collapse, Divider } from "@mui/material";
@@ -10,7 +11,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import TimelineSingle from "./timeline-single";
 import RowCenteredStack from "../ui/row-centered-stack";
 
-export default function EventsTimeline({ events }) {
+export default function EventsTimeline({ events, fullWidth }) {
   // For each event.date in events, extract the year from the date and create a new array with the events that have the same year
   const eventsByYear = events.reduce((acc, event) => {
     const year = event.date.split("-")[0];
@@ -42,7 +43,7 @@ export default function EventsTimeline({ events }) {
   ));
 
   return (
-    <Box sx={{ width: { xs: "100%", md: "75%" } }}>
+    <Box sx={{ width: { xs: "100%", md: fullWidth ? "100%" : "75%" } }}>
       <Box mb={6}>
         <Typography variant="h4" sx={{ mb: 1 }}>
           Tournois &amp; événements à venir
@@ -84,3 +85,12 @@ export default function EventsTimeline({ events }) {
     </Box>
   );
 }
+
+EventsTimeline.propTypes = {
+  events: propTypes.arrayOf(propTypes.object).isRequired,
+  fullWidth: propTypes.bool,
+};
+
+EventsTimeline.defaultProps = {
+  fullWidth: false,
+};
