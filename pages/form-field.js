@@ -1,11 +1,5 @@
 import { fr } from "date-fns/locale";
 import { Fragment, useState } from "react";
-import dynamic from "next/dynamic";
-
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 // MUI IMPORT
 import {
@@ -118,13 +112,7 @@ export default function FormField({
     case "md-editor":
       input = (
         <Fragment>
-          <QuillNoSSRWrapper
-            theme="snow"
-            value={value}
-            onChange={(content) =>
-              handleChange({ target: { id, value: content } })
-            }
-          />
+          <div defaultValue="*lol* non ?">Lol</div>>
         </Fragment>
       );
       break;
