@@ -115,7 +115,7 @@ export default function FormField({
 
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   switch (type) {
-    case "md-editor":
+    case "rich-editor":
       input = (
         <Fragment>
           <QuillNoSSRWrapper
