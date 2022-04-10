@@ -2,6 +2,10 @@ import { getSession } from "next-auth/react";
 import { getDocuments, insertDocument } from "../../../helpers/db";
 import { validateAPI } from "../../../helpers/form";
 import getSchema from "../../../helpers/schemas";
+import turndownService from "turndown";
+
+// Initiate Turndown (for markdown to html conversion)
+const turndown = new turndownService();
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -33,6 +37,13 @@ export default async function handler(req, res) {
         validateAPI({ data, schema });
       } catch (error) {
         console.error("ERROR 400 - posts", error.message);
+        return res.status(400).json({ message: error.message });
+      }
+
+      try {
+        // * Convert HTML into markdown
+        data.content = turndown.turndown(data.content);
+      } catch (error) {
         return res.status(400).json({ message: error.message });
       }
 

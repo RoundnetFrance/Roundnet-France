@@ -13,7 +13,7 @@ export default function getBlogFormConfig() {
       {
         id: "content",
         label: "Contenu de l'article",
-        type: "md-editor",
+        type: "rich-editor",
         options: {
           required: true,
         },

@@ -5,6 +5,10 @@ import {
   patchDocument,
   deleteDocument,
 } from "../../../helpers/db";
+import turndownService from "turndown";
+
+// Initiate Turndown (for markdown to html conversion)
+const turndown = new turndownService();
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -27,6 +31,14 @@ export default async function handler(req, res) {
     if (req.method === "PATCH") {
       const data = req.body;
       delete data._id;
+
+      
+      try {
+        // * Convert HTML into markdown
+        data.content = turndown.turndown(data.content);
+      } catch (error) {
+        return res.status(400).json({ message: error.message });
+      }
 
       try {
         const response = await patchDocument(
