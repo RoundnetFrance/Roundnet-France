@@ -2,6 +2,7 @@ import { getSession } from "next-auth/react";
 import { getDocuments, insertDocument } from "../../../helpers/db";
 import { validateAPI } from "../../../helpers/form";
 import getSchema from "../../../helpers/schemas";
+import createSlug from "../../../helpers/slug-creator";
 import turndownService from "turndown";
 
 // Initiate Turndown (for markdown to html conversion)
@@ -32,6 +33,9 @@ export default async function handler(req, res) {
       try {
         // Define the POST CLUB schema
         const schema = getSchema("posts");
+
+        // Add a slug
+        data.slug = createSlug(data.title);
 
         // Actual validation
         validateAPI({ data, schema });

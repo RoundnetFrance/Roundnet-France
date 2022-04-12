@@ -61,11 +61,6 @@ module.exports = {
         destination: "/qui-sommes-nous/contact",
         permanent: true,
       },
-      // {
-      //   source: "/blog",
-      //   destination: "/",
-      //   permanent: true,
-      // },
       {
         source:
           "/post/championnats-de-france-de-roundnet-tour-d-horizon-des-%C3%A9quipes",
