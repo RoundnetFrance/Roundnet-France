@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import { getDocument } from "../../helpers/db";
 
 // MUI IMPORTS
-import { Container, Typography, Button, Stack } from "@mui/material";
+import { Container, Typography, Button, Stack, Box } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 // COMPONENTS IMPORTS
 import Hero from "../../components/ui/hero";
@@ -11,6 +12,7 @@ import Head from "../../components/head";
 import InfoBlock from "../../components/ui/info-block";
 import HeaderWithIcon from "../../components/ui/header-with-icon";
 import DocumentHalfImage from "../../components/ui/document-half-image";
+import Link from "../../components/ui/link";
 
 // CONTENT
 import { infoCDF } from "../../contents/competition";
@@ -50,6 +52,21 @@ export default function NationalRankingPage({ document }) {
             "La coupe de France est composée, de :",
           ]}
         />
+
+        <Box textAlign="center" mt={8}>
+          <Link
+            href="https://docs.google.com/spreadsheets/d/17SMHWKT9j3coeA8te2TbB0td11AwuHUV1jf9c9wNxtI/edit?usp=sharing"
+            color="#fff"
+          >
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<ArrowForwardIcon />}
+            >
+              Consulter le classement
+            </Button>
+          </Link>
+        </Box>
       </Container>
 
       <DocumentHalfImage
