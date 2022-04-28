@@ -1,5 +1,11 @@
 import { fr } from "date-fns/locale";
 import { Fragment, useState } from "react";
+import dynamic from "next/dynamic";
+
+const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 
 // MUI IMPORT
 import {
@@ -109,6 +115,20 @@ export default function FormField({
 
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   switch (type) {
+    case "rich-editor":
+      input = (
+        <Fragment>
+          <QuillNoSSRWrapper
+            theme="snow"
+            value={value}
+            onChange={(content) =>
+              handleChange({ target: { id, value: content } })
+            }
+          />
+        </Fragment>
+      );
+      break;
+
     case "longtext":
       input = (
         <TextField

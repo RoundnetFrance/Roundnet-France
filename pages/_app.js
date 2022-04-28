@@ -1,5 +1,6 @@
 // Reset margins and paddings
 import "../styles/globals.css";
+import "react-quill/dist/quill.snow.css";
 
 // Create a layout and theme for all front pages (header + footer)
 import Layout from "../layout";
