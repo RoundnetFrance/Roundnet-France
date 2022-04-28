@@ -112,7 +112,7 @@ export default function FormField({
     case "md-editor":
       input = (
         <Fragment>
-          <div defaultValue="*lol* non ?">Lol</div>>
+          <div defaultValue="*lol* non ?">Lol</div>
         </Fragment>
       );
       break;
