@@ -2,29 +2,29 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 // MUI IMPORTS
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Masonry from "@mui/lab/Masonry";
-import IconButton from "@mui/material/IconButton";
-
-// MUI TABLE IMPORTS
-import TablePagination from "@mui/material/TablePagination";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableFooter from "@mui/material/TableFooter";
+import {
+  Container,
+  Paper,
+  Box,
+  Stack,
+  IconButton,
+  TablePagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableFooter,
+  Tooltip,
+} from "@mui/material";
 
 // MUI ICONS
-import EqualizerIcon from "@mui/icons-material/Equalizer";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
+import InfoIcon from "@mui/icons-material/Info";
 
 // COMPONENT IMPORTS
 import HeaderWithIcon from "../../ui/header-with-icon";
@@ -90,6 +90,10 @@ TablePaginationActions.propTypes = {
 };
 
 function TeamRanking({ ranking }) {
+  console.log(
+    "🚀 ~ file: team-ranking.js ~ line 93 ~ TeamRanking ~ ranking",
+    ranking
+  );
   // Pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -146,18 +150,29 @@ function TeamRanking({ ranking }) {
                 : ranking
               ).map((row) => (
                 <TableRow
-                  key={row.playerId}
+                  key={row.teamname}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     "&:nth-of-type(odd)": { background: "#c5cef0" },
                   }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.rank + 1}
+                    {row.rank}
                   </TableCell>
-                  <TableCell>{row.name}</TableCell>
+                  <TableCell>
+                    <Tooltip
+                      title={`${row.player1name} & ${row.player2name}`}
+                      color="primary"
+                      sx={{ mr: 1 }}
+                    >
+                      <IconButton size="small">
+                        <InfoIcon fontSize="10px" />
+                      </IconButton>
+                    </Tooltip>
+                    {row.teamname}
+                  </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="right">
-                    {row.point}
+                    {Math.round(row.points * 10) / 10}
                   </TableCell>
                 </TableRow>
               ))}

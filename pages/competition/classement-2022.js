@@ -12,10 +12,6 @@ import Head from "../../components/head";
 import TeamRanking from "../../components/competition/team-ranking/team-ranking";
 
 export default function HallOfFamePage({ ranking }) {
-  console.log(
-    "🚀 ~ file: classement-2022.js ~ line 15 ~ HallOfFamePage ~ ranking",
-    ranking
-  );
   return (
     <Fragment>
       <Head
@@ -33,7 +29,7 @@ export default function HallOfFamePage({ ranking }) {
         </Typography>
       </Container>
 
-      <Container maxWidth="md" sx={{ my: 8 }}>
+      <Container maxWidth="sm" sx={{ my: 8 }}>
         <TeamRanking ranking={ranking} />
       </Container>
     </Fragment>
