@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       }
       // For admin access
       else {
-        events = await getDocuments("events", null, null, { date: 1 });
+        events = await getDocuments("events", null, null, { createdAt: -1 });
       }
       return res.status(200).json(events);
     } catch (error) {
