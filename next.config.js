@@ -1,4 +1,11 @@
 module.exports = {
+  useFileSystemPublicRoutes: false,
+  webpack(config, { dev }) {
+    if (dev) {
+      config.devtool = "cheap-module-eval-source-map";
+    }
+    return config;
+  },
   reactStrictMode: true,
   images: {
     domains: [
