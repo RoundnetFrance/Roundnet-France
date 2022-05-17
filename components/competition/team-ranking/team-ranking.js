@@ -139,7 +139,7 @@ function TeamRanking({ ranking }) {
             </TableHead>
             <TableBody>
               {(rowsPerPage > 0
-                ? ranking.slice(
+                ? ranking?.slice(
                     page * rowsPerPage,
                     page * rowsPerPage + rowsPerPage
                   )
