@@ -222,7 +222,7 @@ const eventConfig = {
                 value: "ric",
               },
               {
-                label: "Coupe de France",
+                label: "Championnat de France",
                 value: "cdf",
               },
               {

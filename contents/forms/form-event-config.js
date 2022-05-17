@@ -96,6 +96,7 @@ export default function getEventFormConfig(isAdmin) {
           required: true,
           multilineRows: 6,
           dividerBottom: true,
+          maxLength: 600,
         },
       },
       {
@@ -218,7 +219,7 @@ export default function getEventFormConfig(isAdmin) {
               value: "ric",
             },
             {
-              label: "Coupe de France",
+              label: "Championnat de France",
               value: "cdf",
               hide: !isAdmin,
             },
