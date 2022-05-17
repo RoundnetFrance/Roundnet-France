@@ -2,11 +2,10 @@ import { Fragment } from "react";
 import { getDocument } from "../../helpers/db";
 
 // MUI IMPORTS
-import { Container, Typography, Divider, Box, Button } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 // COMPONENT IMPORTS
 import Hero from "../../components/ui/hero";
-import HalfImage from "../../components/ui/half-image";
 import PageTitle from "../../components/ui/page-title";
 import Head from "../../components/head";
 import CTAFooter from "../../components/ui/cta-footer";
@@ -15,18 +14,6 @@ import DocumentHalfImage from "../../components/ui/document-half-image";
 // MUI ICONS
 
 function StatusPage({ officialDoc }) {
-  let readableUpdateDate;
-  if (officialDoc) {
-    readableUpdateDate = new Date(officialDoc.createdAt).toLocaleDateString(
-      "fr-FR",
-      {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      }
-    );
-  }
-
   return (
     <Fragment>
       <Head
