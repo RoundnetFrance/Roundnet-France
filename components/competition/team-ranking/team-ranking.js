@@ -90,10 +90,6 @@ TablePaginationActions.propTypes = {
 };
 
 function TeamRanking({ ranking }) {
-  console.log(
-    "🚀 ~ file: team-ranking.js ~ line 93 ~ TeamRanking ~ ranking",
-    ranking
-  );
   // Pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
