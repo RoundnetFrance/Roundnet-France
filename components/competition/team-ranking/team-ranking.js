@@ -144,7 +144,7 @@ function TeamRanking({ ranking }) {
                     page * rowsPerPage + rowsPerPage
                   )
                 : ranking
-              ).map((row) => (
+              )?.map((row) => (
                 <TableRow
                   key={row.teamname}
                   sx={{
@@ -183,7 +183,7 @@ function TeamRanking({ ranking }) {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 15, { label: "Tous", value: -1 }]}
                   colSpan={3}
-                  count={ranking.length}
+                  count={ranking?.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
