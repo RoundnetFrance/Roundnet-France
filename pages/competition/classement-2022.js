@@ -43,8 +43,8 @@ export default function HallOfFamePage({
         </HeaderWithIcon>
 
         <Stack
-          direction={{ sm: "column", lg: "row" }}
-          spacing={{ sm: 4, lg: 2 }}
+          direction={{ xs: "column", lg: "row" }}
+          spacing={{ xs: 4, lg: 2 }}
         >
           <TeamRanking title="Classement masculin" ranking={mensRanking} />
           <TeamRanking title="Classement féminin" ranking={womensRanking} />

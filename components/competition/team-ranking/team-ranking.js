@@ -154,6 +154,7 @@ function TeamRanking({ ranking, title }) {
                       title={`${row.player1name} & ${row.player2name}`}
                       color="primary"
                       sx={{ mr: 1 }}
+                      enterTouchDelay={0}
                     >
                       <IconButton size="small">
                         <InfoIcon fontSize="10px" />
