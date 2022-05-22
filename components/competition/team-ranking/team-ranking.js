@@ -17,6 +17,7 @@ import {
   TableRow,
   TableFooter,
   Tooltip,
+  Typography,
 } from "@mui/material";
 
 // MUI ICONS
@@ -25,10 +26,6 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import InfoIcon from "@mui/icons-material/Info";
-
-// COMPONENT IMPORTS
-import HeaderWithIcon from "../../ui/header-with-icon";
-
 function TablePaginationActions(props) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -89,7 +86,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function TeamRanking({ ranking }) {
+function TeamRanking({ ranking, title }) {
   // Pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -109,9 +106,9 @@ function TeamRanking({ ranking }) {
 
   return (
     <Container maxWidth="lg" sx={{ position: "relative", mb: 4 }}>
-      <HeaderWithIcon icon="equalizer" title="Classement des équipes">
-        Dernière mise à jour : {new Date().toLocaleDateString()}
-      </HeaderWithIcon>
+      <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
+        {title}
+      </Typography>
 
       {/* TABLE */}
       <Stack
