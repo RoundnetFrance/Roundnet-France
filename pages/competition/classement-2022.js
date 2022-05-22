@@ -3,7 +3,7 @@ import db from "../../lib/spiketimate-firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 // MUI IMPORTS
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Stack } from "@mui/material";
 
 // COMPONENTS IMPORTS
 import Hero from "../../components/ui/hero";
@@ -37,14 +37,19 @@ export default function HallOfFamePage({
         </Typography>
       </Container>
 
-      <Container maxWidth="sm" sx={{ my: 8 }}>
+      <Container maxWidth="xl" sx={{ my: 8 }}>
         <HeaderWithIcon icon="equalizer" title="Classement des équipes">
           Dernière mise à jour : {new Date().toLocaleDateString()}
         </HeaderWithIcon>
 
-        <TeamRanking title="Classement masculin" ranking={mensRanking} />
-        <TeamRanking title="Classement féminin" ranking={womensRanking} />
-        <TeamRanking title="Classement mixte" ranking={mixedRanking} />
+        <Stack
+          direction={{ sm: "column", lg: "row" }}
+          spacing={{ sm: 4, lg: 2 }}
+        >
+          <TeamRanking title="Classement masculin" ranking={mensRanking} />
+          <TeamRanking title="Classement féminin" ranking={womensRanking} />
+          <TeamRanking title="Classement mixte" ranking={mixedRanking} />
+        </Stack>
       </Container>
     </Fragment>
   );
@@ -77,14 +82,14 @@ export async function getStaticProps() {
         womensRanking,
         mixedRanking,
       },
-      revalidate: 600,
+      revalidate: 3600,
     };
   } catch (err) {
     return {
       props: {
         error: err.message,
       },
-      revalidate: 600,
+      revalidate: 3600,
     };
   }
 }

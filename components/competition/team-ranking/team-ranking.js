@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 
 // MUI IMPORTS
 import {
-  Container,
   Paper,
   Box,
   Stack,
@@ -105,12 +104,10 @@ function TeamRanking({ ranking, title }) {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ position: "relative", mb: 4 }}>
+    <Stack direction="column">
       <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
         {title}
       </Typography>
-
-      {/* TABLE */}
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={2}
@@ -143,7 +140,7 @@ function TeamRanking({ ranking, title }) {
                 : ranking
               )?.map((row) => (
                 <TableRow
-                  key={row.teamname}
+                  key={row.rank}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     "&:nth-of-type(odd)": { background: "#c5cef0" },
@@ -198,7 +195,7 @@ function TeamRanking({ ranking, title }) {
           </Table>
         </TableContainer>
       </Stack>
-    </Container>
+    </Stack>
   );
 }
 
