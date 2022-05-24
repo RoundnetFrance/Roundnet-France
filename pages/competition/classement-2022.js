@@ -46,8 +46,12 @@ export default function HallOfFamePage({
           direction={{ xs: "column", lg: "row" }}
           spacing={{ xs: 4, lg: 2 }}
         >
-          <TeamRanking title="Classement masculin" ranking={mensRanking} />
           <TeamRanking title="Classement féminin" ranking={womensRanking} />
+          <TeamRanking
+            title="Classement masculin"
+            ranking={mensRanking}
+            altColor
+          />
           <TeamRanking title="Classement mixte" ranking={mixedRanking} />
         </Stack>
       </Container>

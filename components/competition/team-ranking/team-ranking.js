@@ -85,7 +85,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function TeamRanking({ ranking, title }) {
+function TeamRanking({ ranking, title, altColor }) {
   // Pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -143,7 +143,9 @@ function TeamRanking({ ranking, title }) {
                   key={row.rank}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
-                    "&:nth-of-type(odd)": { background: "#c5cef0" },
+                    "&:nth-of-type(odd)": {
+                      background: altColor ? "#fee5ee" : "#c5cef0",
+                    },
                   }}
                 >
                   <TableCell component="th" scope="row">
@@ -152,7 +154,7 @@ function TeamRanking({ ranking, title }) {
                   <TableCell>
                     <Tooltip
                       title={`${row.player1name} & ${row.player2name}`}
-                      color="primary"
+                      color={altColor ? "secondary" : "primary"}
                       sx={{ mr: 1 }}
                       enterTouchDelay={0}
                     >
