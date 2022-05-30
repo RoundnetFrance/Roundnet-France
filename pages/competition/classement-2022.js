@@ -24,7 +24,11 @@ export default function HallOfFamePage({
         description="Le classement de la Coupe de France est calculé par équipe. La participation aux Tour Stop et au Championnat de France permet de gagner des points. Les égalités de points sont départagées comme indiqué dans le règlement officiel. Vous pouvez aussi y trouver le barème de points."
       />
 
-      <Hero title="Hall Of Fame" image="/images/hero/hall-of-fame.jpg" mini />
+      <Hero
+        title="Classement 2022"
+        image="/images/hero/hall-of-fame.jpg"
+        mini
+      />
 
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <PageTitle title="Classement des équipes - Coupe de France" />
