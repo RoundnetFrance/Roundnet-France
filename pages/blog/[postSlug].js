@@ -8,10 +8,30 @@ import { Container, Box, Typography } from "@mui/material";
 
 // COMPONENTS IMPORTS
 import Head from "../../components/head";
-import Hero from "../../components/ui/hero";
 import Error from "../../components/ui/error";
 
 export default function EventSingle({ post, error }) {
+  const customParagraph = (props) => {
+    return (
+      <Typography variant="body1" color="initial">
+        {props.children}
+      </Typography>
+    );
+  };
+
+  const customHeading = (props) => {
+    return (
+      <Typography
+        component={`h${props.level}`}
+        variant={`h${props.level + 1 >= 6 ? 6 : props.level + 3}`}
+        color="initial"
+        sx={{ my: 5 - props.level }}
+      >
+        {props.children}
+      </Typography>
+    );
+  };
+
   return (
     <Fragment>
       {/* HEAD */}
@@ -21,7 +41,7 @@ export default function EventSingle({ post, error }) {
       />
 
       {/* PAPER CONTENT */}
-      <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Container maxWidth="md" sx={{ my: 4 }} disableGutters>
         <Box>
           {error ? (
             <Error message={error} />
@@ -35,14 +55,27 @@ export default function EventSingle({ post, error }) {
                 alt={post.title}
               />
 
-              <Typography
-                variant="h3"
-                sx={{ fontWeight: "bold", mb: 2, mt: 4 }}
-              >
-                {post.title}
-              </Typography>
+              <Box px={{ xs: 2, sm: 4 }}>
+                <Typography
+                  variant="h2"
+                  component="h1"
+                  sx={{ fontWeight: "bold", mb: 2, mt: 4 }}
+                >
+                  {post.title}
+                </Typography>
 
-              <ReactMarkdown>{post.content}</ReactMarkdown>
+                <ReactMarkdown
+                  components={{
+                    p: customParagraph,
+                    hgroup: customHeading,
+                    h1: customHeading,
+                    h2: customHeading,
+                    h3: customHeading,
+                  }}
+                >
+                  {post.content}
+                </ReactMarkdown>
+              </Box>
             </Fragment>
           )}
         </Box>
