@@ -29,7 +29,7 @@ export default function getEventLabel(label) {
     case "mixed-non-mixed":
       return "Mixte & Non-Mixte";
     case "cdf":
-      return "Coupe de France";
+      return "Championnat de France";
     case "ric":
       return "Rencontres Inter-Club";
     case "open":

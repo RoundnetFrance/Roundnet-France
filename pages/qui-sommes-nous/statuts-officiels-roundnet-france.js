@@ -2,30 +2,18 @@ import { Fragment } from "react";
 import { getDocument } from "../../helpers/db";
 
 // MUI IMPORTS
-import { Container, Typography, Divider, Box, Button } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 // COMPONENT IMPORTS
 import Hero from "../../components/ui/hero";
-import HalfImage from "../../components/ui/half-image";
 import PageTitle from "../../components/ui/page-title";
 import Head from "../../components/head";
 import CTAFooter from "../../components/ui/cta-footer";
+import DocumentHalfImage from "../../components/ui/document-half-image";
 
 // MUI ICONS
 
 function StatusPage({ officialDoc }) {
-  let readableUpdateDate;
-  if (officialDoc) {
-    readableUpdateDate = new Date(officialDoc.createdAt).toLocaleDateString(
-      "fr-FR",
-      {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      }
-    );
-  }
-
   return (
     <Fragment>
       <Head
@@ -81,60 +69,12 @@ function StatusPage({ officialDoc }) {
         </ul>
       </Container>
 
-      <HalfImage image="/images/pages/statuts/telecharger-statuts.jpg">
-        <Typography variant="h5" color="white">
-          <strong>Télécharger les statuts officiels 2021 de Roundnet</strong>
-        </Typography>
-
-        <Box width="50%">
-          <Divider
-            color="white"
-            sx={{
-              mb: 4,
-            }}
-          />
-        </Box>
-
-        {/* <Typography
-          variant="body1"
-          sx={{
-            mb: 2,
-            color: "white",
-          }}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid porro necessitatibus eius quisquam suscipit laborum, odit in, cumque alias quam quibusdam! Assumenda consequatur delectus dolorum est consequuntur, veniam aperiam saepe voluptate, commodi ducimus beatae dolores dolorem odio velit ullam fuga minima doloribus voluptatem.
-        </Typography> */}
-
-        {officialDoc?.description && (
-          <Typography
-            variant="body1"
-            sx={{
-              color: "white",
-              mb: 4,
-            }}
-          >
-            {officialDoc.description}
-          </Typography>
-        )}
-
-        <Button
-          color="secondary"
-          size="large"
-          variant="contained"
-          href={officialDoc?.url || "/docs/regles-2021.pdf"}
-          target="_blank"
-        >
-          Télécharger les statuts
-        </Button>
-
-        <Typography variant="body2" mt={1} color="white">
-          <strong>Note de mise à jour : </strong>
-          {officialDoc?.version || "officielle"}
-          <br />
-          Dernière mise à jour :{" "}
-          {readableUpdateDate ||
-            new Date().toLocaleDateString("fr-FR", { year: "numeric" })}
-        </Typography>
-      </HalfImage>
+      <DocumentHalfImage
+        document={officialDoc}
+        title="Télécharger les statuts officiels 2021 de Roundnet"
+        description="Roundnet France devient une fédération. Le conseil d'administration devient collégial."
+        buttonText="Télécharger les statuts"
+      />
 
       <CTAFooter
         title="Vous avez une question précise à nous demander ?"
