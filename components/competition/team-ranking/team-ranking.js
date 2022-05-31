@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 
 // MUI IMPORTS
 import {
-  Container,
   Paper,
   Box,
   Stack,
@@ -17,6 +16,7 @@ import {
   TableRow,
   TableFooter,
   Tooltip,
+  Typography,
 } from "@mui/material";
 
 // MUI ICONS
@@ -25,10 +25,6 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import InfoIcon from "@mui/icons-material/Info";
-
-// COMPONENT IMPORTS
-import HeaderWithIcon from "../../ui/header-with-icon";
-
 function TablePaginationActions(props) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -89,11 +85,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function TeamRanking({ ranking }) {
-  console.log(
-    "🚀 ~ file: team-ranking.js ~ line 93 ~ TeamRanking ~ ranking",
-    ranking
-  );
+function TeamRanking({ ranking, title, altColor }) {
   // Pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -112,12 +104,10 @@ function TeamRanking({ ranking }) {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ position: "relative", mb: 4 }}>
-      <HeaderWithIcon icon="equalizer" title="Classement des équipes">
-        Dernière mise à jour : {new Date().toLocaleDateString()}
-      </HeaderWithIcon>
-
-      {/* TABLE */}
+    <Stack direction="column">
+      <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
+        {title}
+      </Typography>
       <Stack
         direction={{ xs: "column", md: "row" }}
         spacing={2}
@@ -143,17 +133,19 @@ function TeamRanking({ ranking }) {
             </TableHead>
             <TableBody>
               {(rowsPerPage > 0
-                ? ranking.slice(
+                ? ranking?.slice(
                     page * rowsPerPage,
                     page * rowsPerPage + rowsPerPage
                   )
                 : ranking
-              ).map((row) => (
+              )?.map((row) => (
                 <TableRow
-                  key={row.teamname}
+                  key={row.rank}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
-                    "&:nth-of-type(odd)": { background: "#c5cef0" },
+                    "&:nth-of-type(odd)": {
+                      background: altColor ? "#fee5ee" : "#c5cef0",
+                    },
                   }}
                 >
                   <TableCell component="th" scope="row">
@@ -162,8 +154,9 @@ function TeamRanking({ ranking }) {
                   <TableCell>
                     <Tooltip
                       title={`${row.player1name} & ${row.player2name}`}
-                      color="primary"
+                      color={altColor ? "secondary" : "primary"}
                       sx={{ mr: 1 }}
+                      enterTouchDelay={0}
                     >
                       <IconButton size="small">
                         <InfoIcon fontSize="10px" />
@@ -187,7 +180,7 @@ function TeamRanking({ ranking }) {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 15, { label: "Tous", value: -1 }]}
                   colSpan={3}
-                  count={ranking.length}
+                  count={ranking?.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
@@ -205,7 +198,7 @@ function TeamRanking({ ranking }) {
           </Table>
         </TableContainer>
       </Stack>
-    </Container>
+    </Stack>
   );
 }
 
