@@ -1,7 +1,6 @@
 import { fr } from "date-fns/locale";
 import { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
-
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -64,6 +63,10 @@ export default function FormField({
     });
   };
 
+  const quillImageHandler = () => {
+    console.log("here");
+  };
+
   // If input is hidden, return hidden input with defaultValue
   if (options?.hidden) {
     return (
@@ -119,6 +122,22 @@ export default function FormField({
       input = (
         <Fragment>
           <QuillNoSSRWrapper
+            modules={{
+              toolbar: {
+                container: [
+                  [{ header: [1, 2, 3, false] }],
+                  ["bold", "italic", "underline"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  [{ align: [] }],
+                  ["link", "image"],
+                  // ["clean"],
+                  [{ color: [] }],
+                ],
+                handlers: {
+                  image: quillImageHandler,
+                },
+              },
+            }}
             theme="snow"
             value={value}
             onChange={(content) =>
