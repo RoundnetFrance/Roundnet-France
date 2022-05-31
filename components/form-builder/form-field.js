@@ -131,18 +131,25 @@ export default function FormField({
 
     case "longtext":
       input = (
-        <TextField
-          id={id}
-          label={label}
-          variant="outlined"
-          value={value}
-          onChange={handleChange}
-          error={booleanError}
-          helperText={error}
-          required={options?.required}
-          multiline
-          rows={options?.multilineRows || 4}
-        />
+        <Fragment>
+          <TextField
+            id={id}
+            label={label}
+            variant="outlined"
+            value={value}
+            onChange={handleChange}
+            error={booleanError}
+            helperText={error}
+            required={options?.required}
+            multiline
+            rows={options?.multilineRows || 4}
+          />
+          <FormHelperText>
+            {options?.helperText}{" "}
+            {options?.maxLength &&
+              `(longueur maxi : ${options?.maxLength} caractères)`}
+          </FormHelperText>
+        </Fragment>
       );
       break;
 

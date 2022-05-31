@@ -95,6 +95,11 @@ function schemaConstructor(fields) {
         schemaKeys[id] = Joi.string().trim();
     }
 
+    // If options.maxLength is defined, we add a max length validator
+    if (options?.maxLength) {
+      schemaKeys[id] = schemaKeys[id].max(options.maxLength);
+    }
+
     // If passwordConfirm, passwordConfirm must match password
     if (options?.passwordConfirm) {
       schemaKeys[id] = Joi.any().valid(Joi.ref("password"));

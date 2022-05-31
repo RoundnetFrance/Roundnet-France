@@ -63,6 +63,7 @@ export default function getClubFormConfig() {
         label: "Description",
         type: "longtext",
         options: {
+          helperText: "Veuillez indiquer la description de votre club.",
           required: true,
           multilineRows: 6,
         },

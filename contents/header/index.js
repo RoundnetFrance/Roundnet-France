@@ -7,6 +7,10 @@ const menuElements = [
     icon: "emoji_events",
     subElements: [
       {
+        name: "Classement 2022",
+        url: "/competition/classement-2022",
+      },
+      {
         name: "Règles Officielles",
         url: "/regles",
       },
@@ -22,10 +26,7 @@ const menuElements = [
         name: "Rencontres inter-clubs",
         url: "/competition/rencontres-inter-clubs",
       },
-      // {
-      //   name: 'Hall Of Fame',
-      //   url: '/competition/hall-of-fame',
-      // },
+
       // {
       //   name: 'Mondiaux 2022',
       //   url: '/competition/mondiaux-2022',
