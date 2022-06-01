@@ -1,7 +1,13 @@
 import { fr } from "date-fns/locale";
 import { Fragment, useState } from "react";
+
+// DYNAMIC IMPORTS
 import dynamic from "next/dynamic";
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+const FormBuilder = dynamic(() => import("../form-builder"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
@@ -63,8 +69,17 @@ export default function FormField({
     });
   };
 
+  // Handle Quill image dialog
+  const [quillImageDialogOpen, setQuillImageDialogOpen] = useState(false);
+  function handleQuillDialogOpen() {
+    setQuillImageDialogOpen(true);
+  }
+  function handleQuillDialogClose() {
+    setQuillImageDialogOpen(false);
+  }
+
   const quillImageHandler = () => {
-    console.log("here");
+    handleQuillDialogOpen();
   };
 
   // If input is hidden, return hidden input with defaultValue
@@ -144,6 +159,34 @@ export default function FormField({
               handleChange({ target: { id, value: content } })
             }
           />
+
+          {/* Image Dialog */}
+          <Dialog
+            title="Ajouter une image"
+            open={quillImageDialogOpen}
+            handleClose={handleQuillDialogClose}
+            cancelText="Annuler"
+          >
+            <FormBuilder
+              formConfig={{
+                name: "Upload",
+                endpoint: "upload-image",
+                fields: [
+                  {
+                    id: "image",
+                    label: "Image",
+                    type: "file",
+                    options: {
+                      fileConfig: {
+                        type: "image",
+                        imageMaxWidth: 800,
+                      },
+                    },
+                  },
+                ],
+              }}
+            />
+          </Dialog>
         </Fragment>
       );
       break;
