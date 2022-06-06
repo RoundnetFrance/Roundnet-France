@@ -171,6 +171,7 @@ export default function FormField({
               formConfig={{
                 name: "Upload",
                 endpoint: "upload-image",
+                submitText: "Ajouter",
                 fields: [
                   {
                     id: "image",
