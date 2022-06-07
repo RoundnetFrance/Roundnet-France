@@ -56,6 +56,9 @@ export default function DataSingleField({
     }
   }, [value]);
 
+  // Handle Quill image dialog
+  const [quillImageDialogOpen, setQuillImageDialogOpen] = useState(false);
+
   // Define which content to use
   let content;
   switch (type) {
@@ -177,7 +180,18 @@ export default function DataSingleField({
       );
       break;
 
-    case "rich-editor":
+    case "rich-editor": {
+      function handleQuillDialogOpen() {
+        setQuillImageDialogOpen(true);
+      }
+      function handleQuillDialogClose() {
+        setQuillImageDialogOpen(false);
+      }
+
+      const quillImageHandler = () => {
+        handleQuillDialogOpen();
+      };
+
       content = (
         <Fragment>
           <QuillNoSSRWrapper
@@ -192,15 +206,15 @@ export default function DataSingleField({
                   // ["clean"],
                   [{ color: [] }],
                 ],
-                // handlers: {
-                //   image: quillImageHandler,
-                // },
+                handlers: {
+                  image: quillImageHandler,
+                },
               },
             }}
             theme="snow"
             value={value}
             onChange={(content) =>
-              handleChange({ target: { id, value: content } })
+              handleValuesChange({ target: { id, value: content } })
             }
           />
 
@@ -235,6 +249,7 @@ export default function DataSingleField({
         </Fragment>
       );
       break;
+    }
 
     default:
       content = (
