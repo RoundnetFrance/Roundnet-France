@@ -213,9 +213,7 @@ export default function DataSingleField({
             }}
             theme="snow"
             value={value}
-            onChange={(content) =>
-              handleValuesChange({ target: { id, value: content } })
-            }
+            onChange={(content) => handleValuesChange(id, content)}
           />
 
           {/* Image Dialog */}

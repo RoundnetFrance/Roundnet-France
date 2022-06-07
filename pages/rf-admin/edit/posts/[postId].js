@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { getDocuments } from "../../../../helpers/db";
 import useSWR from "swr";
@@ -10,6 +11,7 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // CONTENTS
 import postConfig from "../../../../contents/forms/posts";
 
+
 export default function EditSinglePostPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
@@ -21,8 +23,7 @@ export default function EditSinglePostPage() {
 
   // Change markdown to HTML to be interpreted by Quill editor
   const converter = new showdown.Converter();
-  data.content = converter.makeHtml(data.content);
-  console.log(data.content);
+  data?.content = converter.makeHtml(data?.content);
 
   return (
     <AdminContentSingle
