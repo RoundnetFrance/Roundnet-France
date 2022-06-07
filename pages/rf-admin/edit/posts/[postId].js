@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { getDocuments } from "../../../../helpers/db";
 import useSWR from "swr";
 import fetcher from "../../../../lib/swr-fetcher";
+import showdown from "showdown";
 
 // COMPONENT IMPORTS
 import AdminContentSingle from "../../../../components/admin/admin-content/admin-content-single";
@@ -17,6 +18,11 @@ export default function EditSinglePostPage() {
   // Get club data
   const { data, error, mutate } = useSWR(`/api/posts/${postId}`, fetcher);
   const isLoading = !error && !data;
+
+  // Change markdown to HTML to be interpreted by Quill editor
+  const converter = new showdown.Converter();
+  data.content = converter.makeHtml(data.content);
+  console.log(data.content);
 
   return (
     <AdminContentSingle
