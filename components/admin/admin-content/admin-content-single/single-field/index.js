@@ -1,4 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
+// DYNAMIC IMPORTS
+import dynamic from "next/dynamic";
+const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
 
 // MUI IMPORTS
 import {
@@ -9,6 +15,7 @@ import {
   Switch,
   Box,
   useMediaQuery,
+  Dialog,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
@@ -21,6 +28,7 @@ import AdminTextField from "./admin-text-field";
 import AdminFileField from "./admin-file-field";
 import AdminSelectField from "./admin-select-field";
 import AdminDateField from "./admin-date-field";
+import FormBuilder from "../../../../form-builder";
 
 export default function DataSingleField({
   id,
@@ -28,6 +36,11 @@ export default function DataSingleField({
   fieldLayout,
   handleValuesChange,
 }) {
+  useEffect(() => {
+    if (document) {
+    }
+  }, []);
+
   // Theme breakpoint listener
   const theme = useTheme();
   const higherThanMd = useMediaQuery(theme.breakpoints.up("md"));
@@ -42,6 +55,9 @@ export default function DataSingleField({
       setImageUrl(value);
     }
   }, [value]);
+
+  // Handle Quill image dialog
+  const [quillImageDialogOpen, setQuillImageDialogOpen] = useState(false);
 
   // Define which content to use
   let content;
@@ -163,6 +179,75 @@ export default function DataSingleField({
         />
       );
       break;
+
+    case "rich-editor": {
+      function handleQuillDialogOpen() {
+        setQuillImageDialogOpen(true);
+      }
+      function handleQuillDialogClose() {
+        setQuillImageDialogOpen(false);
+      }
+
+      const quillImageHandler = () => {
+        handleQuillDialogOpen();
+      };
+
+      content = (
+        <Fragment>
+          <QuillNoSSRWrapper
+            modules={{
+              toolbar: {
+                container: [
+                  [{ header: [1, 2, 3, false] }],
+                  ["bold", "italic", "underline"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  [{ align: [] }],
+                  ["link", "image"],
+                  // ["clean"],
+                  [{ color: [] }],
+                ],
+                handlers: {
+                  image: quillImageHandler,
+                },
+              },
+            }}
+            theme="snow"
+            value={value}
+            onChange={(content) => handleValuesChange(id, content)}
+          />
+
+          {/* Image Dialog */}
+          <Dialog
+            title="Ajouter une image"
+            open={quillImageDialogOpen}
+            handleClose={handleQuillDialogClose}
+            cancelText="Annuler"
+          >
+            <FormBuilder
+              formConfig={{
+                name: "Upload",
+                endpoint: "upload-image",
+                submitText: "Ajouter",
+                fields: [
+                  {
+                    id: "image",
+                    label: "Image",
+                    type: "file",
+                    options: {
+                      fileConfig: {
+                        type: "image",
+                        imageMaxWidth: 800,
+                      },
+                    },
+                  },
+                ],
+              }}
+            />
+          </Dialog>
+        </Fragment>
+      );
+      break;
+    }
 
     default:
       content = (

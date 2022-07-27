@@ -1,8 +1,13 @@
 import { fr } from "date-fns/locale";
 import { Fragment, useState } from "react";
-import dynamic from "next/dynamic";
 
+// DYNAMIC IMPORTS
+import dynamic from "next/dynamic";
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+const FormBuilder = dynamic(() => import("../form-builder"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
@@ -64,6 +69,19 @@ export default function FormField({
     });
   };
 
+  // Handle Quill image dialog
+  const [quillImageDialogOpen, setQuillImageDialogOpen] = useState(false);
+  function handleQuillDialogOpen() {
+    setQuillImageDialogOpen(true);
+  }
+  function handleQuillDialogClose() {
+    setQuillImageDialogOpen(false);
+  }
+
+  const quillImageHandler = () => {
+    handleQuillDialogOpen();
+  };
+
   // If input is hidden, return hidden input with defaultValue
   if (options?.hidden) {
     return (
@@ -119,12 +137,57 @@ export default function FormField({
       input = (
         <Fragment>
           <QuillNoSSRWrapper
+            modules={{
+              toolbar: {
+                container: [
+                  [{ header: [1, 2, 3, false] }],
+                  ["bold", "italic", "underline"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  [{ align: [] }],
+                  ["link", "image"],
+                  // ["clean"],
+                  [{ color: [] }],
+                ],
+                handlers: {
+                  image: quillImageHandler,
+                },
+              },
+            }}
             theme="snow"
             value={value}
             onChange={(content) =>
               handleChange({ target: { id, value: content } })
             }
           />
+
+          {/* Image Dialog */}
+          <Dialog
+            title="Ajouter une image"
+            open={quillImageDialogOpen}
+            handleClose={handleQuillDialogClose}
+            cancelText="Annuler"
+          >
+            <FormBuilder
+              formConfig={{
+                name: "Upload",
+                endpoint: "upload-image",
+                submitText: "Ajouter",
+                fields: [
+                  {
+                    id: "image",
+                    label: "Image",
+                    type: "file",
+                    options: {
+                      fileConfig: {
+                        type: "image",
+                        imageMaxWidth: 800,
+                      },
+                    },
+                  },
+                ],
+              }}
+            />
+          </Dialog>
         </Fragment>
       );
       break;
