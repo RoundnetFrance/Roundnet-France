@@ -11,7 +11,6 @@ import AdminContentSingle from "../../../../components/admin/admin-content/admin
 // CONTENTS
 import postConfig from "../../../../contents/forms/posts";
 
-
 export default function EditSinglePostPage() {
   // Get endpoint and ID from URL
   const router = useRouter();
@@ -23,7 +22,7 @@ export default function EditSinglePostPage() {
 
   // Change markdown to HTML to be interpreted by Quill editor
   const converter = new showdown.Converter();
-  data?.content = converter.makeHtml(data?.content);
+  data.content = converter.makeHtml(data?.content);
 
   return (
     <AdminContentSingle
