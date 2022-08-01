@@ -70,8 +70,9 @@ export default function TourStopAngersPage() {
           qualificatives. Près de quatre mois plus tard et alors que les
           championnats de France sont tout juste derrière nous, il est temps de
           tirer le bilan des ces quatre long weekends de roundnet aux quatre
-          coins du pays. Trois équipes féminines et cinq masculines auront le
-          grand honneur de représenter la France en Belgique début septembre !
+          coins du pays. Trois équipes féminines, cinq masculines et une équipe
+          mixte auront le grand honneur de représenter la France en Belgique
+          début septembre !
         </Typography>
 
         <Box mb={4}>
@@ -119,18 +120,18 @@ export default function TourStopAngersPage() {
           <strong>2. Kayak Volant</strong>
         </Typography>
         <Typography variant="body2" component="p" sx={{ mb: 2 }}>
-          <i>(Juliette Dufourcq &amp; Anaïs Duport, Paris)</i>
+          <i>(Juliette Dufourcq & Anaïs Duport, Paris)</i>
         </Typography>
         <Typography variant="body1" component="p" gutterBottom sx={{ mb: 4 }}>
           Les parisiennes double vice-championnes de France ont vendu chère leur
           peau en finale des championnats de France à Lyon. Mais comme à Paris
           en octobre, elles ont dû s'incliner face à plus fortes qu'elles.
           Juliette et Anaïs se sont imposées contre toute autre équipe qui ne
-          s'appelle pas Puces & Dives. Juliette a désormais un des meilleurs
-          (seuls?) cuts droit du circuit féminin et Anaïs a encore amélioré son
-          "signature move" : son backend. Les championnats du monde constituent
-          le dernier baroud d'honneur de cette paire parisienne historique,
-          Juliette partant en effet à la conquête de la Guyane dès la rentrée.
+          s'appelle pas Puces & Dives. un des meilleurs cuts droit du circuit
+          féminin et Anaïs a encore amélioré son "signature move" : son
+          backhand. Les championnats du monde constituent le dernier baroud
+          d'honneur de cette paire parisienne historique, Juliette partant en
+          effet à la conquête de la Guyane dès la rentrée.
         </Typography>
 
         <Strengths
@@ -183,6 +184,15 @@ export default function TourStopAngersPage() {
             layout="responsive"
           />
         </Box>
+
+        <Typography variant="body1" component="p" gutterBottom sx={{ mb: 4 }}>
+          <strong>Line et Vitable</strong>{" "}
+          <i>(Marina Goncalves & Clara Maucourt, Paris / Angers)</i> et
+          <strong>Ca passe crèèème</strong>{" "}
+          <i>(Enora Le Cadre / Elise Martin, Clermont-Ferrand)</i> complètent le
+          top 5 féminin français dans un classement toujours de plus en plus
+          relevé !
+        </Typography>
 
         {/* MEN */}
         <Typography variant="h4" component="h2" sx={{ mb: 2 }}>
@@ -287,7 +297,7 @@ export default function TourStopAngersPage() {
         <Strengths
           strength="le fergie time"
           weakness="la politesse. Parfois, il faut savoir insulter les PCB"
-          worlds="Exe-reversecut"
+          worlds="Exe-reversecut ou récupérer le foulard de Matt Cole. Au choix."
         />
 
         <Box mb={4}>
@@ -382,7 +392,7 @@ export default function TourStopAngersPage() {
           (Benoit Nguyen et Charles Mordacq, Paris) suivie de{" "}
           <strong>Pierre Feuille Victor</strong> (Victor Cambois & Pierre
           Lecrosnier, Lyon/Paris), <strong>Poulet Curry</strong> (Benoit Durand
-          & Aymeric Sandoz, Paris) et <strong>Wakiki</strong> (Lancelot Touzé &
+          & Aymeric Sandoz, Paris) et <strong>Waikiki</strong> (Lancelot Touzé &
           Thibaud Labourdette, Paris). Des transferts, un rachat du PSG, un
           grand voyage aux US, une thérapie de groupe, changer de sport, aucune
           option n'est encore écartée du côté de la capitale.
@@ -408,7 +418,7 @@ export default function TourStopAngersPage() {
 
         <Typography variant="body1" component="p" gutterBottom sx={{ mb: 4 }}>
           Les équipes masculines et féminines auront fort à faire en Belgique !
-          Au premier tournoi open où se dessineront surement des duels
+          Au premier tournoi open où se dessineront sûrement des duels
           fratricides se succédera le tournoi par équipe sur un format coupe
           davis. Quelles sont les chances des équipes de France ? Côté masculin,
           même amputé de certains de leurs meilleurs joueurs qui ne feront pas
@@ -416,10 +426,10 @@ export default function TourStopAngersPage() {
           figure de grand favori. Derrière eux, le Canada, l'Allemagne… et la
           France devraient se disputer le podium. Côté féminin, même constat
           pour les Etats-Unis malgré l'absence des Twinz, la meilleure équipe
-          américaine - le vivier féminin US reste trop important, sauf peut être
-          pour les Allemandes qui disposent de plusieurs équipes très
-          compétitives. Un podium français féminin sera plus compliqué mais
-          impossible n'est pas gaulois !
+          américaine - le vivier féminin US reste très important, mais les
+          Allemandes qui disposent de plusieurs équipes très compétitives et les
+          Françaises peuvent tout à fait rêver d'une place sur le podium.
+          Impossible n'est pas gaulois !
         </Typography>
 
         <Typography variant="body1" component="p" gutterBottom sx={{ mb: 4 }}>
@@ -432,14 +442,14 @@ export default function TourStopAngersPage() {
           <strong>La pluie toulousaine</strong>, grâce à laquelle la glissade au
           bloc n'a désormais plus de secrets pour les joueurs,{" "}
           <strong>le vent lyonnais</strong> qui a réussi à dégoûter des spikers
-          à jamais, et bien sur <strong>les clubs hôtes</strong>, Roundnet
+          à jamais, et bien sûr <strong>les clubs hôtes</strong>, Roundnet
           Angers, Toulouse, Paris et Lyon pour avoir mis sur pied des
           compétitions pour tous les niveaux et d'avoir célébré tant de
           nouvelles <strong>communautés</strong> naissantes autour d'une même
           passion. Toutes les communautés qui ont fait du roundnet sur les
           tables des Mcdo des aires d'autoroute, depuis Abbeville,
           Clermont-Ferrand, Rennes, l'Alsace, la Bretagne et j'en oublie. Aussi
-          bien sur remercier la toute nouvelle
+          bien sûr remercier la toute nouvelle
           <strong>Fédération Française de Roundnet</strong> qui se construit
           avec les retours (les votes?) des joueurs et des joueuses, et qui se
           professionnalise mois après mois. Remercier tout particulièrement{" "}
@@ -455,10 +465,11 @@ export default function TourStopAngersPage() {
         </Typography>
 
         <Typography variant="body1" component="p" gutterBottom sx={{ mb: 4 }}>
-          Comment oublier <strong>Corentin Bureau</strong> et{" "}
-          <strong>Gaëlle Pénin</strong> qui ont immortalisé tous ces tournois et
-          nous permettent tous les jours de nous replonger dans la magie de
-          chacun de ces moments.
+          Comment oublier <strong>Corentin</strong>, <strong>Gaëlle</strong>,{" "}
+          <strong>Romain</strong>, <strong>Robin</strong> et{" "}
+          <strong>Quentin</strong> qui ont immortalisé tous ces tournois et nous
+          permettent tous les jours de nous replonger dans la magie de chacun de
+          ces moments.
         </Typography>
 
         <Divider sx={{ m: 8 }} />
