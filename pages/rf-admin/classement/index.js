@@ -19,7 +19,7 @@ export default function RakingAdminPage() {
               name: "Date",
               type: "date",
               editable: true,
-              value: "2022-06-05",
+              value: "05/06/2022",
             },
           ],
           endpoint: "ranking/date",
