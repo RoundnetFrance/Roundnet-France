@@ -1,10 +1,10 @@
 import { useState, useEffect, Fragment } from "react";
 // DYNAMIC IMPORTS
-import dynamic from "next/dynamic";
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+// import dynamic from "next/dynamic";
+// const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+//   ssr: false,
+//   loading: () => <p>Loading ...</p>,
+// });
 
 // MUI IMPORTS
 import {
@@ -180,74 +180,74 @@ export default function DataSingleField({
       );
       break;
 
-    case "rich-editor": {
-      function handleQuillDialogOpen() {
-        setQuillImageDialogOpen(true);
-      }
-      function handleQuillDialogClose() {
-        setQuillImageDialogOpen(false);
-      }
+    // case "rich-editor": {
+    //   function handleQuillDialogOpen() {
+    //     setQuillImageDialogOpen(true);
+    //   }
+    //   function handleQuillDialogClose() {
+    //     setQuillImageDialogOpen(false);
+    //   }
 
-      const quillImageHandler = () => {
-        handleQuillDialogOpen();
-      };
+    //   const quillImageHandler = () => {
+    //     handleQuillDialogOpen();
+    //   };
 
-      content = (
-        <Fragment>
-          <QuillNoSSRWrapper
-            modules={{
-              toolbar: {
-                container: [
-                  [{ header: [1, 2, 3, false] }],
-                  ["bold", "italic", "underline"],
-                  [{ list: "ordered" }, { list: "bullet" }],
-                  [{ align: [] }],
-                  ["link", "image"],
-                  // ["clean"],
-                  [{ color: [] }],
-                ],
-                handlers: {
-                  image: quillImageHandler,
-                },
-              },
-            }}
-            theme="snow"
-            value={value}
-            onChange={(content) => handleValuesChange(id, content)}
-          />
+    //   content = (
+    //     <Fragment>
+    //       <QuillNoSSRWrapper
+    //         modules={{
+    //           toolbar: {
+    //             container: [
+    //               [{ header: [1, 2, 3, false] }],
+    //               ["bold", "italic", "underline"],
+    //               [{ list: "ordered" }, { list: "bullet" }],
+    //               [{ align: [] }],
+    //               ["link", "image"],
+    //               // ["clean"],
+    //               [{ color: [] }],
+    //             ],
+    //             handlers: {
+    //               image: quillImageHandler,
+    //             },
+    //           },
+    //         }}
+    //         theme="snow"
+    //         value={value}
+    //         onChange={(content) => handleValuesChange(id, content)}
+    //       />
 
-          {/* Image Dialog */}
-          <Dialog
-            title="Ajouter une image"
-            open={quillImageDialogOpen}
-            handleClose={handleQuillDialogClose}
-            cancelText="Annuler"
-          >
-            <FormBuilder
-              formConfig={{
-                name: "Upload",
-                endpoint: "upload-image",
-                submitText: "Ajouter",
-                fields: [
-                  {
-                    id: "image",
-                    label: "Image",
-                    type: "file",
-                    options: {
-                      fileConfig: {
-                        type: "image",
-                        imageMaxWidth: 800,
-                      },
-                    },
-                  },
-                ],
-              }}
-            />
-          </Dialog>
-        </Fragment>
-      );
-      break;
-    }
+    //       {/* Image Dialog */}
+    //       <Dialog
+    //         title="Ajouter une image"
+    //         open={quillImageDialogOpen}
+    //         handleClose={handleQuillDialogClose}
+    //         cancelText="Annuler"
+    //       >
+    //         <FormBuilder
+    //           formConfig={{
+    //             name: "Upload",
+    //             endpoint: "upload-image",
+    //             submitText: "Ajouter",
+    //             fields: [
+    //               {
+    //                 id: "image",
+    //                 label: "Image",
+    //                 type: "file",
+    //                 options: {
+    //                   fileConfig: {
+    //                     type: "image",
+    //                     imageMaxWidth: 800,
+    //                   },
+    //                 },
+    //               },
+    //             ],
+    //           }}
+    //         />
+    //       </Dialog>
+    //     </Fragment>
+    //   );
+    //   break;
+    // }
 
     default:
       content = (
