@@ -1,5 +1,7 @@
+import { ObjectId } from "mongodb";
 import { Fragment } from "react";
 import db from "../../lib/spiketimate-firebase";
+import { getDocument } from "../../helpers/db";
 import { collection, getDocs } from "firebase/firestore";
 
 // MUI IMPORTS
@@ -11,11 +13,14 @@ import PageTitle from "../../components/ui/page-title";
 import Head from "../../components/head";
 import TeamRanking from "../../components/competition/team-ranking/team-ranking";
 import HeaderWithIcon from "../../components/ui/header-with-icon";
+import Error from "../../components/ui/error";
 
 export default function HallOfFamePage({
   mensRanking,
   womensRanking,
   mixedRanking,
+  date,
+  error,
 }) {
   return (
     <Fragment>
@@ -43,21 +48,25 @@ export default function HallOfFamePage({
 
       <Container maxWidth="xl" sx={{ my: 8 }}>
         <HeaderWithIcon icon="equalizer" title="Classement des équipes">
-          Dernière mise à jour : {new Date().toLocaleDateString()}
+          Dernière mise à jour : {new Date(date || null).toLocaleDateString()}
         </HeaderWithIcon>
 
-        <Stack
-          direction={{ xs: "column", lg: "row" }}
-          spacing={{ xs: 4, lg: 2 }}
-        >
-          <TeamRanking title="Classement féminin" ranking={womensRanking} />
-          <TeamRanking
-            title="Classement masculin"
-            ranking={mensRanking}
-            altColor
-          />
-          <TeamRanking title="Classement mixte" ranking={mixedRanking} />
-        </Stack>
+        {error ? (
+          <Error message={"Une erreur est survenue"} />
+        ) : (
+          <Stack
+            direction={{ xs: "column", lg: "row" }}
+            spacing={{ xs: 4, lg: 2 }}
+          >
+            <TeamRanking title="Classement féminin" ranking={womensRanking} />
+            <TeamRanking
+              title="Classement masculin"
+              ranking={mensRanking}
+              altColor
+            />
+            <TeamRanking title="Classement mixte" ranking={mixedRanking} />
+          </Stack>
+        )}
       </Container>
     </Fragment>
   );
@@ -84,11 +93,17 @@ export async function getStaticProps() {
     const womensRanking = await getRanking("3e2Q82BojSaM3RLAGUWp");
     const mixedRanking = await getRanking("elOhheBFTicqpbcyW62l");
 
+    const { date } = await getDocument(
+      "ranking",
+      ObjectId("6315dbab85098f7156bde68b")
+    );
+
     return {
       props: {
         mensRanking,
         womensRanking,
         mixedRanking,
+        date,
       },
       revalidate: 3600,
     };
