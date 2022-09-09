@@ -3,10 +3,10 @@ import { Fragment, useState } from "react";
 
 // DYNAMIC IMPORTS
 import dynamic from "next/dynamic";
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+// const QuillNoSSRWrapper = dynamic(import("react-quill"), {
+//   ssr: false,
+//   loading: () => <p>Loading ...</p>,
+// });
 const FormBuilder = dynamic(() => import("../form-builder"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -133,64 +133,64 @@ export default function FormField({
 
   // Conditional rendering of form field. If a new one is added, add it to the switch in helper/form too.
   switch (type) {
-    case "rich-editor":
-      input = (
-        <Fragment>
-          <QuillNoSSRWrapper
-            modules={{
-              toolbar: {
-                container: [
-                  [{ header: [1, 2, 3, false] }],
-                  ["bold", "italic", "underline"],
-                  [{ list: "ordered" }, { list: "bullet" }],
-                  [{ align: [] }],
-                  ["link", "image"],
-                  // ["clean"],
-                  [{ color: [] }],
-                ],
-                handlers: {
-                  image: quillImageHandler,
-                },
-              },
-            }}
-            theme="snow"
-            value={value}
-            onChange={(content) =>
-              handleChange({ target: { id, value: content } })
-            }
-          />
+    // case "rich-editor":
+    //   input = (
+    //     <Fragment>
+    //       <QuillNoSSRWrapper
+    //         modules={{
+    //           toolbar: {
+    //             container: [
+    //               [{ header: [1, 2, 3, false] }],
+    //               ["bold", "italic", "underline"],
+    //               [{ list: "ordered" }, { list: "bullet" }],
+    //               [{ align: [] }],
+    //               ["link", "image"],
+    //               // ["clean"],
+    //               [{ color: [] }],
+    //             ],
+    //             handlers: {
+    //               image: quillImageHandler,
+    //             },
+    //           },
+    //         }}
+    //         theme="snow"
+    //         value={value}
+    //         onChange={(content) =>
+    //           handleChange({ target: { id, value: content } })
+    //         }
+    //       />
 
-          {/* Image Dialog */}
-          <Dialog
-            title="Ajouter une image"
-            open={quillImageDialogOpen}
-            handleClose={handleQuillDialogClose}
-            cancelText="Annuler"
-          >
-            <FormBuilder
-              formConfig={{
-                name: "Upload",
-                endpoint: "upload-image",
-                submitText: "Ajouter",
-                fields: [
-                  {
-                    id: "image",
-                    label: "Image",
-                    type: "file",
-                    options: {
-                      fileConfig: {
-                        type: "image",
-                        imageMaxWidth: 800,
-                      },
-                    },
-                  },
-                ],
-              }}
-            />
-          </Dialog>
-        </Fragment>
-      );
-      break;
+    //       {/* Image Dialog */}
+    //       <Dialog
+    //         title="Ajouter une image"
+    //         open={quillImageDialogOpen}
+    //         handleClose={handleQuillDialogClose}
+    //         cancelText="Annuler"
+    //       >
+    //         <FormBuilder
+    //           formConfig={{
+    //             name: "Upload",
+    //             endpoint: "upload-image",
+    //             submitText: "Ajouter",
+    //             fields: [
+    //               {
+    //                 id: "image",
+    //                 label: "Image",
+    //                 type: "file",
+    //                 options: {
+    //                   fileConfig: {
+    //                     type: "image",
+    //                     imageMaxWidth: 800,
+    //                   },
+    //                 },
+    //               },
+    //             ],
+    //           }}
+    //         />
+    //       </Dialog>
+    //     </Fragment>
+    //   );
+    //   break;
 
     case "longtext":
       input = (
