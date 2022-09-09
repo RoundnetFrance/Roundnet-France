@@ -84,6 +84,14 @@ const dashboardElements = [
     url: "/rf-admin/association/partenaires",
   },
   {
+    _id: "date-classement",
+    label: "Date Classement",
+    color: "primary",
+    icon: "edit_calendar",
+    description: "Changez la date de la dernière mise à jour du classement.",
+    url: "/rf-admin/classement",
+  },
+  {
     _id: "account",
     label: "Mon compte",
     color: "neutralDark",

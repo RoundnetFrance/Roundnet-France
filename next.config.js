@@ -8,6 +8,9 @@ module.exports = {
       "platform-lookaside.fbsbx.com",
       "firebasestorage.googleapis.com",
     ],
+    expermental: {
+      esmExternals: false,
+    },
   },
   async redirects() {
     return [

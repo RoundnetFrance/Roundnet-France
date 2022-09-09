@@ -15,7 +15,7 @@ export default function RakingAdminPage() {
           name: "Date de dernière mise à jour",
           fields: [
             {
-              _id: "date",
+              id: "date",
               name: "Date",
               type: "date",
               editable: true,
