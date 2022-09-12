@@ -49,7 +49,7 @@ const menuElements = [
       },
       {
         name: "Ajouter votre tournoi",
-        url: "calendrier/ajouter",
+        url: "/calendrier/ajouter",
       },
     ],
   },
