@@ -1,48 +1,42 @@
 // Reset margins and paddings
-import '../styles/globals.css';
+import "../styles/globals.css";
 
-// Create a layout for all front pages (header + footer)
-import Layout from '../layout'
-import Head from 'next/head'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { frFR } from '@mui/material/locale';
+// Create a layout and theme for all front pages (header + footer)
+import Layout from "../layout";
+import Head from "next/head";
+import { ThemeProvider } from "@mui/material/styles";
+import rfMuiTheme from "../styles/rf-mui-theme";
 
-// Create a theme instance. Affet colors, typography, and localization (frFR, imported from @mui/material/locale)
-const muiTheme = createTheme(
-  {
-    typography: {
-      fontFamily: 'Urbanist, sans-serif',
-    },
-    palette: {
-      type: 'dark',
-      primary: {
-        light: '#778edc',
-        main: '#315bcd',
-        dark: '#1e48b6',
-        analogous: '#31a9cd',
-      },
-      secondary: {
-        light: '#fb5d89',
-        main: '#f50057',
-        dark: '#cf0051',
-      },
-    },
-  },
-  frFR,
-);
+// Import Provider from next/auth client to share session
+import { SessionProvider } from "next-auth/react";
 
+// COMPONENT IMPORT
+import Auth from "../components/admin/auth";
+
+// Render app
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={muiTheme}>
-      <Layout>
-        <Head>
-          <title>Roundnet France - Fédération française de roundnet</title>
-          <meta name="description" content="Site officiel de la fédération française de roundnet" />
-        </Head>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
-  )
+    <SessionProvider session={pageProps.session}>
+      <ThemeProvider theme={rfMuiTheme}>
+        <Layout adminLayout={pageProps.adminLayout} session={pageProps.session}>
+          <Head>
+            <title>Roundnet France - Fédération française de roundnet</title>
+            <meta
+              name="description"
+              content="Site officiel de la fédération française de roundnet"
+            />
+          </Head>
+          {Component.auth ? (
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </Layout>
+      </ThemeProvider>
+    </SessionProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

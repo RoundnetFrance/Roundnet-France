@@ -1,69 +1,105 @@
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Image from "next/image";
+import Link from "next/link";
+import propTypes from "prop-types";
+import { useState } from "react";
 
-// MATERIAL ICONS
-import EqualizerIcon from '@mui/icons-material/Equalizer';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
+// MUI IMPORTS
+import { Box, Container, Stack, Button, Typography } from "@mui/material";
 
-function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, altButtonText, altButtonLink, mini }) {
+// MUI ICONS
+import InfoIcon from "@mui/icons-material/Info";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
+function HomeIntro({
+  image,
+  imagePosition,
+  title,
+  subtitle,
+  mainButtonText,
+  mainButtonLink,
+  altButtonText,
+  altButtonLink,
+  mini,
+  half,
+}) {
   const styles = {
     container: {
-      backgroundImage: `url(${image})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundSize: "cover",
+      backgroundPosition: "center",
     },
     title: {
-      textShadow: 'black 3px 2px 3px',
+      textShadow: "black 3px 2px 3px",
+      zIndex: 1,
     },
   };
+
+  // Handle image error
+  const [imageUrl, setImageUrl] = useState(image);
+
   return (
     <Box
       style={styles.container}
       sx={{
-        bgcolor: 'primary.dark',
-        height: mini ? '20vh' : '70vh',
-        width: '100%',
+        bgcolor: "primary.main",
+        height: mini ? "20vh" : half ? "60vh" : "70vh",
+        width: "100%",
+        position: "relative",
       }}
     >
-      <Container sx={{ height: '100%' }}>
+      <Image
+        src={imageUrl}
+        alt={title}
+        layout="fill"
+        objectFit="cover"
+        objectPosition={imagePosition}
+        priority={true}
+        onError={() => setImageUrl("/images/misc/placeholder.jpg")}
+      />
+
+      <Container sx={{ height: "100%" }}>
         <Stack justifyContent="center" minHeight="100%" spacing={1}>
-          <Typography
-            style={styles.title}
-            pt={4}
-            variant="h4"
-            component="h2"
-            color="primary.contrastText"
-            lineHeight={{ xs: '1.1em', sm: '1.25em', md: '1.5em' }}
-            letterSpacing="0.03em"
-          >
-            {title}
-            {' '}
-            <br />
-            {subtitle}
-            {' '}
-            <br />
-          </Typography>
+          {title && (
+            <Typography
+              style={styles.title}
+              pt={4}
+              variant="h4"
+              component="h2"
+              color="primary.contrastText"
+              lineHeight={{ xs: "1.1em", sm: "1.25em", md: "1.5em" }}
+              letterSpacing="0.03em"
+            >
+              {title} <br />
+              {subtitle} <br />
+            </Typography>
+          )}
           <Stack
             width="fit-content"
-            direction={{ xs: 'column', sm: 'row' }}
+            direction={{ xs: "column", sm: "row" }}
             spacing={2}
           >
             {mainButtonText && mainButtonLink && (
-              <Button sx={{ justifyContent: 'flex-start' }} href={mainButtonLink} size="large" variant="contained">
-                <QueryStatsIcon sx={{ mr: 2 }} />
-                {mainButtonText}
-              </Button>
+              <Link href={mainButtonLink} passHref>
+                <Button
+                  startIcon={<InfoIcon />}
+                  size="large"
+                  variant="contained"
+                >
+                  {mainButtonText}
+                </Button>
+              </Link>
             )}
 
-
             {altButtonText && altButtonLink && (
-              <Button sx={{ justifyContent: 'flex-start' }} href={altButtonLink} color="secondary" size="large" variant="contained">
-                <EqualizerIcon sx={{ mr: 2 }} />
-                {altButtonText}
-              </Button>
+              <Link href={altButtonLink} passHref>
+                <Button
+                  startIcon={<ArrowForwardIcon />}
+                  color="secondary"
+                  size="large"
+                  variant="contained"
+                >
+                  {altButtonText}
+                </Button>
+              </Link>
             )}
           </Stack>
         </Stack>
@@ -71,5 +107,31 @@ function HomeIntro({ image, title, subtitle, mainButtonText, mainButtonLink, alt
     </Box>
   );
 }
+
+HomeIntro.propTypes = {
+  image: propTypes.string,
+  imagePosition: propTypes.string,
+  title: propTypes.string,
+  subtitle: propTypes.string,
+  mainButtonText: propTypes.string,
+  mainButtonLink: propTypes.string,
+  altButtonText: propTypes.string,
+  altButtonLink: propTypes.string,
+  mini: propTypes.bool,
+  half: propTypes.bool,
+};
+
+HomeIntro.defaultProps = {
+  image: "/images/misc/placeholder.jpg",
+  imagePosition: "center",
+  title: null,
+  subtitle: null,
+  mainButtonText: null,
+  mainButtonLink: null,
+  altButtonText: null,
+  altButtonLink: null,
+  mini: false,
+  half: false,
+};
 
 export default HomeIntro;
