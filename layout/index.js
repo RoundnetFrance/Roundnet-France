@@ -1,16 +1,24 @@
-import Header from '../components/layout/header';
-import Footer from '../components/layout/footer';
+import { Stack, Box } from "@mui/material";
 
-import { Fragment } from 'react'
+import Header from "../components/layout/header";
+import Footer from "../components/layout/footer";
 
-function Layout({ children }) {
+function Layout({ children, session, adminLayout }) {
   return (
-    <Fragment>
-      <Header />
-      {children}
+    <Stack direction="column" sx={{ minHeight: "100vh" }}>
+      <Header adminLayout={adminLayout} session={session} />
+      <Box
+        flexGrow={1}
+        sx={{
+          backgroundColor: adminLayout ? "primary.lightest" : "initial",
+          minHeight: "80vh",
+        }}
+      >
+        {children}
+      </Box>
       <Footer />
-    </Fragment>
-  )
+    </Stack>
+  );
 }
 
-export default Layout
+export default Layout;
