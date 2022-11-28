@@ -1,11 +1,11 @@
 import { getDocuments, insertDocument } from "../../../helpers/db";
 import { validateAPI } from "../../../helpers/form";
 import getSchema from "../../../helpers/schemas";
-import { getSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/react";
 import createSlug from "../../../helpers/slug-creator";
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
+  const session = await unstable_getServerSession({ req });
   // GET method to read validated events (for public & admin access)
   if (req.method === "GET") {
     try {
