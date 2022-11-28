@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { getSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/react";
 import {
   getDocument,
   patchDocument,
@@ -10,7 +10,7 @@ import { ref, deleteObject } from "firebase/storage";
 
 export default async function handler(req, res) {
   try {
-    const session = await getSession({ req });
+    const session = await unstable_getServerSession({ req });
     const clubId = req.query.clubId;
 
     // If user is authorized
