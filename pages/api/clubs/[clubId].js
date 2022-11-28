@@ -80,6 +80,7 @@ export default async function handler(req, res) {
       error: "You must be sign in to view the protected content on this page.",
     });
   } catch (err) {
+    console.log("err in clubId", err.message);
     res.status(500).json({ error: err.message });
   }
 }
