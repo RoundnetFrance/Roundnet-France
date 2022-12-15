@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       let clubs;
       // For admin access
       if (session) {
-        clubs = await getDocuments("clubs", null, null, { createdAt: 1 });
+        clubs = await getDocuments("clubs", null, null, { createdAt: -1 });
       }
       // For public access
       else {
