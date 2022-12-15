@@ -7,7 +7,7 @@ import { compare } from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+export const authOptions = {
   // Secret to hash token, sign/encrypt cookies
   secret: process.env.NEXT_AUTH_SECRET,
   // Configure one or more authentication providers
@@ -84,9 +84,7 @@ export default NextAuth({
       const userToLog = await getUser({ email: user.email });
 
       if (!userToLog) {
-        return (
-          "/rf-admin/signup-oauth?email=" + user.email + "&name=" + user.name
-        );
+        return `/rf-admin/signup-oauth?email=${user.email}&name=${user.name}`;
       }
 
       if (!userToLog.authorized) {
@@ -106,4 +104,6 @@ export default NextAuth({
     brandColor: "#f50057",
     logo: "/images/logos/roundnet-france.jpg",
   },
-});
+};
+
+export default NextAuth(authOptions);

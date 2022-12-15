@@ -16,6 +16,7 @@ export default function EditSingleClubPage() {
 
   // Get club data
   const { data, error, mutate } = useSWR(`/api/clubs/${clubId}`, fetcher);
+  console.log(data);
   const isLoading = !error && !data;
 
   return (
