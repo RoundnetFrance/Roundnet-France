@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       let clubs;
       // For admin access
       if (session) {
-        clubs = await getDocuments("clubs", null, null, { createdAt: -1 });
+        clubs = await getDocuments("clubs", null, null, { createdAt: 1 });
       }
       // For public access
       else {
@@ -56,6 +56,7 @@ export default async function handler(req, res) {
 
       // Add a validated:false property to the data
       data.validated = false;
+      data.createdAt = new Date();
 
       await insertDocument("clubs", data);
 
