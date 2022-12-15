@@ -29,6 +29,7 @@ export default async function handler(req, res) {
         message: `Votre email a été envoyé ! Nous vous répondrons sous peu.`,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message:
           "Une erreur est survenue lors de l'envoi du mail. Merci de réessayer",

@@ -1,24 +1,25 @@
 import { getDocuments, insertDocument } from "../../../helpers/db";
 import { validateAPI } from "../../../helpers/form";
 import getSchema from "../../../helpers/schemas";
-import { getSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]";
 import createSlug from "../../../helpers/slug-creator";
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
+  const session = await unstable_getServerSession(req, res, authOptions);
   // GET method to read validated events (for public & admin access)
   if (req.method === "GET") {
     try {
       let events;
+      // For admin access
+      if (session) {
+        events = await getDocuments("events", null, null, { createdAt: -1 });
+      }
       // For public access
-      if (!session) {
+      else {
         events = await getDocuments("events", { validated: true }, null, {
           date: 1,
         });
-      }
-      // For admin access
-      else {
-        events = await getDocuments("events", null, null, { createdAt: -1 });
       }
       return res.status(200).json(events);
     } catch (error) {

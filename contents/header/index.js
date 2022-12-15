@@ -47,6 +47,10 @@ const menuElements = [
         name: "Adhérer à la fédération",
         url: "/clubs-et-communautes/adherer-a-roundnet-france",
       },
+      {
+        name: "Ajouter votre tournoi",
+        url: "/calendrier/ajouter",
+      },
     ],
   },
   {

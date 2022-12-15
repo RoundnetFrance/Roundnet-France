@@ -4,21 +4,22 @@
 import { getDocuments, insertDocument } from "../../../helpers/db";
 import { validateAPI } from "../../../helpers/form";
 import getSchema from "../../../helpers/schemas";
-import { getSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
+  const session = await unstable_getServerSession(req, res, authOptions);
   // GET method to read validated clubs (for public & admin access)
   if (req.method === "GET") {
     try {
       let clubs;
-      // For public access
-      if (!session) {
-        clubs = await getDocuments("clubs", { validated: true });
-      }
       // For admin access
-      else {
+      if (session) {
         clubs = await getDocuments("clubs", null, null, { createdAt: 1 });
+      }
+      // For public access
+      else {
+        clubs = await getDocuments("clubs", { validated: true });
       }
       return res.status(200).json(clubs);
     } catch (error) {
