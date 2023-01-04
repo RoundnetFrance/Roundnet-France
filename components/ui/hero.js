@@ -78,7 +78,7 @@ function HomeIntro({
             spacing={2}
           >
             {mainButtonText && mainButtonLink && (
-              <Link href={mainButtonLink} passHref>
+              <Link href={mainButtonLink} passHref legacyBehavior>
                 <Button
                   startIcon={<InfoIcon />}
                   size="large"
@@ -90,7 +90,7 @@ function HomeIntro({
             )}
 
             {altButtonText && altButtonLink && (
-              <Link href={altButtonLink} passHref>
+              <Link href={altButtonLink} passHref legacyBehavior>
                 <Button
                   startIcon={<ArrowForwardIcon />}
                   color="secondary"

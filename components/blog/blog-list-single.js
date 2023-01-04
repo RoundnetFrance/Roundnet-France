@@ -11,7 +11,7 @@ import { Link } from "../../components/ui";
 export default function BlogListSingle({ post }) {
   return (
     <Stack>
-      <NextLink href={`/blog/${post.slug}`} passHref>
+      <NextLink href={`/blog/${post.slug}`} passHref legacyBehavior>
         <Paper
           sx={{
             borderRadius: 1,

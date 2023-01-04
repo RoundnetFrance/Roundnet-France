@@ -102,8 +102,8 @@ export default function AdminContent({ config, form }) {
                                 }
                                 alt={cardTitle}
                                 title={cardTitle}
-                                height="60px"
-                                width="60px"
+                                height={60}
+                                width={60}
                                 objectFit="cover"
                               />
                             </Avatar>
@@ -141,7 +141,7 @@ export default function AdminContent({ config, form }) {
                           >
                             <Divider orientation="vertical" flexItem />
                             <Box>
-                              <NextLink href={cardLink} passHref>
+                              <NextLink href={cardLink} passHref legacyBehavior>
                                 <Tooltip title="Modifier">
                                   <IconButton color="secondary">
                                     <ArrowForwardIcon />

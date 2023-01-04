@@ -154,8 +154,8 @@ export default function EventSingleHead({
             src={image || "/images/pages/event-single/placeholder.jpg"}
             alt={title}
             title={title}
-            width="600px"
-            height="600px"
+            width={600}
+            height={600}
             objectFit="cover"
           />
         </Paper>

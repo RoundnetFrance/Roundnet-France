@@ -16,7 +16,7 @@ function DesktopNavItem({
   return (
     <Fragment key={item.name}>
       {!item.subElements ? (
-        <Link href={item.url} id={item.slug} passHref>
+        <Link href={item.url} id={item.slug} passHref legacyBehavior>
           <Button
             color="inherit"
             onClick={(event) => {
