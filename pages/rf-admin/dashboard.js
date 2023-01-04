@@ -68,7 +68,7 @@ export default function DashboardPage() {
           {dashboardElements.map((element) => (
             <Card key={element._id}>
               <CardActionArea>
-                <NextLink href={element.url} passHref>
+                <NextLink href={element.url} passHref legacyBehavior>
                   <CardContent sx={{ p: 2 }}>
                     <Stack
                       direction={{ xs: "column-reverse", sm: "row" }}
