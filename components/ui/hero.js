@@ -49,8 +49,8 @@ function HomeIntro({
       <Image
         src={imageUrl}
         alt={title}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         objectPosition={imagePosition}
         priority={true}
         onError={() => setImageUrl("/images/misc/placeholder.jpg")}

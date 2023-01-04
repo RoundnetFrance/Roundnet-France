@@ -104,7 +104,7 @@ export default function AdminContent({ config, form }) {
                                 title={cardTitle}
                                 height={60}
                                 width={60}
-                                objectFit="cover"
+                                style={{ objectFit: "cover" }}
                               />
                             </Avatar>
                           ) : (

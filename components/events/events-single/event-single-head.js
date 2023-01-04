@@ -137,8 +137,8 @@ export default function EventSingleHead({
           src={image}
           alt={title}
           title={title}
-          objectFit="cover"
-          layout="fill"
+          style={{ objectFit: "cover" }}
+          fill
         />
       </Paper>
 
@@ -156,7 +156,7 @@ export default function EventSingleHead({
             title={title}
             width={600}
             height={600}
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
           />
         </Paper>
       </Dialog>
