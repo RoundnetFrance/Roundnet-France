@@ -12,6 +12,11 @@ module.exports = {
     //   esmExternals: false,
     // },
   },
+  // modularizeImports: {
+  //   "@mui/material": {
+  //     transform: "@mui/material/{{member}}",
+  //   },
+  // },
   async redirects() {
     return [
       {

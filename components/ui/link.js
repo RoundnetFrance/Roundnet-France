@@ -34,7 +34,7 @@ export default function Link({
   // Button link
   if (isButton) {
     return (
-      <NextLink href={href} passHref>
+      <NextLink href={href} passHref legacyBehavior>
         <Button
           variant={buttonVariant}
           color={color}
