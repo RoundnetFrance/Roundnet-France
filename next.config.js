@@ -12,6 +12,9 @@ module.exports = {
     //   esmExternals: false,
     // },
   },
+  compiler: {
+    styledComponents: true,
+  },
   modularizeImports: {
     "@mui/material": {
       transform: "@mui/material/{{member}}",
