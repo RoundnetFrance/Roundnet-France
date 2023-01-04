@@ -50,8 +50,7 @@ function HomeIntro({
         src={imageUrl}
         alt={title}
         fill
-        style={{ objectFit: "cover" }}
-        objectPosition={imagePosition}
+        style={{ objectFit: "cover", objectPosition: imagePosition }}
         priority={true}
         onError={() => setImageUrl("/images/misc/placeholder.jpg")}
       />
