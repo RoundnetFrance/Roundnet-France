@@ -114,8 +114,8 @@ export default function AccountClub({
                 <Image
                   src={club.image}
                   alt={clubValue}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                 />
               </Avatar>
             </Box>

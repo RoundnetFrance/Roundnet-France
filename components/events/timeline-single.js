@@ -163,8 +163,8 @@ export default function TimelineSingle({ event, withYear }) {
                 <Image
                   src={imageSrc || "/images/misc/placeholder.jpg"}
                   alt={event.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   onError={() => setImageSrc("/images/misc/placeholder.jpg")}
                 />
               </Paper>

@@ -25,8 +25,8 @@ export default function BlogListSingle({ post }) {
             <Image
               src={post.image || "/images/misc/placeholder.jpg"}
               alt={post.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
             />
           </Box>
         </Paper>

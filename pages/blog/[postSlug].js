@@ -51,7 +51,7 @@ export default function EventSingle({ post, error }) {
                 src={post?.image || "/images/misc/placeholder.jpg"}
                 width={1000}
                 height={600}
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
                 alt={post.title}
               />
 

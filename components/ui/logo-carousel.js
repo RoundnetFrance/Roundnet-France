@@ -19,7 +19,7 @@ function LogoCarousel({ title, logos }) {
         width={150}
         height={150}
         title={logo.alt}
-        objectFit="cover"
+        style={{ objectFit: "cover" }}
       />
     );
 
