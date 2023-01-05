@@ -52,7 +52,7 @@ export default function Link({
 
   return (
     <NextLink href={href} passHref>
-      <MUILink color={color} underline={underline} sx={sx}>
+      <MUILink color={color} underline={underline} sx={sx} component="span">
         {children}
       </MUILink>
     </NextLink>
