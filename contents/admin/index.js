@@ -117,6 +117,14 @@ const dashboardElements = [
     description: "Gérez les comptes des administrateurs du site.",
     url: "/rf-admin/parametres/administrateurs",
   },
+  {
+    _id: "team",
+    label: "Equipe RF",
+    color: "secondary",
+    icon: "manage_accounts",
+    description: "Gérez les membres de l'équipe Roundnet France",
+    url: "/rf-admin/federation-members",
+  },
 ];
 
 export { accountMenuElements, dashboardElements };
