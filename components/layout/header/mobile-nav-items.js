@@ -73,7 +73,7 @@ export default function MobileNavItems({
     return (
       <Fragment key={element.name}>
         {element.dividerTop && <Divider variant="middle" sx={{ mt: 4 }} />}
-        <Link href={element.url} passHref>
+        <Link href={element.url} passHref legacyBehavior>
           <MUILink
             underline="none"
             color={adminLayout ? "secondary" : "primary"}

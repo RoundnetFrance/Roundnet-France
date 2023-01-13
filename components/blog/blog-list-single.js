@@ -11,7 +11,7 @@ import { Link } from "../../components/ui";
 export default function BlogListSingle({ post }) {
   return (
     <Stack>
-      <NextLink href={`/blog/${post.slug}`} passHref>
+      <NextLink href={`/blog/${post.slug}`} passHref legacyBehavior>
         <Paper
           sx={{
             borderRadius: 1,
@@ -25,8 +25,8 @@ export default function BlogListSingle({ post }) {
             <Image
               src={post.image || "/images/misc/placeholder.jpg"}
               alt={post.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
             />
           </Box>
         </Paper>

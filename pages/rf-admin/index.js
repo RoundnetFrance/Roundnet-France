@@ -38,7 +38,7 @@ export default function AdminPage() {
             <Button variant="outlined" onClick={signIn}>
               Se connecter
             </Button>
-            <Link href="/rf-admin/signup" passHref>
+            <Link href="/rf-admin/signup" passHref legacyBehavior>
               <Button color="secondary">Créer un compte</Button>
             </Link>
           </Fragment>

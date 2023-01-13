@@ -58,6 +58,7 @@ export default function HomePage({
             href="/calendrier"
             isButton
             buttonIcon="arrow_forward"
+            legacyBehavior
           >
             Voir les autres tournois
           </Link>
@@ -91,7 +92,12 @@ export default function HomePage({
               </Typography>
             </CardContent>
             <CardActions>
-              <Link href="/blog/bilan-2022" isButton buttonIcon="arrow_forward">
+              <Link
+                href="/blog/bilan-2022"
+                isButton
+                buttonIcon="arrow_forward"
+                legacyBehavior
+              >
                 Lire l&apos;article
               </Link>
             </CardActions>
@@ -117,6 +123,7 @@ export default function HomePage({
                 href="/blog/tour-stop-angers-2022"
                 isButton
                 buttonIcon="arrow_forward"
+                legacyBehavior
               >
                 Lire l&apos;article
               </Link>
