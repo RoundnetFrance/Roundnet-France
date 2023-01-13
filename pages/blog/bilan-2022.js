@@ -81,7 +81,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 
@@ -146,7 +145,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 
@@ -181,7 +179,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 
@@ -237,7 +234,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 
@@ -271,7 +267,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 
@@ -306,7 +301,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 
@@ -340,7 +334,6 @@ export default function TourStopAngersPage() {
             alt="Tour des France des meilleurs équipes de Roundnet !"
             width={1200}
             height={830}
-            layout="responsive"
           />
         </Box>
 

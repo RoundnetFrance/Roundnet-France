@@ -85,7 +85,7 @@ export default function AdminFileField({
               src={image || "/images/misc/placeholder.jpg"}
               width={60}
               height={60}
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
               alt={label}
               onError={() => setImage("/images/misc/placeholder.jpg")}
             />

@@ -144,9 +144,9 @@ function InfoBlock({
       >
         <Image
           src={image || "/images/misc/placeholder.jpg"}
-          layout="fill"
+          fill
           alt={title}
-          objectFit={imageFit}
+          style={{ objectFit: imageFit }}
         />
       </Paper>
     </Stack>

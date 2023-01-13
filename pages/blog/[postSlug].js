@@ -49,9 +49,9 @@ export default function EventSingle({ post, error }) {
             <Fragment>
               <Image
                 src={post?.image || "/images/misc/placeholder.jpg"}
-                width="1000"
-                height="600"
-                objectFit="cover"
+                width={1000}
+                height={600}
+                style={{ objectFit: "cover" }}
                 alt={post.title}
               />
 

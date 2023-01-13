@@ -89,19 +89,25 @@ function Header(props) {
       <Box sx={{ flexGrow: 1, paddingBottom: "50px" }}>
         <AppBar color={adminLayout ? "secondary" : "primary"}>
           <Toolbar>
-            <Link href={adminLayout ? "/rf-admin" : "/"} passHref>
-              <a>
-                <Image
-                  src="/images/logos/roundnet-france-tp-blanc.png"
-                  alt="Roundnet France"
-                  width="50px"
-                  height="50px"
-                />
-              </a>
+            <Link
+              href={adminLayout ? "/rf-admin" : "/"}
+              passHref
+              legacyBehavior
+            >
+              <Image
+                src="/images/logos/roundnet-france-tp-blanc.png"
+                alt="Roundnet France"
+                width={50}
+                height={50}
+              />
             </Link>
 
             <Typography ml={2} variant="h6" component="h1" sx={{ flexGrow: 1 }}>
-              <Link href={adminLayout ? "/rf-admin" : "/"} passHref>
+              <Link
+                href={adminLayout ? "/rf-admin" : "/"}
+                passHref
+                legacyBehavior
+              >
                 <MUILink color="inherit" underline="none">
                   <strong>
                     {adminLayout ? "RF Admin" : "Roundnet France"}

@@ -34,7 +34,7 @@ export default function Link({
   // Button link
   if (isButton) {
     return (
-      <NextLink href={href} passHref>
+      <NextLink href={href} passHref legacyBehavior>
         <Button
           variant={buttonVariant}
           color={color}
@@ -52,7 +52,7 @@ export default function Link({
 
   return (
     <NextLink href={href} passHref>
-      <MUILink color={color} underline={underline} sx={sx}>
+      <MUILink color={color} underline={underline} sx={sx} component="span">
         {children}
       </MUILink>
     </NextLink>

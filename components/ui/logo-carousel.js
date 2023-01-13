@@ -16,10 +16,10 @@ function LogoCarousel({ title, logos }) {
       <Image
         src={logo.src}
         alt={logo.alt}
-        width="150px"
-        height="150px"
+        width={150}
+        height={150}
         title={logo.alt}
-        objectFit="cover"
+        style={{ objectFit: "cover" }}
       />
     );
 

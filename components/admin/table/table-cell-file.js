@@ -1,21 +1,41 @@
-import Image from 'next/image';
-import { Fragment, useState } from 'react';
-import uploadFileTableCell from '../../../helpers/mutaters/upload-file-table-cell';
-import { useSWRConfig } from 'swr';
-import uploadFileToStorage from '../../../helpers/form/upload-file';
+import Image from "next/image";
+import { Fragment, useState } from "react";
+import uploadFileTableCell from "../../../helpers/mutaters/upload-file-table-cell";
+import { useSWRConfig } from "swr";
+import uploadFileToStorage from "../../../helpers/form/upload-file";
 
 // MUI IMPORTS
-import { Box, Avatar, IconButton, TableCell, Stack, Button, Typography, LinearProgress, Tooltip } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import {
+  Box,
+  Avatar,
+  IconButton,
+  TableCell,
+  Stack,
+  Button,
+  Typography,
+  LinearProgress,
+  Tooltip,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 // MUI ICONS
-import FileUploadIcon from '@mui/icons-material/FileUpload';
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 // COMPONENTS IMPORTS
-import Link from '../../../components/ui/link';
-import Dialog from '../../ui/dialog';
+import Link from "../../../components/ui/link";
+import Dialog from "../../ui/dialog";
 
-function TableCellFile({ value, isEditable, id, element, endpoint, tableData, isImage, setError, setSuccess }) {
+function TableCellFile({
+  value,
+  isEditable,
+  id,
+  element,
+  endpoint,
+  tableData,
+  isImage,
+  setError,
+  setSuccess,
+}) {
   const { mutate } = useSWRConfig();
 
   // Handle file upload state
@@ -44,8 +64,8 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
     if (!file) {
       setLoading(false);
       setError({
-        name: 'Error',
-        message: 'Veuillez sélectionner un fichier.',
+        name: "Error",
+        message: "Veuillez sélectionner un fichier.",
       });
       return;
     }
@@ -58,7 +78,11 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
 
     try {
       // Upload file to storage and get download url
-      const url = await uploadFileToStorage({ file, endpoint, handleStateChange: handleUploadStateChange });
+      const url = await uploadFileToStorage({
+        file,
+        endpoint,
+        handleStateChange: handleUploadStateChange,
+      });
 
       // Patch database with download url and mutate local state
       await uploadFileTableCell({
@@ -77,24 +101,29 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
       setOpen(false);
       setUploadingValue(0);
       setSuccess({
-        name: 'Success',
-        message: 'Le fichier a bien été uploadé.',
+        name: "Success",
+        message: "Le fichier a bien été uploadé.",
       });
-
     } catch (error) {
       setLoading(false);
       setError({
-        name: 'Error',
-        message: error.message || 'Une erreur est survenue lors de l\'upload du fichier.',
+        name: "Error",
+        message:
+          error.message ||
+          "Une erreur est survenue lors de l'upload du fichier.",
       });
     }
-  }
+  };
 
   return (
     <Fragment>
       <TableCell>
-        <Stack direction="row" alignItems="center"
-          justifyContent="flex-start" spacing={1}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="flex-start"
+          spacing={1}
+        >
           {isEditable && (
             <Tooltip title="Modifier">
               <IconButton
@@ -111,15 +140,14 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
             <Avatar>
               <Image
                 src={value}
-                layout='fill'
-                objectFit='cover'
+                fill
+                style={{ objectFit: "cover" }}
                 alt={element}
               />
             </Avatar>
           ) : (
             <Link href={value}>Télécharger le fichier</Link>
           )}
-
         </Stack>
       </TableCell>
 
@@ -129,9 +157,16 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
         open={open}
         handleClose={handleClose}
         cancelText="Annuler"
-        confirmButton={<LoadingButton loading={loading} variant="contained" onClick={handleUpload}>Modifier</LoadingButton>}
+        confirmButton={
+          <LoadingButton
+            loading={loading}
+            variant="contained"
+            onClick={handleUpload}
+          >
+            Modifier
+          </LoadingButton>
+        }
       >
-
         <Button
           variant="contained"
           component="label"
@@ -142,24 +177,24 @@ function TableCellFile({ value, isEditable, id, element, endpoint, tableData, is
           <input
             type="file"
             name="file"
-            accept={isImage ? 'image/*' : '*'}
+            accept={isImage ? "image/*" : "*"}
             hidden
             onChange={(event) => setFile(event.target.files[0])}
           />
         </Button>
-        <Typography variant="body2" mt={2} pl={2}>{file ? file.name : 'Aucun fichier sélectionné'}</Typography>
+        <Typography variant="body2" mt={2} pl={2}>
+          {file ? file.name : "Aucun fichier sélectionné"}
+        </Typography>
 
-        {loading && <Box sx={{ width: '100%' }} mt={2}>
-          <Typography variant="body2">Upload en cours...</Typography>
-          <LinearProgress variant="determinate" value={uploadingValue} />
-        </Box>}
-
+        {loading && (
+          <Box sx={{ width: "100%" }} mt={2}>
+            <Typography variant="body2">Upload en cours...</Typography>
+            <LinearProgress variant="determinate" value={uploadingValue} />
+          </Box>
+        )}
       </Dialog>
-
     </Fragment>
-  )
+  );
+}
 
-};
-
-
-export default TableCellFile
+export default TableCellFile;
