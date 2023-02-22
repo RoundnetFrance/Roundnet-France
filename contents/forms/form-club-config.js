@@ -14,7 +14,7 @@ const descriptionAfter = (
 
 export default function getClubFormConfig() {
   return {
-    name: "Formulaire de demande d'affiliation pour la saison 2022",
+    name: "Formulaire de demande d'affiliation pour la saison 2023",
     fields: [
       {
         id: "image",
@@ -34,6 +34,16 @@ export default function getClubFormConfig() {
         type: "text",
         options: {
           required: true,
+        },
+      },
+      {
+        id: "rna",
+        label: "Numéro RNA",
+        type: "text",
+        options: {
+          required: true,
+          helperText:
+            "Le Répertoire National des Associations (RNA) vous a communiqué un numéro unique à la création de votre club.",
         },
       },
       {

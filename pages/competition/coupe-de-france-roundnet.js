@@ -21,7 +21,7 @@ export default function NationalRankingPage({ document }) {
   return (
     <Fragment>
       <Head
-        title="Coupe de France de roundnet 2022 - Roundnet France"
+        title="Coupe de France de roundnet 2023 - Roundnet France"
         description="Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram."
       />
 
@@ -34,7 +34,7 @@ export default function NationalRankingPage({ document }) {
         <PageTitle title="Le tournoi immanquable du roundnet français" />
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
           Le tournoi de la Coupe de France de Roundnet est le plus grand tournoi
-          qui se déroule sur le territoire français. Avec 4 dates, des centaines
+          qui se déroule sur le territoire français. Avec 5 dates, des centaines
           de joueuses et de joueurs parmi le gratin de l&apos;hexagone,
           c&apos;est l&apos;événement à ne surtout pas manquer de la saison !
         </Typography>
@@ -48,7 +48,7 @@ export default function NationalRankingPage({ document }) {
           title="Comment se déroule la Coupe de France de roundnet ?"
           image="/images/pages/competition/coupe-de-france/coupe-de-france-roundnet.jpg"
           description={[
-            "La coupe de France est le format classique de la compétition : des équipes de 2 joueurs s’affrontent dans les 3 catégories : femmes, hommes, mixtes.",
+            "La coupe de France est le format classique de la compétition : des équipes de 2 joueurs s’affrontent dans les 3 catégories : femmes, open, mixtes.",
             "La coupe de France est composée, de :",
           ]}
         />
@@ -76,7 +76,7 @@ export default function NationalRankingPage({ document }) {
         image="/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg"
       />
 
-      <Container maxWidth="md" sx={{ my: 6 }}>
+      {/* <Container maxWidth="md" sx={{ my: 6 }}>
         <HeaderWithIcon
           title="Cette année, la coupe de France servira à la qualification des équipes qui représenteront la France lors des Worlds (septembre 2022 en Belgique)."
           icon="info"
@@ -92,7 +92,7 @@ export default function NationalRankingPage({ document }) {
             Inscription Coupe de France
           </Button>
         </Stack>
-      </Container>
+      </Container> */}
     </Fragment>
   );
 }
