@@ -41,7 +41,7 @@ export default function CreateClubPage() {
           <Typography variant="body1">
             N&apos;oubliez pas de payer votre cotisation <strong>avant</strong>{" "}
             de remplir ce formulaire via ce lien :<br />
-            <Link href="https://www.helloasso.com/associations/roundnet-france/adhesions/adhesion-des-clubs-a-la-federation">
+            <Link href="https://www.helloasso.com/associations/roundnet-france/adhesions/adhesion-clubs-2023">
               <strong>Formulaire d&apos;adhésion HelloAsso</strong>
             </Link>
             .
