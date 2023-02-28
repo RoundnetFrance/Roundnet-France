@@ -41,7 +41,7 @@ export default function NationalRankingPage({ document }) {
       </Container>
 
       <Container maxWidth="md" sx={{ my: 8 }}>
-        <InfoBlock
+        {/* <InfoBlock
           // imageToLeft
           height={450}
           items={infoCDF}
@@ -51,9 +51,9 @@ export default function NationalRankingPage({ document }) {
             "La coupe de France est le format classique de la compétition : des équipes de 2 joueurs s’affrontent dans les 3 catégories : femmes, open, mixtes.",
             "La coupe de France est composée, de :",
           ]}
-        />
+        /> */}
 
-        <Box textAlign="center" mt={8}>
+        {/* <Box textAlign="center" mt={8}>
           <Link
             href="https://docs.google.com/spreadsheets/d/17SMHWKT9j3coeA8te2TbB0td11AwuHUV1jf9c9wNxtI/edit?usp=sharing"
             color="#fff"
@@ -66,7 +66,7 @@ export default function NationalRankingPage({ document }) {
               Consulter le classement
             </Button>
           </Link>
-        </Box>
+        </Box> */}
       </Container>
 
       <DocumentHalfImage
