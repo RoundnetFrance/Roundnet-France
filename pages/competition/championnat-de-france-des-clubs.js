@@ -33,7 +33,7 @@ export default function TournamentsResultsPage({ document }) {
       <Container maxWidth="md" sx={{ my: 4 }}>
         <PageTitle title="Le rendez-vous compétitif des clubs français" />
         <Typography variant="body1">
-          Le championnat de France des clubs représentent l&apos;initiative de
+          Le championnat de France des clubs représente l&apos;initiative de
           Roundnet France de se faire rencontrer les différents viviers de
           joueurs nationaux.
         </Typography>
@@ -42,9 +42,9 @@ export default function TournamentsResultsPage({ document }) {
           imageToLeft
           height={450}
           items={infoRIC}
-          title="Comment se déroulent le championnat de France des clubs ?"
+          title="Comment se déroule le championnat de France des clubs ?"
           image="/images/pages/competition/inter-clubs/inter-club.jpg"
-          description="Des squads représentant les clubs français s'affronterons afin de déterminer le meilleur club français. Retrouvez toutes les informations dans le document en bas de page."
+          description="Des squads représentant les clubs français s'affronteront afin de déterminer le meilleur club français. Retrouvez toutes les informations dans le document en bas de page."
         />
       </Container>
       <Divider />
@@ -57,7 +57,7 @@ export default function TournamentsResultsPage({ document }) {
       <DocumentHalfImage
         document={document}
         title="Le document officiel du Championnat de France des clubs"
-        description="Le document officiel de le Championnat de France des clubs est disponible en PDF pour connaître tous les détails de l'organisation de cette compétition."
+        description="Le document officiel du Championnat de France des clubs est disponible en PDF pour connaître tous les détails de l'organisation de cette compétition."
         image="/images/pages/competition/inter-clubs/inter-club-regles.jpg"
       />
     </Fragment>
