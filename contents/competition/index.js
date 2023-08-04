@@ -12,7 +12,7 @@ const infoRIC = [
   {
     _id: 3,
     title: "Une victoire",
-    text: "La squad remportant le plus de rencontre l'emporte",
+    text: "La squad remportant le plus de rencontres l'emporte",
   },
 ];
 
@@ -22,7 +22,7 @@ const featuredRIC = [
     icon: "groups",
     title: "Mixité",
     description:
-      "Les recontres inter-clubs sont l'occasion de faire briller toute votre communauté.",
+      "Le championnat de France des clubs est l'occasion de faire briller toute votre communauté.",
   },
   {
     _id: "2",
