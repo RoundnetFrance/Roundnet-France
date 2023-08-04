@@ -1,18 +1,18 @@
 const infoRIC = [
   {
     _id: 1,
-    title: "6~10",
-    text: "Composez votre équipe : au minimum 2 femmes et 4 hommes.",
+    title: "Une squad",
+    text: "Composez votre équipe : 3 open, 1 mixte et 1 féminin",
   },
   {
     _id: 2,
-    title: "5...",
-    text: "matchs, en 2v2, pour déterminer le club vainqueur.",
+    title: "Une rencontre",
+    text: "Chaque équipe se bat contre l'équipe équivalente de la squad opposée",
   },
   {
     _id: 3,
-    title: "1...",
-    text: "phase finale se jouant entre les deux meilleures équipes.",
+    title: "Une victoire",
+    text: "La squad remportant le plus de rencontre l'emporte",
   },
 ];
 
@@ -36,7 +36,7 @@ const featuredRIC = [
     icon: "forum",
     title: "Communauté",
     description:
-      "Les rencontres inter-clubs sont un excellent moyen de découvrir les différents clubs de France.",
+      "Le championnat de France des clubs est un excellent moyen de découvrir les différents clubs de France.",
   },
 ];
 

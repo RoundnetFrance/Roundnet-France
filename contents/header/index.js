@@ -23,8 +23,8 @@ const menuElements = [
         url: "/competition/coupe-de-france-roundnet",
       },
       {
-        name: "Rencontres inter-clubs",
-        url: "/competition/rencontres-inter-clubs",
+        name: "Championnat de France des clubs",
+        url: "/competition/championnat-de-france-des-clubs",
       },
 
       // {
