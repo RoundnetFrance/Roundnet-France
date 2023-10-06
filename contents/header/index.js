@@ -15,10 +15,6 @@ const menuElements = [
         url: "/regles",
       },
       {
-        name: "Observeurs",
-        url: "/observeurs",
-      },
-      {
         name: "Calendrier",
         url: "/calendrier",
       },
