@@ -45,6 +45,14 @@ const dashboardElements = [
     url: "/rf-admin/competition/regles",
   },
   {
+    _id: "observers",
+    label: "Observeurs",
+    icon: "rule",
+    description:
+      "Changez le document PDF des directives d'observation du site.",
+    url: "/rf-admin/competition/observeurs",
+  },
+  {
     _id: "cdf",
     label: "Coupe de France",
     icon: "emoji_events",
