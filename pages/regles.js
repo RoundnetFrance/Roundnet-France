@@ -47,6 +47,9 @@ function RulesPage({ rule }) {
           Les règles modifiées dans la dernière version sont surlignées en
           jaune.
         </Typography>
+        <Typography variant="body1" color={"red"} fontWeight={600}>
+          Attention : document en cours de mise à jour.
+        </Typography>
       </Container>
 
       <DocumentHalfImage
