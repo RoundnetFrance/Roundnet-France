@@ -39,9 +39,9 @@ function ObserversPage({ obs }) {
         <PageTitle title="Observer des matchs de roundnet" />
         <Typography variant="body1" mb={2}>
           Comme dans tout sport, il faut pouvoir appliquer les règles. Et même
-          si l'autoaribtrage peut fonctionner, il est souvent préférable d'avoir
-          un parti neutre pour prendre les décisions. Au roundnet ce sont les
-          observeurs !
+          si l&apos;autoaribtrage peut fonctionner, il est souvent préférable
+          d&apos;avoir un parti neutre pour prendre les décisions. Au roundnet
+          ce sont les observeurs !
         </Typography>
       </Container>
 
