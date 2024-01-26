@@ -38,8 +38,8 @@ export default function HomePage({
         title="Roundnet France"
         subtitle="Le site officiel de la fédération française de roundnet"
         image="/images/home-slide.jpg"
-        mainButtonText="Découvrir"
-        mainButtonLink="#rules-demo"
+        mainButtonText="Le calendrier 2024"
+        mainButtonLink="/calendrier"
         altButtonText="Trouver un club"
         altButtonLink="/clubs-et-communautes/liste-des-clubs"
       />
