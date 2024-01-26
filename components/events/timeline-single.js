@@ -41,7 +41,7 @@ export default function TimelineSingle({ event, withYear }) {
       sx={{
         p: 2,
         my: 1,
-        backgroundColor: isFrenchMajorEvent ? "primary.lightest" : "neutral",
+        backgroundColor: "neutral",
         borderRadius: 2,
         transition: "all 0.2s ease-in-out",
       }}
