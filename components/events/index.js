@@ -11,7 +11,7 @@ export default function Events({ lastAddedEvents, futureEvents, pastEvents }) {
   const [controlledEvents, setControlledEvents] = useState(futureEvents);
 
   return (
-    <Stack direction={{ xs: "column", md: "row" }} gap={4}>
+    <Stack direction={{ xs: "column-reverse", md: "row" }} gap={4}>
       <EventsTimeline events={controlledEvents} />
       <Divider orientation="vertical" flexItem />
       <EventsSidebar

@@ -226,6 +226,14 @@ const eventConfig = {
                 value: "cdf",
               },
               {
+                label: "Championnat de France des Clubs",
+                value: "cdfSquads",
+              },
+              {
+                label: "ETS- Tournoi européen",
+                value: "ets",
+              },
+              {
                 label: "Autres",
                 value: "other",
               },

@@ -37,6 +37,11 @@ const rfMuiTheme = createTheme(
       neutralDark: {
         main: '#555',
         contrastText: '#fff',
+      },
+      warning: {
+        light: '#ff9800',
+        main: '#ed6c02',
+        dark: '#e65100'
       }
     },
   },
