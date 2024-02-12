@@ -30,6 +30,8 @@ export default function getEventLabel(label) {
       return "Mixte & Non-Mixte";
     case "cdf":
       return "Championnat de France";
+    case "cdfSquads":
+      return "Championnat de France des Clubs"; 
     case "ric":
       return "Rencontres Inter-Club";
     case "open":
@@ -46,6 +48,8 @@ export default function getEventLabel(label) {
       return "Confirmés";
     case "tourStop":
       return "Tour Stop";
+    case "ets":
+      return "ETS - Tournoi européen"
     default:
       return label;
   }

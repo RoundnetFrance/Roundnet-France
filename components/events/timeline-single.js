@@ -32,7 +32,10 @@ export default function TimelineSingle({ event, withYear }) {
 
   // Check if event.type is a major french tournament (applies to some event details color)
   const isFrenchMajorEvent =
-    event.type === "cdf" || event.type === "ric" || event.type === "tourStop";
+    event.type === "cdf" || event.type === "cdfSquads" || event.type === "ric" || event.type === "tourStop";
+  
+  const isETS =
+    event.type === "ets";
 
   return (
     <Stack
@@ -62,7 +65,7 @@ export default function TimelineSingle({ event, withYear }) {
           {/* Date */}
           <Typography
             variant="h6"
-            color={isFrenchMajorEvent ? "primary" : "initial"}
+            color={isFrenchMajorEvent ? "primary" : (isETS ? "warning.main" :"initial")}
             sx={{ fontWeight: "bold", lineHeight: "1.2" }}
           >
             {new Date(event.date).toLocaleDateString("fr-FR", {
@@ -75,7 +78,7 @@ export default function TimelineSingle({ event, withYear }) {
           {event.dateEnd && (
             <Typography
               variant="h6"
-              color={isFrenchMajorEvent ? "primary" : "initial"}
+              color={isFrenchMajorEvent ? "primary" : (isETS ? "warning.main" : "initial")}
               sx={{ fontWeight: "bold", lineHeight: "1.2" }}
             >
               {event.dateEnd &&
@@ -90,7 +93,7 @@ export default function TimelineSingle({ event, withYear }) {
           {/* Type */}
           <Typography
             variant="body2"
-            color={isFrenchMajorEvent ? "primary" : "initial"}
+            color={isFrenchMajorEvent ? "primary" : (isETS ? "warning.main" :"initial")}
             sx={{ fontWeight: "bold", mb: 1 }}
           >
             {getEventLabel(event.type)}
@@ -156,7 +159,7 @@ export default function TimelineSingle({ event, withYear }) {
                   borderLeft: `4px solid ${
                     isFrenchMajorEvent
                       ? theme.palette.primary.main
-                      : theme.palette.neutralDark.main
+                      : (isETS ? theme.palette.warning.main : theme.palette.neutralDark.main)
                   }`,
                 }}
               >
@@ -190,22 +193,34 @@ export default function TimelineSingle({ event, withYear }) {
                     />
                   </Box>
                 )}
+                {isETS && (
+                  <Box minWidth={50}>
+                    <Image
+                      src="/images/logos/ets_logo.png"
+                      width={35}
+                      height={35}
+                      layout="fixed"
+                      alt="ETS Tournament"
+                      title="ETS Tournament"
+                    />
+                  </Box>
+                )}
                 <Box>
                   <Typography
                     variant="body2"
-                    color={isFrenchMajorEvent ? "primary" : "initial"}
+                    color={isFrenchMajorEvent ? "primary" : (isETS ? "warning.main" : "initial")}
                   >
                     {event.city}
                   </Typography>
                   <Typography
                     variant="h6"
-                    color={isFrenchMajorEvent ? "primary" : "initial"}
+                    color={isFrenchMajorEvent ? "primary" : (isETS ? "warning.main" : "initial")}
                     sx={{ fontWeight: "bold" }}
                   >
                     <Link
                       href={`/calendrier/${event.slug}`}
                       color={
-                        isFrenchMajorEvent ? "primary" : "neutral.contrastText"
+                        isFrenchMajorEvent ? "primary" : (isETS ? "warning.main" :"neutral.contrastText")
                       }
                     >
                       {event.title}

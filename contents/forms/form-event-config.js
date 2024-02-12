@@ -224,6 +224,16 @@ export default function getEventFormConfig(isAdmin) {
               hide: !isAdmin,
             },
             {
+              label: "Championnat de France des Clubs",
+              value: "cdfSquads",
+              hide: !isAdmin,
+            },
+            {
+              label: "ETS - Tournoi européen",
+              value: "ets",
+              hide: !isAdmin,
+            },
+            {
               label: "Autres",
               value: "other",
             },
