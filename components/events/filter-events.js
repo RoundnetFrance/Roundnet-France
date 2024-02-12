@@ -32,10 +32,12 @@ const fieldsInitialState = {
   type: {
     open: true,
     cdf: true,
+    cdfSquads: true,
     ric: true,
     // worlds: true,
     // europe: true,
     tourStop: true,
+    ets: true,
     other: true,
   },
   level: {

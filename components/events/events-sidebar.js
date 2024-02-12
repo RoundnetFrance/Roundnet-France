@@ -40,13 +40,13 @@ export default function EventsSidebar({
         </Typography>
         <FilterEvents events={events} setEvents={setEvents} />
       </Box>
-      <Box>
+      <Box sx={{ display: { xs: 'none', md: 'block' } }}>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
           Derniers ajouts
         </Typography>
         {newlyAddedTimeline}
       </Box>
-      <Box>
+      <Box sx={{ display: { xs: 'none', md: 'block' } }}>
         <Typography variant="h5" color="initial" sx={{ mb: 2 }}>
           Evenements passés
         </Typography>
