@@ -7,8 +7,8 @@ const menuElements = [
     icon: "emoji_events",
     subElements: [
       {
-        name: "Classement 2022",
-        url: "/competition/classement-2022",
+        name: "Classement 2024",
+        url: "/competition/classement-2024",
       },
       {
         name: "Règles Officielles",

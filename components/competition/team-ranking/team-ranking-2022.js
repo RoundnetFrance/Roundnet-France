@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 
 // MUI IMPORTS
-
 import {
   Paper,
   Box,
@@ -16,8 +15,8 @@ import {
   TableHead,
   TableRow,
   TableFooter,
+  Tooltip,
   Typography,
-  SvgIcon,
 } from "@mui/material";
 
 // MUI ICONS
@@ -25,6 +24,7 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
+import InfoIcon from "@mui/icons-material/Info";
 function TablePaginationActions(props) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -85,7 +85,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function TeamRanking({ ranking, title, altColor, headers }) {
+function TeamRanking({ ranking, title, altColor }) {
   // Pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -121,10 +121,7 @@ function TeamRanking({ ranking, title, altColor, headers }) {
                   Rang
                 </TableCell>
                 <TableCell sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-                  {headers?.player || "Joueur.euse"}
-                </TableCell>
-                <TableCell sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-                  Club
+                  Equipe
                 </TableCell>
                 <TableCell
                   sx={{ fontWeight: "bold", fontSize: "1.1rem" }}
@@ -152,56 +149,23 @@ function TeamRanking({ ranking, title, altColor, headers }) {
                   }}
                 >
                   <TableCell component="th" scope="row">
-                    <Box display="flex" alignItems="center" gap={2}>
-                      {row.Rang}
-                      {row.Baguette ? (
-                        <SvgIcon
-                          sx={{
-                            background: `url(/images/misc/baguette.svg) center left no-repeat`,
-                            width: "29px",
-                            height: "29px",
-                          }}
-                        ></SvgIcon>
-                      ) : null}
-                      {row.Pro ? (
-                        <SvgIcon
-                          sx={{
-                            background: `url(/images/misc/PRO.svg) center left no-repeat`,
-                            width: "35px",
-                            height: "25px",
-                          }}
-                        ></SvgIcon>
-                      ) : null}
-                    </Box>
+                    {row.rank}
                   </TableCell>
-                  <TableCell component="th" scope="row">
-                    <Box display="flex" alignItems="center" gap={2}>
-                      {row.Prénom} {row.Nom}
-                      {row["Carton O"] ? (
-                        <SvgIcon
-                          sx={{
-                            background: `url(/images/misc/carton-orange.svg) no-repeat`,
-                            width: "19px",
-                            height: "29px",
-                          }}
-                        ></SvgIcon>
-                      ) : null}
-                      {row["Carton R"] ? (
-                        <SvgIcon
-                          sx={{
-                            background: `url(/images/misc/carton-rouge.svg)  no-repeat`,
-                            width: "19px",
-                            height: "29px",
-                          }}
-                        ></SvgIcon>
-                      ) : null}
-                    </Box>
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.Club}
+                  <TableCell>
+                    <Tooltip
+                      title={`${row.player1name} & ${row.player2name}`}
+                      color={altColor ? "secondary" : "primary"}
+                      sx={{ mr: 1 }}
+                      enterTouchDelay={0}
+                    >
+                      <IconButton size="small">
+                        <InfoIcon fontSize="10px" />
+                      </IconButton>
+                    </Tooltip>
+                    {row.teamname}
                   </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="right">
-                    {Math.round(row.Points * 10) / 10}
+                    {Math.round(row.points * 10) / 10}
                   </TableCell>
                 </TableRow>
               ))}
@@ -215,7 +179,7 @@ function TeamRanking({ ranking, title, altColor, headers }) {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 15, { label: "Tous", value: -1 }]}
-                  colSpan={4}
+                  colSpan={3}
                   count={ranking?.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
