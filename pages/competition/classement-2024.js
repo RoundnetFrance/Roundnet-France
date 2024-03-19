@@ -1,8 +1,7 @@
 import { ObjectId } from "mongodb";
 import { Fragment } from "react";
-import db from "../../lib/spiketimate-firebase";
 import { getDocument } from "../../helpers/db";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDoc, getDocs, addDoc } from "firebase/firestore";
 
 // MUI IMPORTS
 import { Container, Typography, Stack } from "@mui/material";
@@ -11,7 +10,7 @@ import { Container, Typography, Stack } from "@mui/material";
 import Hero from "../../components/ui/hero";
 import PageTitle from "../../components/ui/page-title";
 import Head from "../../components/head";
-import TeamRanking from "../../components/competition/team-ranking/team-ranking-2022";
+import TeamRanking from "../../components/competition/team-ranking/team-ranking";
 import HeaderWithIcon from "../../components/ui/header-with-icon";
 import Error from "../../components/ui/error";
 
@@ -30,13 +29,13 @@ export default function HallOfFamePage({
       />
 
       <Hero
-        title="Classement 2022"
+        title="Classement 2024"
         image="/images/hero/hall-of-fame.jpg"
         mini
       />
 
       <Container maxWidth="md" sx={{ mt: 4 }}>
-        <PageTitle title="Classement des équipes - Coupe de France" />
+        <PageTitle title="Classement du roundnet français" />
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
           Le classement de la Coupe de France est calculé par équipe. La
           participation aux Tour Stop et au Championnat de France permet de
@@ -47,7 +46,7 @@ export default function HallOfFamePage({
       </Container>
 
       <Container maxWidth="xl" sx={{ my: 8 }}>
-        <HeaderWithIcon icon="equalizer" title="Classement des équipes">
+        <HeaderWithIcon icon="equalizer" title="Classement des joueur.euse.s">
           Dernière mise à jour : {new Date(date || null).toLocaleDateString()}
         </HeaderWithIcon>
 
@@ -58,13 +57,21 @@ export default function HallOfFamePage({
             direction={{ xs: "column", lg: "row" }}
             spacing={{ xs: 4, lg: 2 }}
           >
-            <TeamRanking title="Classement féminin" ranking={womensRanking} />
+            <TeamRanking
+              title="Classement féminin"
+              ranking={womensRanking}
+              headers={{ player: "Joueuse" }}
+            />
+            <TeamRanking
+              title="Classement mixte"
+              ranking={mixedRanking}
+              altColor
+            />
             <TeamRanking
               title="Classement masculin"
               ranking={mensRanking}
-              altColor
+              headers={{ player: "Joueur" }}
             />
-            <TeamRanking title="Classement mixte" ranking={mixedRanking} />
           </Stack>
         )}
       </Container>
@@ -74,40 +81,28 @@ export default function HallOfFamePage({
 
 export async function getStaticProps() {
   try {
-    const getRanking = async (collectionName) => {
-      const ranking = [];
-      const querySnapshot = await getDocs(
-        collection(db, `/rankingrf/${collectionName}/teams`)
-      );
-      querySnapshot.forEach((doc) => {
-        ranking.push({
-          ...doc.data(),
-        });
-      });
-      ranking.sort((a, b) => a.rank - b.rank);
-
-      return ranking;
-    };
-
-    const mensRanking = await getRanking("5HCZN4mXIa3pzBuQ2dQO");
-    const womensRanking = await getRanking("3e2Q82BojSaM3RLAGUWp");
-    const mixedRanking = await getRanking("elOhheBFTicqpbcyW62l");
-
-    const { date } = await getDocument(
+    const { ranking, date } = await getDocument(
       "ranking",
-      ObjectId("6315dbab85098f7156bde68b")
+      ObjectId("65f93b696c41d2a7f9689312")
     );
 
     return {
       props: {
-        mensRanking,
-        womensRanking,
-        mixedRanking,
+        mensRanking: ranking["Rank Open"]
+          .sort((a, b) => a.Rang - b.Rang)
+          .filter((p) => p.Points),
+        womensRanking: ranking["Rank Women"]
+          .sort((a, b) => a.Rang - b.Rang)
+          .filter((p) => p.Points),
+        mixedRanking: ranking["Rank Coed"]
+          .sort((a, b) => a.Rang - b.Rang)
+          .filter((p) => p.Points),
         date,
       },
       revalidate: 3600,
     };
   } catch (err) {
+    console.log(err);
     return {
       props: {
         error: err.message,
