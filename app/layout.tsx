@@ -3,6 +3,7 @@ import { ThemeProvider } from "@mui/material";
 import Layout from "../layout";
 import type { Metadata } from "next";
 import rfMuiTheme from "../styles/rf-mui-theme";
+import { Urbanist } from "next/font/google";
 
 import "../styles/globals.css";
 
@@ -18,13 +19,18 @@ export const metadata: Metadata = {
   ],
 };
 
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='fr-FR'>
+    <html lang='fr-FR' className={urbanist.className}>
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={rfMuiTheme}>
