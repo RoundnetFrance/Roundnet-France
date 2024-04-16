@@ -1,8 +1,11 @@
-import sgMail from "@sendgrid/mail";
+import sgMail, { type MailDataRequired } from "@sendgrid/mail";
 import emailTeplate from "../../../styles/email-templates/contact-email-template";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 // Sign SendGrid API key
+if (!process.env.SENDGRID_API_KEY) {
+	throw new Error("No Sendgrid API Key");
+}
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,9 +16,9 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const html = emailTeplate(data);
 
 		// Create email object
-		const msg = {
+		const msg: MailDataRequired & { name: string } = {
 			to: process.env.NOTIFICATION_MAIL_ADDRESS,
-			from: process.env.NOTIFICATION_MAIL_ADDRESS,
+			from: process.env.NOTIFICATION_MAIL_ADDRESS ?? "fake@email.com",
 			subject: `Contact via le site - ${data.subject}`,
 			name: data.name,
 			html,

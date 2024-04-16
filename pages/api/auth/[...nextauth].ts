@@ -29,6 +29,9 @@ export const authOptions = {
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials) {
+				if (!credentials) {
+					throw new Error("No credentials provided");
+				}
 				const { email } = credentials;
 
 				// Connect to database and check if user exists (throw error db malfunction)
@@ -63,8 +66,8 @@ export const authOptions = {
 			},
 		}),
 		GoogleProvider({
-			clientId: process.env.GOOGLE_CLIENT_ID,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
 		}),
 		// ...add more providers here
 	],

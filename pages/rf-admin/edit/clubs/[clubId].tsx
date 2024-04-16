@@ -15,7 +15,6 @@ const EditSingleClubPage = () => {
 
   // Get club data
   const { data, error, mutate } = useSWR(`/api/clubs/${clubId}`, fetcher);
-  console.log(data);
   const isLoading = !error && !data;
 
   return (
@@ -23,11 +22,11 @@ const EditSingleClubPage = () => {
       config={clubConfig}
       data={data}
       mutate={mutate}
-      documentId={clubId.toString()}
+      documentId={clubId?.toString() ?? ""}
       isLoading={isLoading}
     />
   );
-}
+};
 
 EditSingleClubPage.auth = {
   role: "superadmin",

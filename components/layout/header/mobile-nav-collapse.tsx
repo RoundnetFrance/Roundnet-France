@@ -36,7 +36,7 @@ const MobileNavCollapse: FC<MobileNavCollapseProps> = ({
         unmountOnExit
       >
         <ListItem component='div'>
-          <Link href={subElement.url} passHref legacyBehavior>
+          <Link href={subElement.url ?? "#"} passHref legacyBehavior>
             <ListItemButton onClick={toggleDrawer}>
               <ListItemIcon>
                 <Icon>arrow_forward</Icon>

@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ApiSchema, FormField } from "../../models/Form";
+import type { ApiSchema, FormField } from "../../models/Form";
 import { getNotificationData } from "./send-notification";
 
 // * Helper functions
@@ -36,7 +36,7 @@ function matchFormWithApiSchema({
 		}
 		// Else, has to build an array of elements
 		else {
-			const arrayElement = [];
+			const arrayElement: Record<string, any>[] = [];
 
 			// For every element of the array, we construct a new object in an array of elements
 			for (const field of expectedValue) {
@@ -133,7 +133,7 @@ export function getInitialState(fields: FormField[], getInitialErrors = false) {
 	return fields.reduce((acc, curr) => {
 		// Only case where we want to set the value to (not) void is the default value for a select for getInitialState
 		if (!getInitialErrors && curr.type === "select") {
-			const optionDefault = curr.options?.selectValues.find(
+			const optionDefault = curr.options?.selectValues?.find(
 				(option) => option.default,
 			);
 			const defaultValue = optionDefault?.value;
@@ -205,7 +205,7 @@ export function validateForm({
 		// If error, return an custom InvalidForm throw with an adapted details object (key: message). Uses initialFormErrors to populate errors.
 		const details = initialFormErrors;
 		error.details.forEach(({ context, message }) => {
-			details[context.key] = message;
+			if (context?.key) details[context?.key] = message;
 		});
 
 		// Throw the custom error (see InvalidForm class)

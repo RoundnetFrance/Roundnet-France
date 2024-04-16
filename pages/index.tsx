@@ -203,12 +203,12 @@ const HomePage: FC<HomePagePropsErrors> = (props) => {
 export default HomePage;
 
 export const getStaticProps = (async () => {
-  let clubLogos: LogoObject[] = null;
-  let events: Event[] = null;
-  let partnersLogos: LogoObject[] = null;
-  let errorEvents: string = null;
-  let errorLogos: string = null;
-  let errorPartnersLogos: string = null;
+  let clubLogos: LogoObject[] | null = null;
+  let events: Event[] | null = null;
+  let partnersLogos: LogoObject[] | null = null;
+  let errorEvents: string | null = null;
+  let errorLogos: string | null = null;
+  let errorPartnersLogos: string | null = null;
 
   try {
     const clubs = await getDocuments<Club>({
@@ -217,7 +217,7 @@ export const getStaticProps = (async () => {
       fields: { image: 1, title: 1, links: 1, chip: 1 },
     });
     clubLogos = clubs.map((club) => {
-      let link: string;
+      let link = "";
       if (club.links.length > 0) {
         link = club.links[0].url || club.links[1].url || club.links[2].url;
       }
@@ -225,7 +225,7 @@ export const getStaticProps = (async () => {
       return {
         src: club.image,
         alt: club.title,
-        link: link,
+        link,
       };
     });
   } catch (err) {

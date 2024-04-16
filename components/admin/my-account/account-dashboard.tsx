@@ -144,7 +144,7 @@ export function AccountDashboard({ clubs }: Readonly<{ clubs: Club[] }>) {
               <Typography
                 variant='body1'
                 color={element._id === showContent ? "initial" : "disabled"}
-                fontWeight={element._id === showContent && "bold"}
+                fontWeight={element._id === showContent ? "bold" : undefined}
               >
                 {element.label}
               </Typography>

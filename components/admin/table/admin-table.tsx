@@ -30,8 +30,11 @@ function AdminTable({
   },
 }: Readonly<AdminTableProps>) {
   // State to handle errors & success messages
-  const [errorSnackbar, setErrorSnackbar] = useState(null);
-  const [successSnackbar, setSuccessSnackbar] = useState(null);
+  const [errorSnackbar, setErrorSnackbar] = useState<Error | null>(null);
+  const [successSnackbar, setSuccessSnackbar] = useState<{
+    name: string;
+    message: string;
+  } | null>(null);
   const handleSnackbarClose = () => {
     setErrorSnackbar(null);
     setSuccessSnackbar(null);
@@ -152,9 +155,11 @@ function AdminTable({
       >
         <Alert
           onClose={handleSnackbarClose}
+          // @ts-ignore
           severity={
             errorSnackbar?.name.toLowerCase() ||
-            successSnackbar?.name.toLowerCase()
+            successSnackbar?.name.toLowerCase() ||
+            "info"
           }
           sx={{ width: "100%" }}
         >

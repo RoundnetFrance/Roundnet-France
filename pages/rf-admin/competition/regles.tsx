@@ -1,8 +1,8 @@
 import useOfficialDocs from "../../../hooks/use-official-docs";
 
-import {AdminContent} from "../../../components/admin/admin-content";
+import { AdminContent } from "../../../components/admin/admin-content";
 import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper";
-import {PageTitle} from "../../../components/ui";
+import { PageTitle } from "../../../components/ui";
 import CreateOfficialDocForm from "../../../components/admin/forms/create-official-doc";
 import type { FCWithAuth } from "../../../models/Utils";
 import type { GetStaticProps } from "next";
@@ -16,7 +16,7 @@ const RulesAdminPage: FCWithAuth = () => {
       title: "version",
       subtitle: "description",
     },
-    data: officialDocs,
+    data: officialDocs ?? [],
     endpoint: "official-docs",
     isLoading: isLoading,
     isError: isError,
@@ -24,14 +24,14 @@ const RulesAdminPage: FCWithAuth = () => {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Administration du fichier de règles" />
+      <PageTitle title='Administration du fichier de règles' />
       <AdminContent
         config={config}
-        form={<CreateOfficialDocForm doctype="rules" />}
+        form={<CreateOfficialDocForm doctype='rules' />}
       />
     </DashboardWrapper>
   );
-}
+};
 
 RulesAdminPage.auth = {
   role: "superadmin",
@@ -39,7 +39,7 @@ RulesAdminPage.auth = {
 
 export default RulesAdminPage;
 
-export const getStaticProps = (async() => {
+export const getStaticProps = (async () => {
   return {
     props: {
       adminLayout: true,

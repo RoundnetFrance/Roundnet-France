@@ -81,7 +81,7 @@ export const FormField: FC<FormFieldProps> = ({
   }
 
   // If input as an optional.parentText, return a checkbox
-  let optional: JSX.Element;
+  let optional: JSX.Element | null = null;
   if (options?.optional?.parentText) {
     optional = (
       <FormGroup>
@@ -112,6 +112,7 @@ export const FormField: FC<FormFieldProps> = ({
   // If input is a optional.child and its options.parent checkbox is not checked, return null
   if (
     options?.optional?.isChild &&
+    options?.optional?.parent &&
     !parentCheckboxes[options?.optional?.parent]
   ) {
     return null;
@@ -226,7 +227,7 @@ export const FormField: FC<FormFieldProps> = ({
               },
             });
           }}
-          options={options?.selectValues}
+          options={options?.selectValues ?? []}
           renderInput={(params) => <TextField {...params} label={label} />}
         />
       );
@@ -241,7 +242,7 @@ export const FormField: FC<FormFieldProps> = ({
           handleChange={handleChange}
           error={booleanError}
           helperText={typeof error === "string" ? error : "Champ incorrect."}
-          required={options?.required}
+          required={!!options?.required}
         />
       );
       break;
@@ -264,7 +265,7 @@ export const FormField: FC<FormFieldProps> = ({
               });
             }}
           >
-            {options?.selectValues.map((item) => {
+            {options?.selectValues?.map((item) => {
               // Hide if needed
               if (item.hide) return null;
               // Else, return option
@@ -352,7 +353,7 @@ export const FormField: FC<FormFieldProps> = ({
                   handleChange({
                     target: {
                       id,
-                      value: event.target.files[0],
+                      value: event.target.files?.[0],
                     },
                   })
                 }

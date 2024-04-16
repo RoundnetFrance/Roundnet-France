@@ -13,7 +13,7 @@ import {
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
-import {Dialog} from "../../../../ui";
+import { Dialog } from "../../../../ui";
 
 interface AdminFileFieldProps {
   id: string;
@@ -68,16 +68,16 @@ export const AdminFileField: FC<AdminFileFieldProps> = ({
   return (
     <Fragment>
       <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="flex-start"
+        direction='row'
+        alignItems='center'
+        justifyContent='flex-start'
         spacing={1}
       >
         {editable && (
-          <Tooltip title="Modifier">
+          <Tooltip title='Modifier'>
             <IconButton
-              component="label"
-              color="primary"
+              component='label'
+              color='primary'
               onClick={handleDialogOpen}
             >
               <FileUploadIcon />
@@ -100,7 +100,16 @@ export const AdminFileField: FC<AdminFileFieldProps> = ({
         {/* Display download link if image or value is defined */}
         {(image || value) && (
           <Typography sx={{ my: { xs: 0, sm: 1 } }}>
-            <Link href={fileType === "image" ? image : typeof value === "string" && value} target="_blank">
+            <Link
+              href={
+                fileType === "image"
+                  ? image
+                  : typeof value === "string"
+                  ? value
+                  : undefined
+              }
+              target='_blank'
+            >
               Télécharger le fichier
             </Link>
           </Typography>
@@ -110,29 +119,31 @@ export const AdminFileField: FC<AdminFileFieldProps> = ({
       {/* Dialog component */}
       <Dialog
         open={dialogOpen}
-        title="Uploader"
+        title='Uploader'
         handleClose={handleDialogCancel}
-        cancelText="Annuler"
+        cancelText='Annuler'
         confirmButton={
-          <Button variant="contained" onClick={handleDialogClose}>
+          <Button variant='contained' onClick={handleDialogClose}>
             Choisir ce fichier
           </Button>
         }
       >
-        <Button variant="contained" component="label" color="primary">
-          Envoyer un fichier{' '} 
+        <Button variant='contained' component='label' color='primary'>
+          Envoyer un fichier{" "}
           <input
-            type="file"
-            name="file"
+            type='file'
+            name='file'
             accept={accept}
             hidden
-            onChange={(event) => handleChange(id, event.target.files[0])}
+            onChange={(event) => handleChange(id, event.target.files?.[0])}
           />
         </Button>
-        <Typography variant="body2" mt={2} pl={2}>
-          {value && typeof value === "object" ? value.name : "Aucun fichier sélectionné"}
+        <Typography variant='body2' mt={2} pl={2}>
+          {value && typeof value === "object"
+            ? value.name
+            : "Aucun fichier sélectionné"}
         </Typography>
       </Dialog>
     </Fragment>
   );
-}
+};

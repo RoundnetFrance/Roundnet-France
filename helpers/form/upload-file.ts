@@ -22,7 +22,7 @@ export const uploadFileToStorage: (
 	fieldId,
 	handleStateChange = () => {},
 	width = 1800,
-	height,
+	height = 1200,
 }) => {
 	// Check if file is an image  (type with? to avoid errors on file = URL)
 	const isImage = file.type?.startsWith("image/");

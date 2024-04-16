@@ -19,6 +19,10 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions);
     const federationMemberId = req.query.federationMemberId;
 
+    if (!federationMemberId) {
+      throw new Error("No fedeMember Id provided");
+    }
+
     // If user is authorized
     if (session) {
       // Get federationMember data

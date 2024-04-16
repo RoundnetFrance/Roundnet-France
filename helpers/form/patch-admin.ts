@@ -1,3 +1,4 @@
+import type { FormField } from "../../models/Form";
 import { handleFormUpload } from "./handle-form-upload";
 
 interface PatchAdminProps {
@@ -28,7 +29,7 @@ export default async function patchAdmin({
 	setLoading(true);
 
 	// Get every type=file in layout for every tab and merge into one array
-	const files = [];
+	const files: FormField[] = [];
 	for (const tab of tabs) {
 		for (const field of tab.layout) {
 			if (field.type === "file") {

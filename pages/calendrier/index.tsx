@@ -1,13 +1,13 @@
-import { FC, Fragment } from "react";
+import { type FC, Fragment } from "react";
 import { getDocuments } from "../../helpers/db";
 
 import { Container } from "@mui/material";
 
-import { GetStaticProps } from "next";
+import type { GetStaticProps } from "next";
 import { Events } from "../../components/events";
 import Head from "../../components/head";
 import { CTAFooter, Error, Hero } from "../../components/ui";
-import { ListingEvent } from "../../models/collections/Events";
+import type { ListingEvent } from "../../models/collections/Events";
 
 interface EventsPageProps {
   error: string | null;
@@ -25,30 +25,30 @@ const EventsPage: FC<EventsPageProps> = ({
   return (
     <Fragment>
       <Head
-        title="Events et tournois de roundnet en France - Roundnet France"
-        description="Retrouvez tous les tournois et compétitions officielles et non officielles du roundnt en France"
+        title='Events et tournois de roundnet en France - Roundnet France'
+        description='Retrouvez tous les tournois et compétitions officielles et non officielles du roundnt en France'
       />
 
       <Hero
-        title="Calendrier"
-        image="/images/hero/calendrier.jpg"
-        imagePosition="center 30%"
+        title='Calendrier'
+        image='/images/hero/calendrier.jpg'
+        imagePosition='center 30%'
         mini
       />
-      <Container maxWidth="lg" sx={{ my: 8 }}>
+      <Container maxWidth='lg' sx={{ my: 8 }}>
         {error ? (
           <Error message={error} />
         ) : (
           <Events
-            lastAddedEvents={lastAddedEvents}
-            futureEvents={futureEvents}
-            pastEvents={pastEvents}
+            lastAddedEvents={lastAddedEvents ?? []}
+            futureEvents={futureEvents ?? []}
+            pastEvents={pastEvents ?? []}
           />
         )}
       </Container>
 
       <CTAFooter
-        title="Proposez votre événement !"
+        title='Proposez votre événement !'
         subtitle="Vous avez une idée de tournoi ou d'événement ? Nous vous aidons à organiser cette activité en France."
         mainLink={{
           url: "/calendrier/ajouter",
@@ -62,10 +62,10 @@ const EventsPage: FC<EventsPageProps> = ({
 export default EventsPage;
 
 export const getStaticProps = (async () => {
-  let lastAddedEvents: ListingEvent[] = null;
-  let futureEvents: ListingEvent[] = null;
-  let pastEvents: ListingEvent[] = null;
-  let error: string = null;
+  let lastAddedEvents: ListingEvent[] | null = null;
+  let futureEvents: ListingEvent[] | null = null;
+  let pastEvents: ListingEvent[] | null = null;
+  let error: string | null = null;
 
   try {
     const events = await getDocuments<ListingEvent>({
