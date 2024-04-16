@@ -30,7 +30,7 @@ declare module "@mui/material/styles" {
 const rfMuiTheme = createTheme(
 	{
 		typography: {
-			fontFamily: "Urbanist, sans-serif",
+			fontFamily: "inherit",
 			body1: {
 				lineHeight: 1.6,
 			},
