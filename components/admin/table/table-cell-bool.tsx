@@ -44,11 +44,6 @@ function TableCellBool({
     });
   };
 
-  let uneditableIcon: JSX.Element;
-  if (!isEditable) {
-    uneditableIcon = value ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />;
-  }
-
   return (
     <TableCell align='right'>
       {isEditable ? (
@@ -57,8 +52,10 @@ function TableCellBool({
             <Checkbox checked={value} onChange={handleChange} />
           </Tooltip>
         </Box>
+      ) : value ? (
+        <CheckBoxIcon />
       ) : (
-        uneditableIcon
+        <CheckBoxOutlineBlankIcon />
       )}
     </TableCell>
   );

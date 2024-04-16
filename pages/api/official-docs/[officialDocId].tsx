@@ -19,6 +19,10 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions);
     const officialDocId = req.query.officialDocId;
 
+    if (!officialDocId) {
+      throw new Error("No officialDocId provided");
+    }
+
     // If user is authorized
     if (session) {
       // GET method to read specific app official doc

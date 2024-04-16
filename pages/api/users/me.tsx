@@ -23,7 +23,7 @@ export default async function handler(
         try {
           const users = await getDocument<User>({
             collection: "users",
-            params: { email: session.user.email },
+            params: { email: session.user?.email ?? undefined },
             fields: { password: 0, image: 0 },
           });
           return res.status(200).json(users);
@@ -45,7 +45,7 @@ export default async function handler(
         try {
           const user = await patchDocument<User>({
             collection: "users",
-            params: { email: session.user.email },
+            params: { email: session.user?.email ?? undefined },
             document: req.body,
           });
           return res.status(200).json(user);
@@ -63,7 +63,7 @@ export default async function handler(
         try {
           await deleteDocument<User>({
             collection: "users",
-            params: { email: session.user.email },
+            params: { email: session.user?.email ?? undefined },
           });
           return res.status(200).json({ message: "Compte supprimé" });
         } catch (error) {

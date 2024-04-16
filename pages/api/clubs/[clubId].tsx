@@ -20,6 +20,10 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions);
     const clubId = req.query.clubId;
 
+    if (!clubId) {
+      throw new Error("No clubId provided");
+    }
+
     // If user is authorized
     if (session) {
       // GET method to read specific app user
@@ -77,7 +81,7 @@ export default async function handler(
         try {
           const response = await deleteDocument({
             collection: "clubs",
-            params: { _id: new ObjectId(clubId.toString()) },
+            params: { _id: new ObjectId(clubId?.toString()) },
           });
           return res.status(200).json(response);
         } catch (error) {

@@ -35,9 +35,14 @@ export const handleFormUpload: (
 		});
 
 	// Get all files to upload (and their limit, if need be)
-	const filesToUpload = [];
+	const filesToUpload: {
+		id: string;
+		file: any;
+		maxWidth?: number;
+		maxHeight?: number;
+	}[] = [];
 	for (const fileField of fileFields) {
-		if (updatedForm[fileField]) {
+		if (updatedForm[String(fileField)]) {
 			// Find maxWidth and maxHeight of the image. Fields ids can be "id" or "_id"
 			const field = fields.find((field) => {
 				if (field.id) return field.id === fileField;
@@ -48,8 +53,8 @@ export const handleFormUpload: (
 			const maxHeight = field?.options?.fileConfig?.imageMaxHeight;
 
 			filesToUpload.push({
-				id: fileField,
-				file: updatedForm[fileField],
+				id: String(fileField),
+				file: updatedForm[String(fileField)],
 				maxWidth: maxWidth,
 				maxHeight: maxHeight,
 			});

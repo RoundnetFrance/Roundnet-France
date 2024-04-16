@@ -14,7 +14,10 @@ export default function EditSinglePartnerPage() {
   const { partnerId } = router.query;
 
   // Get club data
-  const { data, error, mutate } = useSWR<Partner>(`/api/partners/${partnerId}`, fetcher);
+  const { data, error, mutate } = useSWR<Partner>(
+    `/api/partners/${partnerId}`,
+    fetcher,
+  );
   const isLoading = !error && !data;
 
   return (
@@ -22,7 +25,7 @@ export default function EditSinglePartnerPage() {
       config={partnerConfig}
       data={data}
       mutate={mutate}
-      documentId={partnerId.toString()}
+      documentId={partnerId?.toString() ?? ""}
       isLoading={isLoading}
     />
   );

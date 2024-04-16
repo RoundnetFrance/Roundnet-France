@@ -10,9 +10,9 @@ export const getDocuments: <T>(params: DocumentQueryParams<T>) => Promise<T[]> =
 			const db = client.db();
 			const documents = await db
 				.collection(collection)
-				.find(params)
-				.project(fields)
-				.sort(sort)
+				.find(params ?? {})
+				.project(fields ?? {})
+				.sort(sort ?? {})
 				.limit(limit ?? 0)
 				.toArray();
 
@@ -32,7 +32,7 @@ export const getDocument: <T>(
 		const db = client.db();
 		const document = await db
 			.collection(collection)
-			.findOne(params, { projection: fields, sort: sort || { _id: -1 } });
+			.findOne(params ?? {}, { projection: fields, sort: sort || { _id: -1 } });
 
 		// Clean the _id field from the documents
 		return JSON.parse(JSON.stringify(document));
@@ -71,7 +71,7 @@ export const patchDocument = async <T>({
 		const db = client.db();
 		const result = await db
 			.collection(collection)
-			.updateOne(params, { $set: document });
+			.updateOne(params ?? {}, { $set: document });
 		return result;
 	} catch (error) {
 		return error.message ?? "An error occurred while updating the document.";
@@ -86,7 +86,7 @@ export const deleteDocument = async <T>({
 	try {
 		const client = await clientPromise;
 		const db = client.db();
-		const result = await db.collection(collection).deleteOne(params);
+		const result = await db.collection(collection).deleteOne(params ?? {});
 
 		return result;
 	} catch (error) {

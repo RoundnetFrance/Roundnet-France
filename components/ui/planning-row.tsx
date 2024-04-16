@@ -1,4 +1,6 @@
-import { FC, Fragment, useState } from "react";
+"use client";
+
+import react from "react";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -23,8 +25,8 @@ interface PlanningRowProps {
   resultsTable?: boolean;
 }
 
-const PlanningRow: FC<PlanningRowProps> = ({ row, resultsTable }) => {
-  const [expanded, setExpanded] = useState(false);
+const PlanningRow: react.FC<PlanningRowProps> = ({ row, resultsTable }) => {
+  const [expanded, setExpanded] = react.useState(false);
 
   const humanReadableDate = new Date(row.date).toLocaleDateString("fr-FR", {
     year: "numeric",
@@ -33,7 +35,7 @@ const PlanningRow: FC<PlanningRowProps> = ({ row, resultsTable }) => {
   });
 
   return (
-    <Fragment>
+    <react.Fragment>
       {/* MAIN TABLE */}
       <TableRow
         sx={{
@@ -127,7 +129,7 @@ const PlanningRow: FC<PlanningRowProps> = ({ row, resultsTable }) => {
           </TableCell>
         </TableRow>
       )}
-    </Fragment>
+    </react.Fragment>
   );
 };
 

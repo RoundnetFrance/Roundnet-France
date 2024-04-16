@@ -79,7 +79,7 @@ export default function DataSingleField({
         <Switch
           id={id}
           checked={value}
-          size="medium"
+          size='medium'
           onChange={() => {
             handleValuesChange(id, !value);
           }}
@@ -90,7 +90,7 @@ export default function DataSingleField({
     case "array":
       if (!value) {
         content = (
-          <Typography variant="body1" sx={{ my: 1 }}>
+          <Typography variant='body1' sx={{ my: 1 }}>
             N/A
           </Typography>
         );
@@ -103,12 +103,12 @@ export default function DataSingleField({
           return (
             <Box
               key={element[options.array.key]}
-              sx={{ mt: valueIndex === 0 && 1 }}
+              sx={{ mt: valueIndex === 0 ? 1 : 0 }}
             >
-              <Typography variant="body1">
+              <Typography variant='body1'>
                 <strong>{element[options.array.key]}</strong>
               </Typography>
-              <Typography variant="body1" sx={{ mb: 1 }}>
+              <Typography variant='body1' sx={{ mb: 1 }}>
                 {element[options.array.value] || "N/A"}
               </Typography>
             </Box>
@@ -130,7 +130,7 @@ export default function DataSingleField({
               });
               handleValuesChange(id, newArray);
             }}
-            variant="standard"
+            variant='standard'
             fullWidth
             margin={higherThanMd ? "normal" : "dense"}
           />
@@ -161,7 +161,7 @@ export default function DataSingleField({
           handleChange={handleValuesChange}
           editable={editable}
           fileType={options?.fileConfig?.type}
-          label=""
+          label=''
         />
       );
       break;
@@ -188,8 +188,8 @@ export default function DataSingleField({
       my={2}
     >
       <Stack
-        direction="row"
-        alignItems="center"
+        direction='row'
+        alignItems='center'
         spacing={{ xs: 1, md: 2 }}
         sx={{
           width: {
@@ -200,15 +200,15 @@ export default function DataSingleField({
         }}
       >
         {editable ? (
-          <EditIcon color="primary" fontSize="small" />
+          <EditIcon color='primary' fontSize='small' />
         ) : (
-          <AbcIcon color="primary" fontSize="small" />
+          <AbcIcon color='primary' fontSize='small' />
         )}
-        <Typography variant="h6" color="initial">
+        <Typography variant='h6' color='initial'>
           {label}
         </Typography>
       </Stack>
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation='vertical' flexItem />
       <Box sx={{ width: "100%" }}>{content}</Box>
     </Stack>
   );

@@ -20,7 +20,7 @@ const ClubsAdminPage = () => {
       image: "image",
       toCheck: "validated",
     },
-    data: clubs,
+    data: clubs ?? [],
     endpoint: "clubs",
     isLoading: isLoading,
     isError: isError,

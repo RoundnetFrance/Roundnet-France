@@ -17,7 +17,7 @@ const FrenchCupAdminPage: FCWithAuth = () => {
       title: "version",
       subtitle: "description",
     },
-    data: officialDocs,
+    data: officialDocs ?? [],
     endpoint: "official-docs",
     isLoading: isLoading,
     isError: isError,

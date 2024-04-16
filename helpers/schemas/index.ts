@@ -9,7 +9,7 @@ type SchemaRefProps =
 	| "partners";
 
 export default function getSchema(schemaRef: SchemaRefProps) {
-	let schema: Joi.ObjectSchema | Joi.AnySchema = null;
+	let schema: Joi.ObjectSchema | Joi.AnySchema | null = null;
 
 	switch (schemaRef) {
 		case "club":

@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useState, FC } from "react";
+import { useState, type FC } from "react";
 
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 
@@ -58,7 +60,7 @@ const Hero: FC<HeroProps> = ({
     >
       <Image
         src={imageUrl}
-        alt={title}
+        alt={title ?? ""}
         fill
         style={{ objectFit: "cover", objectPosition: imagePosition }}
         priority={true}
@@ -66,23 +68,23 @@ const Hero: FC<HeroProps> = ({
       />
 
       <Container sx={{ height: "100%" }}>
-        <Stack justifyContent="center" minHeight="100%" spacing={1}>
+        <Stack justifyContent='center' minHeight='100%' spacing={1}>
           {title && (
             <Typography
               style={styles.title}
               pt={4}
-              variant="h4"
-              component="h2"
-              color="primary.contrastText"
+              variant='h4'
+              component='h2'
+              color='primary.contrastText'
               lineHeight={{ xs: "1.1em", sm: "1.25em", md: "1.5em" }}
-              letterSpacing="0.03em"
+              letterSpacing='0.03em'
             >
               {title} <br />
               {subtitle} <br />
             </Typography>
           )}
           <Stack
-            width="fit-content"
+            width='fit-content'
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
           >
@@ -90,8 +92,8 @@ const Hero: FC<HeroProps> = ({
               <Link href={mainButtonLink} passHref legacyBehavior>
                 <Button
                   startIcon={<InfoIcon />}
-                  size="large"
-                  variant="contained"
+                  size='large'
+                  variant='contained'
                 >
                   {mainButtonText}
                 </Button>
@@ -102,9 +104,9 @@ const Hero: FC<HeroProps> = ({
               <Link href={altButtonLink} passHref legacyBehavior>
                 <Button
                   startIcon={<ArrowForwardIcon />}
-                  color="secondary"
-                  size="large"
-                  variant="contained"
+                  color='secondary'
+                  size='large'
+                  variant='contained'
                 >
                   {altButtonText}
                 </Button>

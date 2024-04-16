@@ -47,7 +47,7 @@ function TableCellFile({
   const { mutate } = useSWRConfig();
 
   // Handle file upload state
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [uploadingValue, setUploadingValue] = useState(0);
 
   // Handle loading state
@@ -187,7 +187,7 @@ function TableCellFile({
             name='file'
             accept={isImage ? "image/*" : "*"}
             hidden
-            onChange={(event) => setFile(event.target.files[0])}
+            onChange={(event) => setFile(event.target.files?.[0] ?? null)}
           />
         </Button>
         <Typography variant='body2' mt={2} pl={2}>

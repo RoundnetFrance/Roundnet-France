@@ -1,10 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Slider from "react-slick";
 
 import { Box, Container, Stack, Typography } from "@mui/material";
 
 import Link from "../ui/link";
-import { FC } from "react";
+import type { FC } from "react";
 
 interface Logo {
   src: string;
@@ -46,13 +48,13 @@ const LogoCarousel: FC<LogoCarouselProps> = ({ title, logos }) => {
   // RETURN
   return (
     <Container
-      maxWidth="md"
+      maxWidth='md'
       sx={{
         mb: 6,
       }}
     >
       <Stack mb={2} sx={{ textAlign: "center" }}>
-        <Typography align="center" variant="h4" component="h2">
+        <Typography align='center' variant='h4' component='h2'>
           {title}
         </Typography>
       </Stack>

@@ -4,8 +4,8 @@ import { Container } from "@mui/material";
 
 import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper";
 import PageTitle from "../../../components/ui/page-title";
-import {AdminContent} from "../../../components/admin/admin-content";
-import {CreateEventForm} from "../../../components/forms/create-event-form";
+import { AdminContent } from "../../../components/admin/admin-content";
+import { CreateEventForm } from "../../../components/forms/create-event-form";
 
 export default function EventsAdminPage() {
   // Get events info
@@ -19,7 +19,7 @@ export default function EventsAdminPage() {
       image: "image",
       toCheck: "validated",
     },
-    data: events,
+    data: events ?? [],
     endpoint: "events",
     isLoading: isLoading,
     isError: isError,
@@ -27,8 +27,8 @@ export default function EventsAdminPage() {
 
   return (
     <DashboardWrapper>
-      <Container maxWidth="lg">
-        <PageTitle title="Liste des tournois et événements" />
+      <Container maxWidth='lg'>
+        <PageTitle title='Liste des tournois et événements' />
       </Container>
       <AdminContent config={config} form={<CreateEventForm isAdmin />} />
     </DashboardWrapper>

@@ -6,40 +6,40 @@ import PageTitle from "../../../components/ui/page-title";
 import CreateOfficialDocForm from "../../../components/admin/forms/create-official-doc";
 
 export default function RulesAdminPage() {
-	// Hooks calls
-	const { officialDocs, isLoading, isError } = useOfficialDocs("statuts");
+  // Hooks calls
+  const { officialDocs, isLoading, isError } = useOfficialDocs("statuts");
 
-	const config = {
-		name: "administrators",
-		listProps: {
-			title: "version",
-			subtitle: "description",
-		},
-		data: officialDocs,
-		endpoint: "official-docs",
-		isLoading: isLoading,
-		isError: isError,
-	};
+  const config = {
+    name: "administrators",
+    listProps: {
+      title: "version",
+      subtitle: "description",
+    },
+    data: officialDocs ?? [],
+    endpoint: "official-docs",
+    isLoading: isLoading,
+    isError: isError,
+  };
 
-	return (
-		<DashboardWrapper>
-			<PageTitle title="Administration du fichier des statuts" />
-			<AdminContent
-				config={config}
-				form={<CreateOfficialDocForm doctype="statuts" />}
-			/>
-		</DashboardWrapper>
-	);
+  return (
+    <DashboardWrapper>
+      <PageTitle title='Administration du fichier des statuts' />
+      <AdminContent
+        config={config}
+        form={<CreateOfficialDocForm doctype='statuts' />}
+      />
+    </DashboardWrapper>
+  );
 }
 
 RulesAdminPage.auth = {
-	role: "superadmin",
+  role: "superadmin",
 };
 
 export async function getStaticProps() {
-	return {
-		props: {
-			adminLayout: true,
-		},
-	};
+  return {
+    props: {
+      adminLayout: true,
+    },
+  };
 }

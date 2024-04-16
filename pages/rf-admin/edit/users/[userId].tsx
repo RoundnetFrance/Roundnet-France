@@ -23,7 +23,7 @@ const EditSingleUser = () => {
       config={adminConfig}
       data={data}
       mutate={mutate}
-      documentId={userId.toString()}
+      documentId={userId?.toString() ?? ""}
       isLoading={isLoading}
     />
   );

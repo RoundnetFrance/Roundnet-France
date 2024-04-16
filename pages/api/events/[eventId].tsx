@@ -19,6 +19,10 @@ export default async function handler(
     const session = await getServerSession(req, res, authOptions);
     const eventId = req.query.eventId;
 
+    if (!eventId) {
+      throw new Error("No eventId provided");
+    }
+
     // GET method to read specific app user
     if (req.method === "GET") {
       try {

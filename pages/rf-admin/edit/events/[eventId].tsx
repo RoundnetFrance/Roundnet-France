@@ -11,45 +11,48 @@ import type { GetStaticPaths, GetStaticProps } from "next/types";
 import type { FCWithAuth } from "../../../../models/Utils";
 
 const EditSingleEventPage: FCWithAuth = () => {
-	// Get endpoint and ID from URL
-	const router = useRouter();
-	const { eventId } = router.query;
+  // Get endpoint and ID from URL
+  const router = useRouter();
+  const { eventId } = router.query;
 
-	// Get event data
-	const { data, error, mutate } = useSWR<Event>(`/api/events/${eventId}`, fetcher);
-	const isLoading = !error && !data;
+  // Get event data
+  const { data, error, mutate } = useSWR<Event>(
+    `/api/events/${eventId}`,
+    fetcher,
+  );
+  const isLoading = !error && !data;
 
-	return (
-		<AdminContentSingle
-			config={eventConfig}
-			data={data}
-			mutate={mutate}
-			documentId={eventId.toString()}
-			isLoading={isLoading}
-		/>
-	);
+  return (
+    <AdminContentSingle
+      config={eventConfig}
+      data={data}
+      mutate={mutate}
+      documentId={eventId?.toString() ?? ""}
+      isLoading={isLoading}
+    />
+  );
 };
 
 EditSingleEventPage.auth = {
-	role: "superadmin",
+  role: "superadmin",
 };
 
 export default EditSingleEventPage;
 
 export const getStaticPaths = (async () => {
-	const data = await getDocuments<Event>({ collection: "events" });
-	const paths = data.map((event) => ({
-		params: {
-			eventId: event._id,
-		},
-	}));
-	return { paths, fallback: "blocking" };
+  const data = await getDocuments<Event>({ collection: "events" });
+  const paths = data.map((event) => ({
+    params: {
+      eventId: event._id,
+    },
+  }));
+  return { paths, fallback: "blocking" };
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (() => {
-	return {
-		props: {
-			adminLayout: true,
-		},
-	};
+  return {
+    props: {
+      adminLayout: true,
+    },
+  };
 }) satisfies GetStaticProps;

@@ -25,7 +25,7 @@ const EditSingleDocPage: FCWithAuth = () => {
       config={officialDocsConfig}
       data={data}
       mutate={mutate}
-      documentId={officialDocId.toString()}
+      documentId={officialDocId?.toString() ?? ""}
       isLoading={isLoading}
     />
   );

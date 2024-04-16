@@ -13,17 +13,16 @@ export const resizeImage: (props: ResizeImageProps) => Promise<File> = ({
 	height,
 	type,
 }) => {
-	return new Promise(function (resolve, reject) {
-		let allow = ["jpg", "gif", "bmp", "png", "jpeg", "svg"];
+	return new Promise((resolve, reject) => {
+		const allow = ["jpg", "gif", "bmp", "png", "jpeg", "svg"];
 		try {
 			if (
-				file.name &&
-				file.name.split(".").reverse()[0] &&
+				file.name?.split(".").reverse()[0] &&
 				allow.includes(file.name.split(".").reverse()[0].toLowerCase()) &&
 				file.size &&
 				file.type
 			) {
-				let imageType = type ? type : "jpeg";
+				const imageType = type ? type : "jpeg";
 				const imgWidth = width ? width : "auto";
 				const imgHeight = height ? height : "auto";
 				if (imgWidth === "auto" && imgHeight === "auto") {
@@ -34,7 +33,7 @@ export const resizeImage: (props: ResizeImageProps) => Promise<File> = ({
 				reader.readAsDataURL(file);
 				reader.onload = (event) => {
 					const img = new Image();
-					if (typeof event.target.result !== "string") {
+					if (typeof event.target?.result !== "string") {
 						throw new Error("File not supported!");
 					}
 
@@ -43,8 +42,7 @@ export const resizeImage: (props: ResizeImageProps) => Promise<File> = ({
 						// Get original dimensions.
 						// Path is not supported the same by Chrome and Firefox. Props.path = Chrome, props.composedPath() = Firefox
 						const path =
-							("path" in props && props.path) ||
-							(props.composedPath && props.composedPath());
+							("path" in props && props.path) || props.composedPath?.();
 
 						const originalWidth = path[0].width;
 						const originalHeight = path[0].height;
@@ -72,14 +70,16 @@ export const resizeImage: (props: ResizeImageProps) => Promise<File> = ({
 							}
 						}
 						const ctx = elem.getContext("2d");
-						ctx.drawImage(img, 0, 0, elem.width, elem.height);
-						ctx.canvas.toBlob(
+						ctx?.drawImage(img, 0, 0, elem.width, elem.height);
+						ctx?.canvas.toBlob(
 							(blob) => {
-								const file = new File([blob], fileName, {
-									type: `image/${imageType.toLowerCase()}`,
-									lastModified: Date.now(),
-								});
-								resolve(file);
+								if (blob) {
+									const file = new File([blob], fileName, {
+										type: `image/${imageType.toLowerCase()}`,
+										lastModified: Date.now(),
+									});
+									resolve(file);
+								}
 							},
 							file.type,
 							1,

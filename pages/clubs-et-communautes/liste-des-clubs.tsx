@@ -62,7 +62,7 @@ const ClubListPage: FC<ClubListPageProps> = ({ clubs, error }) => {
 
       <Container maxWidth='sm' sx={{ my: 4 }}>
         <HeaderWithIcon icon='people' title='Liste des clubs' />
-        {error ? (
+        {!clubs ? (
           <ErrorUI message={error} />
         ) : (
           <CrossingItems items={clubs} roundedItems roundedEverywhere />

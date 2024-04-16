@@ -56,10 +56,11 @@ const Ranking22Page: FC<Ranking22PageProps> = ({
       </Container>
 
       <Container maxWidth='xl' sx={{ my: 8 }}>
-        <HeaderWithIcon icon='equalizer' title='Classement des équipes'>
-          Dernière mise à jour :{" "}
-          {new Date(date || null).toLocaleDateString("fr-FR")}
-        </HeaderWithIcon>
+        {date && (
+          <HeaderWithIcon icon='equalizer' title='Classement des équipes'>
+            Dernière mise à jour : {new Date(date).toLocaleDateString("fr-FR")}
+          </HeaderWithIcon>
+        )}
 
         {error ? (
           <ErrorUI message={"Une erreur est survenue"} />
@@ -87,7 +88,7 @@ export default Ranking22Page;
 export const getStaticProps = (async () => {
   try {
     const getRanking = async (collectionName: string) => {
-      const ranking = [];
+      const ranking: any[] = [];
       const querySnapshot = await getDocs(
         collection(db, `/rankingrf/${collectionName}/teams`),
       );

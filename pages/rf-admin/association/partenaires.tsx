@@ -1,6 +1,6 @@
 import usePartners from "../../../hooks/use-partners";
 
-import {AdminContent} from "../../../components/admin/admin-content";
+import { AdminContent } from "../../../components/admin/admin-content";
 import DashboardWrapper from "../../../components/layout/admin/dashboard-wrapper";
 import { PageTitle } from "../../../components/ui";
 import CreatePartnerForm from "../../../components/admin/forms/create-partner-form";
@@ -19,7 +19,7 @@ const PartnersAdminPage: FCWithAuth = () => {
       subtitle: "description",
       image: "image",
     },
-    data: partners,
+    data: partners ?? [],
     endpoint: "partners",
     isLoading: isLoading,
     isError: isError,
@@ -27,12 +27,12 @@ const PartnersAdminPage: FCWithAuth = () => {
 
   return (
     <DashboardWrapper>
-      <PageTitle title="Liste des partenaires de la fédération" />
+      <PageTitle title='Liste des partenaires de la fédération' />
 
       <AdminContent<Partner> config={config} form={<CreatePartnerForm />} />
     </DashboardWrapper>
   );
-}
+};
 
 PartnersAdminPage.auth = {
   role: "superadmin",
@@ -41,9 +41,9 @@ PartnersAdminPage.auth = {
 export default PartnersAdminPage;
 
 export const getStaticProps = (async () => {
-		return {
-			props: {
-				adminLayout: true,
-			},
-		};
-	}) satisfies GetStaticProps;
+  return {
+    props: {
+      adminLayout: true,
+    },
+  };
+}) satisfies GetStaticProps;

@@ -18,7 +18,7 @@ const FederationMembersAdminPage: FCWithAuth = () => {
       subtitle: "description",
       image: "image",
     },
-    data: members,
+    data: members ?? [],
     endpoint: "federation-members",
     isLoading: isLoading,
     isError: isError,

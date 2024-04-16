@@ -1,10 +1,10 @@
 import { Container } from "@mui/material";
-import { FC, Fragment } from "react";
+import { type FC, Fragment } from "react";
 import { getDocuments } from "../helpers/db";
 
 import Head from "../components/head";
 import { CrossingItems, Error, PageTitle } from "../components/ui";
-import { Partner } from "../models/collections/Partners";
+import type { Partner } from "../models/collections/Partners";
 
 interface PartnersPageProps {
   partners: Partner[] | null;
@@ -14,15 +14,15 @@ interface PartnersPageProps {
 const PartnersPage: FC<PartnersPageProps> = ({ partners, error }) => {
   return (
     <Fragment>
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Head title="Partenaires officiels - Fédération Française de Roundnet" />
-        <PageTitle title="Partenaires officiels" />
+      <Container maxWidth='lg' sx={{ py: 4 }}>
+        <Head title='Partenaires officiels - Fédération Française de Roundnet' />
+        <PageTitle title='Partenaires officiels' />
       </Container>
-      <Container maxWidth="md" sx={{ py: 4 }}>
-        {error ? (
+      <Container maxWidth='md' sx={{ py: 4 }}>
+        {!partners ? (
           <Error message={error} />
         ) : (
-          <CrossingItems items={partners} height={300} imageFit="contain" />
+          <CrossingItems items={partners} height={300} imageFit='contain' />
         )}
       </Container>
     </Fragment>
@@ -32,8 +32,8 @@ const PartnersPage: FC<PartnersPageProps> = ({ partners, error }) => {
 export default PartnersPage;
 
 export async function getStaticProps() {
-  let partners: Partner[] = null;
-  let error: string = null;
+  let partners: Partner[] | null = null;
+  let error: string | null = null;
   try {
     partners = await getDocuments<Partner>({ collection: "partners" });
   } catch (err) {
@@ -46,6 +46,6 @@ export async function getStaticProps() {
       partners,
       error,
     },
-    revalidate: 600,
+    revalidate: 60,
   };
 }

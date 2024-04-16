@@ -81,9 +81,10 @@ export const AdminContent = <T extends { _id: string; title?: string }>({
                 item[listProps.subtitle]?.length > 60
                   ? `${item[listProps.subtitle].substring(0, 120)}...`
                   : item[listProps.subtitle];
-              const cardImage = item[listProps.image];
+              const cardImage = listProps.image && item[listProps.image];
               const cardLink = `/rf-admin/edit/${endpoint}/${item._id}`;
-              const cardValidated = item[listProps.toCheck];
+              const cardValidated =
+                listProps.toCheck && item[listProps.toCheck];
               return (
                 <Grid key={item._id} item xs={12} sm={6} lg={6}>
                   <Card sx={{ height: "100%" }}>

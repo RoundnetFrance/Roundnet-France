@@ -1,45 +1,45 @@
-import { FC, Fragment } from "react";
+import { type FC, Fragment } from "react";
 import { getDocument } from "../../helpers/db";
 
 import { Container, Typography } from "@mui/material";
 
 import { Hero, PageTitle, DocumentHalfImage, Error } from "../../components/ui";
 import Head from "../../components/head";
-import { OfficialDocument } from "../../models/collections/OfficialDocs";
+import type { OfficialDocument } from "../../models/collections/OfficialDocs";
 
 interface NationalRankingPageProps {
-	document: OfficialDocument | null;
-	error: string | null;
+  document: OfficialDocument | null;
+  error: string | null;
 }
 
 const NationalRankingPage: FC<NationalRankingPageProps> = ({
-	document,
-	error,
+  document,
+  error,
 }) => {
-	return (
-		<Fragment>
-			<Head
-				title="Coupe de France de roundnet 2023 - Roundnet France"
-				description="Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram."
-			/>
+  return (
+    <Fragment>
+      <Head
+        title='Coupe de France de roundnet 2023 - Roundnet France'
+        description='Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram.'
+      />
 
-			<Hero
-				title="Coupe de France"
-				image="/images/hero/classement-national.jpg"
-				mini
-			/>
-			<Container maxWidth="md" sx={{ mt: 4 }}>
-				<PageTitle title="Le tournoi immanquable du roundnet français" />
-				<Typography align="left" variant="body1" sx={{ my: 2 }}>
-					Le tournoi de la Coupe de France de Roundnet est le plus grand tournoi
-					qui se déroule sur le territoire français. Avec 5 dates, des centaines
-					de joueuses et de joueurs parmi le gratin de l&apos;hexagone,
-					c&apos;est l&apos;événement à ne surtout pas manquer de la saison !
-				</Typography>
-			</Container>
+      <Hero
+        title='Coupe de France'
+        image='/images/hero/classement-national.jpg'
+        mini
+      />
+      <Container maxWidth='md' sx={{ mt: 4 }}>
+        <PageTitle title='Le tournoi immanquable du roundnet français' />
+        <Typography align='left' variant='body1' sx={{ my: 2 }}>
+          Le tournoi de la Coupe de France de Roundnet est le plus grand tournoi
+          qui se déroule sur le territoire français. Avec 5 dates, des centaines
+          de joueuses et de joueurs parmi le gratin de l&apos;hexagone,
+          c&apos;est l&apos;événement à ne surtout pas manquer de la saison !
+        </Typography>
+      </Container>
 
-			<Container maxWidth="md" sx={{ my: 8 }}>
-				{/* <InfoBlock
+      <Container maxWidth='md' sx={{ my: 8 }}>
+        {/* <InfoBlock
           // imageToLeft
           height={450}
           items={infoCDF}
@@ -51,7 +51,7 @@ const NationalRankingPage: FC<NationalRankingPageProps> = ({
           ]}
         /> */}
 
-				{/* <Box textAlign="center" mt={8}>
+        {/* <Box textAlign="center" mt={8}>
           <Link
             href="https://docs.google.com/spreadsheets/d/17SMHWKT9j3coeA8te2TbB0td11AwuHUV1jf9c9wNxtI/edit?usp=sharing"
             color="#fff"
@@ -65,20 +65,20 @@ const NationalRankingPage: FC<NationalRankingPageProps> = ({
             </Button>
           </Link>
         </Box> */}
-			</Container>
+      </Container>
 
-			{!error ? (
-				<DocumentHalfImage
-					title="Le règlement complet de la Coupe de France"
-					description="Pour tout savoir des formats, des points et des différentes spécificités de la coupe de France de roundnet, vous pouvez télécharger le document PDF ci-dessous."
-					document={document}
-					image="/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg"
-				/>
-			) : (
-				<Error message={error} />
-			)}
+      {document ? (
+        <DocumentHalfImage
+          title='Le règlement complet de la Coupe de France'
+          description='Pour tout savoir des formats, des points et des différentes spécificités de la coupe de France de roundnet, vous pouvez télécharger le document PDF ci-dessous.'
+          document={document}
+          image='/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg'
+        />
+      ) : (
+        <Error message={error} />
+      )}
 
-			{/* <Container maxWidth="md" sx={{ my: 6 }}>
+      {/* <Container maxWidth="md" sx={{ my: 6 }}>
         <HeaderWithIcon
           title="Cette année, la coupe de France servira à la qualification des équipes qui représenteront la France lors des Worlds (septembre 2022 en Belgique)."
           icon="info"
@@ -95,33 +95,33 @@ const NationalRankingPage: FC<NationalRankingPageProps> = ({
           </Button>
         </Stack>
       </Container> */}
-		</Fragment>
-	);
+    </Fragment>
+  );
 };
 
 export default NationalRankingPage;
 
 export async function getStaticProps() {
-	let document: OfficialDocument | null = null;
-	let error: string | null = null;
+  let document: OfficialDocument | null = null;
+  let error: string | null = null;
 
-	try {
-		document = await getDocument<OfficialDocument>({
-			collection: "official-docs",
-			params: { doctype: "cdf" },
-			sort: { _id: -1 },
-		});
-	} catch (err) {
-		error =
-			err.message ??
-			"Une erreur est survenue lors de la récupération du document officiel de la Coupe de France";
-	}
+  try {
+    document = await getDocument<OfficialDocument>({
+      collection: "official-docs",
+      params: { doctype: "cdf" },
+      sort: { _id: -1 },
+    });
+  } catch (err) {
+    error =
+      err.message ??
+      "Une erreur est survenue lors de la récupération du document officiel de la Coupe de France";
+  }
 
-	return {
-		props: {
-			document,
-			error,
-		},
-		revalidate: 3600,
-	};
+  return {
+    props: {
+      document,
+      error,
+    },
+    revalidate: 3600,
+  };
 }
