@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { type FC, Fragment } from "react";
 import { getDocument } from "../helpers/db";
 import type { GetStaticProps } from "next";
 
@@ -11,7 +11,7 @@ import {
   Hero,
   PageTitle,
 } from "../components/ui";
-import { FileDocument } from "../models/DB";
+import type { FileDocument } from "../models/DB";
 
 interface ObserversPageProps {
   observerDocument: FileDocument;
@@ -26,15 +26,15 @@ const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
       />
 
       <Hero
-        title="Observation et arbitrage"
-        image="/images/hero/regles.jpg"
-        imagePosition="center 80%"
+        title='Observation et arbitrage'
+        image='/images/hero/regles.jpg'
+        imagePosition='center 80%'
         mini
       />
 
-      <Container maxWidth="md" sx={{ my: { xs: 4, md: 12 } }}>
-        <PageTitle title="Observer des matchs de roundnet" />
-        <Typography variant="body1" mb={2}>
+      <Container maxWidth='md' sx={{ my: { xs: 4, md: 12 } }}>
+        <PageTitle title='Observer des matchs de roundnet' />
+        <Typography variant='body1' mb={2}>
           Comme dans tout sport, il faut pouvoir appliquer les règles. Et même
           si l&apos;autoaribtrage peut fonctionner, il est souvent préférable
           d&apos;avoir un parti neutre pour prendre les décisions. Au roundnet
@@ -45,10 +45,10 @@ const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
       {observerDocument ? (
         <DocumentHalfImage
           document={observerDocument}
-          title="Directives pour les Observeurs Français 2023"
+          title='Directives pour les Observeurs Français 2023'
           description="Vous souhaitez devenir un observeur certifié par Roundnet France ? Vous trouverez dans ce document toutes les directives et conseils liés au rôle d'observeur, ainsi que le lien vers le questionnaire d'entrée pour suivre la formation d'observeur. Que vous soyez un joueur expérimenté ou non, tout le monde peut y apprendre quelque chose et approfondir ses connaissances des règles."
-          buttonText="Télécharger les directives"
-          image="/images/pages/competition/observeurs/observeurs.jpg"
+          buttonText='Télécharger les directives'
+          image='/images/pages/competition/observeurs/observeurs.jpg'
         />
       ) : (
         <Container
@@ -56,13 +56,13 @@ const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
             width: "50%",
           }}
         >
-          <Error message="Une erreur est survenue pour récupérer ce document." />
+          <Error message='Une erreur est survenue pour récupérer ce document.' />
         </Container>
       )}
 
       <CTAFooter
-        title="Vous pensez pouvoir devenir un observeur ?"
-        subtitle="Passez à la prochaine étape !"
+        title='Vous pensez pouvoir devenir un observeur ?'
+        subtitle='Passez à la prochaine étape !'
         mainLink={{
           url: "https://forms.gle/gsdW2838qGJGEN9J7",
           text: "Répondez au questionnaire",
