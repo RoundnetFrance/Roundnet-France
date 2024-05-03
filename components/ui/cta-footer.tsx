@@ -31,7 +31,6 @@ export default function CTAFooter({
   return (
     <Container
       maxWidth='sm'
-      // align='center'
       sx={{
         my: 4,
         p: 10,
@@ -39,6 +38,7 @@ export default function CTAFooter({
         backgroundImage: "url(/images/misc/cta-footer.svg)",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
+        textAlign: "center",
       }}
     >
       <Typography variant='h4' my={2}>
