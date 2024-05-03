@@ -1,5 +1,5 @@
-import { Box, Icon, IconOwnProps, Typography } from "@mui/material";
-import { FC, Fragment, ReactNode } from "react";
+import { Box, Icon, type IconOwnProps, Typography } from "@mui/material";
+import { type FC, Fragment, type ReactNode } from "react";
 
 interface HeaderWithIconProps {
   children?: ReactNode;
@@ -16,8 +16,8 @@ const HeaderWithIcon: FC<HeaderWithIconProps> = ({
 }) => {
   return (
     <Fragment>
-      <Typography variant="h4" align="center" color={color} mt={4}>
-        <Box textAlign="center">
+      <Typography variant='h4' align='center' color={color} mt={4}>
+        <Box textAlign='center'>
           <Icon style={{ fontSize: 80 }} color={color}>
             {icon}
           </Icon>
@@ -25,7 +25,7 @@ const HeaderWithIcon: FC<HeaderWithIconProps> = ({
         <strong>{title}</strong>
       </Typography>
       {children && (
-        <Typography variant="h6" align="center" color={color} mb={4}>
+        <Typography variant='h6' align='center' color={color} mb={4}>
           {children}
         </Typography>
       )}

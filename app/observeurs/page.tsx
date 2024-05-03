@@ -1,30 +1,41 @@
 import { type FC, Fragment } from "react";
-import { getDocument } from "../helpers/db";
-import type { GetStaticProps } from "next";
+import { getDocument } from "../../helpers/db";
+import type { Metadata } from "next";
 
 import { Container, Typography } from "@mui/material";
-import Head from "../components/head";
 import {
   CTAFooter,
   DocumentHalfImage,
-  Error,
+  Error as ErrorUI,
   Hero,
   PageTitle,
-} from "../components/ui";
-import type { FileDocument } from "../models/DB";
+} from "../../components/ui";
+import type { OfficialDocument } from "../../models/collections/OfficialDocs";
 
-interface ObserversPageProps {
-  observerDocument: FileDocument;
-}
+export const metadata: Metadata = {
+  title:
+    "Comment observer au roundnet ? Les directives française en terme d'observation",
+  description:
+    "L'observation est l'équivalent de l'arbitrage pour le roundnet. Venez apprendre à observer grace aux directives et à la formation mise en place par Roundnet France",
+};
 
-const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
+const getObserverDocument = async () => {
+  try {
+    return await getDocument<OfficialDocument>({
+      collection: "official-docs",
+      params: { doctype: "observers" },
+      sort: { _id: -1 },
+    });
+  } catch (err) {
+    const { message } = err as Error;
+    return { error: message };
+  }
+};
+
+const ObserversPage: FC = async () => {
+  const observerDocument = await getObserverDocument();
   return (
     <Fragment>
-      <Head
-        title="Comment observer au roundnet ? Les directives française en terme d'observation"
-        description="L'observation est l'équivalent de l'arbitrage pour le roundnet. Venez apprendre à observer grace aux directives et à la formation mise en place par Roundnet France"
-      />
-
       <Hero
         title='Observation et arbitrage'
         image='/images/hero/regles.jpg'
@@ -42,7 +53,7 @@ const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
         </Typography>
       </Container>
 
-      {observerDocument ? (
+      {!("error" in observerDocument) ? (
         <DocumentHalfImage
           document={observerDocument}
           title='Directives pour les Observeurs Français 2023'
@@ -56,7 +67,7 @@ const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
             width: "50%",
           }}
         >
-          <Error message='Une erreur est survenue pour récupérer ce document.' />
+          <ErrorUI message='Une erreur est survenue pour récupérer ce document.' />
         </Container>
       )}
 
@@ -72,25 +83,5 @@ const ObserversPage: FC<ObserversPageProps> = ({ observerDocument }) => {
   );
 };
 
-export const getStaticProps = (async () => {
-  // Try to fetch latest rule document on DB
-  try {
-    const observerDocument = await getDocument({
-      collection: "official-docs",
-      params: { doctype: "observers" },
-      sort: { _id: -1 },
-    });
-    return {
-      props: {
-        observerDocument,
-      },
-      revalidate: 3600,
-    };
-  } catch (e) {
-    return {
-      props: { observerDocument: undefined },
-    };
-  }
-}) satisfies GetStaticProps;
-
+export const revalidate = 3600;
 export default ObserversPage;
