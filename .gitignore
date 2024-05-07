@@ -44,3 +44,4 @@ dump/
 # ide
 .zed/
 .vscode/
+.env

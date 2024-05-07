@@ -1,11 +1,11 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material";
-import Layout from "../layout";
+import Layout from "../../layout";
 import type { Metadata } from "next";
-import rfMuiTheme from "../styles/rf-mui-theme";
+import rfMuiTheme from "../../styles/rf-mui-theme";
 import { Urbanist } from "next/font/google";
 
-import "../styles/globals.css";
+import "../../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Roundnet France - Fédération française de roundnet",

@@ -1,13 +1,13 @@
 import { Container } from "@mui/material";
 import { type FC, Fragment } from "react";
-import { getDocuments } from "../../helpers/db";
+import { getDocuments } from "../../../helpers/db";
 
 import {
   CrossingItems,
   Error as ErrorUI,
   PageTitle,
-} from "../../components/ui";
-import type { Partner } from "../../models/collections/Partners";
+} from "../../../components/ui";
+import type { Partner } from "../../../models/collections/Partners";
 import "material-icons/iconfont/material-icons.css";
 
 const getPartners = async () => {
