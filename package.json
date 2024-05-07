@@ -11,7 +11,6 @@
 	},
 	"dependencies": {
 		"@date-io/date-fns": "^2.11.0",
-		"@date-io/luxon": "^2.11.1",
 		"@emotion/cache": "^11.11.0",
 		"@emotion/react": "^11.11.4",
 		"@emotion/styled": "^11.11.0",
@@ -26,7 +25,6 @@
 		"firebase": "^9.6.1",
 		"install": "^0.13.0",
 		"joi": "^17.5.0",
-		"luxon": "^2.2.0",
 		"material-icons": "^1.13.12",
 		"mongodb": "^4.2.2",
 		"next": "^14.1.4",
