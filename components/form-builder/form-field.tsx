@@ -1,4 +1,3 @@
-import { fr } from "date-fns/locale";
 import {
   type Dispatch,
   type FC,
@@ -7,8 +6,9 @@ import {
   useState,
 } from "react";
 
-import { DatePicker, LocalizationProvider } from "@mui/lab";
-import DateAdapter from "@mui/lab/AdapterDateFns";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import fr from "date-fns/locale/fr";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
   Autocomplete,
   Box,
@@ -170,7 +170,7 @@ export const FormField: FC<FormFieldProps> = ({
 
     case "date":
       input = (
-        <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
+        <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={fr}>
           <DatePicker
             disableFuture={options?.dateConfig?.disableFuture}
             clearable={options?.dateConfig?.clearable}
@@ -179,6 +179,7 @@ export const FormField: FC<FormFieldProps> = ({
             label={label}
             openTo={options?.dateConfig?.openTo || "month"}
             views={options?.dateConfig?.views || ["year", "month", "day"]}
+            // @ts-ignore
             value={value || null}
             onChange={(newValue) => {
               handleChange({
