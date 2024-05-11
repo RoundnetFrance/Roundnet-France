@@ -13,7 +13,7 @@ model Club {
   name                       String    @db.VarChar(255)
   city                       String    @db.VarChar(255)
   picture                    String?   @db.VarChar(255)
-  description                String?   @db.VarChar(255)
+  description                String?   @db.Text
   mail                       String    @unique @db.VarChar(255)
   phone                      String?   @db.VarChar(20)
   club_created               DateTime? @default(now()) @db.Timestamp(6)

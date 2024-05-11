@@ -32,11 +32,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+
 # vercel
 .vercel
-
-.vercel
-.env*.local
 
 # mongodb
 dump/
@@ -44,4 +42,3 @@ dump/
 # ide
 .zed/
 .vscode/
-.env
