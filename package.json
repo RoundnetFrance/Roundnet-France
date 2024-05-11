@@ -10,7 +10,8 @@
 		"mongodb:dev:sync": "tsx ./scripts/mongodb-dev-sync.ts",
 		"prisma:db:push": "npx prisma db push",
 		"prisma:generate": "npx prisma generate",
-		"prisma:studio": "npx prisma studio"
+		"prisma:studio": "npx prisma studio",
+		"mongo-pg-sync": "tsx --env-file=.env.local ./scripts/export-mongo-to-vercel-pg.ts"
 	},
 	"dependencies": {
 		"@date-io/date-fns": "^2.11.0",
