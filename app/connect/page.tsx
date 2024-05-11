@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import { CardContent, CardTitle } from "../../@/components/ui/card";
+import { CardContent, CardTitle, CardHeader } from "../../@/components/ui/card";
 import { WelcomePanel } from "../../components/connect/dashboard/WelcomePanel";
 import Image from "next/image";
 import { Button, Card, Typography } from "../../components/ui-v2";
@@ -43,12 +43,14 @@ const ConnectHome = () => {
       <section className='grid grid-cols-1 md:grid-cols-3 gap-4'>
         <div className='grid gap-2'>
           <Card>
-            <CardTitle className='flex justify-between mb-4 items-start'>
-              Mes adhérents
-              <div>
-                <User />
-              </div>
-            </CardTitle>
+            <CardHeader>
+              <CardTitle className='flex justify-between items-start'>
+                Mes adhérents
+                <div>
+                  <User />
+                </div>
+              </CardTitle>
+            </CardHeader>
             <CardContent>
               <div className='text-slate-100'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
@@ -64,10 +66,12 @@ const ConnectHome = () => {
 
         <div className='grid gap-2'>
           <Card>
-            <CardTitle className='flex justify-between mb-4'>
-              3 Tournois à venir
-              <div>I</div>
-            </CardTitle>
+            <CardHeader>
+              <CardTitle className='flex justify-between'>
+                3 Tournois à venir
+                <div>I</div>
+              </CardTitle>
+            </CardHeader>
             <CardContent>
               <div className='space-y-2'>
                 <div>
@@ -85,12 +89,14 @@ const ConnectHome = () => {
 
         <div className='grid gap-2'>
           <Card>
-            <CardTitle className='flex justify-between mb-4'>
-              4 Tournois passés
-              <div>
-                <User />
-              </div>
-            </CardTitle>
+            <CardHeader>
+              <CardTitle className='flex justify-between'>
+                4 Tournois passés
+                <div>
+                  <User />
+                </div>
+              </CardTitle>
+            </CardHeader>
             <CardContent>
               <div className='space-y-2'>
                 <div>
