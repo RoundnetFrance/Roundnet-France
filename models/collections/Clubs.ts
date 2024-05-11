@@ -6,6 +6,10 @@ export type Club = {
 	image: string;
 	referer?: string;
 	title: string;
+	validated: boolean;
+	phone?: string;
+	email?: string;
+	players?: string;
 	links: {
 		source: string;
 		url: string;

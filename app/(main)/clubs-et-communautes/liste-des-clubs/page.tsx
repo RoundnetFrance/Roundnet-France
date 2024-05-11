@@ -1,10 +1,8 @@
 import { type FC, Fragment } from "react";
-import { getDocuments } from "../../helpers/db";
 
 import { Box, Container, Divider, Paper, Typography } from "@mui/material";
 
-import type { GetStaticProps } from "next";
-import Head from "../../components/head";
+import Head from "../../../../components/head";
 import {
   CTAFooter,
   CrossingItems,
@@ -12,15 +10,41 @@ import {
   HeaderWithIcon,
   Hero,
   PageTitle,
-} from "../../components/ui";
-import type { Club } from "../../models/collections/Clubs";
+} from "../../../../components/ui";
+import type { Club } from "../../../../models/collections/Clubs";
+import { PrismaClient } from "@prisma/client";
 
 interface ClubListPageProps {
   clubs: Club[] | null;
   error: string | null;
 }
 
-const ClubListPage: FC<ClubListPageProps> = ({ clubs, error }) => {
+const prisma = new PrismaClient();
+const getClubs = async () => {
+  try {
+    const rawClubs = await prisma.club.findMany({
+      where: { validated: true },
+      orderBy: { city: "asc" },
+    });
+    return rawClubs.map((club) => ({
+      _id: club.id,
+      title: club.name,
+      clubCreated: club.club_created,
+      chip: club.city,
+      description: club.description ?? "",
+      email: club.mail,
+      phone: club.phone,
+      image: club.picture ?? undefined,
+    }));
+  } catch (error) {
+    return {
+      error: error.message,
+    };
+  }
+};
+
+const ClubListPage: FC<ClubListPageProps> = async () => {
+  const clubs = await getClubs();
   return (
     <Fragment>
       <Head
@@ -62,8 +86,8 @@ const ClubListPage: FC<ClubListPageProps> = ({ clubs, error }) => {
 
       <Container maxWidth='sm' sx={{ my: 4 }}>
         <HeaderWithIcon icon='people' title='Liste des clubs' />
-        {!clubs ? (
-          <ErrorUI message={error} />
+        {"error" in clubs ? (
+          <ErrorUI message={clubs.error} />
         ) : (
           <CrossingItems items={clubs} roundedItems roundedEverywhere />
         )}
@@ -83,27 +107,5 @@ const ClubListPage: FC<ClubListPageProps> = ({ clubs, error }) => {
   );
 };
 
+export const revalidate = 600;
 export default ClubListPage;
-
-export const getStaticProps = (async () => {
-  let clubs: Club[] | null = null;
-  let error: string | null = null;
-
-  try {
-    clubs = await getDocuments<Club>({
-      collection: "clubs",
-      params: { validated: true },
-      sort: { chip: 1 },
-    });
-  } catch (err) {
-    error = err.message;
-  }
-
-  return {
-    props: {
-      clubs,
-      error,
-    },
-    revalidate: 600,
-  };
-}) satisfies GetStaticProps;
