@@ -1,5 +1,5 @@
 import { type FC, Fragment } from "react";
-import { getDocument } from "../../helpers/db";
+import { getDocument } from "../../../helpers/db";
 import type { Metadata } from "next";
 
 import { Container, Typography } from "@mui/material";
@@ -9,8 +9,8 @@ import {
   Error as ErrorUI,
   Hero,
   PageTitle,
-} from "../../components/ui";
-import type { OfficialDocument } from "../../models/collections/OfficialDocs";
+} from "../../../components/ui";
+import type { OfficialDocument } from "../../../models/collections/OfficialDocs";
 
 export const metadata: Metadata = {
   title:

@@ -1,5 +1,5 @@
 import { type FC, Fragment } from "react";
-import { getDocument } from "../../helpers/db";
+import { getDocument } from "../../../helpers/db";
 
 import { Container, Typography } from "@mui/material";
 
@@ -8,8 +8,8 @@ import {
   DocumentHalfImage,
   Hero,
   PageTitle,
-} from "../../components/ui";
-import type { OfficialDocument } from "../../models/collections/OfficialDocs";
+} from "../../../components/ui";
+import type { OfficialDocument } from "../../../models/collections/OfficialDocs";
 import type { Metadata } from "next/types";
 
 export const metadata: Metadata = {

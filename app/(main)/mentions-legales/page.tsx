@@ -1,8 +1,8 @@
 import { Container, Paper, Typography } from "@mui/material";
 
-import { PageTitle, Accordion } from "../../components/ui";
+import { PageTitle, Accordion } from "../../../components/ui";
 
-import { mentionsLegalesElements } from "../../contents/misc";
+import { mentionsLegalesElements } from "../../../contents/misc";
 import type { FC } from "react";
 import type { Metadata } from "next/types";
 
