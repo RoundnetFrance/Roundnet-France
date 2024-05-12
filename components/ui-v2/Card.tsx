@@ -12,7 +12,7 @@ export const Card = ({ children, className, theme = "primary" }: CardProps) => {
   return (
     <ShadCnCard
       className={clsx(
-        "transition-colors rounded-xl shadow-md",
+        "transition-colors rounded-xl shadow-md p-4 space-y-4",
         {
           "bg-gradient-to-bl from-indigo-500 to-25% to-indigo-700 text-slate-50 hover:to-35%":
             theme === "primary",
