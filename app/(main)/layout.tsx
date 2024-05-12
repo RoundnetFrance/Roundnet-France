@@ -6,6 +6,7 @@ import rfMuiTheme from "../../styles/rf-mui-theme";
 import { Urbanist } from "next/font/google";
 
 import "../../styles/globals.css";
+import "material-icons/iconfont/material-icons.css";
 
 export const metadata: Metadata = {
   title: "Roundnet France - Fédération française de roundnet",

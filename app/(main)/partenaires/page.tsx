@@ -8,7 +8,6 @@ import {
   PageTitle,
 } from "../../../components/ui";
 import type { Partner } from "../../../models/collections/Partners";
-import "material-icons/iconfont/material-icons.css";
 
 const getPartners = async () => {
   try {

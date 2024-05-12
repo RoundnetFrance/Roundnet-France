@@ -2,22 +2,16 @@ import { type FC, Fragment } from "react";
 
 import { Box, Container, Divider, Paper, Typography } from "@mui/material";
 
-import Head from "../../../../components/head";
 import {
   CTAFooter,
   CrossingItems,
   Error as ErrorUI,
-  HeaderWithIcon,
   Hero,
   PageTitle,
 } from "../../../../components/ui";
-import type { Club } from "../../../../models/collections/Clubs";
 import { PrismaClient } from "@prisma/client";
-
-interface ClubListPageProps {
-  clubs: Club[] | null;
-  error: string | null;
-}
+import type { Metadata } from "next";
+import { MapPin, UsersRound } from "lucide-react";
 
 const prisma = new PrismaClient();
 const getClubs = async () => {
@@ -51,15 +45,16 @@ const getClubs = async () => {
   }
 };
 
-const ClubListPage: FC<ClubListPageProps> = async () => {
+export const metadata: Metadata = {
+  title: "Liste des clubs de roundnet en France - Roundnet France",
+  description:
+    "Liste des clubs de roundnet en France. Trouvez le club qui vous correspond le mieux, proche de chez vous !",
+};
+
+const ClubListPage: FC = async () => {
   const clubs = await getClubs();
   return (
     <Fragment>
-      <Head
-        title='Liste des clubs de roundnet en France - Roundnet France'
-        description='Liste des clubs de roundnet en France. Trouvez le club qui vous correspond le mieux, proche de chez vous !'
-      />
-
       <Hero
         title='Liste des clubs'
         image='/images/hero/liste-clubs.jpg'
@@ -77,7 +72,21 @@ const ClubListPage: FC<ClubListPageProps> = async () => {
         </Typography>
 
         <Box mb={4}>
-          <HeaderWithIcon icon='pin_drop' title='Carte des clubs' />
+          <Typography
+            variant='h4'
+            align='center'
+            color='primary'
+            mb={4}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+              fontWeight: "bold",
+            }}
+          >
+            <MapPin size={36} /> Carte des clubs
+          </Typography>
         </Box>
 
         <Paper elevation={6} sx={{ overflow: "hidden", p: 1, pb: 0.5 }}>
@@ -93,7 +102,21 @@ const ClubListPage: FC<ClubListPageProps> = async () => {
       <Divider />
 
       <Container maxWidth='sm' sx={{ my: 4 }}>
-        <HeaderWithIcon icon='people' title='Liste des clubs' />
+        <Typography
+          variant='h4'
+          align='center'
+          color='primary'
+          mb={4}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+            fontWeight: "bold",
+          }}
+        >
+          <UsersRound size={36} /> Liste des clubs
+        </Typography>
         {"error" in clubs ? (
           <ErrorUI message={clubs.error} />
         ) : (
