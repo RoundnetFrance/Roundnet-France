@@ -17,7 +17,7 @@ const ConnectHome = () => {
             <Image
               src='https://firebasestorage.googleapis.com/v0/b/roundnet-france-888b2.appspot.com/o/clubs%2Fvbjh1-titans-roundnet.jpg?alt=media&token=8b247c4e-8248-45da-ba28-12fb8871f719'
               alt='Roundnet'
-              className='object-contain'
+              className='relative object-contain'
               fill
             />
           </div>

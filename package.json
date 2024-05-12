@@ -37,7 +37,6 @@
 		"install": "^0.13.0",
 		"joi": "^17.5.0",
 		"lucide-react": "^0.378.0",
-		"luxon": "^2.2.0",
 		"material-icons": "^1.13.12",
 		"mongodb": "^4.2.2",
 		"next": "^14.1.4",
