@@ -25,6 +25,9 @@ const getClubs = async () => {
     const rawClubs = await prisma.club.findMany({
       where: { validated: true },
       orderBy: { city: "asc" },
+      include: {
+        links: true,
+      },
     });
     return rawClubs.map((club) => ({
       _id: club.id,
@@ -35,8 +38,13 @@ const getClubs = async () => {
       email: club.mail,
       phone: club.phone,
       image: club.picture ?? undefined,
+      links: club.links.map((link) => ({
+        url: link.url,
+        source: link.source,
+      })),
     }));
   } catch (error) {
+    console.error(error);
     return {
       error: error.message,
     };

@@ -20,23 +20,40 @@ async function main() {
 		console.log("Clubs already imported will be skipped.");
 		console.log("Migrating clubs to Vercel PostgreSQL...");
 
-		const { count: insertedCount } = await prisma.club.createMany({
-			skipDuplicates: true,
-			data: clubs.map((club) => ({
-				name: club.title,
-				description: club.description,
-				picture: club.image,
-				city: club.chip,
-				mail:
-					club.email ??
-					`${club.title.toLowerCase().replace(/\s/g, "-")}@roundnetfrance.fr`,
-				club_created: club.clubCreated,
-				validated: club.validated,
-				phone: club.phone,
-			})),
-		});
+		// Check performance
+		const start = Date.now();
+		await prisma.$transaction(
+			clubs.map((club) => {
+				return prisma.club.upsert({
+					where: { mail: club.email },
+					update: {},
+					create: {
+						name: club.title,
+						description: club.description,
+						picture: club.image,
+						city: club.chip,
+						mail:
+							club.email ??
+							`${club.title
+								.toLowerCase()
+								.replace(/\s/g, "-")}@roundnetfrance.fr`,
+						club_created: club.clubCreated,
+						validated: club.validated,
+						phone: club.phone,
+						links: {
+							createMany: {
+								data: club.links.map((link) => ({
+									url: link.url,
+									source: link.source,
+								})),
+							},
+						},
+					},
+				});
+			}),
+		);
 
-		console.log("Migration done!", insertedCount, "clubs inserted.");
+		console.log("Migration done in", Date.now() - start, "ms.");
 	} catch (error) {
 		console.log("Migration failed.");
 		console.error(error);

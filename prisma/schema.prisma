@@ -23,6 +23,17 @@ model Club {
   contact_id                 String?
   User_Club_contact_idToUser User?     @relation("Club_contact_idToUser", fields: [contact_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   User_User_club_idToClub    User[]    @relation("User_club_idToClub")
+  links                      ClubLink[]
+}
+
+model ClubLink {
+  id       String @id @default(uuid())
+  source   String @db.VarChar(255)
+  url      String @db.VarChar(255)
+  club_id  String
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  updated_at  DateTime @default(now()) @db.Timestamp(6)
+  Club      Club   @relation(fields: [club_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model User {
@@ -35,4 +46,6 @@ model User {
   club_id                    String?
   Club_Club_contact_idToUser Club[]  @relation("Club_contact_idToUser")
   Club_User_club_idToClub    Club?   @relation("User_club_idToClub", fields: [club_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_club_id")
+  created_at                 DateTime @default(now()) @db.Timestamp(6)
+  updated_at                 DateTime @default(now()) @db.Timestamp(6)
 }

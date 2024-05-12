@@ -8,10 +8,10 @@
 		"lint": "next lint",
 		"tsc": "typescript-coverage-report",
 		"mongodb:dev:sync": "tsx ./scripts/mongodb-dev-sync.ts",
-		"prisma:db:push": "dotenv -e .env.local -- npx prisma db push",
+		"mongodb:pg:sync": "tsx --env-file=.env.local ./scripts/export-mongo-to-vercel-pg.ts",
 		"prisma:generate": "npx prisma generate",
-		"prisma:studio": "dotenv -e .env.local -- npx prisma studio",
-		"mongo-pg-sync": "tsx --env-file=.env.local ./scripts/export-mongo-to-vercel-pg.ts"
+		"prisma:db:push": "dotenv -e .env.local -- npx prisma db push",
+		"prisma:studio": "dotenv -e .env.local -- npx prisma studio"
 	},
 	"dependencies": {
 		"@date-io/date-fns": "^2.11.0",
