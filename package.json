@@ -9,6 +9,7 @@
 		"tsc": "typescript-coverage-report",
 		"mongodb:dev:sync": "tsx ./scripts/mongodb-dev-sync.ts",
 		"mongodb:pg:sync": "tsx --env-file=.env.local ./scripts/export-mongo-to-vercel-pg.ts",
+		"postinstall": "prisma generate",
 		"prisma:generate": "npx prisma generate",
 		"prisma:db:push": "dotenv -e .env.local -- npx prisma db push",
 		"prisma:studio": "dotenv -e .env.local -- npx prisma studio"
