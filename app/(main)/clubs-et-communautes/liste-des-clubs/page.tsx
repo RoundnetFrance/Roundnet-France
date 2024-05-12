@@ -9,11 +9,10 @@ import {
   Hero,
   PageTitle,
 } from "../../../../components/ui";
-import { PrismaClient } from "@prisma/client";
 import type { Metadata } from "next";
 import { MapPin, UsersRound } from "lucide-react";
+import prisma from "../../../../lib/prisma";
 
-const prisma = new PrismaClient();
 const getClubs = async () => {
   try {
     const rawClubs = await prisma.club.findMany({
