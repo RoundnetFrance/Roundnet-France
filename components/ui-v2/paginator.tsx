@@ -6,7 +6,7 @@ import {
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
-} from "./pagination";
+} from "../../@/components/ui/pagination";
 import { generatePaginationLinks } from "./generate-pages";
 
 type PaginatorProps = {

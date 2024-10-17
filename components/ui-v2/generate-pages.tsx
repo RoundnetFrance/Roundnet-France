@@ -5,7 +5,7 @@ import {
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-} from "./pagination";
+} from "../../@/components/ui/pagination";
 
 export const generatePaginationLinks = (
   currentPage: number,
