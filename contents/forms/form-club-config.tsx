@@ -6,7 +6,7 @@ const descriptionAfter = (
   <Fragment>
     Cette demande sera soumise à validation par la fédération française de
     Roundnet, dans le respect des{" "}
-    <Link href='/clubs-et-communautes/adherer-a-roundnet-france'>
+    <Link href="/clubs-et-communautes/adherer-a-roundnet-france">
       règles d&apos;affiliation de l&apos;association
     </Link>
     .
@@ -15,7 +15,7 @@ const descriptionAfter = (
 
 export const getClubFormConfig: () => FormConfig = () => {
   return {
-    name: "Formulaire de demande d'affiliation pour la saison 2023",
+    name: "Formulaire de demande d'affiliation pour la saison 2025",
     fields: [
       {
         id: "image",
