@@ -9,8 +9,8 @@ const menuElements: MenuItem[] = [
     icon: "emoji_events",
     subElements: [
       {
-        name: "Classement 2024",
-        url: "/competition/classement-2024",
+        name: "Classement 2025",
+        url: "/competition/classement-2025",
       },
       {
         name: "Règles Officielles",
@@ -25,8 +25,8 @@ const menuElements: MenuItem[] = [
         url: "/calendrier",
       },
       {
-        name: "Coupe de France",
-        url: "/competition/coupe-de-france-roundnet",
+        name: "Circuit français",
+        url: "/competition/circuit",
       },
       {
         name: "Championnat de France des clubs",

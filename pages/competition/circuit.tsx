@@ -19,26 +19,25 @@ const NationalRankingPage: FC<NationalRankingPageProps> = ({
   return (
     <Fragment>
       <Head
-        title='Coupe de France de roundnet 2023 - Roundnet France'
-        description='Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram.'
+        title="Circuit de la compétition de roundnet en France - Roundnet France"
+        description="Les tournois en France sont régulièrement annoncés sur les réseaux sociaux Facebook et Instagram."
       />
 
       <Hero
-        title='Coupe de France'
-        image='/images/hero/classement-national.jpg'
+        title="Circuit de la compétition en France"
+        image="/images/hero/classement-national.jpg"
         mini
       />
-      <Container maxWidth='md' sx={{ mt: 4 }}>
-        <PageTitle title='Le tournoi immanquable du roundnet français' />
-        <Typography align='left' variant='body1' sx={{ my: 2 }}>
-          Le tournoi de la Coupe de France de Roundnet est le plus grand tournoi
-          qui se déroule sur le territoire français. Avec 5 dates, des centaines
-          de joueuses et de joueurs parmi le gratin de l&apos;hexagone,
-          c&apos;est l&apos;événement à ne surtout pas manquer de la saison !
+      <Container maxWidth="md" sx={{ mt: 4 }}>
+        <PageTitle title="Les tournois immanquables du roundnet français" />
+        <Typography align="left" variant="body1" sx={{ my: 2 }}>
+          Avec plus de 6 tournois majeurs par an, des centaines de joueuses et
+          de joueurs parmi le gratin de l&apos;hexagone, ce sont les événements
+          à ne pas manquer pour les passionnés de roundnet.
         </Typography>
       </Container>
 
-      <Container maxWidth='md' sx={{ my: 8 }}>
+      <Container maxWidth="md" sx={{ my: 8 }}>
         {/* <InfoBlock
           // imageToLeft
           height={450}
@@ -69,10 +68,10 @@ const NationalRankingPage: FC<NationalRankingPageProps> = ({
 
       {document ? (
         <DocumentHalfImage
-          title='Le règlement complet de la Coupe de France'
-          description='Pour tout savoir des formats, des points et des différentes spécificités de la coupe de France de roundnet, vous pouvez télécharger le document PDF ci-dessous.'
+          title="Le règlement complet"
+          description="Pour tout savoir des formats, des points et des différentes spécificités du circuit de roundnet français, vous pouvez télécharger le document PDF ci-dessous."
           document={document}
-          image='/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg'
+          image="/images/pages/competition/coupe-de-france/coupe-de-france-regles.jpg"
         />
       ) : (
         <Error message={error} />
