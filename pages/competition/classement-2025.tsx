@@ -53,7 +53,7 @@ export default function HallOfFamePage({
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
           Le classement est disponible depuis le lien suivant :{" "}
           <a
-            href="https://docs.google.com/spreadsheets/d/1SiF13TDSn-fSJ0nrSC9iQYH06q0RKJtK/edit?gid=284126450#gid=284126450"
+            href="https://docs.google.com/spreadsheets/d/1uZ7060Bd5nrcryLGHRSUyhKr6e8_mKI7-k-kyZiiR5g/edit?gid=1050869688#gid=1050869688"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -63,37 +63,4 @@ export default function HallOfFamePage({
       </Container>
     </Fragment>
   );
-}
-
-export async function getStaticProps() {
-  try {
-    const { ranking, date } = await getDocument<Ranking2024>({
-      collection: "ranking",
-      params: { _id: new ObjectId("65f93b696c41d2a7f9689312") },
-    });
-
-    return {
-      props: {
-        mensRanking: ranking["Rank Open"]
-          .sort((a, b) => a.Rang - b.Rang)
-          .filter((p) => p.Points),
-        womensRanking: ranking["Rank Women"]
-          .sort((a, b) => a.Rang - b.Rang)
-          .filter((p) => p.Points),
-        mixedRanking: ranking["Rank Coed"]
-          .sort((a, b) => a.Rang - b.Rang)
-          .filter((p) => p.Points),
-        date,
-      },
-      revalidate: 3600,
-    };
-  } catch (err) {
-    console.log(err);
-    return {
-      props: {
-        error: err.message,
-      },
-      revalidate: 3600,
-    };
-  }
 }
