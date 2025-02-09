@@ -26,18 +26,18 @@ export default function DocumentHalfImage({
       day: "numeric",
       month: "long",
       year: "numeric",
-    },
+    }
   );
 
   return (
     <Fragment>
       <HalfImage image={image}>
-        <Typography variant='h5' color='white'>
+        <Typography variant="h5" color="white">
           <strong>{title}</strong>
         </Typography>
-        <Box width='50%'>
+        <Box width="50%">
           <Divider
-            color='white'
+            color="white"
             sx={{
               mb: 4,
             }}
@@ -45,7 +45,7 @@ export default function DocumentHalfImage({
         </Box>
         {description && (
           <Typography
-            variant='body1'
+            variant="body1"
             sx={{
               mb: 2,
               color: "white",
@@ -55,42 +55,32 @@ export default function DocumentHalfImage({
             {description}
           </Typography>
         )}
-        {document.description && (
-          <Typography
-            variant='body1'
-            sx={{
-              color: "white",
-              mb: 4,
-              whiteSpace: "pre-line",
-            }}
-          >
-            {document.description}
-          </Typography>
-        )}
         <Button
-          color='secondary'
-          size='large'
-          variant='contained'
+          color="secondary"
+          size="large"
+          variant="contained"
           href={document.url}
-          target='_blank'
+          target="_blank"
         >
           {buttonText}
         </Button>
-        <Typography variant='body2' mt={1} color='white'>
+        <Typography variant="body2" mt={1} color="white">
           Version : {document.version}
           <br />
           Dernière mise à jour :{" "}
           {readableUpdateDate ||
             new Date().toLocaleDateString("fr-FR", { year: "numeric" })}
+          <br />
+          Description : {document.description || document.description}
         </Typography>
       </HalfImage>
 
-      <Container maxWidth='md' sx={{ my: 8 }}>
+      <Container maxWidth="md" sx={{ my: 8 }}>
         <iframe
           src={`${document.url}#view=fitH`}
-          title='testPdf'
-          height='500px'
-          width='100%'
+          title="testPdf"
+          height="500px"
+          width="100%"
         />
       </Container>
     </Fragment>
