@@ -1,16 +1,16 @@
 import { fr } from "date-fns/locale";
 
 import { TextField, Typography } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
-import DateAdapter from "@mui/lab/AdapterDateFns";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { FormOptions } from "../../../../../models/Form";
 import type { FC } from "react";
 
 interface AdminDateFieldProps {
   id: string;
-  value: string;
+  value: string | null;
   editable: boolean;
-  handleChange: (id: string, value: string) => void;
+  handleChange: (id: string, value: string | null) => void;
   required: boolean;
   dateConfig?: FormOptions["dateConfig"];
 }
@@ -26,30 +26,36 @@ export const AdminDateField: FC<AdminDateFieldProps> = ({
   if (!editable)
     return (
       <Typography variant="body1" sx={{ my: { xs: 0, sm: 1 } }}>
-        {new Date(value).toLocaleDateString("fr-FR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
+        {value
+          ? new Date(value).toLocaleDateString("fr-FR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          : null}
       </Typography>
     );
 
   return (
-    <LocalizationProvider dateAdapter={DateAdapter} locale={fr}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={fr}>
       <DatePicker
         disableFuture={dateConfig?.disableFuture}
         clearable={dateConfig?.clearable}
         id={id}
         openTo={dateConfig?.openTo || "month"}
         views={dateConfig?.views || ["year", "month", "day"]}
+        //@ts-ignore
         value={value || null}
         onChange={(newValue) => {
-          handleChange(id, newValue);
+          handleChange(id, newValue ? newValue.toISOString() : null);
         }}
-        renderInput={(params) => (
-            <TextField key={params} label="Date" {...params} required={required} fullWidth />
-        )}
+        slotProps={{
+          textField: {
+            required,
+            fullWidth: true,
+          },
+        }}
       />
     </LocalizationProvider>
   );
-}
+};
