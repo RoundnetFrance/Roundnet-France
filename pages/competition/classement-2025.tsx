@@ -51,9 +51,9 @@ export default function HallOfFamePage({
           Dernière mise à jour :{" "}
         </HeaderWithIcon>
         <Typography align="left" variant="body1" sx={{ my: 2 }}>
-          Le classement est disponible depuis le lien suivant :{" "}
+          Les classements sont disponibles depuis le lien suivant :{" "}
           <a
-            href="https://docs.google.com/spreadsheets/d/1uZ7060Bd5nrcryLGHRSUyhKr6e8_mKI7-k-kyZiiR5g/edit?gid=1050869688#gid=1050869688"
+            href="https://playerzone.roundnetgermany.de/ranking/rfr/individual/2025?id=27"
             target="_blank"
             rel="noopener noreferrer"
           >
